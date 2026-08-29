@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Stuudium — Intentional Dark
 @namespace      https://github.com/rixerpixer007/TORG-stuudium-theme
-@version        2.2.13
+@version        2.2.14
 @description    A systematic graphite-and-mint dark theme for TORG Stuudium, Tera and Suhtlus.
 @author         rixerpixer007
 @homepageURL    https://github.com/rixerpixer007/TORG-stuudium-theme
@@ -594,6 +594,10 @@
     border-color: var(--sid-border) !important;
   }
 
+  .st-nav-block-main {
+    gap: 4px !important;
+  }
+
   :where(.st-nav-item:hover, .st-nav-item.sn-active, .st-nav-item[aria-expanded="true"]) {
     color: var(--sid-text) !important;
     background: var(--sid-accent-soft) !important;
@@ -930,6 +934,77 @@
 
   :where(.daily-summary, .scheduled-item, .lesson, .event, .todo_container):hover {
     background: var(--sid-surface-3) !important;
+  }
+
+  /* Exercises, homework and tests */
+  .section.todos .todo_container {
+    color: var(--sid-text-2) !important;
+    background: transparent !important;
+    border-color: var(--sid-border) !important;
+  }
+
+  .section.todos .todo_container + .todo_container {
+    border-top: 1px solid var(--sid-border) !important;
+  }
+
+  .section.todos .todo_container:hover {
+    background: var(--sid-surface-3) !important;
+  }
+
+  .section.todos .todo_content {
+    color: var(--sid-text-2) !important;
+  }
+
+  .section.todos .todo_created {
+    color: var(--sid-text-3) !important;
+  }
+
+  .section.todos .todo_container.is_marked :where(.todo, .todo_content) {
+    color: var(--sid-text-3) !important;
+  }
+
+  .section.todos .custom-checkbox-v2 {
+    accent-color: var(--sid-accent) !important;
+  }
+
+  .section.todos .custom-checkbox-v2 + em {
+    box-sizing: border-box !important;
+    width: 16px !important;
+    height: 16px !important;
+    background-color: var(--sid-control) !important;
+    background-image: none !important;
+    border: 1px solid var(--sid-border-strong) !important;
+    border-radius: 4px !important;
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 3%) !important;
+  }
+
+  .section.todos .custom-checkbox-v2:checked + em {
+    background-color: var(--sid-accent) !important;
+    background-image: url("https://assets.stuudium.net/img/check-custom-v2-white.png") !important;
+    border-color: var(--sid-accent) !important;
+    box-shadow: none !important;
+  }
+
+  .section.todos .custom-checkbox-v2:focus-visible + em {
+    outline: 2px solid var(--sid-accent) !important;
+    outline-offset: 2px !important;
+  }
+
+  .section.todos .scheduled-type-badge {
+    color: var(--sid-accent) !important;
+    background: var(--sid-accent-soft) !important;
+    border-color: var(--sid-accent-border) !important;
+    opacity: 1 !important;
+  }
+
+  .section.todos .scheduled-type-badge-hw {
+    color: var(--sid-warning) !important;
+    background: var(--sid-warning-soft) !important;
+    border-color: var(--sid-warning-border) !important;
+  }
+
+  .section.todos .todo_container.is_marked .scheduled-type-badge {
+    opacity: 0.65 !important;
   }
 
   :where(
