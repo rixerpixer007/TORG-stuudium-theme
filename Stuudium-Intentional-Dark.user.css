@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Stuudium — Intentional Dark
 @namespace      https://github.com/rixerpixer007/TORG-stuudium-theme
-@version        2.2.12
+@version        2.2.13
 @description    A systematic graphite-and-mint dark theme for TORG Stuudium, Tera and Suhtlus.
 @author         rixerpixer007
 @homepageURL    https://github.com/rixerpixer007/TORG-stuudium-theme
@@ -1541,13 +1541,11 @@
     font-weight: 500 !important;
   }
 
-  .notebook-is-saving::before {
+  .notebook-is-saving::before,
+  .daily-summaries-navigate.is_loading::after {
     content: "" !important;
     box-sizing: border-box !important;
     display: inline-block !important;
-    width: 11px !important;
-    height: 11px !important;
-    margin-right: 6px !important;
     background: transparent !important;
     border: 2px solid var(--sid-border) !important;
     border-top-color: var(--sid-accent) !important;
@@ -1556,6 +1554,27 @@
     filter: none !important;
     vertical-align: -1px !important;
     animation: sid-spin 0.75s linear infinite !important;
+  }
+
+  .notebook-is-saving::before {
+    width: 11px !important;
+    height: 11px !important;
+    margin-right: 6px !important;
+  }
+
+  .daily-summaries-navigate.is_loading {
+    position: relative !important;
+    padding-bottom: 20px !important;
+    background-image: none !important;
+  }
+
+  .daily-summaries-navigate.is_loading::after {
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 50% !important;
+    width: 14px !important;
+    height: 14px !important;
+    margin-left: -7px !important;
   }
 
   .page_footer {
