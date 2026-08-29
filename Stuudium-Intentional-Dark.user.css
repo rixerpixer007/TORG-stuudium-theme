@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Stuudium — Intentional Dark
 @namespace      https://github.com/rixerpixer007/TORG-stuudium-theme
-@version        2.2.26
+@version        2.2.28
 @description    A systematic graphite-and-mint dark theme for TORG Stuudium, Tera and Suhtlus.
 @author         rixerpixer007
 @homepageURL    https://github.com/rixerpixer007/TORG-stuudium-theme
@@ -1744,16 +1744,20 @@
 
   #course-home .folder_toggle_link::before {
     position: absolute;
-    top: 50%;
+    top: 12px;
     left: 10px;
-    width: 17px;
-    height: 17px;
+    width: 13px;
+    height: 13px;
     content: "";
     background: var(--sid-text-3) !important;
-    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M21.604 13l-1.272 7H3.669l-1.272-7h19.207zM7 2H1v7h2V4h3.084C7.464 5.612 8.661 7 11 7h10v2h2V5H11C9.371 5 8.695 3.942 7 2zm17 9H0l2 11h20l2-11z'/%3E%3C/svg%3E") center / contain no-repeat;
-    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M21.604 13l-1.272 7H3.669l-1.272-7h19.207zM7 2H1v7h2V4h3.084C7.464 5.612 8.661 7 11 7h10v2h2V5H11C9.371 5 8.695 3.942 7 2zm17 9H0l2 11h20l2-11z'/%3E%3C/svg%3E") center / contain no-repeat;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 5h6l2 2h10v12H3z' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 5h6l2 2h10v12H3z' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
     pointer-events: none;
-    transform: translateY(-50%);
+  }
+
+  #course-home .type_folder.is_expanded > .node_main .folder_toggle_link::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 8h18l-2 11H5L3 8zm0 0V5h6l2 3' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 8h18l-2 11H5L3 8zm0 0V5h6l2 3' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E");
   }
 
   #course-home .node_is_unviewed::after {
@@ -1909,6 +1913,43 @@
     background: var(--sid-danger-soft) !important;
     border: 1px solid var(--sid-danger-border) !important;
     border-radius: var(--sid-radius-sm) !important;
+  }
+
+  .content-container .response_node_inner {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface-2) !important;
+    border: 1px solid var(--sid-border) !important;
+    border-radius: var(--sid-radius-sm) !important;
+    box-shadow: none !important;
+  }
+
+  .content-container .response_node_inner :where(.response_node_meta, .response_node_content_wrapper, .node_content, .body, .node-blocks, .node_text_content, .node_text_content_text_wrapper) {
+    color: var(--sid-text-2) !important;
+    background: transparent !important;
+    border-color: var(--sid-border) !important;
+  }
+
+  .content-container .response_node_inner .response_node_meta {
+    color: var(--sid-text) !important;
+  }
+
+  .content-container .response_node_inner .node_time {
+    color: var(--sid-accent) !important;
+  }
+
+  .content-container .response_node_inner .node_time:hover {
+    color: var(--sid-accent-strong) !important;
+  }
+
+  .content-container .response_node_inner :where(.node_file, .node_file_head) {
+    color: var(--sid-accent) !important;
+    background: transparent !important;
+    border-color: var(--sid-border) !important;
+  }
+
+  .content-container .response_node_inner .node_file_with_document_preview iframe {
+    border-color: var(--sid-border-strong) !important;
+    box-shadow: none !important;
   }
 
   /* Suhtlus */
