@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Stuudium — Intentional Dark
 @namespace      https://github.com/rixerpixer007/TORG-stuudium-theme
-@version        2.3.0
+@version        2.3.1
 @description    A systematic graphite-and-mint dark theme for TORG Stuudium, Tera and Suhtlus.
 @author         rixerpixer007
 @homepageURL    https://github.com/rixerpixer007/TORG-stuudium-theme
@@ -1981,6 +1981,12 @@
     background: var(--sid-surface) !important;
   }
 
+  .suhtlus-content.main-block-style:has(.post-in-list.post-expanded) {
+    background: transparent !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+  }
+
   .suhtlus :where(.current-events, .current-events-date, .post-list-search-and-actions, .post-list-meta, .post-in-list, .post-main-wrapper, .post-head-wrapper, .post-in-list-content, .post-body-preview, .post-body, .post-comments-summary, .comment, .formatted-text) {
     color: var(--sid-text-2) !important;
     background: transparent !important;
@@ -1993,6 +1999,35 @@
 
   .suhtlus :where(.post-title, .post-title-main, .post-author) {
     color: var(--sid-text) !important;
+  }
+
+  .suhtlus :where(.post-author[data-suhtlus-user-card], .bl-p-user) {
+    text-decoration: none !important;
+    border-bottom: 0 !important;
+  }
+
+  .suhtlus .user-card {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface-2) !important;
+    border: 1px solid var(--sid-border-strong) !important;
+    border-radius: var(--sid-radius-sm) !important;
+    box-shadow: var(--sid-shadow) !important;
+  }
+
+  .suhtlus .user-card-actions {
+    color: var(--sid-text-2) !important;
+    background: transparent !important;
+    border-color: var(--sid-border) !important;
+  }
+
+  .suhtlus .user-card-meta {
+    color: var(--sid-text-3) !important;
+    background: transparent !important;
+  }
+
+  .suhtlus .user-card-avatar {
+    background: var(--sid-surface-3) !important;
+    border-color: var(--sid-border-strong) !important;
   }
 
   .suhtlus :where(.bl-p, .bl-p.highlighted, .post-participants .bl-p) {
