@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Stuudium — Intentional Dark
 @namespace      https://github.com/rixerpixer007/TORG-stuudium-theme
-@version        2.2.10
+@version        2.2.11
 @description    A systematic graphite-and-mint dark theme for TORG Stuudium, Tera and Suhtlus.
 @author         rixerpixer007
 @homepageURL    https://github.com/rixerpixer007/TORG-stuudium-theme
@@ -43,9 +43,6 @@
     --sid-warning: #efc873;
     --sid-warning-soft: rgb(239 200 115 / 11%);
     --sid-warning-border: rgb(239 200 115 / 42%);
-    --sid-note-gold: #c9ad5b;
-    --sid-note-orange: #d47b43;
-    --sid-note-purple: #9a5bd7;
     --sid-radius-sm: 7px;
     --sid-radius: 11px;
     --sid-radius-lg: 14px;
@@ -987,6 +984,24 @@
     color: var(--sid-accent) !important;
   }
 
+  .stream-entry.ng-grade-is-summary-wrapper {
+    position: relative !important;
+    padding-right: 40px !important;
+    background: var(--sid-warning-soft) !important;
+    border-color: var(--sid-warning-border) !important;
+  }
+
+  .stream-entry.ng-grade-is-summary-wrapper > .stream-entry-avatar {
+    position: absolute !important;
+    top: -3px !important;
+    right: -3px !important;
+    bottom: auto !important;
+    left: auto !important;
+    float: none !important;
+    margin: 0 !important;
+    z-index: 2 !important;
+  }
+
   .stream-entry-avatar[data-balloon]::after {
     color: var(--sid-text) !important;
     background: var(--sid-surface-3) !important;
@@ -1004,6 +1019,16 @@
     background: var(--sid-surface-3) !important;
     border: 1px solid var(--sid-border-strong) !important;
     transform: translate(50%, -50%) rotate(45deg) !important;
+  }
+
+  .stream-entry-avatar {
+    line-height: 0 !important;
+  }
+
+  .stream-entry-avatar > img {
+    display: block !important;
+    width: 25px !important;
+    height: 25px !important;
   }
 
   :where(.daily-summaries-segment-block-lessons-collapsed-title, .daily-summaries .new_button.flat) {
@@ -1029,6 +1054,10 @@
     border-bottom: 1px solid var(--sid-border) !important;
   }
 
+  .user-notebook-sheets > span:not(.notebook-is-saving) {
+    color: var(--sid-text-2) !important;
+  }
+
   .user-notebook-sheets > a {
     top: 0 !important;
     bottom: auto !important;
@@ -1049,27 +1078,35 @@
   }
 
   .user-notebook-sheets > a > span {
-    width: 20px !important;
-    height: 20px !important;
-    border-radius: 50% !important;
-    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 6%) !important;
+    display: none !important;
   }
 
-  .user-notebook-sheets > a[data-notebook-sheet-nr="1"] > span {
-    background: var(--sid-note-gold) !important;
+  .user-notebook-sheets > a::before {
+    color: var(--sid-text-3) !important;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1;
   }
 
-  .user-notebook-sheets > a[data-notebook-sheet-nr="2"] > span {
-    background: var(--sid-note-orange) !important;
+  .user-notebook-sheets > a[data-notebook-sheet-nr="1"]::before {
+    content: "I";
   }
 
-  .user-notebook-sheets > a[data-notebook-sheet-nr="3"] > span {
-    background: var(--sid-note-purple) !important;
+  .user-notebook-sheets > a[data-notebook-sheet-nr="2"]::before {
+    content: "II";
+  }
+
+  .user-notebook-sheets > a[data-notebook-sheet-nr="3"]::before {
+    content: "III";
   }
 
   .user-notebook-sheets > a.sheet-active {
     background: var(--sid-surface-3) !important;
     box-shadow: inset 0 -2px 0 var(--sid-accent) !important;
+  }
+
+  .user-notebook-sheets > a.sheet-active::before {
+    color: var(--sid-text-2) !important;
   }
 
   .user-notebook-content {
@@ -1116,7 +1153,7 @@
   }
 
   #student_dashboard_tera .course.expanded .enclosing_name {
-    color: var(--sid-text-disabled) !important;
+    color: var(--sid-text-3) !important;
   }
 
   #student_dashboard_tera .course.expanded .resource_name {
@@ -1486,9 +1523,26 @@
     border-color: var(--sid-accent) !important;
   }
 
-  .loading-spinner {
+  @keyframes sid-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  :where(.loading-spinner, img[src*="ajax"][src*="load"], img[src*="loading.gif"], img[src*="spinner"]) {
+    box-sizing: border-box !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    content: "" !important;
+    background: transparent !important;
+    border: 2px solid var(--sid-border) !important;
     border-color: var(--sid-border) !important;
     border-top-color: var(--sid-accent) !important;
+    border-radius: 50% !important;
+    box-shadow: none !important;
+    filter: none !important;
+    animation: sid-spin 0.75s linear infinite !important;
   }
 
   .page_footer {
