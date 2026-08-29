@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Stuudium — Intentional Dark
 @namespace      https://github.com/rixerpixer007/TORG-stuudium-theme
-@version        2.2.23
+@version        2.2.24
 @description    A systematic graphite-and-mint dark theme for TORG Stuudium, Tera and Suhtlus.
 @author         rixerpixer007
 @homepageURL    https://github.com/rixerpixer007/TORG-stuudium-theme
@@ -1760,17 +1760,86 @@
     color: var(--sid-accent) !important;
   }
 
+  .course-list-responses-link {
+    position: relative;
+  }
+
+  .course-list-responses-link::before {
+    position: absolute;
+    top: 50%;
+    left: 6px;
+    width: 12px;
+    height: 12px;
+    content: "";
+    background: currentColor !important;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2 2.5h12v8H7l-3.5 3v-3H2z' fill='none' stroke='black' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2 2.5h12v8H7l-3.5 3v-3H2z' fill='none' stroke='black' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+    transform: translateY(-50%);
+  }
+
+  .courses_index_content .course_connections .course-journal {
+    background: transparent !important;
+    border: 0 !important;
+  }
+
+  .self-responses-list .as-link {
+    color: var(--sid-accent) !important;
+  }
+
+  .self-responses-list .bl-resp {
+    color: var(--sid-accent) !important;
+    background: var(--sid-accent-soft) !important;
+    border-color: var(--sid-accent-border) !important;
+    border-radius: 4px !important;
+  }
+
   :where(.course-journal, .badge-archived) {
     color: var(--sid-text-3) !important;
     background: var(--sid-control) !important;
     border-color: var(--sid-border) !important;
   }
 
+  .content-container :where(.course-members-summary, .node-meta) .new-user-card {
+    background: transparent !important;
+    border-color: var(--sid-border-strong) !important;
+  }
+
+  .content-container .node-meta,
+  .content-container .responses-divider {
+    border-color: var(--sid-border) !important;
+  }
+
   .responses-divider > span {
     color: var(--sid-text-2) !important;
-    background: var(--sid-surface-2) !important;
-    border-radius: var(--sid-radius-sm) !important;
+    background: var(--sid-surface) !important;
+    border-radius: 0 !important;
     padding-inline: 8px;
+  }
+
+  .content-container .node_form_new {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface-2) !important;
+    border-color: var(--sid-border) !important;
+    box-shadow: none !important;
+  }
+
+  .content-container .node_form_new :where(.is-response-cta, .form_footer_actions) {
+    color: var(--sid-text-2) !important;
+    background: transparent !important;
+    border-color: var(--sid-border) !important;
+  }
+
+  .content-container .node_form_new .st-fileupload-fileinput > em {
+    color: var(--sid-text-3) !important;
+  }
+
+  .content-container .node_form_new .error_msg {
+    box-sizing: border-box;
+    padding: 6px 8px !important;
+    color: var(--sid-danger) !important;
+    background: var(--sid-danger-soft) !important;
+    border: 1px solid var(--sid-danger-border) !important;
+    border-radius: var(--sid-radius-sm) !important;
   }
 
   /* Suhtlus */
