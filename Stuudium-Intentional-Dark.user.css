@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Stuudium — Intentional Dark
 @namespace      https://github.com/rixerpixer007/TORG-stuudium-theme
-@version        2.3.1
+@version        2.3.2
 @description    A systematic graphite-and-mint dark theme for TORG Stuudium, Tera and Suhtlus.
 @author         rixerpixer007
 @homepageURL    https://github.com/rixerpixer007/TORG-stuudium-theme
@@ -1993,7 +1993,7 @@
     border-color: var(--sid-border) !important;
   }
 
-  .suhtlus :where(.post-in-list:hover, .post-in-list.post-expanded, .post-in-list.highlighted) {
+  .suhtlus :where(.post-in-list:hover, .post-in-list.highlighted) {
     background: var(--sid-surface-3) !important;
   }
 
@@ -2041,9 +2041,10 @@
 
   .post-in-list.post-expanded {
     padding: 18px !important;
-    background: var(--sid-surface-3) !important;
+    margin-bottom: 0 !important;
+    background: transparent !important;
     border: 1px solid var(--sid-border-strong) !important;
-    box-shadow: var(--sid-shadow) !important;
+    box-shadow: none !important;
   }
 
   .post-in-list.post-expanded :where(.post-actions, .post-responses-content, .post-responses-counts, .post-comments, .post-comment, .post-comment-main, .post-add-members, .post-footer-actions) {
@@ -2069,6 +2070,12 @@
     padding: 4px 7px !important;
   }
 
+  .suhtlus .post-in-list.post-collapsed .post-event-time {
+    margin: 10px 0 0 !important;
+    font-size: 13px !important;
+    line-height: 13px !important;
+  }
+
   .suhtlus .post-event-time::before {
     width: 13px;
     height: 13px;
@@ -2082,8 +2089,8 @@
   .suhtlus .button-icon-fav {
     display: inline-flex !important;
     align-items: center;
-    gap: 5px;
-    padding: 4px 7px !important;
+    gap: 4px;
+    padding: 4px 7px 4px 2px !important;
     background-image: none !important;
   }
 
@@ -2095,6 +2102,11 @@
     background: var(--sid-accent) !important;
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
     mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  }
+
+  .suhtlus .button-icon-fav:hover::before,
+  .suhtlus .button-icon-fav:focus-visible::before {
+    background: var(--sid-accent-ink) !important;
   }
 
   .suhtlus .post-responses-add-toggle > span {
@@ -2161,11 +2173,11 @@
     border-color: var(--sid-border) !important;
   }
 
-  .suhtlus .post-list-merged :where(a, .as-link) {
+  .suhtlus .post-list-merged :where(a, .as-link, .style-as-link) {
     color: var(--sid-accent) !important;
   }
 
-  .suhtlus .post-list-merged :where(a, .as-link):hover {
+  .suhtlus .post-list-merged :where(a, .as-link, .style-as-link):hover {
     color: var(--sid-accent-strong) !important;
   }
 
