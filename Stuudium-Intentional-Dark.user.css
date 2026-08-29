@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Stuudium — Intentional Dark
 @namespace      https://github.com/rixerpixer007/TORG-stuudium-theme
-@version        2.2.17
+@version        2.2.18
 @description    A systematic graphite-and-mint dark theme for TORG Stuudium, Tera and Suhtlus.
 @author         rixerpixer007
 @homepageURL    https://github.com/rixerpixer007/TORG-stuudium-theme
@@ -1331,10 +1331,19 @@
   .absences_popover .student-absences-on-date-options-add-notice {
     box-sizing: border-box !important;
     padding: 8px !important;
+    margin: 4px 0 0 !important;
     color: var(--sid-text-2) !important;
     background: var(--sid-danger-soft) !important;
     border: 1px solid var(--sid-danger-border) !important;
-    border-radius: 0 0 var(--sid-radius-sm) var(--sid-radius-sm) !important;
+    border-radius: var(--sid-radius-sm) !important;
+  }
+
+  .absences_popover .st-toggle-control label > span {
+    color: var(--sid-text-2) !important;
+  }
+
+  .absences_popover .st-toggle-control label:has(input:checked) > span {
+    color: var(--sid-text) !important;
   }
 
   .absences_popover .st-toggle-control label:has(input:checked) {
@@ -1376,6 +1385,17 @@
     border: solid currentColor !important;
     border-width: 0 2px 2px 0 !important;
     transform: rotate(45deg) !important;
+  }
+
+  .absences_popover :where(select, textarea)::placeholder {
+    color: var(--sid-text-3) !important;
+    opacity: 0.8 !important;
+  }
+
+  .absences_popover :where(select, textarea):is(:focus, :focus-visible) {
+    border-color: var(--sid-accent-border) !important;
+    outline: 0 !important;
+    box-shadow: 0 0 0 2px rgb(101 214 177 / 8%) !important;
   }
 
   /* Profiles, subjects and segmented controls */
