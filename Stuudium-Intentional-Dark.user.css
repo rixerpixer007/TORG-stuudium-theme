@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Stuudium — Intentional Dark
 @namespace      https://github.com/rixerpixer007/TORG-stuudium-theme
-@version        2.2.24
+@version        2.2.25
 @description    A systematic graphite-and-mint dark theme for TORG Stuudium, Tera and Suhtlus.
 @author         rixerpixer007
 @homepageURL    https://github.com/rixerpixer007/TORG-stuudium-theme
@@ -1804,6 +1804,10 @@
     border-color: var(--sid-border-strong) !important;
   }
 
+  .content-container :where(.course-members-summary, .node-meta) .new-user-card > img {
+    border-right-color: var(--sid-border-strong) !important;
+  }
+
   .content-container .node-meta,
   .content-container .responses-divider {
     border-color: var(--sid-border) !important;
@@ -1831,6 +1835,22 @@
 
   .content-container .node_form_new .st-fileupload-fileinput > em {
     color: var(--sid-text-3) !important;
+  }
+
+  .content-container .node_form_new .st-fileupload-file-inner {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-control) !important;
+    border-color: var(--sid-border-strong) !important;
+    border-radius: 4px !important;
+    box-shadow: none !important;
+  }
+
+  .content-container .node_form_new .st-fileupload-sort-handle {
+    color: var(--sid-text-3) !important;
+  }
+
+  .content-container .node_form_new .st-fileupload-remove-link {
+    color: var(--sid-danger) !important;
   }
 
   .content-container .node_form_new .error_msg {
