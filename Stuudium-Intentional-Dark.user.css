@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Stuudium — Intentional Dark
 @namespace      https://github.com/rixerpixer007/TORG-stuudium-theme
-@version        2.2.25
+@version        2.2.26
 @description    A systematic graphite-and-mint dark theme for TORG Stuudium, Tera and Suhtlus.
 @author         rixerpixer007
 @homepageURL    https://github.com/rixerpixer007/TORG-stuudium-theme
@@ -1735,6 +1735,55 @@
 
   #course-home :where(.node, .node_main):hover {
     background: var(--sid-surface-3) !important;
+  }
+
+  #course-home .folder_toggle_link {
+    position: relative;
+    background-image: none !important;
+  }
+
+  #course-home .folder_toggle_link::before {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    width: 17px;
+    height: 17px;
+    content: "";
+    background: var(--sid-text-3) !important;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M21.604 13l-1.272 7H3.669l-1.272-7h19.207zM7 2H1v7h2V4h3.084C7.464 5.612 8.661 7 11 7h10v2h2V5H11C9.371 5 8.695 3.942 7 2zm17 9H0l2 11h20l2-11z'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M21.604 13l-1.272 7H3.669l-1.272-7h19.207zM7 2H1v7h2V4h3.084C7.464 5.612 8.661 7 11 7h10v2h2V5H11C9.371 5 8.695 3.942 7 2zm17 9H0l2 11h20l2-11z'/%3E%3C/svg%3E") center / contain no-repeat;
+    pointer-events: none;
+    transform: translateY(-50%);
+  }
+
+  #course-home .node_is_unviewed::after {
+    background: var(--sid-accent) !important;
+    box-shadow: 0 0 0 2px var(--sid-accent-soft);
+  }
+
+  #course-home .folder_toggle_link abbr,
+  #course-home .node_time {
+    color: var(--sid-text-3) !important;
+    opacity: 1 !important;
+  }
+
+  #course-home .node_responses {
+    color: var(--sid-accent-strong) !important;
+    font-weight: 600;
+  }
+
+  #course-home .icon-responses {
+    background: var(--sid-accent) !important;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2 2.5h12v8H7l-3.5 3v-3H2z' fill='none' stroke='black' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2 2.5h12v8H7l-3.5 3v-3H2z' fill='none' stroke='black' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  }
+
+  #course-home .child_indicator {
+    border-left-color: var(--sid-border-strong) !important;
+  }
+
+  #course-home .child_indicator::after {
+    border-bottom-color: var(--sid-border-strong) !important;
   }
 
   .courses_index_content > a.course {
