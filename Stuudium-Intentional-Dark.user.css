@@ -1,0 +1,1472 @@
+/* ==UserStyle==
+@name           Stuudium — Intentional Dark
+@namespace      https://github.com/rixerpixer007/TORG-stuudium-theme
+@version        2.2.8
+@description    A systematic graphite-and-mint dark theme for TORG Stuudium, Tera and Suhtlus.
+@author         rixerpixer007
+@homepageURL    https://github.com/rixerpixer007/TORG-stuudium-theme
+@supportURL     https://github.com/rixerpixer007/TORG-stuudium-theme/issues
+@updateURL      https://raw.githubusercontent.com/rixerpixer007/TORG-stuudium-theme/main/Stuudium-Intentional-Dark.user.css
+@license        MIT
+@preprocessor   default
+==/UserStyle== */
+
+@-moz-document domain("torg.ope.ee") {
+  /*
+   * Design tokens
+   * Stuudium has reusable component/state classes but no native colour tokens,
+   * so this userstyle supplies one palette and maps those classes onto it.
+   */
+  :root {
+    color-scheme: dark;
+    --sid-canvas: #0f1311;
+    --sid-canvas-soft: #121713;
+    --sid-canvas-highlight: #101512;
+    --sid-surface: #171c19;
+    --sid-surface-2: #1b211e;
+    --sid-surface-3: #202824;
+    --sid-control: #111613;
+    --sid-border: #2a332e;
+    --sid-border-strong: #3a4740;
+    --sid-text: #f2f0e9;
+    --sid-text-2: #c1c0b8;
+    --sid-text-3: #858b85;
+    --sid-text-disabled: #5d655f;
+    --sid-accent: #65d6b1;
+    --sid-accent-strong: #7ce8c3;
+    --sid-accent-ink: #0b110e;
+    --sid-accent-soft: rgb(101 214 177 / 12%);
+    --sid-accent-border: rgb(101 214 177 / 34%);
+    --sid-danger: #ff9696;
+    --sid-danger-soft: rgb(255 150 150 / 11%);
+    --sid-danger-border: rgb(255 150 150 / 42%);
+    --sid-warning: #efc873;
+    --sid-warning-soft: rgb(239 200 115 / 11%);
+    --sid-warning-border: rgb(239 200 115 / 42%);
+    --sid-radius-sm: 7px;
+    --sid-radius: 11px;
+    --sid-radius-lg: 14px;
+    --sid-radius-pill: 999px;
+    --sid-shadow: 0 16px 42px rgb(0 0 0 / 24%);
+    --sid-focus: 0 0 0 3px rgb(101 214 177 / 20%);
+    --sid-icon-filter-light: invert(88%) sepia(8%) saturate(228%) hue-rotate(88deg) brightness(90%) contrast(91%);
+    --sid-icon-filter-dark: brightness(0) saturate(100%);
+    --sid-z-tabs: 500;
+    --sid-z-nav: 10000;
+    --sid-z-menu: 10020;
+  }
+
+  /* Page shell and type */
+  html,
+  body {
+    background-color: var(--sid-canvas) !important;
+    color: var(--sid-text-2) !important;
+  }
+
+  body {
+    min-height: 100vh;
+    background-image:
+      radial-gradient(circle at 58% 4%, rgb(25 78 60 / 22%), transparent 34rem),
+      linear-gradient(180deg, var(--sid-canvas-highlight) 0, var(--sid-canvas) 34rem) !important;
+    font-family: "Stuudium Sans", Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  :where(#content, .page_body, .page_body_new_layout, .width_wrapper, .medium_width_wrapper, #dashboard, .suhtlus, .courses_index) {
+    color: var(--sid-text-2) !important;
+    background-color: transparent !important;
+  }
+
+  :where(#content, .page_body, .page_body_new_layout, #dashboard, .suhtlus, .courses_index)
+    :where(h1, h2, h3, h4, h5, h6, strong, b) {
+    color: var(--sid-text) !important;
+  }
+
+  :where(.page_title, .section_heading, .content-container-main-heading, .post-title, .post-title-main, .course_name, .resource_name) {
+    color: var(--sid-text) !important;
+  }
+
+  :where(.bl-sub, .small, .smaller, .description, .modified_date, .instructor, .post-date, .course_teachers, .course_connections) {
+    color: var(--sid-text-3) !important;
+  }
+
+  :where(a, a:visited) {
+    color: var(--sid-accent) !important;
+    text-decoration-color: rgb(101 214 177 / 35%) !important;
+  }
+
+  :where(a:hover, a:focus-visible) {
+    color: var(--sid-accent-strong) !important;
+    text-decoration-color: currentColor !important;
+  }
+
+  :where(hr, .divider) {
+    border-color: var(--sid-border) !important;
+  }
+
+  ::selection {
+    color: var(--sid-accent-ink);
+    background: var(--sid-accent);
+  }
+
+  ::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--sid-canvas);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--sid-border-strong);
+    border: 3px solid var(--sid-canvas);
+    border-radius: var(--sid-radius-pill);
+  }
+
+  html {
+    scrollbar-color: var(--sid-border-strong) var(--sid-canvas);
+    scrollbar-width: thin;
+  }
+
+  /* Public login page */
+  #bg {
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at 58% 8%, rgb(25 78 60 / 24%), transparent 34rem),
+      linear-gradient(180deg, var(--sid-canvas-highlight), var(--sid-canvas)) !important;
+  }
+
+  #bg > :is(#bg-img, #bg-img-full) {
+    display: none !important;
+  }
+
+  #stuudium-branding {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 8px !important;
+    color: var(--sid-text-2) !important;
+    background: rgb(23 28 25 / 88%) !important;
+    border: 1px solid var(--sid-border) !important;
+    border-radius: 0 0 var(--sid-radius-sm) 0 !important;
+    box-shadow: 0 8px 24px rgb(0 0 0 / 20%) !important;
+    backdrop-filter: blur(12px) saturate(125%);
+  }
+
+  #stuudium-branding img {
+    opacity: 0.92;
+    border-radius: 3px;
+    filter: none !important;
+  }
+
+  #stuudium-branding span {
+    color: var(--sid-text-2) !important;
+  }
+
+  #login-page-container #main {
+    color: var(--sid-text-2) !important;
+    background:
+      linear-gradient(180deg, rgb(32 40 36 / 98%), rgb(23 28 25 / 98%)) !important;
+    border: 1px solid var(--sid-border-strong) !important;
+    border-radius: var(--sid-radius-lg) !important;
+    box-shadow: 0 24px 80px rgb(0 0 0 / 48%) !important;
+    backdrop-filter: blur(18px) saturate(120%);
+    font-size: 14px;
+  }
+
+  #main :where(.head, .main-body, .main-body-inner, .body-section, .foot, form, label) {
+    color: var(--sid-text-2) !important;
+    background-color: transparent !important;
+    border-color: var(--sid-border) !important;
+  }
+
+  #main .head h1 {
+    color: var(--sid-text) !important;
+  }
+
+  #main .head h2 {
+    color: var(--sid-text-3) !important;
+  }
+
+  #main :where(.label-standalone, .with-separate-label) {
+    color: var(--sid-text-2) !important;
+  }
+
+  #main .head img[src*="/logos/"] {
+    background: var(--sid-canvas-soft) !important;
+    border: 1px solid var(--sid-border) !important;
+    border-radius: var(--sid-radius-sm) !important;
+    opacity: 0.82;
+    filter: invert(82%) grayscale(1) brightness(78%) contrast(86%) !important;
+  }
+
+  #main :where(.login-form-section, .account-help-section, .login-form-idauth-separate-container) {
+    border-color: var(--sid-border) !important;
+  }
+
+  #main .label-with-button-wrapper-inputs {
+    overflow: hidden;
+    background: var(--sid-control) !important;
+    border: 1px solid var(--sid-border-strong) !important;
+    border-radius: var(--sid-radius-sm) !important;
+    box-shadow: none !important;
+  }
+
+  #main .label-with-button-wrapper-inputs:focus-within {
+    border-color: var(--sid-accent) !important;
+    box-shadow: var(--sid-focus) !important;
+  }
+
+  #main .label-with-button-wrapper-inputs :where(input.text, input.button) {
+    border: 0 !important;
+    border-radius: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+  }
+
+  #main .label-with-button-wrapper-inputs :where(input.button):hover {
+    transform: none;
+  }
+
+  #main_login_form input.button.green {
+    color: var(--sid-accent-ink) !important;
+    background: var(--sid-accent) !important;
+    border-color: var(--sid-accent) !important;
+    font-weight: 700;
+  }
+
+  #main_login_form input.button.green:not(:disabled):hover {
+    background: var(--sid-accent-strong) !important;
+    border-color: var(--sid-accent-strong) !important;
+  }
+
+  #main .login-form-idauth-separate-container-divider {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    height: auto !important;
+    color: var(--sid-text-3) !important;
+    background: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
+  #main .login-form-idauth-separate-container-divider::before,
+  #main .login-form-idauth-separate-container-divider::after {
+    content: "";
+    position: static !important;
+    inset: auto !important;
+    display: block !important;
+    width: auto !important;
+    height: 1px;
+    margin: 0 !important;
+    background: var(--sid-border-strong) !important;
+    border: 0 !important;
+  }
+
+  #main .login-form-idauth-separate-container-divider > span {
+    position: static !important;
+    inset: auto !important;
+    display: block !important;
+    padding: 0 !important;
+    color: var(--sid-text-3) !important;
+    background: transparent !important;
+    line-height: 1 !important;
+    transform: none !important;
+  }
+
+  #main .login-form-idauth-separate-container .button {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface-3) !important;
+    border-color: var(--sid-border-strong) !important;
+  }
+
+  #main .login-form-idauth-separate-container .button:hover {
+    filter: brightness(1.14);
+  }
+
+  #main .login-form-idauth-separate-container .login-idauth {
+    color: #c0d3e8 !important;
+    background: #1e3044 !important;
+    border-color: #416384 !important;
+  }
+
+  #main .login-form-idauth-separate-container .custom-style-passkey {
+    color: #e2b9db !important;
+    background: #3a2938 !important;
+    border-color: #6b4a66 !important;
+  }
+
+  /* Login method chooser and the panels it swaps into place. */
+  #main .login-flow-actions-container {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface-2) !important;
+    border: 1px solid var(--sid-border-strong) !important;
+    border-radius: var(--sid-radius) !important;
+    box-shadow: var(--sid-shadow) !important;
+    overflow: hidden;
+  }
+
+  #main :where(
+    .login-flow-actions-method-select-container,
+    .login-flow-actions-methods,
+    .login-flow-actions-methods-subblock
+  ) {
+    color: var(--sid-text-2) !important;
+    background: transparent !important;
+    border-color: var(--sid-border) !important;
+  }
+
+  #main .login-flow-actions-container :where(h1, h2, h3, h4, strong, .label-standalone) {
+    color: var(--sid-text) !important;
+  }
+
+  #main .login-flow-actions-methods .button {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface-3) !important;
+    border-color: var(--sid-border-strong) !important;
+    box-shadow: none !important;
+  }
+
+  #main .login-flow-actions-methods [data-login-method="webauthn"] {
+    color: #e2b9db !important;
+    background: #3a2938 !important;
+    border-color: #6b4a66 !important;
+  }
+
+  #main .login-flow-actions-methods [data-login-method="passkey-via-remote-device"] {
+    color: #b9dfa7 !important;
+    background: #193423 !important;
+    border-color: #3f6a47 !important;
+  }
+
+  #main .login-flow-actions-methods [data-login-method="idcard"] {
+    color: #c0d3e8 !important;
+    background: #1e3044 !important;
+    border-color: #416384 !important;
+  }
+
+  #main .login-flow-actions-methods [data-login-method="smartid"] {
+    color: #8ce0dc !important;
+    background: #103638 !important;
+    border-color: #247174 !important;
+  }
+
+  #main .login-flow-actions-methods [data-login-method="password"] {
+    color: #c7ddef !important;
+    background: #1d3650 !important;
+    border-color: #3f6b94 !important;
+  }
+
+  #main .login-flow-actions-methods .button:not(.disabled):hover {
+    filter: brightness(1.14);
+  }
+
+  #main .login-flow-actions-methods .button.disabled {
+    color: var(--sid-text-disabled) !important;
+    background: var(--sid-canvas-soft) !important;
+    border-color: var(--sid-border) !important;
+    opacity: 0.72;
+  }
+
+  #main .login-flow-actions-method-extra {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface) !important;
+    border-color: var(--sid-border-strong) !important;
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 2%) !important;
+  }
+
+  #main .login-flow-actions-method-extra :where(h1, h2, h3, h4, p, label) {
+    color: var(--sid-text-2) !important;
+  }
+
+  #main .login-flow-actions-method-extra :where(.label-with-button-wrapper-v2023, .label-with-button-wrapper-v2023-footer) {
+    background: transparent !important;
+    border-color: var(--sid-border) !important;
+  }
+
+  #main .login-flow-cancel-container {
+    color: var(--sid-text-3) !important;
+    background: transparent !important;
+    border-color: var(--sid-border) !important;
+  }
+
+  #main .autologin-container-v2023 {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface-2) !important;
+    border-color: var(--sid-border) !important;
+  }
+
+  #main .autologin-container-v2023 .st-toggle-control {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface-3) !important;
+    border: 1px solid var(--sid-border-strong) !important;
+    border-radius: var(--sid-radius-sm) !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+  }
+
+  #main .autologin-container-v2023 label {
+    position: relative;
+    color: var(--sid-text-2) !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: inherit !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    opacity: 1 !important;
+  }
+
+  #main .autologin-container-v2023 label::before,
+  #main .autologin-container-v2023 label::after {
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
+  #main .autologin-container-v2023 label > em {
+    box-sizing: border-box;
+    position: absolute !important;
+    top: 50% !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: 5px !important;
+    width: 12px !important;
+    min-width: 12px !important;
+    max-width: 12px !important;
+    height: 12px !important;
+    min-height: 12px !important;
+    max-height: 12px !important;
+    padding: 0 !important;
+    transform: translateY(-50%) !important;
+    background: var(--sid-control) !important;
+    border: 1px solid var(--sid-border-strong) !important;
+    border-radius: 3px !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+    transition: background-color 140ms ease, border-color 140ms ease;
+  }
+
+  #main .autologin-container-v2023 label > em::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 3px;
+    height: 6px;
+    border: solid var(--sid-accent-ink) !important;
+    border-width: 0 2px 2px 0 !important;
+    opacity: 0;
+    transform: translate(-50%, -58%) rotate(45deg);
+  }
+
+  #main .autologin-container-v2023 label:has(input:checked) > em {
+    background: var(--sid-accent) !important;
+    border-color: var(--sid-accent) !important;
+  }
+
+  #main .autologin-container-v2023 label:has(input:checked) > em::after {
+    opacity: 1;
+  }
+
+  #main .autologin-container-v2023 label:has(input:disabled) > em {
+    background: var(--sid-canvas-soft) !important;
+    border-color: var(--sid-border) !important;
+    opacity: 0.72;
+  }
+
+  #main .autologin-container-v2023 label * {
+    color: inherit !important;
+    -webkit-text-fill-color: currentColor !important;
+    text-shadow: none !important;
+    opacity: 1 !important;
+  }
+
+  #main .autologin-container-v2023 label:has(input:disabled) {
+    color: var(--sid-text-2) !important;
+    background: transparent !important;
+    border: 0 !important;
+    opacity: 0.78 !important;
+  }
+
+  #main .autologin-container-v2023 label:has(input:checked) {
+    color: var(--sid-text) !important;
+    background: transparent !important;
+    border: 0 !important;
+    opacity: 1 !important;
+  }
+
+  #main .autologin-container-v2023 .st-toggle-control:has(input:disabled) {
+    background: var(--sid-canvas-soft) !important;
+    border-color: var(--sid-border) !important;
+  }
+
+  #main .autologin-container-v2023 .st-toggle-control:has(input:checked) {
+    background: var(--sid-accent-soft) !important;
+    border-color: var(--sid-accent-border) !important;
+  }
+
+  #main .autologin-container-v2023 .st-toggle-control:focus-within {
+    border-color: var(--sid-accent) !important;
+    box-shadow: none !important;
+  }
+
+  #main .autologin-container-v2023 input[type="checkbox"] {
+    accent-color: var(--sid-accent) !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+  }
+
+  #main .autologin-container-v2023 .autologin-help {
+    color: var(--sid-warning) !important;
+    background: var(--sid-warning-soft) !important;
+    border: 1px solid var(--sid-warning-border) !important;
+    border-radius: var(--sid-radius-sm) !important;
+  }
+
+  #main .autologin-container-v2023 .autologin-disallowed {
+    color: var(--sid-danger) !important;
+    background: var(--sid-danger-soft) !important;
+    border: 1px solid var(--sid-danger-border) !important;
+    border-radius: var(--sid-radius-sm) !important;
+  }
+
+  #main .login-captcha-container {
+    color: var(--sid-text-2) !important;
+    background: rgb(23 28 25 / 96%) !important;
+    border-color: var(--sid-border-strong) !important;
+  }
+
+  #main .passkey-help a {
+    display: inline-flex !important;
+    align-items: center;
+    padding: 3px 7px !important;
+    color: var(--sid-accent) !important;
+    background: var(--sid-accent-soft) !important;
+    border: 1px solid var(--sid-accent-border) !important;
+    border-radius: var(--sid-radius-sm) !important;
+  }
+
+  #main :where(.status-message.error, .status-message.error-new) {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-danger-soft) !important;
+    border-color: var(--sid-danger-border) !important;
+  }
+
+  #main :where(.status-message.warning, .status-message.warning-new) {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-warning-soft) !important;
+    border-color: var(--sid-warning-border) !important;
+  }
+
+  #main .foot {
+    color: var(--sid-text-3) !important;
+  }
+
+  /* Primary navigation and menus */
+  .st-stuudium-navigation-2021 {
+    position: relative !important;
+    z-index: var(--sid-z-nav) !important;
+    overflow: visible !important;
+    background: rgb(15 19 17 / 94%) !important;
+    border-bottom: 1px solid var(--sid-border) !important;
+    box-shadow: none !important;
+    backdrop-filter: blur(18px) saturate(135%);
+  }
+
+  :where(#stuudium-navigation-container, #stuudium-navigation-container-inner) {
+    position: relative !important;
+    z-index: var(--sid-z-nav) !important;
+    overflow: visible !important;
+  }
+
+  .st-stuudium-navigation-2021-contents {
+    max-width: 1180px;
+    margin-inline: auto;
+  }
+
+  :where(.st-nav-item, .st-nav-item:visited, .st-nav-item-label, .st-nav-item-graphic) {
+    color: var(--sid-text-2) !important;
+    border-color: var(--sid-border) !important;
+  }
+
+  :where(.st-nav-item:hover, .st-nav-item.sn-active, .st-nav-item[aria-expanded="true"]) {
+    color: var(--sid-text) !important;
+    background: var(--sid-accent-soft) !important;
+    border-color: var(--sid-accent-border) !important;
+  }
+
+  .st-nav-item.sn-active {
+    box-shadow: inset 0 -2px 0 var(--sid-accent) !important;
+  }
+
+  :where(.st-nav-item-expandable-content, .st-nav-item-menu-contents, [data-dropdown-content], .dropdown, .dropdown-menu, .ui-menu, .select2-drop) {
+    z-index: var(--sid-z-menu) !important;
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface-2) !important;
+    border: 1px solid var(--sid-border) !important;
+    border-radius: var(--sid-radius) !important;
+    box-shadow: var(--sid-shadow) !important;
+  }
+
+  :where(.st-nav-menu-contents-item, .st-nav-item-expandable-content a, .ui-menu-item) {
+    background: transparent !important;
+  }
+
+  :where(.st-nav-menu-contents-item:hover, .st-nav-item-expandable-content a:hover, .ui-menu-item:hover) {
+    color: var(--sid-text) !important;
+    background: var(--sid-surface-3) !important;
+  }
+
+  /* Secondary tabs and the large "Veel" menu */
+  .page_tabs {
+    position: relative !important;
+    z-index: var(--sid-z-tabs) !important;
+    background: rgb(15 19 17 / 90%) !important;
+    border-bottom: 1px solid var(--sid-border) !important;
+    box-shadow: none !important;
+  }
+
+  .page_tabs .tab {
+    color: var(--sid-text-3) !important;
+    background: transparent !important;
+    border-color: transparent !important;
+  }
+
+  .page_tabs .tab:hover {
+    color: var(--sid-accent-strong) !important;
+    background: var(--sid-accent-soft) !important;
+    border-color: var(--sid-accent-border) !important;
+    text-decoration: none !important;
+  }
+
+  .page_tabs .tab.active {
+    color: var(--sid-accent) !important;
+    background: var(--sid-canvas) !important;
+    border-color: var(--sid-border) var(--sid-border) var(--sid-canvas) !important;
+  }
+
+  .page_tabs_dropdown_v2 {
+    z-index: calc(var(--sid-z-tabs) + 20) !important;
+    padding: 14px;
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface-2) !important;
+    border: 1px solid var(--sid-border-strong) !important;
+    border-radius: var(--sid-radius-lg) !important;
+    box-shadow: var(--sid-shadow) !important;
+  }
+
+  .page_tabs_dropdown_v2 .page_tabs_dropdown_segment {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 10px;
+    margin: 0 0 12px;
+    padding: 0 0 12px;
+    border-color: var(--sid-border) !important;
+  }
+
+  .page_tabs_dropdown_v2 .page_tabs_dropdown_segment:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .page_tabs_dropdown_v2 a {
+    min-height: 44px;
+    box-sizing: border-box;
+    padding: 10px 12px;
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface) !important;
+    border: 1px solid var(--sid-border) !important;
+    border-radius: var(--sid-radius-sm) !important;
+    text-decoration: none !important;
+  }
+
+  :where(.page_tabs_dropdown_v2 a:hover, .page_tabs_dropdown_v2 a:focus-visible) {
+    color: var(--sid-text) !important;
+    background: var(--sid-accent-soft) !important;
+    border-color: var(--sid-accent-border) !important;
+  }
+
+  /* Shared surfaces */
+  :where(
+    .dashboard_recent_overview .section,
+    .page_dashboard_recent .section,
+    .daily-summaries,
+    .main-block-style,
+    .sheet,
+    :where(#content, .page_body, .page_body_new_layout, .courses_index, .suhtlus) :where(.box, .panel),
+    .dialog,
+    .modal,
+    .ui-dialog,
+    .toast-notification
+  ) {
+    color: var(--sid-text-2) !important;
+    background: linear-gradient(145deg, var(--sid-surface-2), var(--sid-surface)) !important;
+    border: 1px solid var(--sid-border) !important;
+    border-radius: var(--sid-radius) !important;
+    box-shadow: var(--sid-shadow) !important;
+  }
+
+  #dashboard_recent :is(.section, .daily-summaries),
+  .page_dashboard_recent .section {
+    padding: 14px;
+  }
+
+  #dashboard_recent {
+    gap: 14px;
+    margin-inline: 0;
+  }
+
+  #dashboard_recent .dr-column {
+    min-width: 0;
+  }
+
+  #dashboard_recent :where(.section, .section-spacing, .daily-summaries) {
+    margin: 0 0 14px;
+  }
+
+  .section_heading {
+    padding-bottom: 8px;
+    letter-spacing: -0.02em;
+    border-bottom-color: var(--sid-border) !important;
+  }
+
+  .section_heading::before {
+    display: inline-block;
+    width: 18px;
+    height: 1px;
+    margin-right: 9px;
+    vertical-align: middle;
+    background: var(--sid-accent);
+    content: "";
+  }
+
+  /* Notices */
+  :where(.section-infomessage, .st-message, .message-help, .inline-help-message, .help-message, .new_message.info) {
+    box-sizing: border-box;
+    padding: 10px 12px !important;
+    color: var(--sid-text-2) !important;
+    background: var(--sid-accent-soft) !important;
+    border: 1px solid var(--sid-accent-border) !important;
+    border-radius: var(--sid-radius-sm) !important;
+  }
+
+  :where(.important, .warning, .message-warning) {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-warning-soft) !important;
+    border-color: var(--sid-warning-border) !important;
+  }
+
+  :where(.new_message.error, .message-error, .error-message) {
+    padding: 10px 12px !important;
+    color: var(--sid-text-2) !important;
+    background: var(--sid-danger-soft) !important;
+    border: 1px solid var(--sid-danger-border) !important;
+    border-radius: var(--sid-radius-sm) !important;
+  }
+
+  /* Controls: intentionally limited to Stuudium controls and text-like fields */
+  :where(
+    .new_button,
+    .button,
+    .post-edit-submit,
+    :is(#content, .page_body, .courses_index, .suhtlus) button,
+    input[type="button"],
+    input[type="submit"]
+  ) {
+    color: var(--sid-text) !important;
+    background: var(--sid-surface-2) !important;
+    border: 1px solid var(--sid-border-strong) !important;
+    border-radius: var(--sid-radius-sm) !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    transition: color 140ms ease, background-color 140ms ease, border-color 140ms ease, transform 140ms ease;
+  }
+
+  :where(
+    .new_button,
+    .button,
+    .post-edit-submit,
+    :is(#content, .page_body, .courses_index, .suhtlus) button,
+    input[type="button"],
+    input[type="submit"]
+  ):not(:disabled):not([aria-disabled="true"]):not(.disabled):hover {
+    color: var(--sid-accent-ink) !important;
+    background: var(--sid-accent) !important;
+    border-color: var(--sid-accent) !important;
+    transform: translateY(-1px);
+  }
+
+  :where(.new_button, .button):where(.pill, .round, [data-shape="pill"]) {
+    border-radius: var(--sid-radius-pill) !important;
+  }
+
+  :where(
+    .new_button,
+    .button,
+    .post-edit-submit,
+    :is(#content, .page_body, .courses_index, .suhtlus) button,
+    input[type="button"],
+    input[type="submit"]
+  ):is(:disabled, [aria-disabled="true"], .disabled) {
+    color: var(--sid-text-disabled) !important;
+    background: var(--sid-canvas-soft) !important;
+    border-color: var(--sid-border) !important;
+    transform: none !important;
+    cursor: not-allowed !important;
+  }
+
+  :where(.button-primary, .new_button.blue, :is(#content, .page_body, .courses_index, .suhtlus) button.primary, input[type="submit"].primary) {
+    color: var(--sid-accent-ink) !important;
+    background: var(--sid-accent) !important;
+    border-color: var(--sid-accent) !important;
+    font-weight: 700;
+  }
+
+  :where(.new_button, .button, :is(#content, .page_body, .courses_index, .suhtlus) button, input, textarea, select, [contenteditable="true"], .st-nav-item, .tab, a):focus-visible {
+    outline: 2px solid var(--sid-accent) !important;
+    outline-offset: 2px;
+    box-shadow: var(--sid-focus) !important;
+  }
+
+  :where(
+    input:not([type]),
+    input[type="text"],
+    input[type="search"],
+    input[type="email"],
+    input[type="password"],
+    input[type="number"],
+    input[type="date"],
+    input[type="time"],
+    textarea,
+    select,
+    .standard-styled-input,
+    .select2-container .select2-choice,
+    .selectize-input,
+    [contenteditable="true"]
+  ) {
+    color: var(--sid-text) !important;
+    caret-color: var(--sid-accent);
+    background-color: var(--sid-control) !important;
+    border: 1px solid var(--sid-border) !important;
+    border-radius: var(--sid-radius-sm) !important;
+    box-shadow: none !important;
+  }
+
+  :where(input, textarea)::placeholder {
+    color: var(--sid-text-disabled) !important;
+    opacity: 1;
+  }
+
+  :where(input, textarea, select, [contenteditable="true"]):disabled {
+    color: var(--sid-text-disabled) !important;
+    background-color: var(--sid-canvas-soft) !important;
+    cursor: not-allowed;
+  }
+
+  /* Small icons: text glyphs inherit colour; monochrome sprite spans are filtered as isolated icons. */
+  :where([class^="icon-"], [class*=" icon-"]) {
+    color: inherit !important;
+  }
+
+  :where([class^="icon-"]::before, [class*=" icon-"]::before) {
+    color: currentColor !important;
+    text-shadow: none !important;
+  }
+
+  /* Verified single-colour navigation glyphs only; arbitrary linked SVG artwork is untouched. */
+  .sn-navicon-new > svg,
+  .sn-navicon-new > svg * {
+    fill: currentColor !important;
+  }
+
+  .sn-navicon-new > svg [fill="none"] {
+    fill: none !important;
+    stroke: currentColor !important;
+  }
+
+  :where(.icon, .no_fontello #dashboard_recent [class^="icon-"]::before, .no_fontello #dashboard_recent [class*=" icon-"]::before) {
+    filter: var(--sid-icon-filter-light) !important;
+  }
+
+  :where(.button-primary, .new_button.blue, :is(#content, .page_body, .courses_index, .suhtlus) button.primary, input[type="submit"].primary) .icon,
+  :where(.new_button, .button, .post-edit-submit, :is(#content, .page_body, .courses_index, .suhtlus) button):not(:disabled):not([aria-disabled="true"]):not(.disabled):hover .icon {
+    filter: var(--sid-icon-filter-dark) !important;
+  }
+
+  :where(.new_button, .button, .post-edit-submit, :is(#content, .page_body, .courses_index, .suhtlus) button):is(:disabled, [aria-disabled="true"], .disabled) .icon {
+    opacity: 0.5;
+  }
+
+  :where(.st-select, [data-action="page-tabs-dropdown"]) {
+    background-image:
+      linear-gradient(45deg, transparent 50%, var(--sid-accent) 50%),
+      linear-gradient(135deg, var(--sid-accent) 50%, transparent 50%) !important;
+    background-repeat: no-repeat !important;
+    background-position:
+      right 11px center,
+      right 7px center !important;
+    background-size: 4px 4px !important;
+  }
+
+  /* Dashboard, diary and dynamically loaded older entries */
+  :where(.daily-summaries-navigate, .daily-summary, .scheduled > *, .scheduled-item, .lesson, .event, .todo_container) {
+    border-color: var(--sid-border) !important;
+  }
+
+  :where(.daily-summary, .scheduled-item, .lesson, .event, .todo_container):hover {
+    background: var(--sid-surface-3) !important;
+  }
+
+  :where(
+    .daily-summaries-segment,
+    .daily-summaries-segment-block,
+    .daily-summaries-segment-block-events,
+    .daily-summaries-segment-block-lessons,
+    .daily-summaries-segment-block-lesson,
+    .daily-summaries-event-stream-v201907,
+    .stream-entry,
+    .stream-entry-primary,
+    .stream-entry-context
+  ) {
+    color: var(--sid-text-2) !important;
+    background-color: transparent !important;
+    border-color: var(--sid-border) !important;
+  }
+
+  :where(.daily-summaries-segment-heading, .daily-summaries-segment > h3) {
+    margin-inline: 0 !important;
+    padding: 7px 10px !important;
+    color: var(--sid-text) !important;
+    background: var(--sid-surface-2) !important;
+    border: 1px solid var(--sid-border) !important;
+    border-radius: var(--sid-radius-sm) !important;
+  }
+
+  :where(.stream-entry.ng-grade-is-summary-wrapper, .ng-grade-is-summary-wrapper, .ng-grade-is-important-wrapper) {
+    padding: 10px 12px !important;
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface-2) !important;
+    border: 1px solid var(--sid-border) !important;
+    border-radius: var(--sid-radius-sm) !important;
+  }
+
+  .ng-grade-is-important-wrapper {
+    background: var(--sid-accent-soft) !important;
+    border-color: var(--sid-accent-border) !important;
+  }
+
+  .daily-summaries :where(.grade-current, .grade-current-verbose, .ng-notes, .st-ucontent, .daily-summaries-segment-lesson-notes, .daily-summaries-segment-lesson-homework, .daily-summaries-segment-lesson-homework-contents) {
+    color: var(--sid-text-2) !important;
+    background: transparent !important;
+    border-color: var(--sid-border) !important;
+  }
+
+  .daily-summaries :where(.grade-label, .daily-summaries-segment-lesson-subject) {
+    color: var(--sid-accent) !important;
+  }
+
+  :where(.daily-summaries-segment-block-lessons-collapsed-title, .daily-summaries .new_button.flat) {
+    color: var(--sid-text-3) !important;
+    background: var(--sid-surface) !important;
+    border-color: var(--sid-border) !important;
+  }
+
+  :where(.user-notebook, .user-notebook-sheets, .user-notebook-content, .user-notebook-content-text, .user-notebook-content-text-preview) {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface) !important;
+    border-color: var(--sid-border) !important;
+  }
+
+  .user-notebook-sheets > a {
+    background: var(--sid-surface-2) !important;
+    border-color: var(--sid-border) !important;
+  }
+
+  .user-notebook-sheets > a.sheet-active {
+    background: var(--sid-accent-soft) !important;
+    box-shadow: inset 0 -2px 0 var(--sid-accent) !important;
+  }
+
+  :where(.tera_nodes, .tera_nodes li, .resources, .resources li) {
+    border-color: var(--sid-border) !important;
+  }
+
+  :where(.tera_nodes .course > a, .resource) {
+    color: var(--sid-text-2) !important;
+  }
+
+  :where(.tera_nodes .course > a:hover, .resource:hover) {
+    background: var(--sid-surface-3) !important;
+  }
+
+  /* Absence calendar */
+  .st-absences_excuses-calendar .monthname {
+    color: var(--sid-accent) !important;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .st-absences_excuses-calendar .week a {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface-2) !important;
+    border-color: var(--sid-border) !important;
+  }
+
+  .st-absences_excuses-calendar .week a:hover {
+    color: var(--sid-accent-ink) !important;
+    background: var(--sid-accent) !important;
+  }
+
+  .st-absences_excuses-calendar .week a.disabled {
+    color: var(--sid-text-disabled) !important;
+    background: var(--sid-canvas-soft) !important;
+  }
+
+  .st-absences_excuses-calendar .week :where(a.is_today, .is_today) {
+    color: var(--sid-accent) !important;
+    border-color: var(--sid-accent) !important;
+    box-shadow: inset 0 0 0 1px var(--sid-accent) !important;
+  }
+
+  /* Profiles, subjects and segmented controls */
+  :where(.st-segment-nav, .st-toggle-control) {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface-2) !important;
+    border-color: var(--sid-border-strong) !important;
+  }
+
+  :where(.st-segment-nav a, .st-toggle-control label, .st-toggle-control label em) {
+    color: var(--sid-text-2) !important;
+    background-color: transparent !important;
+    border-color: var(--sid-border) !important;
+  }
+
+  :where(.st-segment-nav a:hover, .st-segment-nav a.active, .st-segment-nav .st-is-active, .st-toggle-control label:hover, .st-toggle-control label:has(input:checked)) {
+    color: var(--sid-text) !important;
+    background: var(--sid-accent-soft) !important;
+    border-color: var(--sid-accent-border) !important;
+  }
+
+  .page_dashboard_subjects .dashboard-subjects-journal {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface) !important;
+    border: 1px solid var(--sid-border) !important;
+    border-radius: var(--sid-radius) !important;
+    box-shadow: none !important;
+  }
+
+  .page_dashboard_subjects .dashboard-subjects-journal:hover {
+    background: var(--sid-surface-3) !important;
+    border-color: var(--sid-accent-border) !important;
+  }
+
+  .page_dashboard_subjects :where(.dashboard-subjects-journal-content, .dashboard-subjects-journal-teachers, .dashboard-subjects-journal-content-period),
+  .page_users_profile :where(.page_head, .new_column, .divider, .standard, .user_card, .sso) {
+    color: var(--sid-text-2) !important;
+    background: transparent !important;
+    border-color: var(--sid-border) !important;
+  }
+
+  /* Grades: mapped once for every page that uses the shared grade model. */
+  :where(.page_grades_student, .page_dashboard_subjects, .page_users_summary) :where(.grade_active, .grade_params abbr) {
+    color: var(--sid-text) !important;
+    background: var(--sid-surface-2) !important;
+    border: 1px solid var(--sid-border-strong) !important;
+    border-radius: 4px !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  :where(.page_grades_student, .page_dashboard_subjects, .page_users_summary) :where(.grade_A, .grade_B, .grade_C, .grade_AR) {
+    color: var(--sid-accent-strong) !important;
+  }
+
+  :where(.page_grades_student, .page_dashboard_subjects, .page_users_summary) :where(.grade_D, .grade_E, .grade_F, .grade_MA, .grade_0, .grade_1, .grade_2) {
+    color: var(--sid-danger) !important;
+    border-color: var(--sid-danger-border) !important;
+  }
+
+  :where(.page_grades_student, .page_dashboard_subjects, .page_users_summary) :where(.grade_H, .grade_param_is_absent abbr, .grade_param_is_late, .grade_param_is_no_homework) {
+    color: var(--sid-warning) !important;
+    border-color: var(--sid-warning-border) !important;
+  }
+
+  .page_grades_student .help_toggle {
+    color: var(--sid-accent) !important;
+    background: var(--sid-accent-soft) !important;
+    border: 1px solid var(--sid-accent-border) !important;
+    border-radius: var(--sid-radius-pill) !important;
+  }
+
+  .page_grades_student .summary > span {
+    color: var(--sid-text-3) !important;
+  }
+
+  :where(.page_grades_student, .page_dashboard_subjects, .page_users_summary) .grade_param_is_absent {
+    color: var(--sid-warning) !important;
+    background: var(--sid-warning-soft) !important;
+    border-color: var(--sid-warning-border) !important;
+  }
+
+  :where(.page_grades_student, .page_dashboard_subjects, .page_users_summary) :where(.grade_param_is_absent_excused, .grade_param_is_excused) {
+    color: var(--sid-accent) !important;
+    background: var(--sid-accent-soft) !important;
+    border-color: var(--sid-accent-border) !important;
+  }
+
+  :where(.page_grades_student, .page_dashboard_subjects, .page_users_summary) :where(.grade_param_is_late, .grade_param_is_no_homework, .grade_param_is_no_resources) {
+    color: var(--sid-warning) !important;
+    background: var(--sid-warning-soft) !important;
+    border-color: var(--sid-warning-border) !important;
+  }
+
+  :where(.grade_is_important, .grade_is_summary) {
+    background: var(--sid-warning-soft) !important;
+    border-color: var(--sid-warning-border) !important;
+  }
+
+  /* Tera */
+  :where(.courses_index_content.section, .courses_index .primary-container) {
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
+  :where(.content-container, .content-container.with-parent, .content-container.content-container-is-parent, #course-home) {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface) !important;
+    border-color: var(--sid-border) !important;
+    box-shadow: none !important;
+  }
+
+  .content-container.content-container-is-parent {
+    background: var(--sid-surface-2) !important;
+  }
+
+  #course-home :where(.node, .node_main, .node_meta) {
+    color: var(--sid-text-2) !important;
+    background: transparent !important;
+    border-color: var(--sid-border) !important;
+  }
+
+  #course-home :where(.node, .node_main):hover {
+    background: var(--sid-surface-3) !important;
+  }
+
+  .courses_index_content > a.course {
+    display: block;
+    box-sizing: border-box;
+    margin-bottom: 12px !important;
+    padding: 17px 18px !important;
+    color: var(--sid-text-2) !important;
+    background: linear-gradient(145deg, var(--sid-surface-2), var(--sid-surface)) !important;
+    border: 1px solid var(--sid-border) !important;
+    border-radius: var(--sid-radius) !important;
+    box-shadow: none !important;
+    transition: transform 140ms ease, border-color 140ms ease;
+  }
+
+  .courses_index_content > a.course:hover {
+    background: var(--sid-surface-3) !important;
+    border-color: var(--sid-accent-border) !important;
+    transform: translateY(-2px);
+  }
+
+  :where(.starred_toggle, .star-inactive, .star-active) {
+    color: var(--sid-accent) !important;
+  }
+
+  :where(.course-journal, .badge-archived) {
+    color: var(--sid-text-3) !important;
+    background: var(--sid-control) !important;
+    border-color: var(--sid-border) !important;
+  }
+
+  .responses-divider > span {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface-2) !important;
+    border-radius: var(--sid-radius-sm) !important;
+    padding-inline: 8px;
+  }
+
+  /* Suhtlus */
+  :where(.header-wrapper, .suhtlus-nav) {
+    background: transparent !important;
+    border-color: var(--sid-border) !important;
+  }
+
+  .suhtlus-nav a {
+    color: var(--sid-text-3) !important;
+    background: transparent !important;
+    border-color: transparent !important;
+  }
+
+  :where(.suhtlus-nav a:hover, .suhtlus-nav a.nav-active) {
+    color: var(--sid-text) !important;
+    background: var(--sid-surface) !important;
+  }
+
+  .suhtlus-nav a.nav-active {
+    box-shadow: inset 3px 0 0 var(--sid-accent) !important;
+  }
+
+  .suhtlus-content.main-block-style {
+    background: var(--sid-surface) !important;
+  }
+
+  .suhtlus :where(.current-events, .current-events-date, .post-list-search-and-actions, .post-list-meta, .post-in-list, .post-main-wrapper, .post-head-wrapper, .post-in-list-content, .post-body-preview, .post-body, .post-comments-summary, .comment, .formatted-text) {
+    color: var(--sid-text-2) !important;
+    background: transparent !important;
+    border-color: var(--sid-border) !important;
+  }
+
+  .suhtlus :where(.post-in-list:hover, .post-in-list.post-expanded, .post-in-list.highlighted) {
+    background: var(--sid-surface-3) !important;
+  }
+
+  .suhtlus :where(.post-title, .post-title-main, .post-author) {
+    color: var(--sid-text) !important;
+  }
+
+  .suhtlus :where(.bl-p, .bl-p.highlighted, .post-participants .bl-p) {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-accent-soft) !important;
+    border: 1px solid var(--sid-accent-border) !important;
+    border-radius: var(--sid-radius-pill) !important;
+    box-shadow: none !important;
+  }
+
+  .post-in-list.post-expanded {
+    padding: 18px !important;
+    background: var(--sid-surface-3) !important;
+    border: 1px solid var(--sid-border-strong) !important;
+    box-shadow: var(--sid-shadow) !important;
+  }
+
+  .post-in-list.post-expanded :where(.post-actions, .post-responses-content, .post-responses-counts, .post-comments, .post-comment, .post-comment-main, .post-add-members, .post-footer-actions) {
+    color: var(--sid-text-2) !important;
+    background: transparent !important;
+    border-color: var(--sid-border) !important;
+  }
+
+  :where(.post-in-list.post-expanded .post-comments-heading span, .post-in-list.post-expanded .generic-notice, .post-event-time) {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface-2) !important;
+    border: 1px solid var(--sid-border) !important;
+    border-radius: var(--sid-radius-sm) !important;
+    box-shadow: none !important;
+  }
+
+  .post-list-merged {
+    color: var(--sid-text-2) !important;
+    background: transparent !important;
+    border: 1px solid transparent !important;
+    text-decoration: none !important;
+  }
+
+  :where(.post-list-merged:hover, .post-list-merged:focus-visible) {
+    color: var(--sid-text) !important;
+    background: var(--sid-surface-3) !important;
+    border-color: var(--sid-border) !important;
+  }
+
+  .suhtlus :where(.cal-day, .cal-date, .cal-contents, .cal-week, .cal-day-weekday-row) {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface) !important;
+    border-color: var(--sid-border) !important;
+  }
+
+  .suhtlus .cal-day:hover {
+    background: var(--sid-surface-3) !important;
+  }
+
+  .suhtlus :where(.cal-day.cal-day-is-today, .cal-day-is-today) {
+    color: var(--sid-text) !important;
+    background: var(--sid-accent-soft) !important;
+    border-color: var(--sid-accent-border) !important;
+  }
+
+  .suhtlus :where(.cal-ev, .cal-type-post) {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface-2) !important;
+    border-color: var(--sid-border) !important;
+  }
+
+  :where(.selectize-dropdown, .selectize-dropdown-content, .litepicker, .litepicker .container__main, .litepicker .container__months, .litepicker .month-item, .litepicker .container__days, .litepicker .day-item) {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface-2) !important;
+    border-color: var(--sid-border) !important;
+    box-shadow: none !important;
+  }
+
+  :where(.selectize-dropdown .option:hover, .selectize-dropdown .active, .litepicker .day-item:hover, .litepicker .day-item.is-today) {
+    color: var(--sid-accent-strong) !important;
+    background: var(--sid-accent-soft) !important;
+  }
+
+  /* Data grids and calendars: scoped to known data-heavy page/component roots. */
+  :where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_users_profile, .content-container, .suhtlus) table {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface) !important;
+    border-color: var(--sid-border) !important;
+  }
+
+  :where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_users_profile, .content-container, .suhtlus) :where(th, td, tr) {
+    color: var(--sid-text-2) !important;
+    background-color: transparent !important;
+    border-color: var(--sid-border) !important;
+  }
+
+  :where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_users_profile, .content-container, .suhtlus) th {
+    color: var(--sid-text) !important;
+    background: var(--sid-surface-2) !important;
+  }
+
+  :where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_users_profile, .content-container, .suhtlus) tr:hover > :where(th, td) {
+    background: var(--sid-surface-3) !important;
+  }
+
+  :where(.calendar, .calendar-grid, .calendar-day, .fc, .fc-view, .fc-day, .fc-daygrid-day, .fc-scrollgrid) {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface) !important;
+    border-color: var(--sid-border) !important;
+  }
+
+  :where(.fc-event, .calendar-event) {
+    color: var(--sid-text) !important;
+    background: var(--sid-accent-soft) !important;
+    border-color: var(--sid-accent-border) !important;
+  }
+
+  /* Overlays and final legacy exceptions */
+  :where(.tipsy-inner, .tooltip, .popover, .select2-results, .select2-search, .ui-datepicker, .ui-widget-content) {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface-2) !important;
+    border-color: var(--sid-border) !important;
+  }
+
+  :where(.sn-badge, .marker, .badge:not(.badge-archived), .st-badge.st-badge-green) {
+    color: var(--sid-accent-ink) !important;
+    background: var(--sid-accent) !important;
+    border-color: var(--sid-accent) !important;
+  }
+
+  .loading-spinner {
+    border-color: var(--sid-border) !important;
+    border-top-color: var(--sid-accent) !important;
+  }
+
+  .page_footer {
+    color: var(--sid-text-3) !important;
+    background-color: transparent !important;
+    border-top-color: var(--sid-border) !important;
+  }
+
+  @media screen {
+    .page_print_view_report_card :where(.page_body, .bl-is-main) {
+      color: var(--sid-text-2) !important;
+      background: var(--sid-canvas) !important;
+    }
+  }
+
+  @media (max-width: 760px) {
+    body {
+      background-attachment: scroll !important;
+      font-size: 14px;
+    }
+
+    #bg > :is(#bg-img, #bg-img-full) {
+      display: none !important;
+    }
+
+    #login-page-container #main {
+      min-height: 100vh;
+      background: linear-gradient(180deg, var(--sid-surface-2), var(--sid-canvas)) !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+    }
+
+    #dashboard_recent {
+      display: block;
+    }
+
+    #dashboard_recent .dr-column {
+      width: 100%;
+    }
+
+    :where(.dashboard_recent_overview .section, .daily-summaries, .main-block-style, .courses_index_content > a.course) {
+      border-radius: 9px !important;
+    }
+
+    .st-stuudium-navigation-2021-contents {
+      padding-inline: 6px !important;
+    }
+
+    .page_tabs_dropdown_v2 .page_tabs_dropdown_segment {
+      grid-template-columns: 1fr;
+    }
+
+    .page_tabs .width_wrapper {
+      max-width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scrollbar-width: none;
+    }
+
+    .page_tabs .width_wrapper::-webkit-scrollbar {
+      display: none;
+    }
+
+    .page_tabs .scrollable_page_tabs_wrapper {
+      width: max-content !important;
+      min-width: 100%;
+    }
+
+    .dashboard_recent_mobile_navigation > div {
+      background: var(--sid-surface-2) !important;
+      border: 1px solid var(--sid-border-strong) !important;
+      box-shadow: var(--sid-shadow) !important;
+    }
+
+    .dashboard_recent_mobile_navigation > div > a[data-container] {
+      color: var(--sid-text-2) !important;
+      background: transparent !important;
+    }
+
+    .dashboard_with_section_based_navigation[data-dashboard-container-current="stream"]
+      .dashboard_recent_mobile_navigation [data-container="stream"],
+    .dashboard_with_section_based_navigation[data-dashboard-container-current="todos"]
+      .dashboard_recent_mobile_navigation [data-container="todos"],
+    .dashboard_with_section_based_navigation[data-dashboard-container-current="tera"]
+      .dashboard_recent_mobile_navigation [data-container="tera"],
+    .dashboard_with_section_based_navigation[data-dashboard-container-current="absences"]
+      .dashboard_recent_mobile_navigation [data-container="absences"] {
+      color: var(--sid-accent-strong) !important;
+      background: var(--sid-accent-soft) !important;
+      box-shadow: inset 0 -2px 0 var(--sid-accent) !important;
+    }
+
+    :where(.student_subject_grades_cont, .table-responsive, .st-table-scroll) {
+      max-width: 100%;
+      overflow-x: auto;
+      overscroll-behavior-inline: contain;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+    }
+  }
+}
