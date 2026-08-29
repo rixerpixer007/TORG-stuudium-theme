@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Stuudium — Intentional Dark
 @namespace      https://github.com/rixerpixer007/TORG-stuudium-theme
-@version        2.2.15
+@version        2.2.16
 @description    A systematic graphite-and-mint dark theme for TORG Stuudium, Tera and Suhtlus.
 @author         rixerpixer007
 @homepageURL    https://github.com/rixerpixer007/TORG-stuudium-theme
@@ -30,7 +30,7 @@
     --sid-border-strong: #3a4740;
     --sid-text: #f2f0e9;
     --sid-text-2: #c1c0b8;
-    --sid-text-3: #858b85;
+    --sid-text-3: #959b95;
     --sid-text-disabled: #5d655f;
     --sid-accent: #65d6b1;
     --sid-accent-strong: #7ce8c3;
@@ -1286,9 +1286,16 @@
   }
 
   .st-absences_excuses-calendar .week :where(a.is_today, .is_today) {
-    color: var(--sid-accent) !important;
+    color: var(--sid-accent-strong) !important;
+    background: var(--sid-accent-soft) !important;
+    border-color: var(--sid-accent-border) !important;
+    box-shadow: none !important;
+  }
+
+  .st-absences_excuses-calendar .week :where(a.is_today, .is_today):hover {
+    color: var(--sid-accent-ink) !important;
+    background: var(--sid-accent) !important;
     border-color: var(--sid-accent) !important;
-    box-shadow: inset 0 0 0 1px var(--sid-accent) !important;
   }
 
   /* Profiles, subjects and segmented controls */
