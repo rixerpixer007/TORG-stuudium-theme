@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Stuudium — Intentional Dark
 @namespace      https://github.com/rixerpixer007/TORG-stuudium-theme
-@version        2.3.2
+@version        2.3.3
 @description    A systematic graphite-and-mint dark theme for TORG Stuudium, Tera and Suhtlus.
 @author         rixerpixer007
 @homepageURL    https://github.com/rixerpixer007/TORG-stuudium-theme
@@ -25,6 +25,7 @@
     --sid-surface: #171c19;
     --sid-surface-2: #1b211e;
     --sid-surface-3: #202824;
+    --sid-surface-interactive: #191f1b;
     --sid-control: #111613;
     --sid-border: #2a332e;
     --sid-border-strong: #3a4740;
@@ -1981,20 +1982,14 @@
     background: var(--sid-surface) !important;
   }
 
-  .suhtlus-content.main-block-style:has(.post-in-list.post-expanded) {
-    background: transparent !important;
-    border-color: transparent !important;
-    box-shadow: none !important;
-  }
-
   .suhtlus :where(.current-events, .current-events-date, .post-list-search-and-actions, .post-list-meta, .post-in-list, .post-main-wrapper, .post-head-wrapper, .post-in-list-content, .post-body-preview, .post-body, .post-comments-summary, .comment, .formatted-text) {
     color: var(--sid-text-2) !important;
     background: transparent !important;
     border-color: var(--sid-border) !important;
   }
 
-  .suhtlus :where(.post-in-list:hover, .post-in-list.highlighted) {
-    background: var(--sid-surface-3) !important;
+  .suhtlus :where(.post-in-list:hover, .post-in-list.post-expanded, .post-in-list.highlighted) {
+    background: var(--sid-surface-interactive) !important;
   }
 
   .suhtlus :where(.post-title, .post-title-main, .post-author) {
@@ -2042,7 +2037,7 @@
   .post-in-list.post-expanded {
     padding: 18px !important;
     margin-bottom: 0 !important;
-    background: transparent !important;
+    background: var(--sid-surface-interactive) !important;
     border: 1px solid var(--sid-border-strong) !important;
     box-shadow: none !important;
   }
@@ -2051,6 +2046,28 @@
     color: var(--sid-text-2) !important;
     background: transparent !important;
     border-color: var(--sid-border) !important;
+  }
+
+  .post-in-list.post-expanded .post-comment-content {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface-2) !important;
+    border: 1px solid var(--sid-border) !important;
+    border-radius: var(--sid-radius-sm) !important;
+    box-shadow: none !important;
+  }
+
+  .post-in-list.post-expanded .comment-author {
+    color: var(--sid-text) !important;
+    text-decoration: none !important;
+  }
+
+  .post-in-list.post-expanded .comment-date {
+    color: var(--sid-text-3) !important;
+  }
+
+  .post-in-list.post-expanded .comment-body {
+    color: var(--sid-text-2) !important;
+    background: transparent !important;
   }
 
   :where(.post-in-list.post-expanded .post-comments-heading span, .post-in-list.post-expanded .generic-notice, .post-event-time) {
@@ -2071,7 +2088,7 @@
   }
 
   .suhtlus .post-in-list.post-collapsed .post-event-time {
-    margin: 10px 0 0 !important;
+    margin: 0 !important;
     font-size: 13px !important;
     line-height: 13px !important;
   }
