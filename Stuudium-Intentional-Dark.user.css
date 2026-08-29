@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Stuudium — Intentional Dark
 @namespace      https://github.com/rixerpixer007/TORG-stuudium-theme
-@version        2.3.3
+@version        2.3.4
 @description    A systematic graphite-and-mint dark theme for TORG Stuudium, Tera and Suhtlus.
 @author         rixerpixer007
 @homepageURL    https://github.com/rixerpixer007/TORG-stuudium-theme
@@ -583,6 +583,7 @@
     position: relative !important;
     z-index: var(--sid-z-nav) !important;
     overflow: visible !important;
+    background: var(--sid-canvas) !important;
   }
 
   .st-stuudium-navigation-2021-contents {
@@ -2091,6 +2092,11 @@
     margin: 0 !important;
     font-size: 13px !important;
     line-height: 13px !important;
+  }
+
+  .suhtlus .post-in-list.post-collapsed .post-body-preview {
+    font-size: 13px !important;
+    line-height: 1.45 !important;
   }
 
   .suhtlus .post-event-time::before {
