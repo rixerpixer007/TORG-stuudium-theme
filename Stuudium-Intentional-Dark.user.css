@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Stuudium — Intentional Dark
 @namespace      https://github.com/rixerpixer007/TORG-stuudium-theme
-@version        2.2.16
+@version        2.2.17
 @description    A systematic graphite-and-mint dark theme for TORG Stuudium, Tera and Suhtlus.
 @author         rixerpixer007
 @homepageURL    https://github.com/rixerpixer007/TORG-stuudium-theme
@@ -1053,7 +1053,7 @@
   }
 
   :where(.stream-entry.ng-grade-is-summary-wrapper, .ng-grade-is-summary-wrapper, .ng-grade-is-important-wrapper) {
-    padding: 10px 12px !important;
+    padding: 6px 8px !important;
     color: var(--sid-text-2) !important;
     background: var(--sid-surface-2) !important;
     border: 1px solid var(--sid-border) !important;
@@ -1285,17 +1285,97 @@
     background: var(--sid-canvas-soft) !important;
   }
 
-  .st-absences_excuses-calendar .week :where(a.is_today, .is_today) {
+  .st-absences_excuses-calendar .week a.is_today {
     color: var(--sid-accent-strong) !important;
     background: var(--sid-accent-soft) !important;
     border-color: var(--sid-accent-border) !important;
     box-shadow: none !important;
   }
 
-  .st-absences_excuses-calendar .week :where(a.is_today, .is_today):hover {
+  .st-absences_excuses-calendar .week a.is_today:hover {
     color: var(--sid-accent-ink) !important;
     background: var(--sid-accent) !important;
     border-color: var(--sid-accent) !important;
+  }
+
+  /* Absence-entry popover */
+  .popover.absences_popover {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface-2) !important;
+    border-color: var(--sid-border-strong) !important;
+    border-radius: var(--sid-radius) !important;
+    box-shadow: var(--sid-shadow) !important;
+  }
+
+  .popover.absences_popover.has_arrow_top::before {
+    border-bottom-color: var(--sid-border-strong) !important;
+  }
+
+  .popover.absences_popover.has_arrow_top::after {
+    border-bottom-color: var(--sid-surface-2) !important;
+  }
+
+  .absences_popover .day_heading {
+    color: var(--sid-text) !important;
+  }
+
+  .absences_popover .divider {
+    background: var(--sid-border) !important;
+  }
+
+  .absences_popover .icon.close {
+    filter: var(--sid-icon-filter-light) !important;
+    opacity: 0.7 !important;
+  }
+
+  .absences_popover .student-absences-on-date-options-add-notice {
+    box-sizing: border-box !important;
+    padding: 8px !important;
+    color: var(--sid-text-2) !important;
+    background: var(--sid-danger-soft) !important;
+    border: 1px solid var(--sid-danger-border) !important;
+    border-radius: 0 0 var(--sid-radius-sm) var(--sid-radius-sm) !important;
+  }
+
+  .absences_popover .st-toggle-control label:has(input:checked) {
+    color: var(--sid-text) !important;
+    background: var(--sid-accent-soft) !important;
+  }
+
+  .absences_popover .st-toggle-control label.st-subtlered:has(input:checked) {
+    color: var(--sid-danger) !important;
+    background: var(--sid-danger-soft) !important;
+  }
+
+  .absences_popover .st-toggle-control label > em {
+    top: 8px !important;
+    left: 8px !important;
+    width: 13px !important;
+    height: 13px !important;
+    background: transparent !important;
+    border: 1px solid var(--sid-border-strong) !important;
+    border-radius: 3px !important;
+  }
+
+  .absences_popover .st-toggle-control label input:checked ~ em {
+    color: var(--sid-accent) !important;
+    border-color: currentColor !important;
+  }
+
+  .absences_popover .st-toggle-control label.st-subtlered input:checked ~ em {
+    color: var(--sid-danger) !important;
+  }
+
+  .absences_popover .st-toggle-control label input:checked ~ em::after {
+    position: absolute !important;
+    top: 1px !important;
+    left: 4px !important;
+    width: 3px !important;
+    height: 7px !important;
+    content: "" !important;
+    border: solid currentColor !important;
+    border-width: 0 2px 2px 0 !important;
+    transform: rotate(45deg) !important;
   }
 
   /* Profiles, subjects and segmented controls */
