@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Stuudium — Intentional Dark
 @namespace      https://github.com/rixerpixer007/TORG-stuudium-theme
-@version        2.2.21
+@version        2.2.22
 @description    A systematic graphite-and-mint dark theme for TORG Stuudium, Tera and Suhtlus.
 @author         rixerpixer007
 @homepageURL    https://github.com/rixerpixer007/TORG-stuudium-theme
@@ -1456,7 +1456,7 @@
     border-color: var(--sid-danger-border) !important;
   }
 
-  :where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_subjects_student) :where(.grade_H, .grade_param_is_absent abbr, .grade_param_is_late, .grade_param_is_no_homework) {
+  :where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_subjects_student) :where(.grade_H, .grade_param_is_late, .grade_param_is_no_homework) {
     color: var(--sid-warning) !important;
     border-color: var(--sid-warning-border) !important;
   }
@@ -1472,16 +1472,26 @@
     color: var(--sid-text-3) !important;
   }
 
-  :where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_subjects_student) .grade_param_is_absent {
-    color: var(--sid-warning) !important;
-    background: var(--sid-warning-soft) !important;
-    border-color: var(--sid-warning-border) !important;
+  :where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_subjects_student) .grade_param_is_absent:not(.grade_param_is_absent_excused) {
+    color: var(--sid-danger) !important;
+    background: var(--sid-danger-soft) !important;
+    border-color: var(--sid-danger-border) !important;
   }
 
-  :where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_subjects_student) :where(.grade_param_is_absent_excused, .grade_param_is_excused) {
+  :where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_subjects_student) .grade_param_is_absent:not(.grade_param_is_absent_excused) abbr {
+    color: var(--sid-danger) !important;
+  }
+
+  :where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_subjects_student) .grade_param_is_absent.grade_param_is_absent_excused,
+  :where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_subjects_student) .grade_param_is_excused {
     color: var(--sid-accent) !important;
     background: var(--sid-accent-soft) !important;
     border-color: var(--sid-accent-border) !important;
+  }
+
+  :where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_subjects_student) .grade_param_is_absent.grade_param_is_absent_excused abbr,
+  :where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_subjects_student) .grade_param_is_excused abbr {
+    color: var(--sid-accent) !important;
   }
 
   :where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_subjects_student) :where(.grade_param_is_late, .grade_param_is_no_homework, .grade_param_is_no_resources) {
@@ -1490,7 +1500,12 @@
     border-color: var(--sid-warning-border) !important;
   }
 
-  :where(.grade_is_important, .grade_is_summary) {
+  .grade_is_important {
+    background: var(--sid-accent-soft) !important;
+    border-color: var(--sid-accent-border) !important;
+  }
+
+  .grade_is_summary {
     background: var(--sid-warning-soft) !important;
     border-color: var(--sid-warning-border) !important;
   }
@@ -1564,6 +1579,10 @@
     color: var(--sid-text-2) !important;
   }
 
+  .page_subjects_student .student_subject_grades :where(.grade_A, .grade_B, .grade_C, .grade_AR) {
+    color: var(--sid-text-2) !important;
+  }
+
   .page_subjects_student .student_subject_grades .grade_notes {
     color: var(--sid-text) !important;
   }
@@ -1578,6 +1597,20 @@
 
   .page_subjects_student .student_subject_grades .time {
     color: var(--sid-accent-strong) !important;
+  }
+
+  .page_subjects_student .lesson_grade_history .current > th:first-child {
+    color: var(--sid-accent) !important;
+  }
+
+  .page_subjects_student .lesson_grade_history .grade_param_is_notify,
+  .page_subjects_student .lesson_grade_history .grade_param_is_notify abbr {
+    color: var(--sid-danger) !important;
+  }
+
+  .page_subjects_student .lesson_grade_history .grade_param_is_notify {
+    background: var(--sid-danger-soft) !important;
+    border-color: var(--sid-danger-border) !important;
   }
 
   .page_subjects_student .lesson_grade_history {
