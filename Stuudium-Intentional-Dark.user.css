@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Stuudium — Intentional Dark
 @namespace      https://github.com/rixerpixer007/TORG-stuudium-theme
-@version        2.2.28
+@version        2.3.0
 @description    A systematic graphite-and-mint dark theme for TORG Stuudium, Tera and Suhtlus.
 @author         rixerpixer007
 @homepageURL    https://github.com/rixerpixer007/TORG-stuudium-theme
@@ -1970,7 +1970,11 @@
   }
 
   .suhtlus-nav a.nav-active {
-    box-shadow: inset 3px 0 0 var(--sid-accent) !important;
+    color: var(--sid-accent-strong) !important;
+    background: var(--sid-accent-soft) !important;
+    border-color: var(--sid-accent-border) !important;
+    border-radius: var(--sid-radius-sm) var(--sid-radius-sm) 0 0 !important;
+    box-shadow: inset 0 -3px 0 var(--sid-accent) !important;
   }
 
   .suhtlus-content.main-block-style {
@@ -1997,6 +2001,7 @@
     border: 1px solid var(--sid-accent-border) !important;
     border-radius: var(--sid-radius-pill) !important;
     box-shadow: none !important;
+    padding: 2px 5px !important;
   }
 
   .post-in-list.post-expanded {
@@ -2020,6 +2025,94 @@
     box-shadow: none !important;
   }
 
+  .suhtlus .post-event-time {
+    display: inline-flex !important;
+    align-items: center;
+    width: fit-content !important;
+    max-width: 100%;
+    gap: 6px;
+    padding: 4px 7px !important;
+  }
+
+  .suhtlus .post-event-time::before {
+    width: 13px;
+    height: 13px;
+    flex: 0 0 13px;
+    content: "";
+    background: var(--sid-accent) !important;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 3v3M17 3v3M4 8h16M5 5h14a1 1 0 0 1 1 1v14H4V6a1 1 0 0 1 1-1Z' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 3v3M17 3v3M4 8h16M5 5h14a1 1 0 0 1 1 1v14H4V6a1 1 0 0 1 1-1Z' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  }
+
+  .suhtlus .button-icon-fav {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 7px !important;
+    background-image: none !important;
+  }
+
+  .suhtlus .button-icon-fav::before {
+    width: 13px;
+    height: 13px;
+    flex: 0 0 13px;
+    content: "";
+    background: var(--sid-accent) !important;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  }
+
+  .suhtlus .post-responses-add-toggle > span {
+    background-color: var(--sid-accent) !important;
+    background-image: none !important;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='9' fill='none' stroke='black' stroke-width='2'/%3E%3Cpath d='M8.5 10h.01M15.5 10h.01M8 14c1.1 1.3 2.4 2 4 2s2.9-.7 4-2' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") center / 16px 16px no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='9' fill='none' stroke='black' stroke-width='2'/%3E%3Cpath d='M8.5 10h.01M15.5 10h.01M8 14c1.1 1.3 2.4 2 4 2s2.9-.7 4-2' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") center / 16px 16px no-repeat;
+  }
+
+  .suhtlus .post-responses-add-available {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface-2) !important;
+    border: 1px solid var(--sid-border-strong) !important;
+    border-radius: var(--sid-radius-sm) !important;
+    box-shadow: var(--sid-shadow) !important;
+  }
+
+  .suhtlus .post-response-toggle {
+    background: transparent !important;
+    border-color: transparent !important;
+    border-radius: var(--sid-radius-sm) !important;
+  }
+
+  .suhtlus .post-response-toggle:hover {
+    background: var(--sid-accent-soft) !important;
+    border-color: var(--sid-accent-border) !important;
+  }
+
+  .suhtlus .post-comments-heading {
+    display: flex !important;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .suhtlus .post-comments-heading::before,
+  .suhtlus .post-comments-heading::after {
+    position: static !important;
+    width: auto !important;
+    height: 0 !important;
+    flex: 1 1 auto;
+    content: "" !important;
+    border: 0 !important;
+    border-top: 1px solid var(--sid-border) !important;
+  }
+
+  .suhtlus .post-comments-heading > div,
+  .suhtlus .post-comments-heading span {
+    color: var(--sid-text-3) !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
   .post-list-merged {
     color: var(--sid-text-2) !important;
     background: transparent !important;
@@ -2031,6 +2124,14 @@
     color: var(--sid-text) !important;
     background: var(--sid-surface-3) !important;
     border-color: var(--sid-border) !important;
+  }
+
+  .suhtlus .post-list-merged :where(a, .as-link) {
+    color: var(--sid-accent) !important;
+  }
+
+  .suhtlus .post-list-merged :where(a, .as-link):hover {
+    color: var(--sid-accent-strong) !important;
   }
 
   .suhtlus :where(.cal-day, .cal-date, .cal-contents, .cal-week, .cal-day-weekday-row) {
