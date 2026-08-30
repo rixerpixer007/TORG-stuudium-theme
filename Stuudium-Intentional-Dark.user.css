@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Stuudium — Intentional Dark
 @namespace      https://github.com/rixerpixer007/TORG-stuudium-theme
-@version        2.5.2
+@version        2.5.3
 @description    A systematic graphite-and-mint dark theme for TORG Stuudium, Tera and Suhtlus.
 @author         rixerpixer007
 @homepageURL    https://github.com/rixerpixer007/TORG-stuudium-theme
@@ -1494,20 +1494,22 @@
     .dashboard-subjects-journal
     .grade_param_has_comment
     .icon-comment::before {
-    background-color: var(--sid-accent) !important;
-    background-image: none !important;
-    -webkit-mask: url("https://assets.stuudium.net/img/icons/fontello-alt/icon-comment.png") center / 8px 8px no-repeat !important;
-    mask: url("https://assets.stuudium.net/img/icons/fontello-alt/icon-comment.png") center / 8px 8px no-repeat !important;
+    background-color: transparent !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='%2365d6b1' d='M4 1C2.34 1 1 2.05 1 3.35S2.34 5.7 4 5.7c.3 0 .58-.03.85-.1L6.3 7 6 5.2c.62-.43 1-1.1 1-1.85C7 2.05 5.66 1 4 1Z'/%3E%3C/svg%3E") !important;
+    -webkit-mask: none !important;
+    mask: none !important;
+    filter: none !important;
   }
 
   .page_dashboard_subjects.no_fontello
     .dashboard-subjects-journal
     .grade_param_has_comment
     .icon-comment-empty::before {
-    background-color: var(--sid-accent) !important;
-    background-image: none !important;
-    -webkit-mask: url("https://assets.stuudium.net/img/icons/fontello-alt/icon-comment-empty.png") center / 8px 8px no-repeat !important;
-    mask: url("https://assets.stuudium.net/img/icons/fontello-alt/icon-comment-empty.png") center / 8px 8px no-repeat !important;
+    background-color: transparent !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='none' stroke='%2365d6b1' stroke-width='.8' stroke-linejoin='round' d='M4 1C2.34 1 1 2.05 1 3.35S2.34 5.7 4 5.7c.3 0 .58-.03.85-.1L6.3 7 6 5.2c.62-.43 1-1.1 1-1.85C7 2.05 5.66 1 4 1Z'/%3E%3C/svg%3E") !important;
+    -webkit-mask: none !important;
+    mask: none !important;
+    filter: none !important;
   }
 
   .page_dashboard_subjects .stuudium-popover {
