@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Stuudium — Intentional Dark
 @namespace      https://github.com/rixerpixer007/TORG-stuudium-theme
-@version        2.5.5
+@version        2.6.0
 @description    A systematic graphite-and-mint dark theme for TORG Stuudium, Tera and Suhtlus.
 @author         rixerpixer007
 @homepageURL    https://github.com/rixerpixer007/TORG-stuudium-theme
@@ -2022,11 +2022,16 @@
     border-color: var(--sid-border) !important;
   }
 
-  .content-container .node_form_new .st-fileupload-fileinput > em {
+  /* Shared upload preview used by TERA forms and the Suhtlus composer. */
+  :is(.content-container .node_form_new, .suhtlus .post-edit)
+    [data-role="st-fileupload"]
+    .st-fileupload-fileinput > em {
     color: var(--sid-text-3) !important;
   }
 
-  .content-container .node_form_new .st-fileupload-file-inner {
+  :is(.content-container .node_form_new, .suhtlus .post-edit)
+    [data-role="st-fileupload"]
+    .st-fileupload-file-inner {
     color: var(--sid-text-2) !important;
     background: var(--sid-control) !important;
     border-color: var(--sid-border-strong) !important;
@@ -2034,11 +2039,15 @@
     box-shadow: none !important;
   }
 
-  .content-container .node_form_new .st-fileupload-sort-handle {
+  :is(.content-container .node_form_new, .suhtlus .post-edit)
+    [data-role="st-fileupload"]
+    .st-fileupload-sort-handle {
     color: var(--sid-text-3) !important;
   }
 
-  .content-container .node_form_new .st-fileupload-remove-link {
+  :is(.content-container .node_form_new, .suhtlus .post-edit)
+    [data-role="st-fileupload"]
+    .st-fileupload-remove-link {
     color: var(--sid-danger) !important;
   }
 
@@ -2102,6 +2111,82 @@
   :where(.header-wrapper, .suhtlus-nav) {
     background: transparent !important;
     border-color: var(--sid-border) !important;
+  }
+
+  /* New-message composer */
+  .suhtlus .post-edit {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface) !important;
+    border: 1px solid var(--sid-border) !important;
+    border-radius: var(--sid-radius-sm) !important;
+    box-shadow: none !important;
+  }
+
+  .suhtlus .post-edit :where(.post-edit-show-event-params, .post-edit-event-params) {
+    display: none !important;
+  }
+
+  .suhtlus .post-edit .post-edit-contents > .full-size-field:has(> textarea) {
+    margin-top: 12px !important;
+  }
+
+  .suhtlus .post-edit [data-role="membership-search-no-results-hint"] {
+    display: none !important;
+  }
+
+  .suhtlus .post-edit .membership-search .selectize-input,
+  .suhtlus .post-edit .membership-search .selectize-dropdown {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-control) !important;
+    border-color: var(--sid-border) !important;
+    box-shadow: none !important;
+  }
+
+  .suhtlus .post-edit .membership-search .selectize-input input {
+    color: var(--sid-text) !important;
+    caret-color: var(--sid-accent) !important;
+  }
+
+  .suhtlus .post-edit .membership-search .selectize-input input::placeholder {
+    color: var(--sid-text-disabled) !important;
+    opacity: 1 !important;
+  }
+
+  .suhtlus .post-edit .membership-search .selectize-input [data-value] {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-accent-soft) !important;
+    border-color: var(--sid-accent-border) !important;
+    border-radius: 4px !important;
+    box-shadow: none !important;
+  }
+
+  .suhtlus .post-edit .membership-search .selectize-input [data-value] .remove {
+    color: var(--sid-accent) !important;
+    background: transparent !important;
+    border-color: var(--sid-accent-border) !important;
+  }
+
+  .suhtlus .post-edit .membership-search .selectize-dropdown-content [data-selectable] {
+    color: var(--sid-text-2) !important;
+    background: transparent !important;
+    border-bottom: 1px solid var(--sid-border) !important;
+  }
+
+  .suhtlus .post-edit .membership-search .selectize-dropdown-content [data-selectable]:last-child {
+    border-bottom: 0 !important;
+  }
+
+  .suhtlus .post-edit .membership-search .selectize-dropdown-content .opt-description {
+    color: var(--sid-text-3) !important;
+  }
+
+  .suhtlus .post-edit .membership-search .selectize-dropdown-content :where([data-selectable]:hover, .active) {
+    color: var(--sid-text) !important;
+    background: var(--sid-accent-soft) !important;
+  }
+
+  .suhtlus .post-edit .membership-search .selectize-dropdown-content :where([data-selectable]:hover, .active) .opt-description {
+    color: var(--sid-text-2) !important;
   }
 
   .suhtlus-nav a {
