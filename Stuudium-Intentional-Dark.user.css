@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Stuudium — Intentional Dark
 @namespace      https://github.com/rixerpixer007/TORG-stuudium-theme
-@version        2.3.4
+@version        2.3.5
 @description    A systematic graphite-and-mint dark theme for TORG Stuudium, Tera and Suhtlus.
 @author         rixerpixer007
 @homepageURL    https://github.com/rixerpixer007/TORG-stuudium-theme
@@ -52,6 +52,7 @@
     --sid-focus: 0 0 0 3px rgb(101 214 177 / 20%);
     --sid-icon-filter-light: invert(88%) sepia(8%) saturate(228%) hue-rotate(88deg) brightness(90%) contrast(91%);
     --sid-icon-filter-dark: brightness(0) saturate(100%);
+    --sid-spinner-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='9' fill='none' stroke='%232a332e' stroke-width='3'/%3E%3Cpath d='M12 3a9 9 0 0 1 9 9' fill='none' stroke='%2365d6b1' stroke-width='3' stroke-linecap='round'%3E%3CanimateTransform attributeName='transform' type='rotate' from='0 12 12' to='360 12 12' dur='.75s' repeatCount='indefinite'/%3E%3C/path%3E%3C/svg%3E");
     --sid-z-tabs: 500;
     --sid-z-nav: 10000;
     --sid-z-menu: 10020;
@@ -1954,7 +1955,21 @@
     box-shadow: none !important;
   }
 
+  .content-container .responses_hidden_notice > span {
+    display: inline-block;
+    padding: 4px 7px !important;
+    color: var(--sid-text-2) !important;
+    background: var(--sid-accent-soft) !important;
+    border: 1px solid var(--sid-accent-border) !important;
+    border-radius: var(--sid-radius-sm) !important;
+    box-shadow: none !important;
+  }
+
   /* Suhtlus */
+  .suhtlus {
+    font-size: 16px;
+  }
+
   :where(.header-wrapper, .suhtlus-nav) {
     background: transparent !important;
     border-color: var(--sid-border) !important;
@@ -2000,6 +2015,20 @@
   .suhtlus :where(.post-author[data-suhtlus-user-card], .bl-p-user) {
     text-decoration: none !important;
     border-bottom: 0 !important;
+  }
+
+  .suhtlus :where(.post-participants .bl-p-user, .channel-meta .channel-members .channel-member) {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-accent-soft) !important;
+    border: 1px solid var(--sid-accent-border) !important;
+    border-radius: var(--sid-radius-sm) !important;
+    box-shadow: none !important;
+  }
+
+  .suhtlus .channel-meta .channel-members .channel-member.channel-member-excluded {
+    color: var(--sid-danger) !important;
+    background: var(--sid-danger-soft) !important;
+    border-color: var(--sid-danger-border) !important;
   }
 
   .suhtlus .user-card {
@@ -2071,7 +2100,7 @@
     background: transparent !important;
   }
 
-  :where(.post-in-list.post-expanded .post-comments-heading span, .post-in-list.post-expanded .generic-notice, .post-event-time) {
+  :where(.post-in-list.post-expanded .post-comments-heading span, .post-in-list.post-expanded .generic-notice) {
     color: var(--sid-text-2) !important;
     background: var(--sid-surface-2) !important;
     border: 1px solid var(--sid-border) !important;
@@ -2085,18 +2114,24 @@
     width: fit-content !important;
     max-width: 100%;
     gap: 6px;
+    background-image: none !important;
+  }
+
+  .suhtlus .post-in-list.post-expanded .post-event-time {
     padding: 4px 7px !important;
+    color: var(--sid-text-2) !important;
+    background-color: var(--sid-surface-2) !important;
+    border: 1px solid var(--sid-border) !important;
+    border-radius: var(--sid-radius-sm) !important;
+    box-shadow: none !important;
   }
 
   .suhtlus .post-in-list.post-collapsed .post-event-time {
-    margin: 0 !important;
-    font-size: 13px !important;
-    line-height: 13px !important;
-  }
-
-  .suhtlus .post-in-list.post-collapsed .post-body-preview {
-    font-size: 13px !important;
-    line-height: 1.45 !important;
+    padding: 0 !important;
+    background-color: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
   }
 
   .suhtlus .post-event-time::before {
@@ -2107,6 +2142,25 @@
     background: var(--sid-accent) !important;
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 3v3M17 3v3M4 8h16M5 5h14a1 1 0 0 1 1 1v14H4V6a1 1 0 0 1 1-1Z' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
     mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 3v3M17 3v3M4 8h16M5 5h14a1 1 0 0 1 1 1v14H4V6a1 1 0 0 1 1-1Z' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  }
+
+  .suhtlus :where(
+    .loading-spinner,
+    .post-list .post-list-search.is-searching input,
+    .post-list .post-list-load-older.is-loading,
+    [data-suhtlus-role="post-responses-v2"] .post-response-names-popover .is-loading-indicator,
+    [data-suhtlus-role="post-responses"] .post-response-names-popover .is-loading-indicator,
+    [data-suhtlus-role="post-responses"] .post-response.post-response-custom.is-loading span,
+    .content-embeds .video-embed iframe,
+    .attached-files .attached-file.attached-file-with-preview img,
+    [data-role="st-fileupload"] .st-fileupload-files .st-fileupload-file.st-fileupload-file-is-loading .st-fileupload-file-inner
+  ) {
+    background-image: var(--sid-spinner-image) !important;
+    filter: none !important;
+  }
+
+  .suhtlus :where(.content-embeds .video-embed iframe, .attached-files .attached-file.attached-file-with-preview img) {
+    background-color: var(--sid-surface-2) !important;
   }
 
   .suhtlus .button-icon-fav {
