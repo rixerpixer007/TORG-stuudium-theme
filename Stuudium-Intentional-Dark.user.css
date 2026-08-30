@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Stuudium — Intentional Dark
 @namespace      https://github.com/rixerpixer007/TORG-stuudium-theme
-@version        2.4.0
+@version        2.4.1
 @description    A systematic graphite-and-mint dark theme for TORG Stuudium, Tera and Suhtlus.
 @author         rixerpixer007
 @homepageURL    https://github.com/rixerpixer007/TORG-stuudium-theme
@@ -2292,9 +2292,40 @@
   }
 
   /* Registrations */
+  :where(#registration_index, #registration_collection) {
+    background-image: radial-gradient(circle at 58% 0, rgb(25 78 60 / 22%), transparent 34rem) !important;
+    background-repeat: no-repeat !important;
+  }
+
+  :where(.page_registration_index, .page_registration_collection) .page_head {
+    border-bottom-color: var(--sid-border) !important;
+  }
+
+  .page_registration_collection .page_title a {
+    color: var(--sid-text) !important;
+    text-decoration: none !important;
+  }
+
   :where(.page_registration_index, .page_registration_collection)
     :where(.new_column.is_left, .new_column.is_right) {
     border-color: var(--sid-border) !important;
+  }
+
+  :where(.page_registration_index, .page_registration_collection)
+    .badge.span-badge-large.badge-inactive {
+    color: var(--sid-text-3) !important;
+    background: var(--sid-surface-2) !important;
+    border: 1px solid var(--sid-border-strong) !important;
+    border-radius: var(--sid-radius-pill) !important;
+    box-shadow: none !important;
+  }
+
+  .page_registration_collection .st-badge.st-badge-green {
+    color: var(--sid-accent-strong) !important;
+    background: var(--sid-accent-soft) !important;
+    border: 1px solid var(--sid-accent-border) !important;
+    border-radius: var(--sid-radius-pill) !important;
+    box-shadow: none !important;
   }
 
   .page_registration_index .collection_in_index > a {
@@ -2310,7 +2341,12 @@
   }
 
   .page_registration_index .collection_in_index > a h3 {
-    color: var(--sid-text) !important;
+    color: var(--sid-accent) !important;
+  }
+
+  .page_registration_index .collection_in_index > a:hover h3,
+  .page_registration_index .collection_in_index > a:focus-visible h3 {
+    color: var(--sid-accent-strong) !important;
   }
 
   .page_registration_index .collection_in_index > a .collection_description {
@@ -2324,6 +2360,10 @@
   .page_registration_collection .option {
     color: var(--sid-text-2) !important;
     border-color: var(--sid-border) !important;
+  }
+
+  .page_registration_collection .registration-collection-info-container > h2:first-child {
+    color: var(--sid-accent) !important;
   }
 
   .page_registration_collection .reg_count abbr {
