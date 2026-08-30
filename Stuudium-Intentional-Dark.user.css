@@ -801,7 +801,8 @@
   :where(
     .new_button,
     .button,
-    .post-edit-submit,
+    a.button-submit,
+    a.button-disabled,
     :is(#content, .page_body, .courses_index, .suhtlus) button,
     input[type="button"],
     input[type="submit"]
@@ -818,7 +819,7 @@
   :where(
     .new_button,
     .button,
-    .post-edit-submit,
+    a.button-submit,
     :is(#content, .page_body, .courses_index, .suhtlus) button,
     input[type="button"],
     input[type="submit"]
@@ -836,11 +837,11 @@
   :where(
     .new_button,
     .button,
-    .post-edit-submit,
     :is(#content, .page_body, .courses_index, .suhtlus) button,
     input[type="button"],
     input[type="submit"]
-  ):is(:disabled, [aria-disabled="true"], .disabled) {
+  ):is(:disabled, [aria-disabled="true"], .disabled),
+  a.button-disabled {
     color: var(--sid-text-disabled) !important;
     background: var(--sid-canvas-soft) !important;
     border-color: var(--sid-border) !important;
@@ -848,7 +849,7 @@
     cursor: not-allowed !important;
   }
 
-  :where(.button-primary, .new_button.blue, :is(#content, .page_body, .courses_index, .suhtlus) button.primary, input[type="submit"].primary) {
+  :where(.button-primary, .new_button.blue, a.button-submit, :is(#content, .page_body, .courses_index, .suhtlus) button.primary, input[type="submit"].primary) {
     color: var(--sid-accent-ink) !important;
     background: var(--sid-accent) !important;
     border-color: var(--sid-accent) !important;
@@ -921,12 +922,13 @@
     filter: var(--sid-icon-filter-light) !important;
   }
 
-  :where(.button-primary, .new_button.blue, :is(#content, .page_body, .courses_index, .suhtlus) button.primary, input[type="submit"].primary) .icon,
-  :where(.new_button, .button, .post-edit-submit, :is(#content, .page_body, .courses_index, .suhtlus) button):not(:disabled):not([aria-disabled="true"]):not(.disabled):hover .icon {
+  :where(.button-primary, .new_button.blue, a.button-submit, :is(#content, .page_body, .courses_index, .suhtlus) button.primary, input[type="submit"].primary) .icon,
+  :where(.new_button, .button, a.button-submit, :is(#content, .page_body, .courses_index, .suhtlus) button):not(:disabled):not([aria-disabled="true"]):not(.disabled):hover .icon {
     filter: var(--sid-icon-filter-dark) !important;
   }
 
-  :where(.new_button, .button, .post-edit-submit, :is(#content, .page_body, .courses_index, .suhtlus) button):is(:disabled, [aria-disabled="true"], .disabled) .icon {
+  :where(.new_button, .button, :is(#content, .page_body, .courses_index, .suhtlus) button):is(:disabled, [aria-disabled="true"], .disabled) .icon,
+  a.button-disabled .icon {
     opacity: 0.5;
   }
 
@@ -2114,12 +2116,39 @@
   }
 
   /* New-message composer */
+  .suhtlus .my-drafts {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface-2) !important;
+    border: 1px solid var(--sid-border) !important;
+    border-radius: var(--sid-radius-sm) !important;
+    margin-bottom: 12px !important;
+    box-shadow: none !important;
+  }
+
+  .suhtlus .my-drafts h3 {
+    color: var(--sid-text) !important;
+  }
+
+  .suhtlus .my-drafts .draft-date {
+    color: var(--sid-text-3) !important;
+  }
+
   .suhtlus .post-edit {
     color: var(--sid-text-2) !important;
     background: var(--sid-surface) !important;
     border: 1px solid var(--sid-border) !important;
     border-radius: var(--sid-radius-sm) !important;
     box-shadow: none !important;
+  }
+
+  .suhtlus .post-edit .post-edit-submit {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-canvas-soft) !important;
+    border: 0 !important;
+    border-top: 1px solid var(--sid-border) !important;
+    border-radius: 0 0 var(--sid-radius-sm) var(--sid-radius-sm) !important;
+    box-shadow: none !important;
+    transform: none !important;
   }
 
   .suhtlus .post-edit :where(.post-edit-show-event-params, .post-edit-event-params) {
