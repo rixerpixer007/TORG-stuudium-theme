@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Stuudium — Intentional Dark
 @namespace      https://github.com/rixerpixer007/TORG-stuudium-theme
-@version        2.5.4
+@version        2.5.5
 @description    A systematic graphite-and-mint dark theme for TORG Stuudium, Tera and Suhtlus.
 @author         rixerpixer007
 @homepageURL    https://github.com/rixerpixer007/TORG-stuudium-theme
@@ -1558,8 +1558,23 @@
     border-color: var(--sid-border) !important;
   }
 
-  /* Grades: mapped once for every page that uses the shared grade model. */
-  :where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_subjects_student) :where(.grade_active, .grade_params abbr) {
+  /* Grades: one structural primitive, followed by semantic state colours. */
+  :where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_subjects_student)
+    :where(.grade_active, .grade_inactive) {
+    color: var(--sid-text) !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    font-size: 12px !important;
+    line-height: 15px !important;
+    margin: 0 !important;
+    padding: 0 2px !important;
+    text-shadow: none !important;
+  }
+
+  :where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_subjects_student)
+    .grade_params abbr {
     color: var(--sid-text) !important;
     background: transparent !important;
     border: 0 !important;
