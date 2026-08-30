@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Stuudium — Intentional Dark
 @namespace      https://github.com/rixerpixer007/TORG-stuudium-theme
-@version        2.3.6
+@version        2.4.0
 @description    A systematic graphite-and-mint dark theme for TORG Stuudium, Tera and Suhtlus.
 @author         rixerpixer007
 @homepageURL    https://github.com/rixerpixer007/TORG-stuudium-theme
@@ -2289,6 +2289,69 @@
   :where(.selectize-dropdown .option:hover, .selectize-dropdown .active, .litepicker .day-item:hover, .litepicker .day-item.is-today) {
     color: var(--sid-accent-strong) !important;
     background: var(--sid-accent-soft) !important;
+  }
+
+  /* Registrations */
+  :where(.page_registration_index, .page_registration_collection)
+    :where(.new_column.is_left, .new_column.is_right) {
+    border-color: var(--sid-border) !important;
+  }
+
+  .page_registration_index .collection_in_index > a {
+    color: var(--sid-text-2) !important;
+    background: transparent !important;
+    border-color: var(--sid-border) !important;
+  }
+
+  .page_registration_index .collection_in_index > a:hover,
+  .page_registration_index .collection_in_index > a:focus-visible {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface-interactive) !important;
+  }
+
+  .page_registration_index .collection_in_index > a h3 {
+    color: var(--sid-text) !important;
+  }
+
+  .page_registration_index .collection_in_index > a .collection_description {
+    color: var(--sid-text-2) !important;
+  }
+
+  .page_registration_index .collection_in_index > a .open_timeframe {
+    color: var(--sid-text-3) !important;
+  }
+
+  .page_registration_collection .option {
+    color: var(--sid-text-2) !important;
+    border-color: var(--sid-border) !important;
+  }
+
+  .page_registration_collection .reg_count abbr {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-accent-soft) !important;
+    border: 1px solid var(--sid-accent-border) !important;
+    border-radius: var(--sid-radius-pill) !important;
+    padding: 1px 6px !important;
+    text-decoration: none !important;
+  }
+
+  .page_registration_collection .option_registrations {
+    color: var(--sid-text-2) !important;
+    background: transparent !important;
+  }
+
+  .page_registration_collection .option_registrations .reg_main_row td {
+    color: var(--sid-text-2) !important;
+    background: transparent !important;
+    border-color: var(--sid-border) !important;
+  }
+
+  .page_registration_collection .option_registrations :where(.reg_time, .notes) {
+    color: var(--sid-text-3) !important;
+  }
+
+  .page_registration_collection .option_registrations .group_name {
+    color: var(--sid-text-3) !important;
   }
 
   /* Data grids and calendars: scoped to known data-heavy page/component roots. */
