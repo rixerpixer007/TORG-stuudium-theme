@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Stuudium — Intentional Dark
 @namespace      https://github.com/rixerpixer007/TORG-stuudium-theme
-@version        2.4.1
+@version        2.5.0
 @description    A systematic graphite-and-mint dark theme for TORG Stuudium, Tera and Suhtlus.
 @author         rixerpixer007
 @homepageURL    https://github.com/rixerpixer007/TORG-stuudium-theme
@@ -1440,6 +1440,73 @@
   .page_users_profile :where(.page_head, .new_column, .divider, .standard, .user_card, .sso) {
     color: var(--sid-text-2) !important;
     background: transparent !important;
+    border-color: var(--sid-border) !important;
+  }
+
+  .page_dashboard_subjects .dashboard-subjects-journal h2 > a {
+    color: var(--sid-text) !important;
+    text-decoration-color: rgb(242 240 233 / 28%) !important;
+  }
+
+  .page_dashboard_subjects .dashboard-subjects-journal h2 > a:hover {
+    color: var(--sid-text) !important;
+    text-decoration-color: currentColor !important;
+  }
+
+  .page_dashboard_subjects .subjectplan-student-view-journal-planlist > a {
+    color: var(--sid-text-2) !important;
+    background: transparent !important;
+    border-color: var(--sid-border-strong) !important;
+    box-shadow: none !important;
+  }
+
+  .page_dashboard_subjects .subjectplan-student-view-journal-planlist > a:hover,
+  .page_dashboard_subjects .subjectplan-student-view-journal-planlist > a:focus-visible {
+    color: var(--sid-accent-strong) !important;
+    background: var(--sid-accent-soft) !important;
+    border-color: var(--sid-accent-border) !important;
+  }
+
+  .page_dashboard_subjects .dashboard-subjects-journal-teacher [data-balloon]::after {
+    color: var(--sid-text) !important;
+    background: var(--sid-surface-2) !important;
+    border: 1px solid var(--sid-border-strong) !important;
+    border-radius: var(--sid-radius-sm) !important;
+    box-shadow: var(--sid-shadow) !important;
+  }
+
+  .page_dashboard_subjects
+    .dashboard-subjects-journal-teacher
+    [data-balloon][data-balloon-pos="down"]::before {
+    border-bottom-color: var(--sid-surface-2) !important;
+  }
+
+  .page_dashboard_subjects .dashboard-subjects-journal :where(.grade_A, .grade_B, .grade_C, .grade_AR) {
+    color: var(--sid-text-2) !important;
+  }
+
+  .page_dashboard_subjects .dashboard-subjects-journal :where(.grade_param_has_comment, .icon-comment, .icon-comment-empty) {
+    color: var(--sid-accent) !important;
+  }
+
+  .page_dashboard_subjects .stuudium-popover {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface-2) !important;
+    border: 1px solid var(--sid-border-strong) !important;
+    border-radius: var(--sid-radius-sm) !important;
+    box-shadow: var(--sid-shadow) !important;
+  }
+
+  .page_dashboard_subjects .stuudium-popover::before {
+    border-bottom-color: var(--sid-border-strong) !important;
+  }
+
+  .page_dashboard_subjects .stuudium-popover::after {
+    border-bottom-color: var(--sid-surface-2) !important;
+  }
+
+  .page_dashboard_subjects .d-s-grade-popover :where(.d-s-grade-comment, .d-s-grade-lesson) {
+    color: var(--sid-text-2) !important;
     border-color: var(--sid-border) !important;
   }
 
