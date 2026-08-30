@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Stuudium — Intentional Dark
 @namespace      https://github.com/rixerpixer007/TORG-stuudium-theme
-@version        2.5.3
+@version        2.5.4
 @description    A systematic graphite-and-mint dark theme for TORG Stuudium, Tera and Suhtlus.
 @author         rixerpixer007
 @homepageURL    https://github.com/rixerpixer007/TORG-stuudium-theme
@@ -12,6 +12,14 @@
 ==/UserStyle== */
 
 @-moz-document domain("torg.ope.ee") {
+  @font-face {
+    font-family: "fontello";
+    src: url("https://assets.stuudium.net/etc/fonts/fontello/fontello.woff2?v10") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+  }
+
   /*
    * Design tokens
    * Stuudium has reusable component/state classes but no native colour tokens,
@@ -1490,26 +1498,43 @@
     color: var(--sid-accent) !important;
   }
 
-  .page_dashboard_subjects.no_fontello
-    .dashboard-subjects-journal
-    .grade_param_has_comment
-    .icon-comment::before {
+  :is(
+    .page_subjects_student .student_subject_grades,
+    .page_dashboard_subjects .dashboard-subjects-journal
+  ) .grade_param_has_comment :is(.icon-comment, .icon-comment-empty)::before {
+    display: inline-block !important;
+    width: 1em !important;
+    height: auto !important;
+    color: var(--sid-accent) !important;
     background-color: transparent !important;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='%2365d6b1' d='M4 1C2.34 1 1 2.05 1 3.35S2.34 5.7 4 5.7c.3 0 .58-.03.85-.1L6.3 7 6 5.2c.62-.43 1-1.1 1-1.85C7 2.05 5.66 1 4 1Z'/%3E%3C/svg%3E") !important;
+    background-image: none !important;
     -webkit-mask: none !important;
     mask: none !important;
     filter: none !important;
+    font-family: "fontello" !important;
+    font-size: 9px !important;
+    font-style: normal !important;
+    font-variant: normal !important;
+    font-weight: normal !important;
+    line-height: 15px !important;
+    text-align: center !important;
+    text-decoration: inherit !important;
+    text-transform: none !important;
+    vertical-align: baseline !important;
   }
 
-  .page_dashboard_subjects.no_fontello
-    .dashboard-subjects-journal
-    .grade_param_has_comment
-    .icon-comment-empty::before {
-    background-color: transparent !important;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='none' stroke='%2365d6b1' stroke-width='.8' stroke-linejoin='round' d='M4 1C2.34 1 1 2.05 1 3.35S2.34 5.7 4 5.7c.3 0 .58-.03.85-.1L6.3 7 6 5.2c.62-.43 1-1.1 1-1.85C7 2.05 5.66 1 4 1Z'/%3E%3C/svg%3E") !important;
-    -webkit-mask: none !important;
-    mask: none !important;
-    filter: none !important;
+  :is(
+    .page_subjects_student .student_subject_grades,
+    .page_dashboard_subjects .dashboard-subjects-journal
+  ) .grade_param_has_comment .icon-comment::before {
+    content: "\e802" !important;
+  }
+
+  :is(
+    .page_subjects_student .student_subject_grades,
+    .page_dashboard_subjects .dashboard-subjects-journal
+  ) .grade_param_has_comment .icon-comment-empty::before {
+    content: "\e804" !important;
   }
 
   .page_dashboard_subjects .stuudium-popover {
