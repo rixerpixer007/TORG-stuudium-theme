@@ -201,7 +201,7 @@ T1-01 complete; live grading-guide checkbox and dashboard TODO checkbox availabl
 
 Alias current values first (card, overlay, hover/interactive) and migrate one component at a time. This is a naming clarification, not a palette change.
 
-**Progress:** T3-01a complete for overlays. `--sid-bg-overlay` aliases the existing `--sid-surface-2` value and now owns verified absence, grade, lesson-teacher, Suhtlus user/reaction, teacher-balloon, arrow-fill, and intentional legacy overlay backgrounds. No unused card/hover aliases were added. Additional aliases require a separately verified component migration.
+**Disposition:** **COMPLETE AT THE JUSTIFIED BOUNDARY.** `--sid-bg-overlay` aliases the existing `--sid-surface-2` value and now owns verified absence, grade, lesson-teacher, Suhtlus user/reaction, teacher-balloon, arrow-fill, and intentional legacy overlay backgrounds. A live/static owner inventory rejected generic card and hover aliases: card-like components intentionally use both base and raised surfaces, while interaction states use two different strengths (`--sid-surface-3` and `--sid-surface-interactive`). Adding aliases for those ambiguous roles would hide real distinctions rather than clarify them.
 
 ### T3-02 — Small justified tokens
 
@@ -219,6 +219,8 @@ Map participant, registration, category, and help chips by semantic variant. Pre
 
 Move late table/overlay/badge exceptions only after recording each live winner. If source order is required, keep a documented exceptions section instead of forcing relocation.
 
+**Disposition:** **COMPLETE — KEEP EXPLICIT.** Shared overlay structure and its semantic background moved into owned components in T2-04a/T3-01a. The remaining tooltip/widget and badge rules are deliberately broad zero-specificity fallbacks whose late source position is part of the cascade. Their section now documents that contract; relocating them would create risk without improving ownership.
+
 ## Tier 4 — High-risk cascade work
 
 1. Narrow the global anchor rule after an anchor-role inventory.
@@ -227,15 +229,17 @@ Move late table/overlay/badge exceptions only after recording each live winner. 
 4. Reduce `!important` declaration-by-declaration against the site's actual competing selector.
 5. Do not introduce `@layer` or reorganize behavioral overrides for aesthetics.
 
+**Disposition for maintainable v1:** **KEEP THE VERIFIED FOUNDATIONS.** Across 11 representative signed-in pages, 204 of 672 visible links rely on the global mint rule as their only important color owner. They span subject periods and teachers, grade-table links, Tera files, message titles/expanders, registration expanders, and dashboard actions; replacing that fallback would scatter new ownership across unrelated and partially unavailable states. The same inventory found 17 live button-like controls, 8 fields, and 199 icon nodes using the shared layers with feature variants. Narrow these foundations only as part of a future feature batch with full state coverage, not as a standalone v1 rewrite. Generic warning/important classes remain `KEEP` because available warning examples are hidden and their dynamic states cannot be verified without changing application state. The absence-focus contradiction and loader reduced-motion behavior remain explicit design/accessibility decisions, not refactor work.
+
 ## Patch-cluster disposition
 
 | Cluster | Classification | Planned direction |
 |---|---|---|
-| Global page/link layer, 69–145 | REPLACE WITH ROOT FIX | Tier 4; inventory link roles first |
+| Global page/link layer, 69–145 | KEEP | Live inventory proved it is a functional fallback for 204/672 visible links across 11 pages |
 | Login, 146–581 | CONSOLIDATE / KEEP | T1-02 palettes; keep structural toggle rules |
 | Navigation/tabs, 584–720 | REMOVE / KEEP | T1-01 redundant branch; keep stacking rules |
-| Shared controls/icons, 722–944 | REQUIRES MORE INFORMATION | Narrow only after component evidence |
-| Dashboard/TODO/notebook, 946–1278 and 2718–2759 | REMOVE / CONSOLIDATE / KEEP | T1-01/T1-03 complete; T2-01 kept; inspectable T2-03 loaders classified, notebook saving unavailable |
+| Shared controls/icons, 722–944 | KEEP / REQUIRES MORE INFORMATION | 17 controls, 8 fields, and 199 icon nodes sampled; narrow only inside a verified feature batch |
+| Dashboard/TODO/notebook, 946–1278 and 2718–2759 | REMOVE / CONSOLIDATE / KEEP | T1-01/T1-03 and T2-01 complete; inspectable T2-03 loaders classified, notebook saving unavailable |
 | Absences, 1280–1415 | REMOVE / KEEP | T1-01 invalid target; preserve geometry pending tests |
 | Subjects/grades, 1417–1848 | CONSOLIDATE / KEEP | T1-03 only; preserve contextual grade semantics |
 | Tera, 1850–2110 | REMOVE / KEEP | T1-01 base branches; retain coherent feature rules |

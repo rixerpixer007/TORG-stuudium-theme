@@ -106,6 +106,7 @@
     color: var(--sid-text-3) !important;
   }
 
+  /* Intentional site-wide link fallback; named feature roles override this paint. */
   :where(a) {
     color: var(--sid-accent) !important;
     text-decoration-color: rgb(101 214 177 / 35%) !important;
@@ -2648,7 +2649,10 @@
     border-bottom-color: var(--sid-bg-overlay) !important;
   }
 
-  /* Final legacy exceptions */
+  /*
+   * Intentional late zero-specificity fallbacks. Source order is part of this
+   * contract; verified feature selectors may stay earlier when specificity wins.
+   */
   :where(.tipsy-inner, .tooltip, .popover, .select2-results, .select2-search, .ui-datepicker, .ui-widget-content) {
     color: var(--sid-text-2) !important;
     background: var(--sid-bg-overlay) !important;

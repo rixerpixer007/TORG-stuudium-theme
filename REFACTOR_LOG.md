@@ -559,3 +559,39 @@ PASS. TODO hover behavior is unchanged and its cascade now reports one real stat
 
 - No task was toggled or edited.
 - Mobile remains blocked, but this change removes a selector that was already defeated by the same unchanged feature base and hover rules used at every viewport.
+
+## Investigation T3-01b / T3-04 / T4-01
+
+**Name**
+
+Classify semantic surfaces and make the remaining cascade foundations explicit.
+
+**Changes**
+
+- Added an ownership comment to the global link fallback.
+- Expanded the final legacy-exceptions comment to state that its late zero-specificity source order is intentional.
+- Added no declarations, selectors, surface aliases, component groupings, or specificity changes.
+
+**Root cause**
+
+The audit correctly identified the broad link layer and late generic fallbacks as the largest theoretical cascade risks. Live ownership evidence shows they are not accidental leftovers: the link rule supplies the intended accent to many unrelated link roles, while the late rules are compatibility fallbacks beneath more specific feature owners. Numbered surface values also do not map cleanly to generic card/hover semantics.
+
+**Verification**
+
+- Inventoried 672 visible anchors across 11 representative routes: dashboard, subject index/detail/plan, grades, Tera resource, Suhtlus inbox/post/composer, and registration index/detail.
+- 204 visible anchors rely on the global link rule as their only important theme color owner: 95 miscellaneous/action links, 65 table links, 26 message links, 11 registration links, 4 navigation-home links, and 3 Tera links.
+- Confirmed the dependent roles include subject periods/teachers, grade and history links, Tera resources, message titles/expanders, registration list expanders, and dashboard actions. They cannot be replaced by one honest component scope.
+- Inventoried the other shared foundations on the same routes: 17 visible button-like controls, 8 visible text/select fields, and 199 visible icon nodes, with feature-specific variants layered over their shared paint.
+- Inventoried generic notice/status classes. Visible examples are informational notices; the available `.important` and `.warning` examples are hidden, so narrowing their dynamic contract cannot be verified.
+- Mapped surface ownership statically and live: card-like elements legitimately use both `--sid-surface` and `--sid-surface-2`; hover/selected states legitimately use both `--sid-surface-3` and `--sid-surface-interactive`.
+- Reloaded representative pages after the comment-only change and confirmed computed CSS is unaffected.
+
+**Result**
+
+PASS — classification and ownership documentation. The global link, shared control/field/icon layers, and remaining late fallbacks are `KEEP` for maintainable v1. Only the verified overlay semantic alias is retained.
+
+**Notes**
+
+- This is not a claim that the foundations are theoretically minimal. It is a finding that replacing them now would add scattered, state-incomplete code and increase regression risk.
+- Future feature work may narrow one consumer at a time when its complete live state matrix is available.
+- Login, mobile, unavailable warning states, absence focus behavior, and reduced-motion loader behavior remain explicit blockers or design decisions.
