@@ -8,9 +8,6 @@ Maintain `Stuudium-Intentional-Dark.user.css` without redesigning it. Preserve t
 
 1. The signed-in, rendered Stuudium site with this exact local stylesheet active.
 2. `Stuudium-Intentional-Dark.user.css`.
-3. `audit.md`, `REFACTOR_PLAN.md`, and `REFACTOR_LOG.md`.
-
-Use the existing audit and plan; do not start another generic audit. Treat unverified states as unknown, not safe.
 
 ## Change workflow
 
