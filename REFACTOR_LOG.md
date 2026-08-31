@@ -51,7 +51,8 @@ PASS as a desktop baseline. Mobile, public-login, and populated historical-diary
 | Primary navigation | Dashboard | ✓ | ✓ | ✓ | ✓ | BLOCKED | ✓ | Default, Tera hover, and keyboard focus-visible checked after T1-01 |
 | Page tabs / Veel | Dashboard | ✓ | △ | ✓ | ✓ | BLOCKED | ✓ | 4 menu segments and 7 links; the first link's pre-existing hover-paint issue remains |
 | Dashboard cards | Dashboard | ✓ | PENDING | — | — | BLOCKED | ✓ | Two-column desktop rendering matches the baseline |
-| TODO rows / checkbox | Dashboard | ✓ | PENDING | PENDING | ✓ | BLOCKED | ✓ | Checked and unchecked states remain visible; no state was changed |
+| TODO rows / checkbox | Dashboard | ✓ | ✓ | BLOCKED | ✓ | BLOCKED | ✓ | Checked/unchecked and hover values match; hidden native input was not toggled |
+| Grading-guide checkbox | Subject plan 489 | ✓ | ✓ | BLOCKED | ✓ | BLOCKED | ✓ | 20 markers: 1 checked, 19 unchecked; native inputs are hidden decorative markup |
 | Notebook | Dashboard | ✓ | PENDING | PENDING | ✓ | BLOCKED | ✓ | Roman numeral tabs remain visible |
 | Historical diary summary | Dashboard | BLOCKED | BLOCKED | — | BLOCKED | BLOCKED | BLOCKED | No populated older entries currently exposed; T1-01 selector change is a strict-subset removal |
 | Absence calendar / popover | Dashboard | ✓ | PENDING | BLOCKED | ✓ | BLOCKED | ✓ | Popover opened and closed; attendance values and disabled controls were not changed |
@@ -115,3 +116,43 @@ PASS for the T1-01 batch scope. The edited file is active, desktop rendering and
 - The only responsive deletion is an exact copy of an identical unconditional `#bg > :is(#bg-img, #bg-img-full) { display: none !important; }` rule, so it cannot change the mobile cascade even though the browser viewport capability is ineffective.
 - The Suhtlus unread link and first **Veel** link still match `:hover` without a computed paint change. This reproduces the pre-refactor observation and is not a T1-01 regression.
 - Do not replace surviving single-arm `:where(...)` wrappers with plain selectors; that would increase specificity.
+
+## Batch T1-03
+
+**Name**
+
+Consolidate shared custom-checkbox states.
+
+**Changes**
+
+- Moved the TODO checked-state declarations to the existing grading-guide checked-state location and grouped the two original full selectors.
+- Moved the TODO focus-visible declarations to the existing grading-guide focus-state location and grouped the two original full selectors.
+- Left the two base shells, TODO-only 16px geometry, transition, and `label:active` press scale in their feature sections.
+
+**Root cause**
+
+The same checked and focus-visible appearance was independently owned by the dashboard TODO and grading-guide sections even though the declarations were identical.
+
+**Verification**
+
+- Located five reachable subject-plan pages with live custom-checkbox markup; selected Geography plan 489 because it exposes both checked and unchecked states.
+- Captured the pre-change dashboard state (2 TODO checkboxes: 1 checked, 1 unchecked) and grading-guide state (20 markers: 1 checked, 19 unchecked). Neither page currently exposes a disabled example.
+- Reloaded both affected pages and confirmed Stylus injected the new body on each: 96,422 characters, fingerprint `bb33c00e`.
+- Compared checked and unchecked computed values property-by-property before and after: background, check image, border, radius, shadow, outline, and outline offset are identical for both components.
+- Confirmed the TODO transform and transition remain unchanged; its feature-local `label:active` rule was not moved or edited.
+- Deliberately hovered an unchecked TODO and an unchecked grading-guide marker; both retained their pre-change control surface and border.
+- Visually compared post-change dashboard and Geography plan screenshots with their immediately captured baselines.
+- `git diff --check`: no whitespace errors; only the existing LF/CRLF working-copy notice.
+- CSS structure: 451 opening/451 closing braces and 996 opening/996 closing parentheses.
+- Diff scope: two selector additions and removal of two duplicate declaration blocks; 2 insertions and 12 deletions.
+
+**Result**
+
+PASS for the T1-03 batch scope. Both live components retain identical checked, unchecked, and hover rendering, while the duplicate state declarations now have one owner.
+
+**Notes**
+
+- No checkbox was toggled: the TODO checkbox changes real task data, and the subject-plan checkboxes are presentation markup. Existing checked/unchecked examples supplied both visual states safely.
+- The native inputs compute to `display: none`, so keyboard focus-visible cannot be reached on the current live markup. The original focus selectors and declarations were preserved exactly; this pre-existing accessibility limitation is recorded rather than changed during the refactor.
+- Pointer-down animation was not directly sampled because the available browser control cannot hold the pointer while inspecting computed style without clicking the real TODO control. The TODO-only press selector and declaration remain byte-for-byte unchanged.
+- Mobile remains unobserved because the external viewport override is ineffective. There are no custom-checkbox declarations in the mobile media block, and no intervening custom-checkbox owner exists between the old and new source positions.
