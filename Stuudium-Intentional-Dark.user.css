@@ -1311,14 +1311,6 @@
     box-shadow: var(--sid-shadow) !important;
   }
 
-  .popover.absences_popover.has_arrow_top::before {
-    border-bottom-color: var(--sid-border-strong) !important;
-  }
-
-  .popover.absences_popover.has_arrow_top::after {
-    border-bottom-color: var(--sid-surface-2) !important;
-  }
-
   .absences_popover .day_heading {
     color: var(--sid-text) !important;
   }
@@ -1527,22 +1519,6 @@
     content: "\e804" !important;
   }
 
-  .page_dashboard_subjects .stuudium-popover {
-    color: var(--sid-text-2) !important;
-    background: var(--sid-surface-2) !important;
-    border: 1px solid var(--sid-border-strong) !important;
-    border-radius: var(--sid-radius-sm) !important;
-    box-shadow: var(--sid-shadow) !important;
-  }
-
-  .page_dashboard_subjects .stuudium-popover::before {
-    border-bottom-color: var(--sid-border-strong) !important;
-  }
-
-  .page_dashboard_subjects .stuudium-popover::after {
-    border-bottom-color: var(--sid-surface-2) !important;
-  }
-
   .page_dashboard_subjects .d-s-grade-popover :where(.d-s-grade-comment, .d-s-grade-lesson) {
     color: var(--sid-text-2) !important;
     border-color: var(--sid-border) !important;
@@ -1637,14 +1613,6 @@
   }
 
   /* Lesson information */
-  .page_subjects_student .si-teachers-cards .popover.has_arrow_top::before {
-    border-bottom-color: var(--sid-border-strong) !important;
-  }
-
-  .page_subjects_student .si-teachers-cards .popover.has_arrow_top::after {
-    border-bottom-color: var(--sid-surface-2) !important;
-  }
-
   .page_subjects_student .subjectplan-student-view-journal-planlist {
     color: var(--sid-text-2) !important;
     background: var(--sid-surface-2) !important;
@@ -2264,14 +2232,6 @@
     border-color: var(--sid-danger-border) !important;
   }
 
-  .suhtlus .user-card {
-    color: var(--sid-text-2) !important;
-    background: var(--sid-surface-2) !important;
-    border: 1px solid var(--sid-border-strong) !important;
-    border-radius: var(--sid-radius-sm) !important;
-    box-shadow: var(--sid-shadow) !important;
-  }
-
   .suhtlus .user-card-actions {
     color: var(--sid-text-2) !important;
     background: transparent !important;
@@ -2423,14 +2383,6 @@
     background-image: none !important;
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='9' fill='none' stroke='black' stroke-width='2'/%3E%3Cpath d='M8.5 10h.01M15.5 10h.01M8 14c1.1 1.3 2.4 2 4 2s2.9-.7 4-2' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") center / 16px 16px no-repeat;
     mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='9' fill='none' stroke='black' stroke-width='2'/%3E%3Cpath d='M8.5 10h.01M15.5 10h.01M8 14c1.1 1.3 2.4 2 4 2s2.9-.7 4-2' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") center / 16px 16px no-repeat;
-  }
-
-  .suhtlus .post-responses-add-available {
-    color: var(--sid-text-2) !important;
-    background: var(--sid-surface-2) !important;
-    border: 1px solid var(--sid-border-strong) !important;
-    border-radius: var(--sid-radius-sm) !important;
-    box-shadow: var(--sid-shadow) !important;
   }
 
   .suhtlus .post-response-toggle {
@@ -2680,7 +2632,30 @@
     border-color: var(--sid-accent-border) !important;
   }
 
-  /* Overlays and final legacy exceptions */
+  /* Shared overlay shells and arrows */
+  .page_dashboard_subjects .stuudium-popover,
+  .suhtlus .user-card,
+  .suhtlus .post-responses-add-available {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface-2) !important;
+    border: 1px solid var(--sid-border-strong) !important;
+    border-radius: var(--sid-radius-sm) !important;
+    box-shadow: var(--sid-shadow) !important;
+  }
+
+  .popover.absences_popover.has_arrow_top::before,
+  .page_dashboard_subjects .stuudium-popover::before,
+  .page_subjects_student .si-teachers-cards .popover.has_arrow_top::before {
+    border-bottom-color: var(--sid-border-strong) !important;
+  }
+
+  .popover.absences_popover.has_arrow_top::after,
+  .page_dashboard_subjects .stuudium-popover::after,
+  .page_subjects_student .si-teachers-cards .popover.has_arrow_top::after {
+    border-bottom-color: var(--sid-surface-2) !important;
+  }
+
+  /* Final legacy exceptions */
   :where(.tipsy-inner, .tooltip, .popover, .select2-results, .select2-search, .ui-datepicker, .ui-widget-content) {
     color: var(--sid-text-2) !important;
     background: var(--sid-surface-2) !important;

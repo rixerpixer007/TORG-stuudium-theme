@@ -169,7 +169,7 @@ T1-01 complete; live grading-guide checkbox and dashboard TODO checkbox availabl
 - **Risk:** C.
 - **Verification:** collapsed, hover, highlighted, expanded, comments, event time, reactions, participant chips, user card, and merged rows.
 - **Dependency:** edited stylesheet must be active; representative posts must be available.
-- **Progress:** T2-02a complete. Live CSSOM tracing proved the shared hover/expanded/highlighted rule already owns `--sid-surface-interactive` for a non-hovered expanded post, so the duplicate background declaration was removed from the stronger expanded shell. The comment-heading arm was separately traced and classified `KEEP`: the later reset replaces color/background/border/shadow, but the earlier 7px radius still survives, while the grouped generic-notice branch remains fully active. Reactions, highlighted posts, user cards, and merged rows are still pending.
+- **Disposition:** **COMPLETE WITH ONE UNAVAILABLE STATE.** T2-02a removed the duplicate expanded-background declaration after live CSSOM tracing proved the shared state rule owns it. The comment-heading arm is `KEEP`: its radius survives the later reset and its grouped generic-notice branch remains fully active. The author card and reaction picker were opened and checked in default, hover, keyboard-focus, and close states. The live inbox exposes one merged event row; its intended hover/focus paint rule cannot outrank its own base rule because the state is wrapped in zero-specificity `:where(...)`. This is a pre-existing visual bug, not refactorable dead code: changing it would alter the design, while deleting it would erase the documented intent, so it remains `REQUIRES DESIGN APPROVAL`. No `.post-in-list.highlighted` example is currently available; that untouched selector remains `REQUIRES MORE INFORMATION`.
 
 ### T2-03 — Spinner registry and reduced motion
 
@@ -190,6 +190,7 @@ T1-01 complete; live grading-guide checkbox and dashboard TODO checkbox availabl
 - **Risk:** B/C.
 - **Verification:** open/close, arrow direction, stacking, hover, keyboard focus, and viewport-edge placement.
 - **Dependency:** T2-02 for Suhtlus overlays.
+- **Progress:** T2-04a complete. The grade popover, Suhtlus author card, and reaction picker now share one exact five-declaration shell owner using their original full selectors. Absence, grade, and lesson-teacher arrows now share two exact color owners. Distinct absence radius, teacher-tooltip text/arrow implementation, lesson-teacher shell geometry, overlay internals, and the broad legacy fallback remain feature-owned. Live open/close, shell paint, arrows, reaction hover/focus, and a teacher-tooltip negative control passed. Viewport-edge variants and currently unavailable legacy overlay types remain pending.
 
 ## Tier 3 — Structural improvements
 

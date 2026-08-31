@@ -61,7 +61,10 @@ PASS as a desktop baseline. Mobile, public-login, and populated historical-diary
 | Suhtlus navigation | Suhtlus inbox | ✓ | △ | ✓ | ✓ | BLOCKED | ✓ | Hover still matches without changing paint; keyboard focus-visible remains styled |
 | Suhtlus participant chips | Suhtlus inbox | ✓ | PENDING | — | ✓ | BLOCKED | ✓ | 74 participant and 47 highlighted variants retain the shared chip style |
 | Suhtlus posts | Suhtlus inbox / post 25742635 | ✓ | ✓ | PENDING | ✓ | BLOCKED | ✓ | Collapsed default/hover and expanded non-hover states verified; highlighted unavailable |
+| Suhtlus overlays | Post 25742635 | ✓ | ✓ | ✓ | ✓ | BLOCKED | ✓ | Author card and reaction picker opened/closed; reaction option hover and focus-visible checked |
+| Suhtlus merged row | Suhtlus inbox | ✓ | △ | ✓ | — | BLOCKED | ✓ | Existing zero-specificity state paint does not beat the base; global focus ring still works |
 | Suhtlus calendar today | Suhtlus calendar | ✓ | PENDING | — | ✓ | BLOCKED | ✓ | One `.cal-day.cal-day-is-today` cell retains the accent-soft state |
+| Overlay shells / arrows | Dashboard, subjects, Suhtlus | ✓ | ✓ | ✓ | ✓ | BLOCKED | ✓ | Absence, grade, lesson-teacher, user-card, reaction, and teacher-tooltip negative control checked |
 | Grades / semantic states | Grades table | ✓ | PENDING | PENDING | ✓ | BLOCKED | ✓ | Table rendering matches the baseline; representative row hover was exercised |
 | Public login | Login | BLOCKED | BLOCKED | BLOCKED | BLOCKED | BLOCKED | BLOCKED | The themed external browser redirects the auth URL to the signed-in dashboard |
 | Responsive breakpoint | Representative pages | — | — | — | — | BLOCKED | BLOCKED | The external viewport override still reports 2,048px and was reset |
@@ -254,3 +257,73 @@ PASS — classification `KEEP`. The selector arm is mostly overridden but is not
 **Notes**
 
 The surviving radius is visually inert while the heading remains transparent and borderless. Removing it would still change computed behavior, while relocating it would add a special-purpose rule with no maintenance benefit. This is exactly the kind of low-value theoretical cleanup the refactor should stop short of.
+
+## Investigation T2-02c
+
+**Name**
+
+Complete the remaining Suhtlus state inventory.
+
+**Changes**
+
+No CSS change. Author-card, reaction, participant, and merged-row rules remain in place.
+
+**Root cause**
+
+The remaining rules describe genuine components rather than duplicate patches. One exception is the merged-row state selector: `:where(.post-list-merged:hover, .post-list-merged:focus-visible)` has zero specificity and cannot override the preceding `.post-list-merged` base when both declarations are important.
+
+**Verification**
+
+- Opened and closed the author card on the already-read post 25742635. Its shell, actions, metadata, and avatar each retain distinct computed paint.
+- Opened and closed the reaction picker without choosing a reaction. Verified the picker shell, reaction-option default and hover paint, and a keyboard-only focus-visible state after moving the pointer away.
+- Inspected the inbox: 25 collapsed posts, one merged event row, and no `.post-in-list.highlighted` posts.
+- Deliberately hovered the merged row and keyboard-focused it. Its background, border, and text remain at the base values, while the global mint outline and focus shadow remain visible.
+- Traced matching theme rules for the reaction focus state and merged-row cascade.
+
+**Result**
+
+PASS for the inspectable T2-02 scope. Author card, reaction picker, and merged row are classified `KEEP`; highlighted-post coverage remains `REQUIRES MORE INFORMATION`.
+
+**Notes**
+
+- Fixing the merged-row state selector would introduce a visible hover/focus background and border. That is an existing design bug and requires explicit design approval; deleting the rule would preserve today's pixels but erase useful intent, so neither action belongs in this refactor.
+- No reaction, favorite, mute, reply, participant, or message state was changed.
+
+## Batch T2-04a
+
+**Name**
+
+Consolidate verified overlay shells and arrow colors.
+
+**Changes**
+
+- Replaced three identical shell implementations with one shared owner for `.page_dashboard_subjects .stuudium-popover`, `.suhtlus .user-card`, and `.suhtlus .post-responses-add-available`.
+- Replaced six individual arrow-color rules with one shared `::before` owner and one shared `::after` owner for absence, grade, and lesson-teacher popovers.
+- Kept every original full selector, important declaration, radius, arrow DOM, component internal, and distinct overlay implementation.
+
+**Root cause**
+
+The same overlay palette was implemented independently as grade and Suhtlus features were added. Arrow colors were likewise repeated beside three feature modules even though the two-layer arrow treatment is one component decision.
+
+**Verification**
+
+- Confirmed the edited live stylesheet is active: 95,621 characters, fingerprint `ad5b0b5c`, and 438 style rules.
+- Grade popover on `/s/520/subjects`: opened and closed; preserved text/background, `0.8px` strong border, 7px radius, shadow, and both arrow colors.
+- Absence popover on `/s/520`: opened and toggled closed without changing attendance data; preserved its distinct 11px radius and both arrow colors.
+- Lesson-teacher popover on `/subjects/student/944/520`: opened, closed, and reopened; preserved its site-owned 1.6px shell, 8px radius, shadow, and themed arrow colors.
+- Suhtlus author card on post 25742635: opened and closed; preserved its shell plus feature-local action, metadata, and avatar paint.
+- Suhtlus reaction picker: opened and closed without selecting a reaction; preserved shell, option hover, and keyboard focus-visible behavior.
+- Teacher balloon on `/s/520/subjects`: hovered as a negative control; retained its brighter text and separate SVG arrow implementation.
+- Visually compared live grade and Suhtlus overlay captures with their pre-change captures.
+- `git diff --check`: no whitespace errors; only the existing LF/CRLF working-copy notice.
+- CSS structure: 445 opening/445 closing braces and 981 opening/981 closing parentheses.
+- Diff scope: 26 lines, 6 style rules, and 14 repeated important declarations removed without changing selector coverage.
+
+**Result**
+
+PASS. The shared overlay palette and arrow colors now each have one owner, while component-specific geometry and behavior remain unchanged.
+
+**Notes**
+
+- Mobile remains blocked by the ineffective external-browser viewport override.
+- Viewport-edge arrow variants and unexposed legacy overlay types were not claimed as observed and were not changed.
