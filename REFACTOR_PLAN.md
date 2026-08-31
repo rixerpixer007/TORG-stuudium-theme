@@ -182,6 +182,7 @@ T1-01 complete; live grading-guide checkbox and dashboard TODO checkbox availabl
 - **Risk:** D.
 - **Verification:** every loader type in normal and reduced-motion modes, including dimensions and empty/loading transitions.
 - **Dependency:** triggerable loading states and reduced-motion emulation.
+- **Disposition:** **COMPLETE FOR AVAILABLE STATES — KEEP / REQUIRES DESIGN APPROVAL.** Live Suhtlus post expansion proved `.loading-spinner` is an image-backed 16px SVG inside a 60px loading area; its later border colors are inert because every border is `0 none`. Live search proved the input uses the same SVG at 14px during `.is-searching`. Live dashboard history proved `.daily-summaries-navigate.is_loading::after` is a separate 14px CSS border spinner. A loaded attachment image retains the SVG only as an underneath placeholder. Notebook saving, reaction-name, upload, and other dynamic loaders remain unavailable without changing data or manufacturing state, so their rules stay `KEEP`. Reduced-motion emulation is unavailable; static cascade analysis also shows the component-specific important animation shorthand can outrank the generic important duration, while the embedded SVG uses SMIL. Changing either behavior would alter animation and requires explicit design/accessibility approval rather than a refactor-only edit.
 
 ### T2-04 — Overlay shell and arrow ownership
 
@@ -230,7 +231,7 @@ Move late table/overlay/badge exceptions only after recording each live winner. 
 | Login, 146–581 | CONSOLIDATE / KEEP | T1-02 palettes; keep structural toggle rules |
 | Navigation/tabs, 584–720 | REMOVE / KEEP | T1-01 redundant branch; keep stacking rules |
 | Shared controls/icons, 722–944 | REQUIRES MORE INFORMATION | Narrow only after component evidence |
-| Dashboard/TODO/notebook, 946–1278 and 2718–2759 | REMOVE / CONSOLIDATE / KEEP | T1-01 and T1-03 complete; T2-01 hover rule kept after live cascade trace; T2-03 pending |
+| Dashboard/TODO/notebook, 946–1278 and 2718–2759 | REMOVE / CONSOLIDATE / KEEP | T1-01/T1-03 complete; T2-01 kept; inspectable T2-03 loaders classified, notebook saving unavailable |
 | Absences, 1280–1415 | REMOVE / KEEP | T1-01 invalid target; preserve geometry pending tests |
 | Subjects/grades, 1417–1848 | CONSOLIDATE / KEEP | T1-03 only; preserve contextual grade semantics |
 | Tera, 1850–2110 | REMOVE / KEEP | T1-01 base branches; retain coherent feature rules |
@@ -238,7 +239,7 @@ Move late table/overlay/badge exceptions only after recording each live winner. 
 | Registrations, 2538–2639 | CONSOLIDATE / KEEP | T3-03a accent-pill shell complete; inactive and collection-specific variants remain local |
 | Tables/overlays/final exceptions, 2641–2772 | KEEP / REPLACE WITH ROOT FIX | Preserve order until live winners are known |
 | Mobile, 2774–2860 | REMOVE / KEEP | Remove only duplicate login block in T1-01 |
-| Reduced motion, 2862–2870 | REQUIRES MORE INFORMATION | Treat with spinner registry, not safe cleanup |
+| Reduced motion, 2862–2870 | REQUIRES DESIGN APPROVAL | Browser emulation unavailable; CSS/SMIL loader motion is not safely changed during visual refactor |
 
 ## Batch verification protocol
 

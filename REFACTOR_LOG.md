@@ -54,6 +54,7 @@ PASS as a desktop baseline. Mobile, public-login, and populated historical-diary
 | TODO rows / checkbox | Dashboard | ✓ | ✓ | BLOCKED | ✓ | BLOCKED | ✓ | Checked/unchecked and hover values match; hidden native input was not toggled |
 | Grading-guide checkbox | Subject plan 489 | ✓ | ✓ | BLOCKED | ✓ | BLOCKED | ✓ | 20 markers: 1 checked, 19 unchecked; native inputs are hidden decorative markup |
 | Notebook | Dashboard | ✓ | PENDING | PENDING | ✓ | BLOCKED | ✓ | Roman numeral tabs remain visible |
+| Diary history loader | Dashboard | ✓ | — | — | ✓ | BLOCKED | ✓ | Live 14px CSS pseudo-element spinner captured during read-only history load |
 | Historical diary summary | Dashboard | BLOCKED | BLOCKED | — | BLOCKED | BLOCKED | BLOCKED | No populated older entries currently exposed; T1-01 selector change is a strict-subset removal |
 | Absence calendar / popover | Dashboard | ✓ | PENDING | BLOCKED | ✓ | BLOCKED | ✓ | Popover opened and closed; attendance values and disabled controls were not changed |
 | Tera course cards | Tera index | ✓ | ✓ | PENDING | — | BLOCKED | ✓ | 39 cards; hover border and -2px translation preserved |
@@ -62,12 +63,14 @@ PASS as a desktop baseline. Mobile, public-login, and populated historical-diary
 | Suhtlus participant chips | Suhtlus inbox | ✓ | PENDING | — | ✓ | BLOCKED | ✓ | 74 participant and 47 highlighted variants retain the shared chip style |
 | Suhtlus posts | Suhtlus inbox / post 25742635 | ✓ | ✓ | PENDING | ✓ | BLOCKED | ✓ | Collapsed default/hover and expanded non-hover states verified; highlighted unavailable |
 | Suhtlus overlays | Post 25742635 | ✓ | ✓ | ✓ | ✓ | BLOCKED | ✓ | Author card and reaction picker opened/closed; reaction option hover and focus-visible checked |
+| Suhtlus image loaders | Inbox / post 25742635 | ✓ | — | — | ✓ | BLOCKED | ✓ | Live post and search SVG loader states captured; zero-width borders do not double-render |
 | Suhtlus merged row | Suhtlus inbox | ✓ | △ | ✓ | — | BLOCKED | ✓ | Existing zero-specificity state paint does not beat the base; global focus ring still works |
 | Suhtlus calendar today | Suhtlus calendar | ✓ | PENDING | — | ✓ | BLOCKED | ✓ | One `.cal-day.cal-day-is-today` cell retains the accent-soft state |
 | Overlay shells / arrows | Dashboard, subjects, Suhtlus | ✓ | ✓ | ✓ | ✓ | BLOCKED | ✓ | Absence, grade, lesson-teacher, user-card, reaction, and teacher-tooltip negative control checked |
 | Grades / semantic states | Grades table | ✓ | PENDING | PENDING | ✓ | BLOCKED | ✓ | Table rendering matches the baseline; representative row hover was exercised |
 | Public login | Login | BLOCKED | BLOCKED | BLOCKED | BLOCKED | BLOCKED | BLOCKED | The themed external browser redirects the auth URL to the signed-in dashboard |
 | Responsive breakpoint | Representative pages | — | — | — | — | BLOCKED | BLOCKED | The external viewport override still reports 2,048px and was reset |
+| Reduced-motion loaders | Dashboard / Suhtlus | — | — | — | BLOCKED | — | BLOCKED | Browser media emulation unsupported; no behavioral change made |
 
 ## Batch T1-01
 
@@ -406,3 +409,39 @@ PASS. The four exact accent-pill shells now have one structural owner, and every
 - No registration choice, participant link, message, or grade data was changed.
 - Mobile remains blocked by the ineffective external-browser viewport override.
 - The increase of one style rule is intentional: component ownership improved while repeated declarations fell. Rule count is not treated as a standalone quality metric.
+
+## Investigation T2-03
+
+**Name**
+
+Classify loader mechanisms and reduced-motion ownership.
+
+**Changes**
+
+No CSS change. The image-placeholder registry, global `.loading-spinner` color rule, CSS pseudo-element spinners, and reduced-motion block remain intact.
+
+**Root cause**
+
+Three loading mechanisms were added at different times: animated SVG backgrounds for Suhtlus placeholders, CSS border spinners for notebook/history states, and site-provided loader geometry. Their overlapping selector names made the SVG and border systems appear to compete even where one mechanism has no visible border.
+
+**Verification**
+
+- Inventoried loader DOM on dashboard, Suhtlus inbox/single-post, and a Tera resource.
+- Captured an already-read Suhtlus post expanding: the active `.loading-spinner` became a 698.8×60px area with a centered 16px SVG; all four borders remained `0 none`, so the later border-color rule did not render a second spinner.
+- Submitted and then cleared a harmless no-match Suhtlus search. During `.is-searching`, the input received the SVG at 14×14px on its right edge and returned to `background-image: none` after completion.
+- Triggered dashboard history loading read-only and captured `.daily-summaries-navigate.is_loading::after`: 14×14px, circular border, mint top edge, and `sid-spin 0.75s linear infinite`.
+- Loaded older Suhtlus messages read-only. The request completed too quickly to capture its transient class, so that specific state is not claimed.
+- Inspected a fully loaded attachment preview: the image is complete at 1200×675 natural pixels and retains the SVG only as its background placeholder underneath the rendered image.
+- Confirmed a hidden notebook-saving element, a hidden reaction-name loading indicator, and an idle upload container exist. They were not activated because doing so would require editing notebook/message/upload data.
+- Attempted browser reduced-motion emulation; the browser-control surface does not expose that capability.
+- Static cascade review confirms the specific important spinner animation shorthand has greater specificity than the generic reduced-motion animation-duration/iteration declarations. The SVG animation is SMIL and outside CSS animation control.
+- Restored dashboard and Suhtlus inbox routes with an empty search after testing.
+
+**Result**
+
+PASS — classification only. The live mechanisms are separate and should remain `KEEP`; no root-cause CSS deletion is justified. Reduced-motion loader behavior is `REQUIRES DESIGN APPROVAL`.
+
+**Notes**
+
+- No notebook, message, upload, reaction, registration, or attendance data was changed.
+- A future accessibility change should explicitly decide whether reduced-motion users see a static loader, a finite animation, or no animation. That is behavior design, not invisible refactoring.
