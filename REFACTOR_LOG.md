@@ -60,7 +60,7 @@ PASS as a desktop baseline. Mobile, public-login, and populated historical-diary
 | Tera nested containers | Tera resource | ✓ | — | — | ✓ | BLOCKED | ✓ | One parent and one child variant present with their distinct surfaces |
 | Suhtlus navigation | Suhtlus inbox | ✓ | △ | ✓ | ✓ | BLOCKED | ✓ | Hover still matches without changing paint; keyboard focus-visible remains styled |
 | Suhtlus participant chips | Suhtlus inbox | ✓ | PENDING | — | ✓ | BLOCKED | ✓ | 74 participant and 47 highlighted variants retain the shared chip style |
-| Suhtlus posts | Suhtlus inbox | ✓ | PENDING | PENDING | PENDING | BLOCKED | ✓ | Feed default state matches the baseline; no post was expanded |
+| Suhtlus posts | Suhtlus inbox / post 25742635 | ✓ | ✓ | PENDING | ✓ | BLOCKED | ✓ | Collapsed default/hover and expanded non-hover states verified; highlighted unavailable |
 | Suhtlus calendar today | Suhtlus calendar | ✓ | PENDING | — | ✓ | BLOCKED | ✓ | One `.cal-day.cal-day-is-today` cell retains the accent-soft state |
 | Grades / semantic states | Grades table | ✓ | PENDING | PENDING | ✓ | BLOCKED | ✓ | Table rendering matches the baseline; representative row hover was exercised |
 | Public login | Login | BLOCKED | BLOCKED | BLOCKED | BLOCKED | BLOCKED | BLOCKED | The themed external browser redirects the auth URL to the signed-in dashboard |
@@ -185,3 +185,42 @@ PASS — classification `KEEP`. Removing the feature-specific hover owner would 
 **Notes**
 
 A root-level rewrite would need to change how the TODO default transparent state is selected, then re-test touch/mobile hover behavior. That is not justified merely to remove one intentional reinforcement rule.
+
+## Batch T2-02a
+
+**Name**
+
+Remove the duplicate expanded-post background owner.
+
+**Changes**
+
+Removed only `background: var(--sid-surface-interactive) !important` from the stronger `.post-in-list.post-expanded` shell. Padding, margin, border, shadow, comments, notices, event time, reactions, and all other Suhtlus rules remain unchanged.
+
+**Root cause**
+
+The expanded state was first included in the shared hover/expanded/highlighted background rule and then given the same background again when the expanded shell geometry was added.
+
+**Verification**
+
+- Baseline inbox contained 25 collapsed posts and no expanded or highlighted post; exercised a collapsed post's transparent default and `--sid-surface-interactive` hover states.
+- Opened real post 25742635, moved the pointer outside it, and traced the live CSSOM cascade. The shared `.suhtlus :where(.post-in-list:hover, .post-in-list.post-expanded, .post-in-list.highlighted)` rule matched the non-hovered expanded post and already followed the transparent base owner.
+- Captured the pre-change expanded shell: `rgb(25, 31, 27)` background, `0.8px solid rgb(58, 71, 64)` border, 18px padding, zero bottom margin, and no shadow.
+- Reloaded the stable single-post route after the edit and confirmed the new active Stylus body: 96,363 characters, fingerprint `3c94334b`; the stronger expanded shell no longer contains a background declaration.
+- Confirmed the post-change expanded shell has the same computed background, border, padding, margin, and shadow, with the pointer outside the post.
+- Confirmed the post still renders one comment, its transparent comment heading, its surfaced generic notice, and its bordered event-time chip.
+- Returned to the inbox and rechecked all 25 collapsed posts: default remains transparent and hover remains `rgb(25, 31, 27)`.
+- Waited for dynamic content to finish and visually compared both expanded and collapsed states with the baseline captures.
+- `git diff --check`: no whitespace errors; only the existing LF/CRLF working-copy notice.
+- CSS structure: 451 opening/451 closing braces and 995 opening/995 closing parentheses.
+- Diff scope: one declaration removed.
+
+**Result**
+
+PASS for T2-02a. The shared state rule is now the single expanded-background owner and the expanded shell retains only its genuine geometry and border differences.
+
+**Notes**
+
+- The inbox currently exposes no `.post-in-list.highlighted` example, so that state remains unobserved; its selector was not changed.
+- Mobile remains blocked by the ineffective browser viewport override. There is no mobile-specific post background owner in the stylesheet.
+- Opening the initially unread post for the required expanded-state test caused Stuudium to mark it read. No message content, reaction, favorite, mute, participant, or reply state was changed.
+- The later comment-heading reset and other T2-02 branches remain pending; this batch does not classify them.
