@@ -53,6 +53,7 @@ PASS as a desktop baseline. Mobile, public-login, and populated historical-diary
 | Dashboard cards | Dashboard | ✓ | PENDING | — | — | BLOCKED | ✓ | Two-column desktop rendering matches the baseline |
 | TODO rows / checkbox | Dashboard | ✓ | ✓ | BLOCKED | ✓ | BLOCKED | ✓ | Checked/unchecked and hover values match; hidden native input was not toggled |
 | Grading-guide checkbox | Subject plan 489 | ✓ | ✓ | BLOCKED | ✓ | BLOCKED | ✓ | 20 markers: 1 checked, 19 unchecked; native inputs are hidden decorative markup |
+| Compact-radius family | Dashboard, plan, Tera/Suhtlus forms | △ | ✓ | BLOCKED | ✓ | BLOCKED | ✓ | Both live checkbox owners passed; response badge, upload-preview, and recipient-tag instances are currently unavailable |
 | Notebook | Dashboard | ✓ | PENDING | PENDING | ✓ | BLOCKED | ✓ | Roman numeral tabs remain visible |
 | Diary history loader | Dashboard | ✓ | — | — | ✓ | BLOCKED | ✓ | Live 14px CSS pseudo-element spinner captured during read-only history load |
 | Historical diary summary | Dashboard | BLOCKED | BLOCKED | — | BLOCKED | BLOCKED | BLOCKED | No populated older entries currently exposed; T1-01 selector change is a strict-subset removal |
@@ -482,4 +483,44 @@ PASS. Overlay background ownership is now semantically named with no visual or b
 **Notes**
 
 - The teacher balloon arrow is an embedded SVG with a literal `#1b211e` fill. CSS custom properties cannot be consumed inside that data URI, so it remains intentionally hard-coded and was checked as a negative control.
+- Mobile remains blocked by the ineffective external-browser viewport override.
+
+## Batch T3-02a
+
+**Name**
+
+Name the compact-component radius.
+
+**Changes**
+
+- Added `--sid-radius-xs: 4px` beside the existing radius scale.
+- Replaced four literal declarations covering five component owners: the shared TODO/subject-plan checkbox shell, Tera response badges, Tera/Suhtlus upload previews, and Suhtlus recipient tags.
+- Did not add tokens for the checkbox inset hairline or 140ms transitions.
+
+**Root cause**
+
+The same mini-radius convention had remained as an unexplained literal across compact controls and metadata elements. The earlier checkbox consolidation reduced two declarations to one, but the value still had five semantic consumers. Naming the convention makes compact geometry discoverable without grouping unrelated selectors or changing component ownership.
+
+**Verification**
+
+- Captured both live checkbox implementations before editing: two 16px dashboard TODO controls and twenty 14px subject-plan markers all resolved to 4px radii.
+- Reloaded dashboard, subject plan 489, a Tera resource, and the Suhtlus new-message composer after the edit.
+- Confirmed the live token resolves to `4px`; the injected stylesheet is 95,318 characters with fingerprint `376cf76a`.
+- Dashboard TODO controls retained 16px geometry, checked/unchecked paint, border, shadow, transform, and 4px radius. The unchecked hover state was deliberately exercised.
+- Subject-plan markers retained 14px geometry, checked/unchecked paint, border, shadow, site-owned transform, and 4px radius. The unchecked hover state was deliberately exercised.
+- Visually compared both live pages after reload with the immediately captured baseline; no geometry or paint difference was visible.
+- Confirmed the current Tera resource has no response-badge or upload-preview instance and the empty Suhtlus composer has no recipient-tag or upload-preview instance. Their selectors and declarations are otherwise unchanged; only the literal value source moved to an equal alias.
+- `git diff --check`: no whitespace errors; only the existing LF/CRLF working-copy notice.
+- CSS structure: 445 opening/445 closing braces and 974 opening/974 closing parentheses.
+- Diff scope: one token added and four equal-value references changed; line count increased by one, while style-rule and `!important` counts stayed unchanged.
+
+**Result**
+
+PASS for the live component instances. The unavailable compact owners require no speculative DOM interaction because this batch changes only the source of the same computed value.
+
+**Notes**
+
+- No task, plan, recipient, message, response, or upload data was changed.
+- The inset hairline now has one shared declaration owner, so a dedicated token is not justified.
+- The 140ms token remains deferred until the public login consumer can be verified.
 - Mobile remains blocked by the ineffective external-browser viewport override.

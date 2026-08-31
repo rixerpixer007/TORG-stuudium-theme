@@ -207,6 +207,8 @@ Alias current values first (card, overlay, hover/interactive) and migrate one co
 
 Consider only demonstrated conventions: compact `4px` radius, checkbox inset hairline, and `140ms` fast transition. Do not introduce a spacing or typography scale without component normalization.
 
+**Progress:** T3-02a complete for compact radii. `--sid-radius-xs` now owns the verified 4px convention used by the shared TODO/subject-plan checkbox shell, Tera response badges, Tera/Suhtlus upload previews, and Suhtlus recipient tags. The checkbox inset hairline now has only one shared declaration owner, so a token would add indirection without reuse. The 140ms transition candidate remains deferred because one of its three consumers is the currently inaccessible public-login page; it will not be migrated without complete live coverage.
+
 ### T3-03 — Chip and badge families
 
 Map participant, registration, category, and help chips by semantic variant. Preserve warning, danger, archived, excluded, and inactive variants.

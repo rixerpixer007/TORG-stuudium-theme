@@ -53,6 +53,7 @@
     --sid-warning: #efc873;
     --sid-warning-soft: rgb(239 200 115 / 11%);
     --sid-warning-border: rgb(239 200 115 / 42%);
+    --sid-radius-xs: 4px;
     --sid-radius-sm: 7px;
     --sid-radius: 11px;
     --sid-radius-lg: 14px;
@@ -1778,7 +1779,7 @@
     background-color: var(--sid-control) !important;
     background-image: none !important;
     border: 1px solid var(--sid-border-strong) !important;
-    border-radius: 4px !important;
+    border-radius: var(--sid-radius-xs) !important;
     box-shadow: inset 0 1px 0 rgb(255 255 255 / 3%) !important;
   }
 
@@ -1930,7 +1931,7 @@
     color: var(--sid-accent) !important;
     background: var(--sid-accent-soft) !important;
     border-color: var(--sid-accent-border) !important;
-    border-radius: 4px !important;
+    border-radius: var(--sid-radius-xs) !important;
   }
 
   :where(.course-journal, .badge-archived) {
@@ -1986,7 +1987,7 @@
     color: var(--sid-text-2) !important;
     background: var(--sid-control) !important;
     border-color: var(--sid-border-strong) !important;
-    border-radius: 4px !important;
+    border-radius: var(--sid-radius-xs) !important;
     box-shadow: none !important;
   }
 
@@ -2134,7 +2135,7 @@
     color: var(--sid-text-2) !important;
     background: var(--sid-accent-soft) !important;
     border-color: var(--sid-accent-border) !important;
-    border-radius: 4px !important;
+    border-radius: var(--sid-radius-xs) !important;
     box-shadow: none !important;
   }
 
