@@ -158,6 +158,7 @@ T1-01 complete; live grading-guide checkbox and dashboard TODO checkbox availabl
 - **Risk:** C.
 - **Verification:** TODO default/hover/checked/marked on desktop and mobile.
 - **Dependency:** T1-03 should be settled first.
+- **Disposition after live inspection:** **KEEP.** The generic hover rule does not own the state. With `!important` on all three declarations, `.section.todos .todo_container { background: transparent; }` outranks `:where(...):hover`; the feature-specific hover rule is what restores `--sid-surface-3` for both marked and unmarked rows. Removing it would be a regression, while changing the base selector would expand this batch beyond safe consolidation.
 
 ### T2-02 — Suhtlus post-state ownership
 
@@ -223,7 +224,7 @@ Move late table/overlay/badge exceptions only after recording each live winner. 
 | Login, 146–581 | CONSOLIDATE / KEEP | T1-02 palettes; keep structural toggle rules |
 | Navigation/tabs, 584–720 | REMOVE / KEEP | T1-01 redundant branch; keep stacking rules |
 | Shared controls/icons, 722–944 | REQUIRES MORE INFORMATION | Narrow only after component evidence |
-| Dashboard/TODO/notebook, 946–1278 and 2718–2759 | REMOVE / CONSOLIDATE / KEEP | T1-01, T1-03, then T2-01/T2-03 |
+| Dashboard/TODO/notebook, 946–1278 and 2718–2759 | REMOVE / CONSOLIDATE / KEEP | T1-01 and T1-03 complete; T2-01 hover rule kept after live cascade trace; T2-03 pending |
 | Absences, 1280–1415 | REMOVE / KEEP | T1-01 invalid target; preserve geometry pending tests |
 | Subjects/grades, 1417–1848 | CONSOLIDATE / KEEP | T1-03 only; preserve contextual grade semantics |
 | Tera, 1850–2110 | REMOVE / KEEP | T1-01 base branches; retain coherent feature rules |

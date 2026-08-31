@@ -156,3 +156,32 @@ PASS for the T1-03 batch scope. Both live components retain identical checked, u
 - The native inputs compute to `display: none`, so keyboard focus-visible cannot be reached on the current live markup. The original focus selectors and declarations were preserved exactly; this pre-existing accessibility limitation is recorded rather than changed during the refactor.
 - Pointer-down animation was not directly sampled because the available browser control cannot hold the pointer while inspecting computed style without clicking the real TODO control. The TODO-only press selector and declaration remain byte-for-byte unchanged.
 - Mobile remains unobserved because the external viewport override is ineffective. There are no custom-checkbox declarations in the mobile media block, and no intervening custom-checkbox owner exists between the old and new source positions.
+
+## Investigation T2-01
+
+**Name**
+
+Determine TODO hover ownership.
+
+**Changes**
+
+No CSS change. The feature-specific hover rule remains in place.
+
+**Root cause**
+
+The broad diary hover selector uses `:where(...)` and cannot override the more specific TODO base rule when both declarations are `!important`.
+
+**Verification**
+
+- Hovered the live unmarked and marked TODO rows.
+- Traced the accessible injected stylesheet through CSSOM. Each hovered row matches the generic hover owner, the transparent TODO base owner, and the feature-specific TODO hover owner.
+- Confirmed the live winning background is `rgb(32, 40, 36)` (`--sid-surface-3`) only because `.section.todos .todo_container:hover` outranks the transparent base declaration.
+- Confirmed the marked row retains muted text and its `line-through 1px rgba(193, 192, 184, 0.55)` decoration while hovered.
+
+**Result**
+
+PASS — classification `KEEP`. Removing the feature-specific hover owner would make hovered TODO rows transparent.
+
+**Notes**
+
+A root-level rewrite would need to change how the TODO default transparent state is selected, then re-test touch/mobile hover behavior. That is not justified merely to remove one intentional reinforcement rule.
