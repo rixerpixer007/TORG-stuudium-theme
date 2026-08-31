@@ -595,3 +595,46 @@ PASS — classification and ownership documentation. The global link, shared con
 - This is not a claim that the foundations are theoretically minimal. It is a finding that replacing them now would add scattered, state-incomplete code and increase regression risk.
 - Future feature work may narrow one consumer at a time when its complete live state matrix is available.
 - Login, mobile, unavailable warning states, absence focus behavior, and reduced-motion loader behavior remain explicit blockers or design decisions.
+
+## Completion checkpoint R1
+
+**Name**
+
+Maintainable v1 refactor boundary.
+
+**Changes**
+
+No additional CSS change. Marked the plan complete for the safe, live-verifiable v1 scope and retained explicit blockers instead of forcing speculative cleanup.
+
+**Outcome against baseline**
+
+| Metric | Before (`8ec50bb`) | Refactored | Change |
+|---|---:|---:|---:|
+| Stylesheet lines | 2,872 | 2,829 | -43 |
+| Style rules | 447 | 438 | -9 |
+| `!important` declarations | 1,118 | 1,080 | -38 |
+| Design-token definitions | 37 | 39 | +2 meaningful tokens |
+| Source characters | 97,748 | 96,180 | -1,568 |
+
+The metrics are secondary. The material result is fewer false selector branches, one complete custom-checkbox paint primitive, one verified overlay shell/arrow family, one accent-pill shell, named overlay/compact-radius decisions, truthful TODO hover ownership, and documented global/legacy cascade contracts.
+
+**Final verification**
+
+- Confirmed the active live stylesheet has 438 style rules, 3 media blocks, 1 keyframe block, and fingerprint `66ab3ab6`.
+- Re-ran representative desktop interactions after the final stage: primary navigation hover, TODO default/hover, grade-help hover, Tera primary-action hover, Suhtlus collapsed-post hover, registration-expander hover, and Suhtlus composer keyboard focus-visible.
+- Composer focus retained the mint outline and 3px focus shadow; no value was entered.
+- Reconfirmed representative global-link consumers after reload: dashboard action, grade-table subject link, Tera file, Suhtlus expander/title, and registration expander all retain the accent color.
+- Reconfirmed an informational registration notice retains its accent-soft background, border, and neutral text.
+- `git diff --check` remained clean apart from the repository's existing LF/CRLF notice; braces and parentheses remain balanced.
+- Every CSS-changing batch has its own reversible Git checkpoint.
+
+**Result**
+
+PASS WITH EXPLICITLY BLOCKED COVERAGE. The refactor has reached the requested stable, maintainable v1 stopping point without a broad rewrite or intentional design change.
+
+**Remaining limitations**
+
+- Public login redirects into the signed-in dashboard, so login palettes and states remain unverified and unchanged.
+- The external browser remains at a 2,048px CSS viewport despite the available override, so mobile visual equivalence is blocked; mobile declarations were changed only where selector equivalence was provable.
+- Historical diary entries, highlighted Suhtlus posts, populated upload/recipient states, notebook saving, some loaders, and dynamic warning examples were unavailable without altering real Stuudium data.
+- The merged-row hover/focus specificity issue, absence-popover focus treatment, and loader reduced-motion behavior are existing design/accessibility questions. They were recorded, not silently redesigned.

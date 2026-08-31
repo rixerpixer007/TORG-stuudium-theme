@@ -1,5 +1,11 @@
 # Stuudium Intentional Dark — Refactor Plan
 
+## Status
+
+**COMPLETE FOR MAINTAINABLE V1 — 2026-08-31.** All safe and live-verifiable batches in this plan are complete. The stylesheet is 2,829 lines with 438 style rules and 1,080 `!important` declarations, compared with the 2,872-line / 447-rule / 1,118-important baseline. Remaining items are not open-ended cleanup: public-login and mobile verification are environment-blocked; unavailable dynamic states remain `KEEP`; and absence focus plus reduced-motion loader behavior require explicit design/accessibility approval.
+
+Future work should use `AGENTS.md` and reopen one component/state batch only when its real DOM is available. Do not resume broad line-count, global-specificity, token, or `!important` cleanup merely because the file can be made smaller.
+
 ## Baseline
 
 - Known-good stylesheet: `Stuudium-Intentional-Dark.user.css` v2.6.1.
