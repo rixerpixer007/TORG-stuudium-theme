@@ -160,7 +160,7 @@ T1-01 complete; live grading-guide checkbox and dashboard TODO checkbox availabl
 - **Risk:** C.
 - **Verification:** TODO default/hover/checked/marked on desktop and mobile.
 - **Dependency:** T1-03 should be settled first.
-- **Disposition after live inspection:** **KEEP.** The generic hover rule does not own the state. With `!important` on all three declarations, `.section.todos .todo_container { background: transparent; }` outranks `:where(...):hover`; the feature-specific hover rule is what restores `--sid-surface-3` for both marked and unmarked rows. Removing it would be a regression, while changing the base selector would expand this batch beyond safe consolidation.
+- **Disposition after live inspection:** **COMPLETE — KEEP / REMOVE.** The feature-specific hover rule remains required: with `!important` on all declarations, `.section.todos .todo_container { background: transparent; }` outranks the zero-specificity generic hover owner. T2-01b removed only the dead `.todo_container` arm from that generic diary selector. Both live TODO instances are inside `.section.todos`, so their default and hover states now each have one truthful owner without changing the winning feature rule.
 
 ### T2-02 — Suhtlus post-state ownership
 

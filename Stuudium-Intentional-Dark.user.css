@@ -950,7 +950,7 @@
     border-color: var(--sid-border) !important;
   }
 
-  :where(.daily-summary, .scheduled-item, .lesson, .event, .todo_container):hover {
+  :where(.daily-summary, .scheduled-item, .lesson, .event):hover {
     background: var(--sid-surface-3) !important;
   }
 

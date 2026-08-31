@@ -51,7 +51,7 @@ PASS as a desktop baseline. Mobile, public-login, and populated historical-diary
 | Primary navigation | Dashboard | ✓ | ✓ | ✓ | ✓ | BLOCKED | ✓ | Default, Tera hover, and keyboard focus-visible checked after T1-01 |
 | Page tabs / Veel | Dashboard | ✓ | △ | ✓ | ✓ | BLOCKED | ✓ | 4 menu segments and 7 links; the first link's pre-existing hover-paint issue remains |
 | Dashboard cards | Dashboard | ✓ | PENDING | — | — | BLOCKED | ✓ | Two-column desktop rendering matches the baseline |
-| TODO rows / checkbox | Dashboard | ✓ | ✓ | BLOCKED | ✓ | BLOCKED | ✓ | Checked/unchecked and hover values match; hidden native input was not toggled |
+| TODO rows / checkbox | Dashboard | ✓ | ✓ | BLOCKED | ✓ | BLOCKED | ✓ | One feature-specific hover owner after T2-01b; checked/unchecked paint matches |
 | Grading-guide checkbox | Subject plan 489 | ✓ | ✓ | BLOCKED | ✓ | BLOCKED | ✓ | 20 markers: 1 checked, 19 unchecked; native inputs are hidden decorative markup |
 | Compact-radius family | Dashboard, plan, Tera/Suhtlus forms | △ | ✓ | BLOCKED | ✓ | BLOCKED | ✓ | Both live checkbox owners passed; response badge, upload-preview, and recipient-tag instances are currently unavailable |
 | Notebook | Dashboard | ✓ | PENDING | PENDING | ✓ | BLOCKED | ✓ | Roman numeral tabs remain visible |
@@ -524,3 +524,38 @@ PASS for the live component instances. The unavailable compact owners require no
 - The inset hairline now has one shared declaration owner, so a dedicated token is not justified.
 - The 140ms token remains deferred until the public login consumer can be verified.
 - Mobile remains blocked by the ineffective external-browser viewport override.
+
+## Batch T2-01b
+
+**Name**
+
+Remove the dead TODO arm from the generic diary hover selector.
+
+**Changes**
+
+- Removed `.todo_container` from `:where(.daily-summary, .scheduled-item, .lesson, .event, .todo_container):hover`.
+- Kept `.section.todos .todo_container:hover` unchanged as the sole working TODO hover owner.
+
+**Root cause**
+
+The generic hover primitive has zero selector specificity inside `:where(...)`, while the TODO base deliberately declares a transparent important background with feature specificity. That base always defeats the generic TODO arm. A later feature-specific hover rule was added to restore the intended hover surface, leaving the original generic arm as misleading dead coverage.
+
+**Verification**
+
+- Confirmed both live `.todo_container` instances are descendants of `.section.todos`; one is unchecked and one is checked/marked.
+- Before editing, traced three matching important owners on a hovered row: generic hover, transparent TODO base, and feature-specific hover. The feature rule was the only owner capable of winning.
+- Reloaded the dashboard after editing and deliberately tested both rows in default and hover states.
+- Both default rows remain transparent; both hovered rows remain `rgb(32, 40, 36)` (`--sid-surface-3`).
+- The marked row retained its checked control and `line-through 1px rgba(193, 192, 184, 0.55)` content decoration.
+- Post-edit CSSOM tracing shows only the transparent TODO base and feature-specific hover rule match the hovered row.
+- Confirmed the edited live stylesheet is 95,301 characters with fingerprint `e3225188`.
+- Visually compared the hovered marked row with its pre-change rendering; no paint, geometry, or text difference was visible.
+
+**Result**
+
+PASS. TODO hover behavior is unchanged and its cascade now reports one real state owner instead of one dead generic arm plus one repair.
+
+**Notes**
+
+- No task was toggled or edited.
+- Mobile remains blocked, but this change removes a selector that was already defeated by the same unchanged feature base and hover rules used at every viewport.
