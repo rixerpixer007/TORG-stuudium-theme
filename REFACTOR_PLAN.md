@@ -208,6 +208,8 @@ Consider only demonstrated conventions: compact `4px` radius, checkbox inset hai
 
 Map participant, registration, category, and help chips by semantic variant. Preserve warning, danger, archived, excluded, and inactive variants.
 
+**Progress:** T3-03a complete at the shared-geometry boundary. Grade help, Suhtlus participant pills, registration success status, and registration counts now share one exact accent-pill shell: accent-soft background, 1px accent border, and pill radius. Text, padding, shadows, links, and expanded/focus behavior remain local. Registration inactive, Suhtlus excluded/small-radius members, subject-plan category, TODO warning, archived, and generic bright badges remain intentionally separate because their geometry or semantic palette differs. No broader value-based badge selector is planned without new live evidence.
+
 ### T3-04 — Explicit legacy ownership
 
 Move late table/overlay/badge exceptions only after recording each live winner. If source order is required, keep a documented exceptions section instead of forcing relocation.
@@ -232,8 +234,8 @@ Move late table/overlay/badge exceptions only after recording each live winner. 
 | Absences, 1280–1415 | REMOVE / KEEP | T1-01 invalid target; preserve geometry pending tests |
 | Subjects/grades, 1417–1848 | CONSOLIDATE / KEEP | T1-03 only; preserve contextual grade semantics |
 | Tera, 1850–2110 | REMOVE / KEEP | T1-01 base branches; retain coherent feature rules |
-| Suhtlus, 2112–2536 | REMOVE / REPLACE WITH ROOT FIX / KEEP | T1-01 and T2-02a complete; remaining T2-02 states and T2-04 pending |
-| Registrations, 2538–2639 | KEEP | Badge work only after a state inventory |
+| Suhtlus, 2112–2536 | REMOVE / REPLACE WITH ROOT FIX / KEEP | T1-01 and inspectable T2-02 complete; T2-04a/T3-03a complete; highlighted post unavailable |
+| Registrations, 2538–2639 | CONSOLIDATE / KEEP | T3-03a accent-pill shell complete; inactive and collection-specific variants remain local |
 | Tables/overlays/final exceptions, 2641–2772 | KEEP / REPLACE WITH ROOT FIX | Preserve order until live winners are known |
 | Mobile, 2774–2860 | REMOVE / KEEP | Remove only duplicate login block in T1-01 |
 | Reduced motion, 2862–2870 | REQUIRES MORE INFORMATION | Treat with spinner registry, not safe cleanup |

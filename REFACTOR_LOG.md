@@ -366,3 +366,43 @@ PASS. Both checkbox implementations now share one complete paint/state primitive
 - The hidden native inputs are skipped by keyboard traversal on the live site, so focus-visible could not be newly exercised. Its selectors and declarations were not changed in this follow-up.
 - No checkbox was toggled and no Stuudium task or grading-guide data was changed.
 - Mobile remains blocked by the ineffective external-browser viewport override.
+
+## Batch T3-03a
+
+**Name**
+
+Extract the verified accent-pill shell.
+
+**Changes**
+
+- Added one shared structural owner for grade help, Suhtlus participant pills, registration success status, and registration-count pills.
+- Moved only the three identical declarations: accent-soft background, 1px accent border, and pill radius.
+- Kept component text colors, padding, shadows, text decoration, expanded behavior, and link behavior in their feature sections.
+- Left neutral inactive, danger/excluded, warning, archived, small-radius, category, and generic bright badges out of the primitive.
+
+**Root cause**
+
+Four independently themed features implemented the same accent-pill shell, while nearby badge variants only looked related and actually had different geometry or semantic colors. Grouping the exact shell removes duplication without turning all badges into one fragile mega-selector.
+
+**Verification**
+
+- Grades `/grades/student/520`: verified the help pill in default, hover, keyboard focus-visible, expanded, and collapsed states.
+- Suhtlus post 25742635: verified both participant pills in default, hover, and keyboard focus-visible states without opening their destinations.
+- Ended registration 296: verified one success status pill and nine registration-count pills; preserved their distinct text and padding.
+- Registration inactive badge was checked as a negative control and retained its neutral surface, strong border, muted text, and pill radius.
+- Traced the pre-change live CSSOM for all four included selectors and the inactive negative control before moving declarations.
+- Confirmed the edited live stylesheet on all affected pages: 95,175 characters, fingerprint `a47f31c7`, and 438 style rules.
+- Visually compared the expanded grades help and registration collection with their pre-change rendering.
+- `git diff --check`: no whitespace errors; only the existing LF/CRLF working-copy notice.
+- CSS structure: 445 opening/445 closing braces and 969 opening/969 closing parentheses.
+- Diff scope: one explicit component rule added and nine duplicate important declarations removed; net stylesheet length reduced by 2 lines.
+
+**Result**
+
+PASS. The four exact accent-pill shells now have one structural owner, and every observed semantic/state difference remains local.
+
+**Notes**
+
+- No registration choice, participant link, message, or grade data was changed.
+- Mobile remains blocked by the ineffective external-browser viewport override.
+- The increase of one style rule is intentional: component ownership improved while repeated declarations fell. Rule count is not treated as a standalone quality metric.

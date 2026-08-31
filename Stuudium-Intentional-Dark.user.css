@@ -1555,9 +1555,6 @@
 
   .page_grades_student .help_toggle {
     color: var(--sid-accent) !important;
-    background: var(--sid-accent-soft) !important;
-    border: 1px solid var(--sid-accent-border) !important;
-    border-radius: var(--sid-radius-pill) !important;
   }
 
   .page_grades_student .summary > span {
@@ -2243,9 +2240,6 @@
 
   .suhtlus :where(.bl-p) {
     color: var(--sid-text-2) !important;
-    background: var(--sid-accent-soft) !important;
-    border: 1px solid var(--sid-accent-border) !important;
-    border-radius: var(--sid-radius-pill) !important;
     box-shadow: none !important;
     padding: 2px 5px !important;
   }
@@ -2500,9 +2494,6 @@
 
   .page_registration_collection .st-badge.st-badge-green {
     color: var(--sid-accent-strong) !important;
-    background: var(--sid-accent-soft) !important;
-    border: 1px solid var(--sid-accent-border) !important;
-    border-radius: var(--sid-radius-pill) !important;
     box-shadow: none !important;
   }
 
@@ -2546,9 +2537,6 @@
 
   .page_registration_collection .reg_count abbr {
     color: var(--sid-text-2) !important;
-    background: var(--sid-accent-soft) !important;
-    border: 1px solid var(--sid-accent-border) !important;
-    border-radius: var(--sid-radius-pill) !important;
     padding: 1px 6px !important;
     text-decoration: none !important;
   }
@@ -2623,6 +2611,16 @@
     color: var(--sid-text) !important;
     background: var(--sid-accent-soft) !important;
     border-color: var(--sid-accent-border) !important;
+  }
+
+  /* Shared accent-pill shell; text, spacing, and semantic variants stay local. */
+  .page_grades_student .help_toggle,
+  .suhtlus :where(.bl-p),
+  .page_registration_collection .st-badge.st-badge-green,
+  .page_registration_collection .reg_count abbr {
+    background: var(--sid-accent-soft) !important;
+    border: 1px solid var(--sid-accent-border) !important;
+    border-radius: var(--sid-radius-pill) !important;
   }
 
   /* Shared overlay shells and arrows */
