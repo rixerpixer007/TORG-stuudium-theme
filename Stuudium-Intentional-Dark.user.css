@@ -104,7 +104,7 @@
     color: var(--sid-text-3) !important;
   }
 
-  :where(a, a:visited) {
+  :where(a) {
     color: var(--sid-accent) !important;
     text-decoration-color: rgb(101 214 177 / 35%) !important;
   }
@@ -603,7 +603,7 @@
     margin-inline: auto;
   }
 
-  :where(.st-nav-item, .st-nav-item:visited, .st-nav-item-label, .st-nav-item-graphic) {
+  :where(.st-nav-item, .st-nav-item-label, .st-nav-item-graphic) {
     color: var(--sid-text-2) !important;
     border-color: var(--sid-border) !important;
   }
@@ -1068,7 +1068,7 @@
     border-radius: var(--sid-radius-sm) !important;
   }
 
-  :where(.stream-entry.ng-grade-is-summary-wrapper, .ng-grade-is-summary-wrapper, .ng-grade-is-important-wrapper) {
+  :where(.ng-grade-is-summary-wrapper, .ng-grade-is-important-wrapper) {
     padding: 6px 8px !important;
     color: var(--sid-text-2) !important;
     background: var(--sid-surface-2) !important;
@@ -1403,7 +1403,7 @@
     transform: rotate(45deg) !important;
   }
 
-  .absences_popover :where(select, textarea)::placeholder {
+  .absences_popover :where(textarea)::placeholder {
     color: var(--sid-text-3) !important;
     opacity: 0.8 !important;
   }
@@ -1854,7 +1854,7 @@
     box-shadow: none !important;
   }
 
-  :where(.content-container, .content-container.with-parent, .content-container.content-container-is-parent, #course-home) {
+  :where(.content-container, #course-home) {
     color: var(--sid-text-2) !important;
     background: var(--sid-surface) !important;
     border-color: var(--sid-border) !important;
@@ -2224,7 +2224,7 @@
     border-color: transparent !important;
   }
 
-  :where(.suhtlus-nav a:hover, .suhtlus-nav a.nav-active) {
+  :where(.suhtlus-nav a:hover) {
     color: var(--sid-text) !important;
     background: var(--sid-surface) !important;
   }
@@ -2298,7 +2298,7 @@
     border-color: var(--sid-border-strong) !important;
   }
 
-  .suhtlus :where(.bl-p, .bl-p.highlighted, .post-participants .bl-p) {
+  .suhtlus :where(.bl-p) {
     color: var(--sid-text-2) !important;
     background: var(--sid-accent-soft) !important;
     border: 1px solid var(--sid-accent-border) !important;
@@ -2511,7 +2511,7 @@
     background: var(--sid-surface-3) !important;
   }
 
-  .suhtlus :where(.cal-day.cal-day-is-today, .cal-day-is-today) {
+  .suhtlus :where(.cal-day-is-today) {
     color: var(--sid-text) !important;
     background: var(--sid-accent-soft) !important;
     border-color: var(--sid-accent-border) !important;
@@ -2778,10 +2778,6 @@
 
     html:not([class*="suhtlus-"]) body {
       font-size: 14px;
-    }
-
-    #bg > :is(#bg-img, #bg-img-full) {
-      display: none !important;
     }
 
     #login-page-container #main {
