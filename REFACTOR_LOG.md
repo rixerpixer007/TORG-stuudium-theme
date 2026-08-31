@@ -223,4 +223,34 @@ PASS for T2-02a. The shared state rule is now the single expanded-background own
 - The inbox currently exposes no `.post-in-list.highlighted` example, so that state remains unobserved; its selector was not changed.
 - Mobile remains blocked by the ineffective browser viewport override. There is no mobile-specific post background owner in the stylesheet.
 - Opening the initially unread post for the required expanded-state test caused Stuudium to mark it read. No message content, reaction, favorite, mute, participant, or reply state was changed.
-- The later comment-heading reset and other T2-02 branches remain pending; this batch does not classify them.
+- The comment-heading branch is classified separately in T2-02b below; the other T2-02 branches remain pending.
+
+## Investigation T2-02b
+
+**Name**
+
+Determine expanded comment-heading ownership.
+
+**Changes**
+
+No CSS change. The grouped comment-heading/generic-notice rule remains intact.
+
+**Root cause**
+
+The expanded-post rule initially gives both the comment heading span and generic notice a small surfaced-panel treatment. A later Suhtlus heading rule resets most of the span treatment to a divider label, but does not reset its radius.
+
+**Verification**
+
+- Opened post 25742635 with one real comment heading and one generic notice.
+- Traced matching injected CSS rules and computed values for each element separately.
+- The heading span's later owner resets color to `--sid-text-3`, background to transparent, border to zero, and shadow to none; `border-radius: 7px` still comes from the earlier grouped rule.
+- The heading is a non-focusable `<span>` (`tabIndex = -1`) displaying “Vastuseid veel pole”.
+- The generic notice has no later replacement and still receives its text color, surfaced background, border, radius, and shadow from the grouped rule.
+
+**Result**
+
+PASS — classification `KEEP`. The selector arm is mostly overridden but is not wholly dead, and its sibling is required.
+
+**Notes**
+
+The surviving radius is visually inert while the heading remains transparent and borderless. Removing it would still change computed behavior, while relocating it would add a special-purpose rule with no maintenance benefit. This is exactly the kind of low-value theoretical cleanup the refactor should stop short of.

@@ -169,7 +169,7 @@ T1-01 complete; live grading-guide checkbox and dashboard TODO checkbox availabl
 - **Risk:** C.
 - **Verification:** collapsed, hover, highlighted, expanded, comments, event time, reactions, participant chips, user card, and merged rows.
 - **Dependency:** edited stylesheet must be active; representative posts must be available.
-- **Progress:** T2-02a complete. Live CSSOM tracing proved the shared hover/expanded/highlighted rule already owns `--sid-surface-interactive` for a non-hovered expanded post, so the duplicate background declaration was removed from the stronger expanded shell. Comment-heading ownership and the remaining states are still pending and must not be inferred from this one-declaration cleanup.
+- **Progress:** T2-02a complete. Live CSSOM tracing proved the shared hover/expanded/highlighted rule already owns `--sid-surface-interactive` for a non-hovered expanded post, so the duplicate background declaration was removed from the stronger expanded shell. The comment-heading arm was separately traced and classified `KEEP`: the later reset replaces color/background/border/shadow, but the earlier 7px radius still survives, while the grouped generic-notice branch remains fully active. Reactions, highlighted posts, user cards, and merged rows are still pending.
 
 ### T2-03 — Spinner registry and reduced motion
 
