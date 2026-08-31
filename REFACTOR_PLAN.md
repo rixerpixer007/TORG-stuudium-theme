@@ -114,7 +114,7 @@ Both login markup generations must be observable with the edited stylesheet acti
 
 **Objective**
 
-Share only the truly identical checked and keyboard-focus states between dashboard TODOs and the grading guide.
+Share only the truly identical accent, base paint, checked, and keyboard-focus states between dashboard TODOs and the grading guide.
 
 **Relevant pre-refactor selectors/ranges**
 
@@ -129,11 +129,11 @@ The same Stuudium checkbox state was independently themed in two feature section
 
 **Proposed change**
 
-Group the original full checked selectors and the original full focus selectors after both base shells. Keep geometry, transition, and pressed behavior feature-local.
+Group the original full accent, base-paint, checked, and focus selectors after the feature-local geometry. Keep dimensions, transition, and pressed behavior feature-local.
 
 **Expected benefit**
 
-One state implementation with page-specific geometry retained.
+One paint/state implementation with page-specific geometry retained.
 
 **Risk**
 
@@ -146,6 +146,8 @@ TODO and grading-guide checkboxes: default, hover, keyboard focus, checked, unch
 **Dependencies**
 
 T1-01 complete; live grading-guide checkbox and dashboard TODO checkbox available.
+
+**Disposition:** **COMPLETE.** T1-03 consolidated checked and focus states; follow-up T1-03b consolidated the remaining identical accent and six-declaration base shell. TODO keeps its 16px sizing, transform, transition, and pressed rule; the grading guide keeps its site-owned 14px geometry and transition. Live checked, unchecked, and hover paint is unchanged. Keyboard focus and pointer-down remain untriggerable without interacting with hidden native inputs, so those untouched rules retain the earlier static/live cascade evidence rather than a new behavioral claim.
 
 ## Tier 2 — Root-cause patch fixes
 

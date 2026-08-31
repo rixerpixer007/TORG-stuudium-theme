@@ -327,3 +327,42 @@ PASS. The shared overlay palette and arrow colors now each have one owner, while
 
 - Mobile remains blocked by the ineffective external-browser viewport override.
 - Viewport-edge arrow variants and unexposed legacy overlay types were not claimed as observed and were not changed.
+
+## Batch T1-03b
+
+**Name**
+
+Complete the shared custom-checkbox base primitive.
+
+**Changes**
+
+- Grouped the identical native `accent-color` owners for dashboard TODO and grading-guide checkboxes.
+- Moved the six identical visual-shell declarations into one grouped owner using both original full selectors.
+- Kept TODO-only width, height, transform, transform origin, transition, and pressed-state rule in the TODO section.
+- Kept the already-shared checked and focus-visible state owners unchanged.
+
+**Root cause**
+
+T1-03 initially consolidated only checked and focus states because the two components have different geometry. Live property-by-property inspection showed that the geometry differs but the accent and entire base paint shell do not.
+
+**Verification**
+
+- Dashboard exposes two TODO controls: one checked and one unchecked. Both retained their exact 16px geometry, background/check image, border, 4px radius, shadow, transform, and TODO-specific transition.
+- Geography plan 489 exposes 20 guide controls: one checked and 19 unchecked. Representative controls retained their exact 14px site-owned geometry and transition plus the shared paint values.
+- Hovered an unchecked control in each component. Both retained the same control background, strong border, inset hairline, and component-specific transform.
+- Traced the live CSSOM after the edit: TODO now matches one geometry owner plus one shared shell owner; the guide matches only the shared shell owner.
+- Confirmed the edited live stylesheet on both pages: 95,408 characters, fingerprint `e9976f76`, and 437 style rules.
+- Visually compared both pages with the immediately captured baselines.
+- `git diff --check`: no whitespace errors; only the existing LF/CRLF working-copy notice.
+- CSS structure: 444 opening/444 closing braces and 977 opening/977 closing parentheses.
+- Diff scope: 7 lines, 1 style rule, and 7 duplicate important declarations removed.
+
+**Result**
+
+PASS. Both checkbox implementations now share one complete paint/state primitive while retaining their genuine geometry and motion differences.
+
+**Notes**
+
+- The hidden native inputs are skipped by keyboard traversal on the live site, so focus-visible could not be newly exercised. Its selectors and declarations were not changed in this follow-up.
+- No checkbox was toggled and no Stuudium task or grading-guide data was changed.
+- Mobile remains blocked by the ineffective external-browser viewport override.
