@@ -201,6 +201,8 @@ T1-01 complete; live grading-guide checkbox and dashboard TODO checkbox availabl
 
 Alias current values first (card, overlay, hover/interactive) and migrate one component at a time. This is a naming clarification, not a palette change.
 
+**Progress:** T3-01a complete for overlays. `--sid-bg-overlay` aliases the existing `--sid-surface-2` value and now owns verified absence, grade, lesson-teacher, Suhtlus user/reaction, teacher-balloon, arrow-fill, and intentional legacy overlay backgrounds. No unused card/hover aliases were added. Additional aliases require a separately verified component migration.
+
 ### T3-02 — Small justified tokens
 
 Consider only demonstrated conventions: compact `4px` radius, checkbox inset hairline, and `140ms` fast transition. Do not introduce a spacing or typography scale without component normalization.
@@ -237,7 +239,7 @@ Move late table/overlay/badge exceptions only after recording each live winner. 
 | Tera, 1850–2110 | REMOVE / KEEP | T1-01 base branches; retain coherent feature rules |
 | Suhtlus, 2112–2536 | REMOVE / REPLACE WITH ROOT FIX / KEEP | T1-01 and inspectable T2-02 complete; T2-04a/T3-03a complete; highlighted post unavailable |
 | Registrations, 2538–2639 | CONSOLIDATE / KEEP | T3-03a accent-pill shell complete; inactive and collection-specific variants remain local |
-| Tables/overlays/final exceptions, 2641–2772 | KEEP / REPLACE WITH ROOT FIX | Preserve order until live winners are known |
+| Tables/overlays/final exceptions, 2641–2772 | KEEP / CONSOLIDATE | T2-04a and T3-01a complete; intentional legacy fallback remains late and documented |
 | Mobile, 2774–2860 | REMOVE / KEEP | Remove only duplicate login block in T1-01 |
 | Reduced motion, 2862–2870 | REQUIRES DESIGN APPROVAL | Browser emulation unavailable; CSS/SMIL loader motion is not safely changed during visual refactor |
 

@@ -445,3 +445,41 @@ PASS — classification only. The live mechanisms are separate and should remain
 
 - No notebook, message, upload, reaction, registration, or attendance data was changed.
 - A future accessibility change should explicitly decide whether reduced-motion users see a static loader, a finite animation, or no animation. That is behavior design, not invisible refactoring.
+
+## Batch T3-01a
+
+**Name**
+
+Introduce semantic overlay background ownership.
+
+**Changes**
+
+- Added `--sid-bg-overlay` as an alias of the existing `--sid-surface-2` value.
+- Migrated only verified overlay backgrounds and inner arrow fill: absence popover, teacher balloon, shared grade/Suhtlus shell, shared overlay arrows, and the intentional legacy overlay fallback.
+- Added no unused card, hover, spacing, or typography aliases.
+
+**Root cause**
+
+The overlay component family was structurally consolidated in T2-04a, but its background still referred to a numbered surface token that did not communicate ownership. The alias makes future overlay changes discoverable without changing the palette.
+
+**Verification**
+
+- Confirmed the live alias and source token both resolve to `#1b211e`.
+- Confirmed the edited live stylesheet: 95,224 characters and fingerprint `246fd52a`.
+- Grade popover: opened/closed; preserved background, strong border, 7px radius, shadow, and inner arrow fill.
+- Teacher balloon: hovered; preserved brighter text, background, strong border, 7px radius, shadow, and its separate SVG arrow.
+- Lesson-teacher popover: opened; preserved legacy shell geometry plus themed outer/inner arrow colors.
+- Suhtlus author card and reaction picker: opened/closed; preserved backgrounds, borders, radii, and shadows.
+- Absence popover: opened/closed without changing attendance data; preserved background, 11px radius, border, shadow, and arrows.
+- `git diff --check`: no whitespace errors; only the existing LF/CRLF working-copy notice.
+- CSS structure: 445 opening/445 closing braces and 970 opening/970 closing parentheses.
+- Diff scope: one meaningful token plus five component references; important and style-rule counts unchanged.
+
+**Result**
+
+PASS. Overlay background ownership is now semantically named with no visual or behavioral change.
+
+**Notes**
+
+- The teacher balloon arrow is an embedded SVG with a literal `#1b211e` fill. CSS custom properties cannot be consumed inside that data URI, so it remains intentionally hard-coded and was checked as a negative control.
+- Mobile remains blocked by the ineffective external-browser viewport override.

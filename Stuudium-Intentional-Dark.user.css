@@ -34,6 +34,7 @@
     --sid-surface-2: #1b211e;
     --sid-surface-3: #202824;
     --sid-surface-interactive: #191f1b;
+    --sid-bg-overlay: var(--sid-surface-2);
     --sid-control: #111613;
     --sid-border: #2a332e;
     --sid-border-strong: #3a4740;
@@ -1295,7 +1296,7 @@
   /* Absence-entry popover */
   .popover.absences_popover {
     color: var(--sid-text-2) !important;
-    background: var(--sid-surface-2) !important;
+    background: var(--sid-bg-overlay) !important;
     border-color: var(--sid-border-strong) !important;
     border-radius: var(--sid-radius) !important;
     box-shadow: var(--sid-shadow) !important;
@@ -1449,7 +1450,7 @@
 
   .page_dashboard_subjects .dashboard-subjects-journal-teacher [data-balloon]::after {
     color: var(--sid-text) !important;
-    background: var(--sid-surface-2) !important;
+    background: var(--sid-bg-overlay) !important;
     border: 1px solid var(--sid-border-strong) !important;
     border-radius: var(--sid-radius-sm) !important;
     box-shadow: var(--sid-shadow) !important;
@@ -2628,7 +2629,7 @@
   .suhtlus .user-card,
   .suhtlus .post-responses-add-available {
     color: var(--sid-text-2) !important;
-    background: var(--sid-surface-2) !important;
+    background: var(--sid-bg-overlay) !important;
     border: 1px solid var(--sid-border-strong) !important;
     border-radius: var(--sid-radius-sm) !important;
     box-shadow: var(--sid-shadow) !important;
@@ -2643,13 +2644,13 @@
   .popover.absences_popover.has_arrow_top::after,
   .page_dashboard_subjects .stuudium-popover::after,
   .page_subjects_student .si-teachers-cards .popover.has_arrow_top::after {
-    border-bottom-color: var(--sid-surface-2) !important;
+    border-bottom-color: var(--sid-bg-overlay) !important;
   }
 
   /* Final legacy exceptions */
   :where(.tipsy-inner, .tooltip, .popover, .select2-results, .select2-search, .ui-datepicker, .ui-widget-content) {
     color: var(--sid-text-2) !important;
-    background: var(--sid-surface-2) !important;
+    background: var(--sid-bg-overlay) !important;
     border-color: var(--sid-border) !important;
   }
 
