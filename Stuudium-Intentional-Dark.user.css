@@ -1071,6 +1071,33 @@
     color: var(--sid-accent) !important;
   }
 
+  .daily-summaries .ng-param-wrapper .grade-param {
+    color: var(--sid-warning) !important;
+    background: var(--sid-warning-soft) !important;
+    border-color: var(--sid-warning-border) !important;
+  }
+
+  .daily-summaries .ng-param-wrapper .grade-param:is(
+    .grade-param-is_notify,
+    .grade-param-is_absent,
+    .grade-param-is_not_completed,
+    .grade-param-interest-absent
+  ) {
+    color: var(--sid-danger) !important;
+    background: var(--sid-danger-soft) !important;
+    border-color: var(--sid-danger-border) !important;
+  }
+
+  .daily-summaries .ng-param-wrapper .grade-param:is(
+    .grade-param-is_excused,
+    .grade-param-is_absent-excused,
+    .grade-param-interest-present
+  ) {
+    color: var(--sid-accent) !important;
+    background: var(--sid-accent-soft) !important;
+    border-color: var(--sid-accent-border) !important;
+  }
+
   .stream-entry.ng-grade-is-summary-wrapper {
     position: relative !important;
     padding-right: 40px !important;
@@ -1122,6 +1149,22 @@
     color: var(--sid-text-3) !important;
     background: var(--sid-surface) !important;
     border-color: var(--sid-border) !important;
+  }
+
+  .daily-summaries .daily-summaries-segment-block-lessons-collapsed-title h3 > a {
+    color: var(--sid-text-2) !important;
+  }
+
+  .daily-summaries .daily-summaries-segment-block-lessons-collapsed-title h3 > a > span {
+    color: var(--sid-accent) !important;
+  }
+
+  .daily-summaries .daily-summaries-segment-block-lessons-collapsed-title h3 > a:is(:hover, :focus-visible) {
+    color: var(--sid-text) !important;
+  }
+
+  .daily-summaries .daily-summaries-segment-block-lessons-collapsed-title h3 > a:is(:hover, :focus-visible) > span {
+    color: var(--sid-accent-strong) !important;
   }
 
   :where(.user-notebook, .user-notebook-sheets, .user-notebook-content, .user-notebook-content-text, .user-notebook-content-text-preview) {
@@ -1419,6 +1462,7 @@
   }
 
   .page_dashboard_subjects :where(.dashboard-subjects-journal-content, .dashboard-subjects-journal-teachers, .dashboard-subjects-journal-content-period),
+  .page_users_language_select .page_head,
   .page_users_profile :where(.page_head, .new_column, .divider, .standard, .user_card, .sso) {
     color: var(--sid-text-2) !important;
     background: transparent !important;
