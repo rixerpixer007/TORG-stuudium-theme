@@ -1560,6 +1560,62 @@
     border-color: var(--sid-border) !important;
   }
 
+  /* Class page */
+  .page_groups_view :where(.page_head, .divider) {
+    border-color: var(--sid-border) !important;
+  }
+
+  .page_groups_view .page_title .light {
+    color: var(--sid-text-3) !important;
+  }
+
+  .page_groups_view :where(
+    .new_column,
+    .group_teachers_cards,
+    .group_teacher,
+    .user_message_link_container,
+    .group_view_links,
+    .users-table
+  ) {
+    color: var(--sid-text-2) !important;
+    background: transparent !important;
+    border-color: var(--sid-border) !important;
+  }
+
+  .page_groups_view .group_teacher .avatar.outline {
+    border-color: var(--sid-border-strong) !important;
+  }
+
+  .page_groups_view .group_view_links a::before {
+    color: var(--sid-text-3) !important;
+  }
+
+  .page_groups_view .users-table :where(th, td) {
+    color: var(--sid-text-2) !important;
+    background: transparent !important;
+    border-color: var(--sid-border) !important;
+  }
+
+  .page_groups_view .users-table tbody tr.student > td:first-child {
+    color: var(--sid-text-3) !important;
+  }
+
+  .page_groups_view .users-table .u-name > i {
+    color: var(--sid-text-2) !important;
+  }
+
+  .page_groups_view .users-table tr.parent .u-name > em {
+    color: var(--sid-text-3) !important;
+  }
+
+  .page_groups_view :where(.group_teacher, .group_view_links, .users-table) a {
+    color: var(--sid-accent) !important;
+  }
+
+  .page_groups_view :where(.group_teacher, .group_view_links, .users-table) a:is(:hover, :focus-visible) {
+    color: var(--sid-accent-strong) !important;
+  }
+
   /* Grades: one structural primitive, followed by semantic state colours. */
   :where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_subjects_student)
     :where(.grade_active, .grade_inactive) {
@@ -2969,6 +3025,36 @@
 
     body.page_dashboard_recent .page_body > .medium_width_wrapper {
       padding-inline: 0 !important;
+    }
+
+    body.page_groups_view {
+      min-width: 0 !important;
+    }
+
+    body.page_groups_view :where(.page_head, .page_body) {
+      width: 100% !important;
+    }
+
+    body.page_groups_view :where(.page_head, .page_body) > .width_wrapper {
+      box-sizing: border-box !important;
+      width: 100% !important;
+      padding-inline: 14px !important;
+      margin-inline: 0 !important;
+    }
+
+    body.page_groups_view :where(
+      .new_column.width_full.view,
+      .group_teachers_cards,
+      .group_view_links,
+      .divider
+    ) {
+      box-sizing: border-box !important;
+      width: 100% !important;
+    }
+
+    body.page_groups_view .users-table {
+      max-width: 100% !important;
+      margin-inline: auto !important;
     }
 
     #login-page-container #main {
