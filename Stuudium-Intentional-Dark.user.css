@@ -2206,6 +2206,13 @@
     color: var(--sid-text) !important;
   }
 
+  .suhtlus .post-unread-badge {
+    color: var(--sid-accent-ink) !important;
+    background: var(--sid-accent) !important;
+    border-color: var(--sid-accent) !important;
+    box-shadow: none !important;
+  }
+
   .suhtlus :where(.post-author[data-suhtlus-user-card], .bl-p-user) {
     text-decoration: none !important;
     border-bottom: 0 !important;
@@ -2280,6 +2287,40 @@
   .post-in-list.post-expanded .comment-body {
     color: var(--sid-text-2) !important;
     background: transparent !important;
+  }
+
+  .suhtlus .post-body.block-collapsed .block-collapsed-expander {
+    background-image: linear-gradient(
+      to bottom,
+      rgb(25 31 27 / 0%),
+      var(--sid-surface-interactive) 72%
+    ) !important;
+  }
+
+  .suhtlus .post-body.block-collapsed .block-collapsed-expander > span {
+    color: var(--sid-accent) !important;
+    background: var(--sid-surface-2) !important;
+    border-color: var(--sid-border-strong) !important;
+    box-shadow: none !important;
+  }
+
+  .suhtlus .post-body.block-collapsed .block-collapsed-expander:hover > span,
+  .suhtlus .post-body.block-collapsed .block-collapsed-expander:focus-visible > span {
+    color: var(--sid-accent-strong) !important;
+    background: var(--sid-surface-3) !important;
+    border-color: var(--sid-accent-border) !important;
+  }
+
+  .suhtlus .attached-files .attached-file-inner {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface-2) !important;
+    border-color: var(--sid-border) !important;
+    box-shadow: none !important;
+  }
+
+  .suhtlus .attached-files .attached-file:hover .attached-file-inner {
+    background: var(--sid-surface-3) !important;
+    border-color: var(--sid-accent-border) !important;
   }
 
   :where(.post-in-list.post-expanded .post-comments-heading span, .post-in-list.post-expanded .generic-notice) {
