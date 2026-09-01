@@ -1655,7 +1655,7 @@
 
   .page_avaldused_index .new_message::before {
     position: absolute;
-    top: 9px;
+    top: 50%;
     left: 8px;
     display: grid;
     width: 14px;
@@ -1669,6 +1669,7 @@
     border: 1px solid currentColor;
     border-radius: 50%;
     place-items: center;
+    transform: translateY(-50%);
   }
 
   .page_avaldused_index .avaldus-application-index-filters .st-toggle-control {
