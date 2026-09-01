@@ -2427,6 +2427,10 @@
     border-color: var(--sid-accent-border) !important;
   }
 
+  .suhtlus .post-response-names-block + .post-response-names-block {
+    border-top-color: var(--sid-border) !important;
+  }
+
   .suhtlus .post-comments-heading {
     display: flex !important;
     align-items: center;
@@ -2670,6 +2674,7 @@
   /* Shared overlay shells and arrows */
   .page_dashboard_subjects .stuudium-popover,
   .suhtlus .user-card,
+  .suhtlus .post-response-names-popover,
   .suhtlus .post-responses-add-available {
     color: var(--sid-text-2) !important;
     background: var(--sid-bg-overlay) !important;
