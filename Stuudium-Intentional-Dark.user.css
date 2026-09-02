@@ -1913,12 +1913,14 @@
     color: var(--sid-text-3) !important;
   }
 
+  :where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_subjects_student) .grade_param_is_notify,
   :where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_subjects_student) .grade_param_is_absent:not(.grade_param_is_absent_excused) {
     color: var(--sid-danger) !important;
     background: var(--sid-danger-soft) !important;
     border-color: var(--sid-danger-border) !important;
   }
 
+  :where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_subjects_student) .grade_param_is_notify abbr,
   :where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_subjects_student) .grade_param_is_absent:not(.grade_param_is_absent_excused) abbr {
     color: var(--sid-danger) !important;
   }
@@ -2051,16 +2053,6 @@
 
   .page_subjects_student .lesson_grade_history .current > th:first-child {
     color: var(--sid-accent) !important;
-  }
-
-  .page_subjects_student .lesson_grade_history .grade_param_is_notify,
-  .page_subjects_student .lesson_grade_history .grade_param_is_notify abbr {
-    color: var(--sid-danger) !important;
-  }
-
-  .page_subjects_student .lesson_grade_history .grade_param_is_notify {
-    background: var(--sid-danger-soft) !important;
-    border-color: var(--sid-danger-border) !important;
   }
 
   .page_subjects_student .lesson_grade_history {
@@ -3291,6 +3283,101 @@
     .page_print_view_report_card :where(.page_body, .bl-is-main) {
       color: var(--sid-text-2) !important;
       background: var(--sid-canvas) !important;
+    }
+
+    .page_print_view_report_card iframe {
+      display: block;
+      overflow: hidden !important;
+      background: transparent !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+    }
+
+    html:has(body.client_torg > .report_card),
+    body.client_torg:has(> .report_card) {
+      overflow: hidden !important;
+      background: transparent !important;
+    }
+
+    body.client_torg > .report_card {
+      color: var(--sid-text-2) !important;
+      background: var(--sid-surface) !important;
+      border-color: var(--sid-surface) !important;
+      box-shadow: var(--sid-shadow) !important;
+    }
+
+    body.client_torg > .report_card :where(h1, h2, h3, h4, strong) {
+      color: var(--sid-text) !important;
+    }
+
+    .page_print_view_report_card .bl-print-view-report-card-share-goto {
+      color: var(--sid-text-3) !important;
+    }
+
+    .page_print_view_report_card .print-view-report-card-share .new_message.help {
+      position: relative;
+      padding: 10px 12px 10px 36px !important;
+      color: var(--sid-text-2) !important;
+      background: var(--sid-accent-soft) !important;
+      background-image: none !important;
+      border: 1px solid var(--sid-accent-border) !important;
+      border-radius: var(--sid-radius-sm) !important;
+      box-shadow: none !important;
+    }
+
+    .page_print_view_report_card .print-view-report-card-share .new_message.help::before {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      display: grid;
+      width: 14px;
+      height: 14px;
+      color: var(--sid-accent);
+      font-size: 10px;
+      font-weight: 700;
+      line-height: 1;
+      content: "?";
+      border: 1px solid currentColor;
+      border-radius: 50%;
+      place-items: center;
+    }
+
+    .page_print_view_report_card .print-view-report-card-share .bl-current-share {
+      box-sizing: border-box;
+      padding: 0 !important;
+      color: var(--sid-text-2) !important;
+      background: var(--sid-surface-2) !important;
+      border: 1px solid var(--sid-accent-border) !important;
+      border-radius: var(--sid-radius-sm) !important;
+      box-shadow: none !important;
+      overflow: hidden;
+    }
+
+    .page_print_view_report_card .print-view-report-card-share .bl-current-share > p {
+      margin: 0 !important;
+      padding: 8px 10px !important;
+      color: var(--sid-text) !important;
+      background: var(--sid-accent-soft) !important;
+      border-bottom: 1px solid var(--sid-accent-border) !important;
+      font-weight: 600;
+    }
+
+    .page_print_view_report_card .print-view-report-card-share .bl-current-share .new_button {
+      margin: 10px 0 0 10px !important;
+    }
+
+    .page_print_view_report_card .print-view-report-card-share .bl-share-link {
+      display: inline-block;
+      margin: 10px 10px 0 4px !important;
+      color: var(--sid-accent) !important;
+      overflow-wrap: anywhere !important;
+      word-break: break-word;
+    }
+
+    .page_print_view_report_card .print-view-report-card-share .bl-meta {
+      margin: 10px !important;
+      color: var(--sid-text-3) !important;
     }
   }
 
