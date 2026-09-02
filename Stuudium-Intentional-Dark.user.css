@@ -3273,6 +3273,20 @@
     border-bottom-color: var(--sid-border) !important;
   }
 
+  .page_registration_collection .message {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface-2) !important;
+    border: 1px solid var(--sid-border) !important;
+    border-radius: var(--sid-radius-sm) !important;
+    box-shadow: none !important;
+  }
+
+  .page_registration_collection .message.ok {
+    color: var(--sid-accent-strong) !important;
+    background: var(--sid-accent-soft) !important;
+    border-color: var(--sid-accent-border) !important;
+  }
+
   .page_registration_collection .page_title a {
     color: var(--sid-text) !important;
     text-decoration: none !important;
