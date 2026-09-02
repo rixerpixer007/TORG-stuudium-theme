@@ -1508,17 +1508,24 @@
     border-bottom-color: var(--sid-surface-2) !important;
   }
 
-  .page_dashboard_subjects .dashboard-subjects-journal :where(.grade_A, .grade_B, .grade_C, .grade_AR) {
+  :is(
+    .page_dashboard_subjects .dashboard-subjects-journal,
+    .page_grades_student .student_lessons_grades
+  ) :where(.grade_A, .grade_B, .grade_C, .grade_AR) {
     color: var(--sid-text-2) !important;
   }
 
-  .page_dashboard_subjects .dashboard-subjects-journal :where(.grade_param_has_comment, .icon-comment, .icon-comment-empty) {
+  :is(
+    .page_dashboard_subjects .dashboard-subjects-journal,
+    .page_grades_student .student_lessons_grades
+  ) :where(.grade_param_has_comment, .icon-comment, .icon-comment-empty) {
     color: var(--sid-accent) !important;
   }
 
   :is(
     .page_subjects_student .student_subject_grades,
-    .page_dashboard_subjects .dashboard-subjects-journal
+    .page_dashboard_subjects .dashboard-subjects-journal,
+    .page_grades_student .student_lessons_grades
   ) .grade_param_has_comment :is(.icon-comment, .icon-comment-empty)::before {
     display: inline-block !important;
     width: 1em !important;
@@ -1543,14 +1550,16 @@
 
   :is(
     .page_subjects_student .student_subject_grades,
-    .page_dashboard_subjects .dashboard-subjects-journal
+    .page_dashboard_subjects .dashboard-subjects-journal,
+    .page_grades_student .student_lessons_grades
   ) .grade_param_has_comment .icon-comment::before {
     content: "\e802" !important;
   }
 
   :is(
     .page_subjects_student .student_subject_grades,
-    .page_dashboard_subjects .dashboard-subjects-journal
+    .page_dashboard_subjects .dashboard-subjects-journal,
+    .page_grades_student .student_lessons_grades
   ) .grade_param_has_comment .icon-comment-empty::before {
     content: "\e804" !important;
   }
@@ -1862,8 +1871,42 @@
     border-color: var(--sid-warning-border) !important;
   }
 
+  .page_grades_student #period_nav {
+    border-bottom: 1px solid var(--sid-border) !important;
+  }
+
+  .page_grades_student #period_nav :where(.period_prev, .period_next) {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+    background-image: none !important;
+  }
+
+  .page_grades_student #period_nav .period_prev::before {
+    content: "«";
+    margin-right: 5px;
+  }
+
+  .page_grades_student #period_nav .period_next::after {
+    content: "»";
+    margin-left: 5px;
+  }
+
+  .page_grades_student .student_grade_help {
+    margin-bottom: 10px !important;
+  }
+
   .page_grades_student .help_toggle {
+    padding-right: 5px !important;
+    padding-left: 5px !important;
     color: var(--sid-accent) !important;
+  }
+
+  .page_grades_student .student_grade_help .info {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface-2) !important;
+    border-color: var(--sid-border) !important;
+    border-radius: var(--sid-radius-sm) !important;
+    box-shadow: none !important;
   }
 
   .page_grades_student .summary > span {
