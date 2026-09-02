@@ -3107,6 +3107,19 @@
     border-color: var(--sid-border) !important;
   }
 
+  .page_registration_collection .register_form {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface-2) !important;
+    border-color: var(--sid-border) !important;
+    box-shadow: none !important;
+  }
+
+  .page_registration_collection .register_form input.text:is(:focus, :focus-visible) {
+    border-color: var(--sid-accent) !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+  }
+
   .page_registration_collection .registration-collection-info-container > h2:first-child {
     color: var(--sid-accent) !important;
   }
