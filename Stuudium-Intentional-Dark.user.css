@@ -2720,6 +2720,45 @@
     box-shadow: inset 0 -3px 0 var(--sid-accent) !important;
   }
 
+  /* Settings pages */
+  .suhtlus .notification-settings select {
+    background-image:
+      linear-gradient(45deg, transparent 50%, var(--sid-accent) 50%),
+      linear-gradient(135deg, var(--sid-accent) 50%, transparent 50%) !important;
+    background-repeat: no-repeat !important;
+    background-position:
+      right 11px center,
+      right 7px center !important;
+    background-size: 4px 4px !important;
+  }
+
+  .suhtlus .notification-settings .full-size-field + .full-size-field {
+    border-top-color: var(--sid-border) !important;
+  }
+
+  .suhtlus .email-in-settings .email-in-address a {
+    border-color: var(--sid-accent-border) !important;
+  }
+
+  .suhtlus .email-in-settings .email-in-address a:is(:hover, :focus-visible) {
+    border-color: var(--sid-accent) !important;
+  }
+
+  @keyframes sid-accent-flash {
+    0% {
+      background-color: rgb(101 214 177 / 28%);
+    }
+
+    50%,
+    100% {
+      background-color: transparent;
+    }
+  }
+
+  .suhtlus .email-in-settings .email-in-address a.colorflash {
+    animation-name: sid-accent-flash !important;
+  }
+
   /* Groups menu */
   .suhtlus .my-channels :where(.my-channel, .channels-manage-link, .no-channels-placeholder) {
     color: var(--sid-text-2) !important;
