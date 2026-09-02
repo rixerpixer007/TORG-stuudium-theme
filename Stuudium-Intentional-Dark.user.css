@@ -1137,23 +1137,23 @@
     border-color: var(--sid-accent-border) !important;
   }
 
-  .daily-summaries :where(.grade-current, .grade-current-verbose, .ng-notes, .st-ucontent, .daily-summaries-segment-lesson-notes, .daily-summaries-segment-lesson-homework, .daily-summaries-segment-lesson-homework-contents) {
+  :where(.daily-summaries, .page_dashboard_subjects) :where(.grade-current, .grade-current-verbose, .ng-notes, .st-ucontent, .daily-summaries-segment-lesson-notes, .daily-summaries-segment-lesson-homework, .daily-summaries-segment-lesson-homework-contents) {
     color: var(--sid-text-2) !important;
     background: transparent !important;
     border-color: var(--sid-border) !important;
   }
 
-  .daily-summaries :where(.grade-label, .daily-summaries-segment-lesson-subject) {
+  :where(.daily-summaries, .page_dashboard_subjects) :where(.grade-label, .daily-summaries-segment-lesson-subject) {
     color: var(--sid-accent) !important;
   }
 
-  .daily-summaries .ng-param-wrapper .grade-param {
+  :where(.daily-summaries, .page_dashboard_subjects) .ng-param-wrapper .grade-param {
     color: var(--sid-warning) !important;
     background: var(--sid-warning-soft) !important;
     border-color: var(--sid-warning-border) !important;
   }
 
-  .daily-summaries .ng-param-wrapper .grade-param:is(
+  :where(.daily-summaries, .page_dashboard_subjects) .ng-param-wrapper .grade-param:is(
     .grade-param-is_notify,
     .grade-param-is_absent,
     .grade-param-is_not_completed,
@@ -1164,7 +1164,7 @@
     border-color: var(--sid-danger-border) !important;
   }
 
-  .daily-summaries .ng-param-wrapper .grade-param:is(
+  :where(.daily-summaries, .page_dashboard_subjects) .ng-param-wrapper .grade-param:is(
     .grade-param-is_excused,
     .grade-param-is_absent-excused,
     .grade-param-interest-present
@@ -1545,6 +1545,29 @@
     border-color: var(--sid-border) !important;
   }
 
+  .page_dashboard_subjects
+    .dashboard-subjects-view-mode-expanded
+    .dashboard-subjects-journal
+    > h2,
+  .page_dashboard_subjects
+    .dashboard-subjects-view-mode-expanded
+    .dashboard-subjects-journal
+    h3.d-s-period {
+    color: var(--sid-text) !important;
+    background: var(--sid-surface) !important;
+  }
+
+  .page_dashboard_subjects
+    .dashboard-subjects-view-mode-expanded
+    .dashboard-subjects-journal:hover
+    > h2,
+  .page_dashboard_subjects
+    .dashboard-subjects-view-mode-expanded
+    .dashboard-subjects-journal:hover
+    h3.d-s-period {
+    background: var(--sid-surface-3) !important;
+  }
+
   .page_dashboard_subjects .dashboard-subjects-journal h2 > a {
     color: var(--sid-text) !important;
     text-decoration-color: rgb(242 240 233 / 28%) !important;
@@ -1553,6 +1576,67 @@
   .page_dashboard_subjects .dashboard-subjects-journal h2 > a:hover {
     color: var(--sid-text) !important;
     text-decoration-color: currentColor !important;
+  }
+
+  .page_dashboard_subjects .dashboard-subjects-journal h3.d-s-period > a {
+    color: var(--sid-text) !important;
+    text-decoration-color: rgb(242 240 233 / 28%) !important;
+  }
+
+  .page_dashboard_subjects .dashboard-subjects-journal h3.d-s-period > a > span {
+    color: var(--sid-text-2) !important;
+  }
+
+  .page_dashboard_subjects .dashboard-subjects-journal h3.d-s-period > a:is(:hover, :focus-visible) {
+    color: var(--sid-text) !important;
+    text-decoration-color: currentColor !important;
+  }
+
+  .page_dashboard_subjects .dashboard-subjects-journal .d-s-type {
+    color: var(--sid-text-2) !important;
+  }
+
+  .page_dashboard_subjects .dashboard-subjects-journal .d-s-type-expandable {
+    text-decoration-color: var(--sid-accent-border) !important;
+  }
+
+  .page_dashboard_subjects .dashboard-subjects-journal .d-s-type-expandable:hover {
+    color: var(--sid-accent-strong) !important;
+    text-decoration-color: currentColor !important;
+  }
+
+  .page_dashboard_subjects .dashboard-subjects-journal :where(.ng-grade, .ng-notes, .d-s-lesson, .d-s-lesson b) {
+    color: var(--sid-text-2) !important;
+    background: transparent !important;
+  }
+
+  .page_dashboard_subjects .dashboard-subjects-journal .grade-current-verbose-standalone {
+    color: var(--sid-text-2) !important;
+  }
+
+  .page_dashboard_subjects .dashboard-subjects-journal .ng-param-wrapper .grade-param-extra {
+    color: var(--sid-text-3) !important;
+  }
+
+  .page_dashboard_subjects .dashboard-subjects-journal .d-s-entry-summary {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface-2) !important;
+    border-color: var(--sid-border) !important;
+  }
+
+  .page_dashboard_subjects .dashboard-subjects-journal .d-s-entry-summary .ng-grade-is-summary-wrapper {
+    padding: 0 !important;
+    color: var(--sid-text-2) !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  .page_dashboard_subjects .dashboard-subjects-journal .d-s-is-final {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface-2) !important;
+    border: 1px solid var(--sid-border) !important;
+    border-radius: var(--sid-radius-sm) !important;
   }
 
   .page_dashboard_subjects .subjectplan-student-view-journal-planlist > a {
@@ -1584,11 +1668,26 @@
     border-bottom-color: var(--sid-surface-2) !important;
   }
 
+  /* Grade value paints shared by the compact and expanded subject renderers. */
   :is(
     .page_dashboard_subjects .dashboard-subjects-journal,
     .page_grades_student .student_lessons_grades
-  ) :where(.grade_A, .grade_B, .grade_C, .grade_AR) {
+  ) :where(.grade_A, .grade_B, .grade_C, .grade_AR),
+  .page_dashboard_subjects
+    .dashboard-subjects-journal
+    .grade-current:not(:has(.grade-current-verbose-standalone)) {
     color: var(--sid-text-2) !important;
+  }
+
+  :is(
+    .page_dashboard_subjects .dashboard-subjects-journal,
+    .page_grades_student .student_lessons_grades
+  ) :where(.grade_3, .grade_4, .grade_5),
+  .page_dashboard_subjects
+    .dashboard-subjects-journal
+    .d-s-is-final
+    .grade-current:not(:has(.grade-current-verbose-standalone)) {
+    color: var(--sid-text) !important;
   }
 
   :is(
