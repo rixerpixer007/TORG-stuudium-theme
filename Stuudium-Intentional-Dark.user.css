@@ -2720,6 +2720,59 @@
     box-shadow: inset 0 -3px 0 var(--sid-accent) !important;
   }
 
+  /* Groups menu */
+  .suhtlus .my-channels :where(.my-channel, .channels-manage-link, .no-channels-placeholder) {
+    color: var(--sid-text-2) !important;
+    background: transparent !important;
+    border-color: var(--sid-border) !important;
+  }
+
+  .suhtlus .my-channels .my-channel > span:first-child,
+  .suhtlus .my-channels .channels-manage-link {
+    color: var(--sid-accent-strong) !important;
+  }
+
+  .suhtlus .my-channels .my-channel > p,
+  .suhtlus .my-channels .no-channels-placeholder {
+    color: var(--sid-text-3) !important;
+  }
+
+  .suhtlus .my-channels a + a {
+    border-top-color: var(--sid-border) !important;
+  }
+
+  .suhtlus .my-channels .channels-manage-link + .my-channel {
+    border-top-color: var(--sid-border-strong) !important;
+  }
+
+  .suhtlus .my-channels a:not(.my-channels-close):is(:hover, :focus-visible) {
+    color: var(--sid-text) !important;
+    background: var(--sid-accent-soft) !important;
+  }
+
+  .suhtlus .my-channels a:not(.my-channels-close):is(:hover, :focus-visible) > p {
+    color: var(--sid-text-2) !important;
+  }
+
+  .suhtlus .my-channels .my-channel.newsletters-channel img {
+    border-color: var(--sid-border-strong) !important;
+  }
+
+  .suhtlus .my-channels .my-channel.newsletters-channel img + span {
+    color: var(--sid-accent-strong) !important;
+  }
+
+  .suhtlus .my-channels .my-channels-close > span {
+    background-color: var(--sid-control) !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='m4 4 8 8m0-8-8 8' fill='none' stroke='%23c1c0b8' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E") !important;
+    border-color: var(--sid-border-strong) !important;
+  }
+
+  .suhtlus .my-channels .my-channels-close:is(:hover, :focus-visible) > span {
+    background-color: var(--sid-accent-soft) !important;
+    border-color: var(--sid-accent-border) !important;
+  }
+
   .suhtlus-content.main-block-style {
     background: var(--sid-surface) !important;
   }
@@ -2800,6 +2853,10 @@
   .suhtlus :where(.post-author[data-suhtlus-user-card], .bl-p-user) {
     text-decoration: none !important;
     border-bottom: 0 !important;
+  }
+
+  .suhtlus .channel-meta .channel-description {
+    color: var(--sid-text-3) !important;
   }
 
   .suhtlus :where(.post-participants .bl-p-user, .channel-meta .channel-members .channel-member) {
@@ -3372,6 +3429,7 @@
 
   /* Shared overlay shells and arrows */
   .page_dashboard_subjects .stuudium-popover,
+  .suhtlus .my-channels,
   .suhtlus .user-card,
   .suhtlus .post-response-names-popover,
   .suhtlus .post-responses-add-available {
