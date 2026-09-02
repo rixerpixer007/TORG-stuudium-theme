@@ -117,6 +117,28 @@
     text-decoration-color: currentColor !important;
   }
 
+  /* Minimal mode: hide navigation into Stuudium's Abi section. */
+  :where(a):is(
+    [href="/abi"],
+    [href^="/abi/"],
+    [href^="/abi?"],
+    [href^="/abi#"],
+    [href="https://torg.ope.ee/abi"],
+    [href^="https://torg.ope.ee/abi/"],
+    [href^="https://torg.ope.ee/abi?"],
+    [href^="https://torg.ope.ee/abi#"],
+    [href="http://torg.ope.ee/abi"],
+    [href^="http://torg.ope.ee/abi/"],
+    [href^="http://torg.ope.ee/abi?"],
+    [href^="http://torg.ope.ee/abi#"],
+    [href="//torg.ope.ee/abi"],
+    [href^="//torg.ope.ee/abi/"],
+    [href^="//torg.ope.ee/abi?"],
+    [href^="//torg.ope.ee/abi#"]
+  ) {
+    display: none !important;
+  }
+
   :where(hr, .divider) {
     border-color: var(--sid-border) !important;
   }
@@ -565,6 +587,15 @@
     background: var(--sid-accent-soft) !important;
     border: 1px solid var(--sid-accent-border) !important;
     border-radius: var(--sid-radius-sm) !important;
+  }
+
+  #main .passkey-help a:is(
+    [href="/abi"],
+    [href^="/abi/"],
+    [href="https://torg.ope.ee/abi"],
+    [href^="https://torg.ope.ee/abi/"]
+  ) {
+    display: none !important;
   }
 
   #main :where(.status-message.error, .status-message.error-new) {
