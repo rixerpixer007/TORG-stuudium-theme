@@ -2810,6 +2810,14 @@
     transform: translateY(-50%);
   }
 
+  .suhtlus :is(
+    [data-suhtlus-post-list-id="a/unread"],
+    [data-suhtlus-post-list-id="a/favorites"],
+    [data-suhtlus-post-list-id="a/all"]
+  ) > .post-list-meta {
+    display: none !important;
+  }
+
   .suhtlus :where(.current-events, .current-events-date, .post-list-search-and-actions, .post-list-meta, .post-in-list, .post-main-wrapper, .post-head-wrapper, .post-in-list-content, .post-body-preview, .post-body, .post-comments-summary, .comment, .formatted-text) {
     color: var(--sid-text-2) !important;
     background: transparent !important;
@@ -2857,6 +2865,10 @@
 
   .suhtlus .channel-meta .channel-description {
     color: var(--sid-text-3) !important;
+  }
+
+  .suhtlus .channel-meta > * > a {
+    display: none !important;
   }
 
   .suhtlus :where(.post-participants .bl-p-user, .channel-meta .channel-members .channel-member) {
