@@ -975,6 +975,13 @@
   }
 
   /* Dashboard, diary and dynamically loaded older entries */
+  body.page_dashboard_recent :is(
+    .section.todos,
+    .section.student_absences_excuses
+  ) > .section-infomessage {
+    display: none !important;
+  }
+
   :where(.daily-summaries-navigate, .daily-summary, .scheduled > *, .scheduled-item, .lesson, .event, .todo_container) {
     border-color: var(--sid-border) !important;
   }
