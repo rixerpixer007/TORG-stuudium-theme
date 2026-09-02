@@ -2933,6 +2933,7 @@
   .suhtlus .user-card-meta {
     color: var(--sid-text-3) !important;
     background: transparent !important;
+    border-color: var(--sid-border) !important;
   }
 
   .suhtlus .user-card-avatar {
