@@ -785,6 +785,35 @@
     border-radius: var(--sid-radius-sm) !important;
   }
 
+  :is(.page_avaldused_index, .page_users_summary) .new_message:not(.error, .warning) {
+    position: relative;
+    padding-left: 30px !important;
+    color: var(--sid-text-2) !important;
+    background: var(--sid-accent-soft) !important;
+    border: 1px solid var(--sid-accent-border) !important;
+    border-radius: var(--sid-radius-sm) !important;
+    box-shadow: none !important;
+  }
+
+  :is(.page_avaldused_index, .page_users_summary) .new_message:not(.error, .warning)::before {
+    position: absolute;
+    top: 50%;
+    left: 8px;
+    display: grid;
+    width: 14px;
+    height: 14px;
+    color: var(--sid-accent);
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1;
+    content: "i";
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    place-items: center;
+    transform: translateY(-50%);
+  }
+
   :where(.important, .warning, .message-warning) {
     color: var(--sid-text-2) !important;
     background: var(--sid-warning-soft) !important;
@@ -1625,6 +1654,26 @@
     color: var(--sid-accent-strong) !important;
   }
 
+  /* User directory */
+  .page_users_directory .page_head {
+    border-bottom-color: var(--sid-border) !important;
+  }
+
+  .page_users_directory .page_title .light {
+    color: var(--sid-text-3) !important;
+  }
+
+  .page_users_directory .user_directory_card_contents .no_bull > li {
+    color: var(--sid-text-3) !important;
+  }
+
+  .page_users_directory .user_directory_card_contents .st-badge {
+    color: var(--sid-warning) !important;
+    background: var(--sid-warning-soft) !important;
+    border-color: var(--sid-warning-border) !important;
+    box-shadow: none !important;
+  }
+
   /* Applications */
   :is(.page_avaldused_index, .page_avaldused_edit) .page_head {
     border-bottom-color: var(--sid-border) !important;
@@ -1650,35 +1699,6 @@
     color: var(--sid-accent-strong) !important;
     background: var(--sid-surface-3) !important;
     box-shadow: inset 0 0 0 1px var(--sid-accent-border) !important;
-  }
-
-  .page_avaldused_index .new_message {
-    position: relative;
-    padding-left: 30px !important;
-    color: var(--sid-text-2) !important;
-    background: var(--sid-accent-soft) !important;
-    border: 1px solid var(--sid-accent-border) !important;
-    border-radius: var(--sid-radius-sm) !important;
-    box-shadow: none !important;
-  }
-
-  .page_avaldused_index .new_message::before {
-    position: absolute;
-    top: 50%;
-    left: 8px;
-    display: grid;
-    width: 14px;
-    height: 14px;
-    color: var(--sid-accent);
-    font-size: 10px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 1;
-    content: "i";
-    border: 1px solid currentColor;
-    border-radius: 50%;
-    place-items: center;
-    transform: translateY(-50%);
   }
 
   .page_avaldused_index .avaldus-application-index-filters .st-toggle-control {
@@ -3136,6 +3156,18 @@
 
   :where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_users_profile, .content-container, .suhtlus) tr:hover > :where(th, td) {
     background: var(--sid-surface-3) !important;
+  }
+
+  .page_users_summary table.generic_styled tbody :where(th, td) {
+    border-bottom: 0 !important;
+  }
+
+  .page_users_summary table.generic_styled tbody tr:not(:last-child) {
+    border-bottom: 1px solid var(--sid-border) !important;
+  }
+
+  .page_users_summary table.generic_styled .assessment > i {
+    color: var(--sid-text-3) !important;
   }
 
   /* Profile-specific table, footer and edit-menu corrections */
