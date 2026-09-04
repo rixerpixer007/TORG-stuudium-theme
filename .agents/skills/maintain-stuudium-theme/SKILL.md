@@ -14,7 +14,7 @@ Use both:
 1. The signed-in, rendered Stuudium site with the relevant local build or stylesheet active.
 2. The actual theme source in this repository.
 
-Until a modular source build is introduced, `Stuudium-Intentional-Dark.user.css` is the primary theme source. If it later becomes a generated compatibility artifact, identify and edit its declared source files instead; do not hand-edit generated output. Always confirm which local artifact the browser is actually loading.
+`src/theme/modules/*.css` is the canonical full-theme source. `Stuudium-Intentional-Dark.user.css` and `src/generated/theme.css` are generated outputs; do not hand-edit them. Always confirm which local artifact the browser is actually loading.
 
 ## Before editing
 
@@ -49,12 +49,12 @@ Never change attendance, TODOs, messages, grades, reactions, registrations, or o
 
 After every meaningful CSS change:
 
-1. Confirm the intended local stylesheet or extension build is injected, then reload the affected page.
+1. Confirm the intended local stylesheet or extension build is injected before detailed inspection. Check a changed value, selector, markup node, or another unmistakable signal. If the old artifact remains after one refresh, reload the correct style or extension and refresh once rather than continuing against stale output.
 2. Compare against the pre-change page at the same route and viewport.
 3. Exercise affected interaction and semantic states, including relevant states that require a controlled fixture, plus one unaffected negative-control component.
 4. Test the relevant responsive breakpoint. If unavailable, record `BLOCKED`; do not claim mobile equivalence.
 5. Inspect the injected rules and computed winning styles rather than relying only on screenshots.
-6. Run applicable project checks, `git diff --check`, inspect the complete diff, and confirm CSS braces and parentheses remain balanced.
+6. Run the applicable verification tier from `AGENTS.md`, `git diff --check`, and inspect the complete diff. Count delimiters manually only when the normal parser or build cannot validate the edited format.
 7. If the repository contains a verification matrix or `REFACTOR_LOG.md` relevant to the batch, update it as required by its local conventions.
 
 Do not call a change visually equivalent based only on static CSS inspection. If asked to commit, commit only a verified, logically isolated batch; otherwise do not commit. Record uncertain equivalence as `REQUIRES REVIEW` or revert the uncertain change.

@@ -27,7 +27,7 @@ The project enhances the genuine Stuudium interface. It must never become a prox
 - `src/generated/theme.css` is the generated, activation-gated extension stylesheet. Never edit it directly; it is intentionally ignored by Git.
 - `src/theme/critical.css` is the small early dark surface. Keep it minimal and never use it to replace Stuudium's structural CSS.
 
-Run `npm run build:theme` after changing canonical theme modules. Run `npm run check:theme` to prove both generated CSS outputs are current and deterministic.
+Run `npm run build:theme` after changing canonical theme modules, unless `npm run dev` is already watching them. Run `npm run check:theme` to prove both generated CSS outputs are current and deterministic.
 
 ## Architecture map
 
@@ -44,9 +44,10 @@ Keep shared feature logic independent of Chrome, Android, and iOS APIs. Browser 
 
 ## Required skills and documentation lookup
 
-- For HTML, CSS, or client-side JavaScript work, use `.agents/skills/modern-web-guidance/SKILL.md` first as its instructions require.
+- For new UI architecture, unfamiliar web APIs, accessibility patterns, performance work, or compatibility-sensitive frontend techniques, use `.agents/skills/modern-web-guidance/SKILL.md`. Do not invoke it for routine maintenance that follows an established local component pattern.
 - For theme CSS, rendered appearance, DOM/cascade debugging, or visual-equivalence claims, use `.agents/skills/maintain-stuudium-theme/SKILL.md`.
-- For extension manifests, content scripts, browser APIs, permissions, or Chrome Web Store work, use `.agents/skills/chrome-extensions/SKILL.md` and its routed reference.
+- For extension manifests, content scripts, browser APIs, permissions, or Chrome Web Store work, use `.agents/skills/chrome-extensions/SKILL.md`.
+- After building UI injected into a genuine Stuudium page, use `.agents/skills/verify-stuudium-extension-ui/SKILL.md` for live verification.
 - Follow the repository's Context7 instructions for current library, framework, API, SDK, and CLI documentation. Use first-party sources for browser/store rules and other requirements that may change.
 
 ## Theme and cascade workflow
@@ -88,10 +89,28 @@ Never mutate attendance, TODOs, messages, grades, registrations, or other Stuudi
 
 Beginner setup and testing instructions live in `docs/EXTENSION_DEVELOPMENT.md`. Release preparation lives in `docs/EXTENSION_PUBLISHING.md`.
 
+## Development artifact identity
+
+Before diagnosing a stale browser result, confirm which unpacked folder the browser is actually loading:
+
+- `npm run dev` continuously writes `.output/chrome-mv3-dev/`.
+- `npm run build` writes `.output/chrome-mv3/` once.
+
+The two folders are different extension builds. Running `npm run dev` cannot update a browser instance loaded from `.output/chrome-mv3/`, even after reloading that extension card. Keep only the intended test instance enabled, and disable the Stylus compatibility userstyle during extension-only checks.
+
 ## Verification and handoff
 
-For every meaningful change, run the applicable checks, `git diff --check`, inspect the complete diff, and confirm relevant delimiters remain balanced. After theme/build changes, verify that the compatibility userstyle regenerates exactly and inspect the packaged ZIP contents.
+Use the smallest verification tier that proves the change, then inspect the complete diff and run `git diff --check`:
 
-Browser claims require a dedicated test profile or isolated session and the actual local build. Test the affected route and state, one unaffected negative control, and a relevant responsive width. Check page and extension consoles. If browser automation cannot access a protected `chrome://` or `chrome-extension://` surface, ask the user to perform that narrow check and report it as `BLOCKED` until confirmed; do not bypass the restriction with another control path.
+- Documentation or agent guidance only: inspect rendered structure where relevant; no extension build is required.
+- Canonical theme CSS: run `npm run check:theme` after regeneration and the relevant targeted tests.
+- TypeScript or extension UI behavior: run the targeted test, `npm run typecheck`, and `npm run lint`.
+- Manifest, entrypoint, build configuration, or generated extension structure: run `npm run build` and `npm run validate:build` in addition to relevant targeted checks.
+- Broad, cross-cutting, or release-candidate work: run `npm run validate`.
+- Packaging or publication work only: run `npm run package` and inspect the packaged ZIP contents.
+
+Do not run packaging checks for an ordinary CSS or documentation edit. Do not manually count delimiters when the relevant parser, formatter, compiler, or build already validates them; count only when the format lacks a normal parser or an error indicates structural imbalance.
+
+Browser claims require a dedicated test profile or isolated session and the exact local build under test. Before detailed visual inspection, prove freshness with an unmistakable changed value, selector, or DOM marker. Test the affected route and state, one unaffected negative control, and a relevant responsive width. Check page and extension consoles. If browser automation cannot access a protected `chrome://` or `chrome-extension://` surface, ask the user to perform that narrow check and report it as `BLOCKED` until confirmed; do not bypass the restriction with another control path.
 
 When handing off, state the root cause, exact changes, commands and automated results, live routes/browsers/viewports/states tested, startup-flash result when relevant, security/permission impact, all changed files, and every blocked or unverified item. Static inspection alone does not establish live visual equivalence.

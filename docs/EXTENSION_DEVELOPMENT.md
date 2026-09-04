@@ -142,6 +142,10 @@ The development folder is:
 .output/chrome-mv3-dev
 ```
 
+> **Important:** `npm run dev` updates only `.output/chrome-mv3-dev`. It does
+> not update `.output/chrome-mv3`, even if you reload that production extension
+> in the browser. Check the extension card's **Loaded from** path before testing.
+
 WXT intentionally does not launch a personal browser profile for this project.
 Load that folder manually in a dedicated development browser profile or
 session. Keep the terminal command running while editing. Press `Control+C` in
@@ -179,8 +183,8 @@ described in [How can I add extensions to Brave?](https://support.brave.com/hc/e
 2. Enter `brave://extensions` in the address bar.
 3. Turn on **Developer mode**.
 4. Select **Load unpacked**.
-5. Choose `.output/chrome-mv3` or, for watch mode,
-   `.output/chrome-mv3-dev`.
+5. Choose `.output/chrome-mv3-dev` for watch mode. Choose
+   `.output/chrome-mv3` only when testing the result of `npm run build`.
 6. Confirm that **TORG Stuudium Enhancement** appears without an error badge.
 
 Published users of Brave can later install the same listing from the Chrome Web
@@ -449,7 +453,15 @@ unpacked**. Do not choose the ZIP or its parent directory.
 
 Wait for the build to finish, reload the extension card, and refresh the web
 page. Confirm that you loaded the same development or production folder that
-the current command writes.
+the current command writes:
+
+| Running command | Browser must show **Loaded from** |
+| --------------- | --------------------------------- |
+| `npm run dev`   | `.output/chrome-mv3-dev`          |
+| `npm run build` | `.output/chrome-mv3`              |
+
+These are separate unpacked extension instances. If both are installed, disable
+the one that is not under test.
 
 ### “Extension context invalidated” after reloading the extension
 
