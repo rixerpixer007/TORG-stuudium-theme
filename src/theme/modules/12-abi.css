@@ -1,0 +1,51 @@
+/* Minimal mode: hide navigation into Stuudium's Abi section. */
+:where(a):is(
+  [href="/abi"],
+  [href^="/abi/"],
+  [href^="/abi?"],
+  [href^="/abi#"],
+  [href="https://torg.ope.ee/abi"],
+  [href^="https://torg.ope.ee/abi/"],
+  [href^="https://torg.ope.ee/abi?"],
+  [href^="https://torg.ope.ee/abi#"],
+  [href="http://torg.ope.ee/abi"],
+  [href^="http://torg.ope.ee/abi/"],
+  [href^="http://torg.ope.ee/abi?"],
+  [href^="http://torg.ope.ee/abi#"],
+  [href="//torg.ope.ee/abi"],
+  [href^="//torg.ope.ee/abi/"],
+  [href^="//torg.ope.ee/abi?"],
+  [href^="//torg.ope.ee/abi#"]
+) {
+  display: none !important;
+}
+
+:where(hr, .divider) {
+  border-color: var(--sid-border) !important;
+}
+
+::selection {
+  color: var(--sid-accent-ink);
+  background: var(--sid-accent);
+}
+
+::-webkit-scrollbar {
+  width: 11px;
+  height: 11px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--sid-canvas);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--sid-border-strong);
+  border: 3px solid var(--sid-canvas);
+  border-radius: var(--sid-radius-pill);
+}
+
+html {
+  scrollbar-color: var(--sid-border-strong) var(--sid-canvas);
+  scrollbar-width: thin;
+}
+

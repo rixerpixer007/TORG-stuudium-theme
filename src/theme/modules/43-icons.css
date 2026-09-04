@@ -1,0 +1,46 @@
+/* Small icons: text glyphs inherit colour; monochrome sprite spans are filtered as isolated icons. */
+:where([class^="icon-"], [class*=" icon-"]) {
+  color: inherit !important;
+}
+
+:where([class^="icon-"]::before, [class*=" icon-"]::before) {
+  color: currentColor !important;
+  text-shadow: none !important;
+}
+
+/* Verified single-colour navigation glyphs only; arbitrary linked SVG artwork is untouched. */
+.sn-navicon-new > svg,
+.sn-navicon-new > svg * {
+  fill: currentColor !important;
+}
+
+.sn-navicon-new > svg [fill="none"] {
+  fill: none !important;
+  stroke: currentColor !important;
+}
+
+:where(.icon, .no_fontello #dashboard_recent [class^="icon-"]::before, .no_fontello #dashboard_recent [class*=" icon-"]::before) {
+  filter: var(--sid-icon-filter-light) !important;
+}
+
+:where(.button-primary, .new_button.blue, a.button-submit, :is(#content, .page_body, .courses_index, .suhtlus) button.primary, input[type="submit"].primary) .icon,
+:where(.new_button, .button, a.button-submit, :is(#content, .page_body, .courses_index, .suhtlus) button):not(:disabled):not([aria-disabled="true"]):not(.disabled):hover .icon {
+  filter: var(--sid-icon-filter-dark) !important;
+}
+
+:where(.new_button, .button, :is(#content, .page_body, .courses_index, .suhtlus) button):is(:disabled, [aria-disabled="true"], .disabled) .icon,
+a.button-disabled .icon {
+  opacity: 0.5;
+}
+
+:where(.st-select, [data-action="page-tabs-dropdown"]) {
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--sid-accent) 50%),
+    linear-gradient(135deg, var(--sid-accent) 50%, transparent 50%) !important;
+  background-repeat: no-repeat !important;
+  background-position:
+    right 11px center,
+    right 7px center !important;
+  background-size: 4px 4px !important;
+}
+

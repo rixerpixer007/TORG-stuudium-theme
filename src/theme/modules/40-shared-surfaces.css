@@ -1,0 +1,52 @@
+/* Shared surfaces */
+:where(
+  .dashboard_recent_overview .section,
+  .page_dashboard_recent .section,
+  .daily-summaries,
+  .main-block-style,
+  .sheet,
+  :where(#content, .page_body, .page_body_new_layout, .courses_index, .suhtlus) :where(.box, .panel),
+  .dialog,
+  .modal,
+  .ui-dialog
+) {
+  color: var(--sid-text-2) !important;
+  background: linear-gradient(145deg, var(--sid-surface-2), var(--sid-surface)) !important;
+  border: 1px solid var(--sid-border) !important;
+  border-radius: var(--sid-radius) !important;
+  box-shadow: var(--sid-shadow) !important;
+}
+
+#dashboard_recent .dr-column :is(.section, .daily-summaries),
+.page_dashboard_recent .section {
+  padding: 14px;
+}
+
+body.page_dashboard_recent #dashboard_recent {
+  gap: 14px;
+  margin-inline: 0;
+}
+
+#dashboard_recent .dr-column {
+  min-width: 0;
+}
+
+#dashboard_recent :where(.section, .section-spacing, .daily-summaries) {
+  margin: 0 0 14px;
+}
+
+.section_heading {
+  padding-bottom: 8px;
+  letter-spacing: -0.02em;
+  border-bottom-color: var(--sid-border) !important;
+}
+
+.section_heading::before {
+  display: inline-block;
+  width: 18px;
+  height: 1px;
+  margin-right: 9px;
+  vertical-align: middle;
+  background: var(--sid-accent);
+  content: "";
+}

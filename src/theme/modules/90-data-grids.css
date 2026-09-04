@@ -1,0 +1,34 @@
+/* Data grids and calendars: scoped to known data-heavy page/component roots. */
+:where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_users_profile, .content-container, .suhtlus) table {
+  color: var(--sid-text-2) !important;
+  background: var(--sid-surface) !important;
+  border-color: var(--sid-border) !important;
+}
+
+:where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_users_profile, .content-container, .suhtlus) :where(th, td, tr) {
+  color: var(--sid-text-2) !important;
+  background-color: transparent !important;
+  border-color: var(--sid-border) !important;
+}
+
+:where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_users_profile, .content-container, .suhtlus) th {
+  color: var(--sid-text) !important;
+  background: var(--sid-surface-2) !important;
+}
+
+:where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_users_profile, .content-container, .suhtlus) tr:hover > :where(th, td) {
+  background: var(--sid-surface-3) !important;
+}
+
+.page_users_summary table.generic_styled tbody :where(th, td) {
+  border-bottom: 0 !important;
+}
+
+.page_users_summary table.generic_styled tbody tr:not(:last-child) {
+  border-bottom: 1px solid var(--sid-border) !important;
+}
+
+.page_users_summary table.generic_styled .assessment > i {
+  color: var(--sid-text-3) !important;
+}
+

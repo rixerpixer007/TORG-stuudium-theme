@@ -1,0 +1,359 @@
+/* Exercises, homework and tests */
+.section.todos .todo_container {
+  color: var(--sid-text-2) !important;
+  background: transparent !important;
+  border-color: var(--sid-border) !important;
+}
+
+.section.todos .todo_container + .todo_container {
+  border-top: 1px solid var(--sid-border) !important;
+}
+
+.section.todos .todo_container:hover {
+  background: var(--sid-surface-3) !important;
+}
+
+.section.todos .todo_content {
+  color: var(--sid-text-2) !important;
+}
+
+.section.todos .todo_created {
+  color: var(--sid-text-3) !important;
+}
+
+.section.todos .todo_container.is_marked :where(.todo, .todo_content) {
+  color: var(--sid-text-3) !important;
+}
+
+.section.todos .todo_container.is_marked .todo_content {
+  text-decoration-line: line-through !important;
+  text-decoration-color: rgb(193 192 184 / 55%) !important;
+  text-decoration-thickness: 1px !important;
+}
+
+.section.todos .custom-checkbox-v2 + em {
+  width: 16px !important;
+  height: 16px !important;
+  transform: scale(1) !important;
+  transform-origin: center;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s,
+    transform 0.18s cubic-bezier(0.2, 1.55, 0.4, 1) !important;
+}
+
+.section.todos .todo label:active .custom-checkbox-v2 + em {
+  transform: scale(0.76) !important;
+}
+
+.section.todos .scheduled-type-badge {
+  color: var(--sid-accent) !important;
+  background: var(--sid-accent-soft) !important;
+  border-color: var(--sid-accent-border) !important;
+  opacity: 1 !important;
+}
+
+.section.todos .scheduled-type-badge-hw {
+  color: var(--sid-warning) !important;
+  background: var(--sid-warning-soft) !important;
+  border-color: var(--sid-warning-border) !important;
+}
+
+.section.todos .todo_container.is_marked .scheduled-type-badge {
+  opacity: 0.65 !important;
+}
+
+:where(
+  .daily-summaries-segment,
+  .daily-summaries-segment-block,
+  .daily-summaries-segment-block-events,
+  .daily-summaries-segment-block-lessons,
+  .daily-summaries-segment-block-lesson,
+  .daily-summaries-event-stream-v201907,
+  .stream-entry,
+  .stream-entry-primary,
+  .stream-entry-context
+) {
+  color: var(--sid-text-2) !important;
+  background-color: transparent !important;
+  border-color: var(--sid-border) !important;
+}
+
+:where(
+  .daily-summaries-segment-heading,
+  .daily-summaries-segment > h3,
+  .daily-summaries-segment-block > h3
+) {
+  margin-inline: 0 !important;
+  padding: 7px 10px !important;
+  color: var(--sid-text) !important;
+  background: var(--sid-surface-2) !important;
+  border: 1px solid var(--sid-border) !important;
+  border-radius: var(--sid-radius-sm) !important;
+}
+
+:where(.ng-grade-is-summary-wrapper, .ng-grade-is-important-wrapper) {
+  padding: 6px 8px !important;
+  color: var(--sid-text-2) !important;
+  background: var(--sid-surface-2) !important;
+  border: 1px solid var(--sid-border) !important;
+  border-radius: var(--sid-radius-sm) !important;
+}
+
+.ng-grade-is-important-wrapper {
+  background: var(--sid-accent-soft) !important;
+  border-color: var(--sid-accent-border) !important;
+}
+
+:where(.daily-summaries, .page_dashboard_subjects) :where(.grade-current, .grade-current-verbose, .ng-notes, .st-ucontent, .daily-summaries-segment-lesson-notes, .daily-summaries-segment-lesson-homework, .daily-summaries-segment-lesson-homework-contents) {
+  color: var(--sid-text-2) !important;
+  background: transparent !important;
+  border-color: var(--sid-border) !important;
+}
+
+:where(.daily-summaries, .page_dashboard_subjects) :where(.grade-label, .daily-summaries-segment-lesson-subject) {
+  color: var(--sid-accent) !important;
+}
+
+:where(.daily-summaries, .page_dashboard_subjects) .ng-param-wrapper .grade-param {
+  color: var(--sid-warning) !important;
+  background: var(--sid-warning-soft) !important;
+  border-color: var(--sid-warning-border) !important;
+}
+
+:where(.daily-summaries, .page_dashboard_subjects) .ng-param-wrapper .grade-param:is(
+  .grade-param-is_notify,
+  .grade-param-is_absent,
+  .grade-param-is_not_completed,
+  .grade-param-interest-absent
+) {
+  color: var(--sid-danger) !important;
+  background: var(--sid-danger-soft) !important;
+  border-color: var(--sid-danger-border) !important;
+}
+
+:where(.daily-summaries, .page_dashboard_subjects) .ng-param-wrapper .grade-param:is(
+  .grade-param-is_excused,
+  .grade-param-is_absent-excused,
+  .grade-param-interest-present
+) {
+  color: var(--sid-accent) !important;
+  background: var(--sid-accent-soft) !important;
+  border-color: var(--sid-accent-border) !important;
+}
+
+.stream-entry.ng-grade-is-summary-wrapper {
+  position: relative !important;
+  padding-right: 40px !important;
+  background: var(--sid-warning-soft) !important;
+  border-color: var(--sid-warning-border) !important;
+}
+
+.stream-entry.ng-grade-is-summary-wrapper > .stream-entry-avatar {
+  position: absolute !important;
+  top: -3px !important;
+  right: -3px !important;
+  bottom: auto !important;
+  left: auto !important;
+  float: none !important;
+  margin: 0 !important;
+  z-index: 2 !important;
+}
+
+.stream-entry-avatar[data-balloon]::after {
+  color: var(--sid-text) !important;
+  background: var(--sid-surface-3) !important;
+  border: 1px solid var(--sid-border-strong) !important;
+  box-shadow: var(--sid-shadow) !important;
+}
+
+.stream-entry-avatar[data-balloon-pos="left"]::before {
+  top: 50% !important;
+  right: 100% !important;
+  bottom: auto !important;
+  left: auto !important;
+  width: 8px !important;
+  height: 8px !important;
+  background: var(--sid-surface-3) !important;
+  border: 1px solid var(--sid-border-strong) !important;
+  transform: translate(50%, -50%) rotate(45deg) !important;
+}
+
+.stream-entry-avatar {
+  line-height: 0 !important;
+}
+
+.stream-entry-avatar > img {
+  display: block !important;
+  width: 25px !important;
+  height: 25px !important;
+}
+
+:where(.daily-summaries-segment-block-lessons-collapsed-title, .daily-summaries .new_button.flat) {
+  color: var(--sid-text-3) !important;
+  background: var(--sid-surface) !important;
+  border-color: var(--sid-border) !important;
+}
+
+.daily-summaries
+  .daily-summaries-segment-block-lessons-collapsed-title
+  h3
+  > a[data-action="dashboard-lessons-block-expand"] {
+  color: var(--sid-text-2) !important;
+}
+
+.daily-summaries
+  .daily-summaries-segment-block-lessons-collapsed-title
+  h3
+  > a[data-action="dashboard-lessons-block-expand"]
+  > span {
+  color: var(--sid-accent) !important;
+}
+
+.daily-summaries
+  .daily-summaries-segment-block-lessons-collapsed-title
+  h3
+  > a[data-action="dashboard-lessons-block-expand"]:is(:hover, :focus-visible) {
+  color: var(--sid-text) !important;
+}
+
+.daily-summaries
+  .daily-summaries-segment-block-lessons-collapsed-title
+  h3
+  > a[data-action="dashboard-lessons-block-expand"]:is(:hover, :focus-visible)
+  > span {
+  color: var(--sid-accent-strong) !important;
+}
+
+:where(.user-notebook, .user-notebook-sheets, .user-notebook-content, .user-notebook-content-text, .user-notebook-content-text-preview) {
+  color: var(--sid-text-2) !important;
+  background: var(--sid-surface) !important;
+  border-color: var(--sid-border) !important;
+}
+
+.section-user-notebook {
+  overflow: hidden !important;
+}
+
+.user-notebook-sheets {
+  margin-top: 0 !important;
+  padding-left: 10px !important;
+  background: transparent !important;
+  border-bottom: 1px solid var(--sid-border) !important;
+}
+
+.user-notebook-sheets > span:not(.notebook-is-saving) {
+  color: var(--sid-text-2) !important;
+}
+
+.user-notebook-sheets > a {
+  top: 0 !important;
+  bottom: auto !important;
+  display: inline-grid !important;
+  place-items: center !important;
+  box-sizing: border-box !important;
+  width: 34px !important;
+  min-height: 25px !important;
+  padding: 3px 7px !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: var(--sid-radius-sm) var(--sid-radius-sm) 0 0 !important;
+  box-shadow: none !important;
+}
+
+.user-notebook-sheets > a:hover {
+  background: transparent !important;
+}
+
+.user-notebook-sheets > a > span {
+  display: none !important;
+}
+
+.user-notebook-sheets > a::before {
+  color: var(--sid-text-3) !important;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.user-notebook-sheets > a[data-notebook-sheet-nr="1"]::before {
+  content: "I";
+}
+
+.user-notebook-sheets > a[data-notebook-sheet-nr="2"]::before {
+  content: "II";
+}
+
+.user-notebook-sheets > a[data-notebook-sheet-nr="3"]::before {
+  content: "III";
+}
+
+.user-notebook-sheets > a.sheet-active {
+  background: var(--sid-surface-3) !important;
+  box-shadow: inset 0 -2px 0 var(--sid-accent) !important;
+}
+
+.user-notebook-sheets > a.sheet-active::before {
+  color: var(--sid-text-2) !important;
+}
+
+.user-notebook-content {
+  background: transparent !important;
+}
+
+.user-notebook-content :where(textarea, .user-notebook-content-text, .user-notebook-content-text-preview) {
+  border: 0 !important;
+  border-radius: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
+:where(.tera_nodes, .tera_nodes li, .resources, .resources li) {
+  border-color: var(--sid-border) !important;
+}
+
+:where(.tera_nodes .course > a, .resource) {
+  color: var(--sid-text-2) !important;
+}
+
+:where(.tera_nodes .course > a:hover, .resource:hover) {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+#student_dashboard_tera .tera_nodes > .course.expanded {
+  color: var(--sid-text-2) !important;
+  background: transparent !important;
+}
+
+#student_dashboard_tera .course.expanded > .resources {
+  color: var(--sid-text-2) !important;
+  background: transparent !important;
+}
+
+#student_dashboard_tera .course.expanded .resource {
+  color: var(--sid-text-2) !important;
+  background: transparent !important;
+}
+
+#student_dashboard_tera .course.expanded .resource:hover {
+  background: transparent !important;
+}
+
+#student_dashboard_tera .course.expanded .enclosing_name {
+  color: var(--sid-text-3) !important;
+}
+
+#student_dashboard_tera .course.expanded .resource_name {
+  color: var(--sid-text) !important;
+}
+
+#student_dashboard_tera .course.expanded .modified_date {
+  color: var(--sid-text-3) !important;
+}
+
+#student_dashboard_tera .course.expanded .view_all,
+#student_dashboard_tera .course.expanded .view_all > a {
+  background: transparent !important;
+  border-color: var(--sid-border) !important;
+}

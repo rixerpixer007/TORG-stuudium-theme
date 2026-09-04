@@ -1,0 +1,25 @@
+/* Shared overlay shells and arrows */
+.page_dashboard_subjects .stuudium-popover,
+.suhtlus .my-channels,
+.suhtlus .user-card,
+.suhtlus .post-response-names-popover,
+.suhtlus .post-responses-add-available {
+  color: var(--sid-text-2) !important;
+  background: var(--sid-bg-overlay) !important;
+  border: 1px solid var(--sid-border-strong) !important;
+  border-radius: var(--sid-radius-sm) !important;
+  box-shadow: var(--sid-shadow) !important;
+}
+
+.popover.absences_popover.has_arrow_top::before,
+.page_dashboard_subjects .stuudium-popover::before,
+.page_subjects_student .si-teachers-cards .popover.has_arrow_top::before {
+  border-bottom-color: var(--sid-border-strong) !important;
+}
+
+.popover.absences_popover.has_arrow_top::after,
+.page_dashboard_subjects .stuudium-popover::after,
+.page_subjects_student .si-teachers-cards .popover.has_arrow_top::after {
+  border-bottom-color: var(--sid-bg-overlay) !important;
+}
+

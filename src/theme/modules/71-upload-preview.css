@@ -1,0 +1,85 @@
+/* Shared upload preview used by TERA forms and the Suhtlus composer. */
+:is(.content-container .node_form_new, .suhtlus .post-edit)
+  [data-role="st-fileupload"]
+  .st-fileupload-fileinput > em {
+  color: var(--sid-text-3) !important;
+}
+
+:is(.content-container .node_form_new, .suhtlus .post-edit)
+  [data-role="st-fileupload"]
+  .st-fileupload-file-inner {
+  color: var(--sid-text-2) !important;
+  background: var(--sid-control) !important;
+  border-color: var(--sid-border-strong) !important;
+  border-radius: var(--sid-radius-xs) !important;
+  box-shadow: none !important;
+}
+
+:is(.content-container .node_form_new, .suhtlus .post-edit)
+  [data-role="st-fileupload"]
+  .st-fileupload-sort-handle {
+  color: var(--sid-text-3) !important;
+}
+
+:is(.content-container .node_form_new, .suhtlus .post-edit)
+  [data-role="st-fileupload"]
+  .st-fileupload-remove-link {
+  color: var(--sid-danger) !important;
+}
+
+.content-container .node_form_new .error_msg {
+  box-sizing: border-box;
+  padding: 6px 8px !important;
+  color: var(--sid-danger) !important;
+  background: var(--sid-danger-soft) !important;
+  border: 1px solid var(--sid-danger-border) !important;
+  border-radius: var(--sid-radius-sm) !important;
+}
+
+.content-container .response_node_inner {
+  color: var(--sid-text-2) !important;
+  background: var(--sid-surface-2) !important;
+  border: 1px solid var(--sid-border) !important;
+  border-radius: var(--sid-radius-sm) !important;
+  box-shadow: none !important;
+}
+
+.content-container .response_node_inner :where(.response_node_meta, .response_node_content_wrapper, .node_content, .body, .node-blocks, .node_text_content, .node_text_content_text_wrapper) {
+  color: var(--sid-text-2) !important;
+  background: transparent !important;
+  border-color: var(--sid-border) !important;
+}
+
+.content-container .response_node_inner .response_node_meta {
+  color: var(--sid-text) !important;
+}
+
+.content-container .response_node_inner .node_time {
+  color: var(--sid-accent) !important;
+}
+
+.content-container .response_node_inner .node_time:hover {
+  color: var(--sid-accent-strong) !important;
+}
+
+.content-container .response_node_inner :where(.node_file, .node_file_head) {
+  color: var(--sid-accent) !important;
+  background: transparent !important;
+  border-color: var(--sid-border) !important;
+}
+
+.content-container .response_node_inner .node_file_with_document_preview iframe {
+  border-color: var(--sid-border-strong) !important;
+  box-shadow: none !important;
+}
+
+.content-container .responses_hidden_notice > span {
+  display: inline-block;
+  padding: 4px 7px !important;
+  color: var(--sid-text-2) !important;
+  background: var(--sid-accent-soft) !important;
+  border: 1px solid var(--sid-accent-border) !important;
+  border-radius: var(--sid-radius-sm) !important;
+  box-shadow: none !important;
+}
+

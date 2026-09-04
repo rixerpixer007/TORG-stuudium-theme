@@ -1,0 +1,37 @@
+/* Absence calendar */
+.st-absences_excuses-calendar .monthname {
+  margin-bottom: 6px !important;
+  color: var(--sid-accent) !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.st-absences_excuses-calendar .week a {
+  color: var(--sid-text-2) !important;
+  background: var(--sid-surface-2) !important;
+  border-color: var(--sid-border) !important;
+}
+
+.st-absences_excuses-calendar .week a:hover {
+  color: var(--sid-accent-ink) !important;
+  background: var(--sid-accent) !important;
+}
+
+.st-absences_excuses-calendar .week a.disabled {
+  color: var(--sid-text-disabled) !important;
+  background: var(--sid-canvas-soft) !important;
+}
+
+.st-absences_excuses-calendar .week a.is_today {
+  color: var(--sid-accent-strong) !important;
+  background: var(--sid-accent-soft) !important;
+  border-color: var(--sid-accent-border) !important;
+  box-shadow: none !important;
+}
+
+.st-absences_excuses-calendar .week a.is_today:hover {
+  color: var(--sid-accent-ink) !important;
+  background: var(--sid-accent) !important;
+  border-color: var(--sid-accent) !important;
+}
+

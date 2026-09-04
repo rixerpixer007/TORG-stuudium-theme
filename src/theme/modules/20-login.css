@@ -1,0 +1,446 @@
+/* Public login page */
+#bg {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 58% 8%, rgb(25 78 60 / 24%), transparent 34rem),
+    linear-gradient(180deg, var(--sid-canvas-highlight), var(--sid-canvas)) !important;
+}
+
+#bg > :is(#bg-img, #bg-img-full) {
+  display: none !important;
+}
+
+#stuudium-branding {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 8px !important;
+  color: var(--sid-text-2) !important;
+  background: rgb(23 28 25 / 88%) !important;
+  border: 1px solid var(--sid-border) !important;
+  border-radius: 0 0 var(--sid-radius-sm) 0 !important;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 20%) !important;
+  backdrop-filter: blur(12px) saturate(125%);
+}
+
+#stuudium-branding img {
+  opacity: 0.92;
+  border-radius: 3px;
+  filter: none !important;
+}
+
+#stuudium-branding span {
+  color: var(--sid-text-2) !important;
+}
+
+#login-page-container #main {
+  color: var(--sid-text-2) !important;
+  background:
+    linear-gradient(180deg, rgb(32 40 36 / 98%), rgb(23 28 25 / 98%)) !important;
+  border: 1px solid var(--sid-border-strong) !important;
+  border-radius: var(--sid-radius-lg) !important;
+  box-shadow: 0 24px 80px rgb(0 0 0 / 48%) !important;
+  backdrop-filter: blur(18px) saturate(120%);
+  font-size: 14px;
+}
+
+#main :where(.head, .main-body, .main-body-inner, .body-section, .foot, form, label) {
+  color: var(--sid-text-2) !important;
+  background-color: transparent !important;
+  border-color: var(--sid-border) !important;
+}
+
+#main .head h1 {
+  color: var(--sid-text) !important;
+}
+
+#main .head h2 {
+  color: var(--sid-text-3) !important;
+}
+
+#main :where(.label-standalone, .with-separate-label) {
+  color: var(--sid-text-2) !important;
+}
+
+#main .head img[src*="/logos/"] {
+  background: var(--sid-canvas-soft) !important;
+  border: 1px solid var(--sid-border) !important;
+  border-radius: var(--sid-radius-sm) !important;
+  opacity: 0.82;
+  filter: invert(82%) grayscale(1) brightness(78%) contrast(86%) !important;
+}
+
+#main :where(.login-form-section, .account-help-section, .login-form-idauth-separate-container) {
+  border-color: var(--sid-border) !important;
+}
+
+#main .label-with-button-wrapper-inputs {
+  overflow: hidden;
+  background: var(--sid-control) !important;
+  border: 1px solid var(--sid-border-strong) !important;
+  border-radius: var(--sid-radius-sm) !important;
+  box-shadow: none !important;
+}
+
+#main .label-with-button-wrapper-inputs:focus-within {
+  border-color: var(--sid-accent) !important;
+  box-shadow: var(--sid-focus) !important;
+}
+
+#main .label-with-button-wrapper-inputs :where(input.text, input.button) {
+  border: 0 !important;
+  border-radius: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
+#main .label-with-button-wrapper-inputs :where(input.button):hover {
+  transform: none;
+}
+
+#main_login_form input.button.green {
+  color: var(--sid-accent-ink) !important;
+  background: var(--sid-accent) !important;
+  border-color: var(--sid-accent) !important;
+  font-weight: 700;
+}
+
+#main_login_form input.button.green:not(:disabled):hover {
+  background: var(--sid-accent-strong) !important;
+  border-color: var(--sid-accent-strong) !important;
+}
+
+#main .login-form-idauth-separate-container-divider {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  height: auto !important;
+  color: var(--sid-text-3) !important;
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+#main .login-form-idauth-separate-container-divider::before,
+#main .login-form-idauth-separate-container-divider::after {
+  content: "";
+  position: static !important;
+  inset: auto !important;
+  display: block !important;
+  width: auto !important;
+  height: 1px;
+  margin: 0 !important;
+  background: var(--sid-border-strong) !important;
+  border: 0 !important;
+}
+
+#main .login-form-idauth-separate-container-divider > span {
+  position: static !important;
+  inset: auto !important;
+  display: block !important;
+  padding: 0 !important;
+  color: var(--sid-text-3) !important;
+  background: transparent !important;
+  line-height: 1 !important;
+  transform: none !important;
+}
+
+#main .login-form-idauth-separate-container .button {
+  color: var(--sid-text-2) !important;
+  background: var(--sid-surface-3) !important;
+  border-color: var(--sid-border-strong) !important;
+}
+
+#main .login-form-idauth-separate-container .button:hover {
+  filter: brightness(1.14);
+}
+
+#main .login-form-idauth-separate-container .login-idauth {
+  color: #c0d3e8 !important;
+  background: #1e3044 !important;
+  border-color: #416384 !important;
+}
+
+#main .login-form-idauth-separate-container .custom-style-passkey {
+  color: #e2b9db !important;
+  background: #3a2938 !important;
+  border-color: #6b4a66 !important;
+}
+
+/* Login method chooser and the panels it swaps into place. */
+#main .login-flow-actions-container {
+  color: var(--sid-text-2) !important;
+  background: var(--sid-surface-2) !important;
+  border: 1px solid var(--sid-border-strong) !important;
+  border-radius: var(--sid-radius) !important;
+  box-shadow: var(--sid-shadow) !important;
+  overflow: hidden;
+}
+
+#main :where(
+  .login-flow-actions-method-select-container,
+  .login-flow-actions-methods,
+  .login-flow-actions-methods-subblock
+) {
+  color: var(--sid-text-2) !important;
+  background: transparent !important;
+  border-color: var(--sid-border) !important;
+}
+
+#main .login-flow-actions-container :where(h1, h2, h3, h4, strong, .label-standalone) {
+  color: var(--sid-text) !important;
+}
+
+#main .login-flow-actions-methods .button {
+  color: var(--sid-text-2) !important;
+  background: var(--sid-surface-3) !important;
+  border-color: var(--sid-border-strong) !important;
+  box-shadow: none !important;
+}
+
+#main .login-flow-actions-methods [data-login-method="webauthn"] {
+  color: #e2b9db !important;
+  background: #3a2938 !important;
+  border-color: #6b4a66 !important;
+}
+
+#main .login-flow-actions-methods [data-login-method="passkey-via-remote-device"] {
+  color: #b9dfa7 !important;
+  background: #193423 !important;
+  border-color: #3f6a47 !important;
+}
+
+#main .login-flow-actions-methods [data-login-method="idcard"] {
+  color: #c0d3e8 !important;
+  background: #1e3044 !important;
+  border-color: #416384 !important;
+}
+
+#main .login-flow-actions-methods [data-login-method="smartid"] {
+  color: #8ce0dc !important;
+  background: #103638 !important;
+  border-color: #247174 !important;
+}
+
+#main .login-flow-actions-methods [data-login-method="password"] {
+  color: #c7ddef !important;
+  background: #1d3650 !important;
+  border-color: #3f6b94 !important;
+}
+
+#main .login-flow-actions-methods .button:not(.disabled):hover {
+  filter: brightness(1.14);
+}
+
+#main .login-flow-actions-methods .button.disabled {
+  color: var(--sid-text-disabled) !important;
+  background: var(--sid-canvas-soft) !important;
+  border-color: var(--sid-border) !important;
+  opacity: 0.72;
+}
+
+#main .login-flow-actions-method-extra {
+  color: var(--sid-text-2) !important;
+  background: var(--sid-surface) !important;
+  border-color: var(--sid-border-strong) !important;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 2%) !important;
+}
+
+#main .login-flow-actions-method-extra :where(h1, h2, h3, h4, p, label) {
+  color: var(--sid-text-2) !important;
+}
+
+#main .login-flow-actions-method-extra :where(.label-with-button-wrapper-v2023, .label-with-button-wrapper-v2023-footer) {
+  background: transparent !important;
+  border-color: var(--sid-border) !important;
+}
+
+#main .login-flow-cancel-container {
+  color: var(--sid-text-3) !important;
+  background: transparent !important;
+  border-color: var(--sid-border) !important;
+}
+
+#main .autologin-container-v2023 {
+  color: var(--sid-text-2) !important;
+  background: var(--sid-surface-2) !important;
+  border-color: var(--sid-border) !important;
+}
+
+#main .autologin-container-v2023 .st-toggle-control {
+  color: var(--sid-text-2) !important;
+  background: var(--sid-surface-3) !important;
+  border: 1px solid var(--sid-border-strong) !important;
+  border-radius: var(--sid-radius-sm) !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
+#main .autologin-container-v2023 label {
+  position: relative;
+  color: var(--sid-text-2) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: inherit !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+}
+
+#main .autologin-container-v2023 label::before,
+#main .autologin-container-v2023 label::after {
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+#main .autologin-container-v2023 label > em {
+  box-sizing: border-box;
+  position: absolute !important;
+  top: 50% !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: 5px !important;
+  width: 12px !important;
+  min-width: 12px !important;
+  max-width: 12px !important;
+  height: 12px !important;
+  min-height: 12px !important;
+  max-height: 12px !important;
+  padding: 0 !important;
+  transform: translateY(-50%) !important;
+  background: var(--sid-control) !important;
+  border: 1px solid var(--sid-border-strong) !important;
+  border-radius: 3px !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  transition: background-color 140ms ease, border-color 140ms ease;
+}
+
+#main .autologin-container-v2023 label > em::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 3px;
+  height: 6px;
+  border: solid var(--sid-accent-ink) !important;
+  border-width: 0 2px 2px 0 !important;
+  opacity: 0;
+  transform: translate(-50%, -58%) rotate(45deg);
+}
+
+#main .autologin-container-v2023 label:has(input:checked) > em {
+  background: var(--sid-accent) !important;
+  border-color: var(--sid-accent) !important;
+}
+
+#main .autologin-container-v2023 label:has(input:checked) > em::after {
+  opacity: 1;
+}
+
+#main .autologin-container-v2023 label:has(input:disabled) > em {
+  background: var(--sid-canvas-soft) !important;
+  border-color: var(--sid-border) !important;
+  opacity: 0.72;
+}
+
+#main .autologin-container-v2023 label * {
+  color: inherit !important;
+  -webkit-text-fill-color: currentColor !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+}
+
+#main .autologin-container-v2023 label:has(input:disabled) {
+  color: var(--sid-text-2) !important;
+  background: transparent !important;
+  border: 0 !important;
+  opacity: 0.78 !important;
+}
+
+#main .autologin-container-v2023 label:has(input:checked) {
+  color: var(--sid-text) !important;
+  background: transparent !important;
+  border: 0 !important;
+  opacity: 1 !important;
+}
+
+#main .autologin-container-v2023 .st-toggle-control:has(input:disabled) {
+  background: var(--sid-canvas-soft) !important;
+  border-color: var(--sid-border) !important;
+}
+
+#main .autologin-container-v2023 .st-toggle-control:has(input:checked) {
+  background: var(--sid-accent-soft) !important;
+  border-color: var(--sid-accent-border) !important;
+}
+
+#main .autologin-container-v2023 .st-toggle-control:focus-within {
+  border-color: var(--sid-accent) !important;
+  box-shadow: none !important;
+}
+
+#main .autologin-container-v2023 input[type="checkbox"] {
+  accent-color: var(--sid-accent) !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
+#main .autologin-container-v2023 .autologin-help {
+  color: var(--sid-warning) !important;
+  background: var(--sid-warning-soft) !important;
+  border: 1px solid var(--sid-warning-border) !important;
+  border-radius: var(--sid-radius-sm) !important;
+}
+
+#main .autologin-container-v2023 .autologin-disallowed {
+  color: var(--sid-danger) !important;
+  background: var(--sid-danger-soft) !important;
+  border: 1px solid var(--sid-danger-border) !important;
+  border-radius: var(--sid-radius-sm) !important;
+}
+
+#main .login-captcha-container {
+  color: var(--sid-text-2) !important;
+  background: rgb(23 28 25 / 96%) !important;
+  border-color: var(--sid-border-strong) !important;
+}
+
+#main .passkey-help a {
+  display: inline-flex !important;
+  align-items: center;
+  padding: 3px 7px !important;
+  color: var(--sid-accent) !important;
+  background: var(--sid-accent-soft) !important;
+  border: 1px solid var(--sid-accent-border) !important;
+  border-radius: var(--sid-radius-sm) !important;
+}
+
+#main .passkey-help a:is(
+  [href="/abi"],
+  [href^="/abi/"],
+  [href="https://torg.ope.ee/abi"],
+  [href^="https://torg.ope.ee/abi/"]
+) {
+  display: none !important;
+}
+
+#main :where(.status-message.error, .status-message.error-new) {
+  color: var(--sid-text-2) !important;
+  background: var(--sid-danger-soft) !important;
+  border-color: var(--sid-danger-border) !important;
+}
+
+#main :where(.status-message.warning, .status-message.warning-new) {
+  color: var(--sid-text-2) !important;
+  background: var(--sid-warning-soft) !important;
+  border-color: var(--sid-warning-border) !important;
+}
+
+#main .foot {
+  color: var(--sid-text-3) !important;
+}
+

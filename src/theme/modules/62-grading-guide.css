@@ -1,0 +1,39 @@
+/* Grading guide */
+.page_subjectplans_plan .page_head {
+  border-bottom-color: var(--sid-border) !important;
+}
+
+.page_subjectplans_plan .si-title {
+  color: var(--sid-text-2) !important;
+}
+
+.page_subjectplans_plan .si-title-subject {
+  color: var(--sid-text) !important;
+}
+
+.page_subjectplans_plan .si-title-description {
+  color: var(--sid-text-3) !important;
+}
+
+.page_subjectplans_plan .st-badge-semantic-si-category {
+  color: var(--sid-accent-strong) !important;
+  background: var(--sid-accent-soft) !important;
+  border-color: var(--sid-accent-border) !important;
+}
+
+.page_subjectplans_plan .subjectplan-rendered {
+  color: var(--sid-text-2) !important;
+  background: var(--sid-surface-2) !important;
+  border: 1px solid var(--sid-border) !important;
+  border-radius: var(--sid-radius-sm) !important;
+  box-shadow: none !important;
+}
+
+.page_subjectplans_plan .subjectplan-rendered :where(.sp-text, .sp-list-item, .sp-list-item-text, .sp-bullet) {
+  color: var(--sid-text-2) !important;
+}
+
+.page_subjectplans_plan .subjectplan-rendered :where(.sp-divider-text, .sp-list-item-marker) {
+  color: var(--sid-text-3) !important;
+}
+

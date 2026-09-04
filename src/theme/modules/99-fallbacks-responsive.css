@@ -1,0 +1,306 @@
+/*
+ * Intentional late zero-specificity fallbacks. Source order is part of this
+ * contract; verified feature selectors may stay earlier when specificity wins.
+ */
+:where(.tipsy-inner, .tooltip, .popover, .select2-results, .select2-search, .ui-datepicker, .ui-widget-content) {
+  color: var(--sid-text-2) !important;
+  background: var(--sid-bg-overlay) !important;
+  border-color: var(--sid-border) !important;
+}
+
+:where(.sn-badge, .marker, .badge:not(.badge-archived), .st-badge.st-badge-green) {
+  color: var(--sid-accent-ink) !important;
+  background: var(--sid-accent) !important;
+  border-color: var(--sid-accent) !important;
+}
+
+@keyframes sid-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-spinner {
+  border-color: var(--sid-border) !important;
+  border-top-color: var(--sid-accent) !important;
+}
+
+.notebook-is-saving {
+  padding: 6px 7px 0 0 !important;
+  color: var(--sid-text-3) !important;
+  background: none !important;
+  font-weight: 500 !important;
+}
+
+.notebook-is-saving::before,
+.daily-summaries-navigate.is_loading::after {
+  content: "" !important;
+  box-sizing: border-box !important;
+  display: inline-block !important;
+  background: transparent !important;
+  border: 2px solid var(--sid-border) !important;
+  border-top-color: var(--sid-accent) !important;
+  border-radius: 50% !important;
+  box-shadow: none !important;
+  filter: none !important;
+  vertical-align: -1px !important;
+  animation: sid-spin 0.75s linear infinite !important;
+}
+
+.notebook-is-saving::before {
+  width: 11px !important;
+  height: 11px !important;
+  margin-right: 6px !important;
+}
+
+.daily-summaries-navigate.is_loading {
+  position: relative !important;
+  padding-bottom: 20px !important;
+  background-image: none !important;
+}
+
+.daily-summaries-navigate.is_loading::after {
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 50% !important;
+  width: 14px !important;
+  height: 14px !important;
+  margin-left: -7px !important;
+}
+
+.page_footer {
+  color: var(--sid-text-3) !important;
+  background-color: transparent !important;
+  border-top-color: var(--sid-border) !important;
+}
+
+@media screen {
+  .page_print_view_report_card :where(.page_body, .bl-is-main) {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-canvas) !important;
+  }
+
+  .page_print_view_report_card iframe {
+    display: block;
+    overflow: hidden !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  html:has(body.client_torg > .report_card),
+  body.client_torg:has(> .report_card) {
+    overflow: hidden !important;
+    background: transparent !important;
+  }
+
+  body.client_torg > .report_card {
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface) !important;
+    border-color: var(--sid-surface) !important;
+    box-shadow: var(--sid-shadow) !important;
+  }
+
+  body.client_torg > .report_card :where(h1, h2, h3, h4, strong) {
+    color: var(--sid-text) !important;
+  }
+
+  .page_print_view_report_card .bl-print-view-report-card-share-goto {
+    color: var(--sid-text-3) !important;
+  }
+
+  .page_print_view_report_card .print-view-report-card-share .new_message.help {
+    position: relative;
+    padding: 10px 12px 10px 36px !important;
+    color: var(--sid-text-2) !important;
+    background: var(--sid-accent-soft) !important;
+    background-image: none !important;
+    border: 1px solid var(--sid-accent-border) !important;
+    border-radius: var(--sid-radius-sm) !important;
+    box-shadow: none !important;
+  }
+
+  .page_print_view_report_card .print-view-report-card-share .new_message.help::before {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    display: grid;
+    width: 14px;
+    height: 14px;
+    color: var(--sid-accent);
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1;
+    content: "?";
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    place-items: center;
+  }
+
+  .page_print_view_report_card .print-view-report-card-share .bl-current-share {
+    box-sizing: border-box;
+    padding: 0 !important;
+    color: var(--sid-text-2) !important;
+    background: var(--sid-surface-2) !important;
+    border: 1px solid var(--sid-accent-border) !important;
+    border-radius: var(--sid-radius-sm) !important;
+    box-shadow: none !important;
+    overflow: hidden;
+  }
+
+  .page_print_view_report_card .print-view-report-card-share .bl-current-share > p {
+    margin: 0 !important;
+    padding: 8px 10px !important;
+    color: var(--sid-text) !important;
+    background: var(--sid-accent-soft) !important;
+    border-bottom: 1px solid var(--sid-accent-border) !important;
+    font-weight: 600;
+  }
+
+  .page_print_view_report_card .print-view-report-card-share .bl-current-share .new_button {
+    margin: 10px 0 0 10px !important;
+  }
+
+  .page_print_view_report_card .print-view-report-card-share .bl-share-link {
+    display: inline-block;
+    margin: 10px 10px 0 4px !important;
+    color: var(--sid-accent) !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-word;
+  }
+
+  .page_print_view_report_card .print-view-report-card-share .bl-meta {
+    margin: 10px !important;
+    color: var(--sid-text-3) !important;
+  }
+}
+
+@media (max-width: 760px) {
+  body {
+    background-attachment: scroll !important;
+  }
+
+  html:not([class*="suhtlus-"]) body {
+    font-size: 14px;
+  }
+
+  body.page_dashboard_recent .page_body > .medium_width_wrapper {
+    padding-inline: 0 !important;
+  }
+
+  body.page_groups_view {
+    min-width: 0 !important;
+  }
+
+  body.page_groups_view :where(.page_head, .page_body) {
+    width: 100% !important;
+  }
+
+  body.page_groups_view :where(.page_head, .page_body) > .width_wrapper {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    padding-inline: 14px !important;
+    margin-inline: 0 !important;
+  }
+
+  body.page_groups_view :where(
+    .new_column.width_full.view,
+    .group_teachers_cards,
+    .group_view_links,
+    .divider
+  ) {
+    box-sizing: border-box !important;
+    width: 100% !important;
+  }
+
+  body.page_groups_view .users-table {
+    max-width: 100% !important;
+    margin-inline: auto !important;
+  }
+
+  #login-page-container #main {
+    min-height: 100vh;
+    background: linear-gradient(180deg, var(--sid-surface-2), var(--sid-canvas)) !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  #dashboard_recent {
+    display: block;
+  }
+
+  #dashboard_recent .dr-column {
+    width: 100%;
+  }
+
+  :where(.dashboard_recent_overview .section, .daily-summaries, .main-block-style, .courses_index_content > a.course) {
+    border-radius: 9px !important;
+  }
+
+  .st-stuudium-navigation-2021-contents {
+    padding-inline: 6px !important;
+  }
+
+  .page_tabs_dropdown_v2 .page_tabs_dropdown_segment {
+    grid-template-columns: 1fr;
+  }
+
+  .page_tabs .width_wrapper {
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+  }
+
+  .page_tabs .width_wrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+  .page_tabs .scrollable_page_tabs_wrapper {
+    width: max-content !important;
+    min-width: 100%;
+  }
+
+  .dashboard_recent_mobile_navigation > div {
+    background: var(--sid-surface-2) !important;
+    border: 1px solid var(--sid-border-strong) !important;
+    box-shadow: var(--sid-shadow) !important;
+  }
+
+  .dashboard_recent_mobile_navigation > div > a[data-container] {
+    color: var(--sid-text-2) !important;
+    background: transparent !important;
+  }
+
+  .dashboard_with_section_based_navigation[data-dashboard-container-current="stream"]
+    .dashboard_recent_mobile_navigation [data-container="stream"],
+  .dashboard_with_section_based_navigation[data-dashboard-container-current="todos"]
+    .dashboard_recent_mobile_navigation [data-container="todos"],
+  .dashboard_with_section_based_navigation[data-dashboard-container-current="tera"]
+    .dashboard_recent_mobile_navigation [data-container="tera"],
+  .dashboard_with_section_based_navigation[data-dashboard-container-current="absences"]
+    .dashboard_recent_mobile_navigation [data-container="absences"] {
+    color: var(--sid-accent-strong) !important;
+    background: var(--sid-accent-soft) !important;
+    box-shadow: inset 0 -2px 0 var(--sid-accent) !important;
+  }
+
+  :where(.student_subject_grades_cont, .table-responsive, .st-table-scroll) {
+    max-width: 100%;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

@@ -1,0 +1,9 @@
+:root:where([data-sid-enhancement="enabled"]) {
+  color-scheme: dark;
+  background-color: #0f1311 !important;
+}
+
+:root:where([data-sid-enhancement="enabled"]) body {
+  background-color: #0f1311 !important;
+  color: #c1c0b8 !important;
+}

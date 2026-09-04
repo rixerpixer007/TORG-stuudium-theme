@@ -1,0 +1,121 @@
+/* Grades: one structural primitive, followed by semantic state colours. */
+:where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_subjects_student)
+  :where(.grade_active, .grade_inactive) {
+  color: var(--sid-text) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  font-size: 12px !important;
+  line-height: 15px !important;
+  margin: 0 !important;
+  padding: 0 2px !important;
+  text-shadow: none !important;
+}
+
+:where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_subjects_student)
+  .grade_params abbr {
+  color: var(--sid-text) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+:where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_subjects_student) :where(.grade_A, .grade_B, .grade_C, .grade_AR) {
+  color: var(--sid-accent-strong) !important;
+}
+
+:where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_subjects_student) :where(.grade_D, .grade_E, .grade_F, .grade_MA, .grade_0, .grade_1, .grade_2) {
+  color: var(--sid-danger) !important;
+  border-color: var(--sid-danger-border) !important;
+}
+
+:where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_subjects_student) :where(.grade_H, .grade_param_is_late, .grade_param_is_no_homework) {
+  color: var(--sid-warning) !important;
+  border-color: var(--sid-warning-border) !important;
+}
+
+.page_grades_student #period_nav {
+  border-bottom: 1px solid var(--sid-border) !important;
+}
+
+.page_grades_student #period_nav :where(.period_prev, .period_next) {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+  background-image: none !important;
+}
+
+.page_grades_student #period_nav .period_prev::before {
+  content: "«";
+  margin-right: 5px;
+}
+
+.page_grades_student #period_nav .period_next::after {
+  content: "»";
+  margin-left: 5px;
+}
+
+.page_grades_student .student_grade_help {
+  margin-bottom: 10px !important;
+}
+
+.page_grades_student .help_toggle {
+  padding-right: 5px !important;
+  padding-left: 5px !important;
+  color: var(--sid-accent) !important;
+}
+
+.page_grades_student .student_grade_help .info {
+  color: var(--sid-text-2) !important;
+  background: var(--sid-surface-2) !important;
+  border-color: var(--sid-border) !important;
+  border-radius: var(--sid-radius-sm) !important;
+  box-shadow: none !important;
+}
+
+.page_grades_student .summary > span {
+  color: var(--sid-text-3) !important;
+}
+
+:where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_subjects_student) .grade_param_is_notify,
+:where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_subjects_student) .grade_param_is_absent:not(.grade_param_is_absent_excused) {
+  color: var(--sid-danger) !important;
+  background: var(--sid-danger-soft) !important;
+  border-color: var(--sid-danger-border) !important;
+}
+
+:where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_subjects_student) .grade_param_is_notify abbr,
+:where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_subjects_student) .grade_param_is_absent:not(.grade_param_is_absent_excused) abbr {
+  color: var(--sid-danger) !important;
+}
+
+:where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_subjects_student) .grade_param_is_absent.grade_param_is_absent_excused,
+:where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_subjects_student) .grade_param_is_excused {
+  color: var(--sid-accent) !important;
+  background: var(--sid-accent-soft) !important;
+  border-color: var(--sid-accent-border) !important;
+}
+
+:where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_subjects_student) .grade_param_is_absent.grade_param_is_absent_excused abbr,
+:where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_subjects_student) .grade_param_is_excused abbr {
+  color: var(--sid-accent) !important;
+}
+
+:where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_subjects_student) :where(.grade_param_is_late, .grade_param_is_no_homework, .grade_param_is_no_resources) {
+  color: var(--sid-warning) !important;
+  background: var(--sid-warning-soft) !important;
+  border-color: var(--sid-warning-border) !important;
+}
+
+.grade_is_important {
+  background: var(--sid-accent-soft) !important;
+  border-color: var(--sid-accent-border) !important;
+}
+
+.grade_is_summary {
+  background: var(--sid-warning-soft) !important;
+  border-color: var(--sid-warning-border) !important;
+}
+

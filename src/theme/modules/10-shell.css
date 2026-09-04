@@ -1,0 +1,37 @@
+/* Page shell and type */
+html,
+body {
+  background-color: var(--sid-canvas) !important;
+  color: var(--sid-text-2) !important;
+}
+
+body {
+  min-height: 100vh;
+  background-image:
+    radial-gradient(circle at 58% 4%, rgb(25 78 60 / 22%), transparent 34rem),
+    linear-gradient(180deg, var(--sid-canvas-highlight) 0, var(--sid-canvas) 34rem) !important;
+  font-family: "Stuudium Sans", Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+}
+
+html:not([class*="suhtlus-"]) body {
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+:where(#content, .page_body, .page_body_new_layout, .width_wrapper, .medium_width_wrapper, #dashboard, .suhtlus, .courses_index) {
+  color: var(--sid-text-2) !important;
+  background-color: transparent !important;
+}
+
+:where(#content, .page_body, .page_body_new_layout, #dashboard, .suhtlus, .courses_index)
+  :where(h1, h2, h3, h4, h5, h6, strong, b) {
+  color: var(--sid-text) !important;
+}
+
+:where(.page_title, .section_heading, .content-container-main-heading, .post-title, .post-title-main, .course_name, .resource_name) {
+  color: var(--sid-text) !important;
+}
+
+:where(.bl-sub, .small, .smaller, .description, .modified_date, .instructor, .post-date, .course_teachers, .course_connections) {
+  color: var(--sid-text-3) !important;
+}

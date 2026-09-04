@@ -11,6 +11,11 @@
 @preprocessor   default
 ==/UserStyle== */
 
+/*
+ * GENERATED FILE — DO NOT EDIT DIRECTLY.
+ * Edit src/theme/modules/*.css, then run npm run build:theme.
+ */
+
 @-moz-document domain("torg.ope.ee") {
   @font-face {
     font-family: "fontello";
@@ -80,7 +85,7 @@
     background-image:
       radial-gradient(circle at 58% 4%, rgb(25 78 60 / 22%), transparent 34rem),
       linear-gradient(180deg, var(--sid-canvas-highlight) 0, var(--sid-canvas) 34rem) !important;
-    font-family: "Stuudium Sans", Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-family: "Stuudium Sans", Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
   }
 
   html:not([class*="suhtlus-"]) body {
@@ -105,7 +110,6 @@
   :where(.bl-sub, .small, .smaller, .description, .modified_date, .instructor, .post-date, .course_teachers, .course_connections) {
     color: var(--sid-text-3) !important;
   }
-
   /* Intentional site-wide link fallback; named feature roles override this paint. */
   :where(a) {
     color: var(--sid-accent) !important;
@@ -772,12 +776,12 @@
     box-shadow: var(--sid-shadow) !important;
   }
 
-  #dashboard_recent :is(.section, .daily-summaries),
+  #dashboard_recent .dr-column :is(.section, .daily-summaries),
   .page_dashboard_recent .section {
     padding: 14px;
   }
 
-  #dashboard_recent {
+  body.page_dashboard_recent #dashboard_recent {
     gap: 14px;
     margin-inline: 0;
   }
@@ -805,7 +809,6 @@
     background: var(--sid-accent);
     content: "";
   }
-
   /* Notices */
   :where(.section-infomessage, .st-message, .message-help, .inline-help-message, .help-message, .new_message.info) {
     box-sizing: border-box;
@@ -1227,19 +1230,33 @@
     border-color: var(--sid-border) !important;
   }
 
-  .daily-summaries .daily-summaries-segment-block-lessons-collapsed-title h3 > a {
+  .daily-summaries
+    .daily-summaries-segment-block-lessons-collapsed-title
+    h3
+    > a[data-action="dashboard-lessons-block-expand"] {
     color: var(--sid-text-2) !important;
   }
 
-  .daily-summaries .daily-summaries-segment-block-lessons-collapsed-title h3 > a > span {
+  .daily-summaries
+    .daily-summaries-segment-block-lessons-collapsed-title
+    h3
+    > a[data-action="dashboard-lessons-block-expand"]
+    > span {
     color: var(--sid-accent) !important;
   }
 
-  .daily-summaries .daily-summaries-segment-block-lessons-collapsed-title h3 > a:is(:hover, :focus-visible) {
+  .daily-summaries
+    .daily-summaries-segment-block-lessons-collapsed-title
+    h3
+    > a[data-action="dashboard-lessons-block-expand"]:is(:hover, :focus-visible) {
     color: var(--sid-text) !important;
   }
 
-  .daily-summaries .daily-summaries-segment-block-lessons-collapsed-title h3 > a:is(:hover, :focus-visible) > span {
+  .daily-summaries
+    .daily-summaries-segment-block-lessons-collapsed-title
+    h3
+    > a[data-action="dashboard-lessons-block-expand"]:is(:hover, :focus-visible)
+    > span {
     color: var(--sid-accent-strong) !important;
   }
 
@@ -1375,7 +1392,6 @@
     background: transparent !important;
     border-color: var(--sid-border) !important;
   }
-
   /* Absence calendar */
   .st-absences_excuses-calendar .monthname {
     margin-bottom: 6px !important;

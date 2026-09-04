@@ -1,0 +1,20 @@
+/* User directory */
+.page_users_directory .page_head {
+  border-bottom-color: var(--sid-border) !important;
+}
+
+.page_users_directory .page_title .light {
+  color: var(--sid-text-3) !important;
+}
+
+.page_users_directory .user_directory_card_contents .no_bull > li {
+  color: var(--sid-text-3) !important;
+}
+
+.page_users_directory .user_directory_card_contents .st-badge {
+  color: var(--sid-warning) !important;
+  background: var(--sid-warning-soft) !important;
+  border-color: var(--sid-warning-border) !important;
+  box-shadow: none !important;
+}
+

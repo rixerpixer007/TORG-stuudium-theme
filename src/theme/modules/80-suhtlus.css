@@ -1,0 +1,6 @@
+/* Suhtlus */
+:where(.header-wrapper, .suhtlus-nav) {
+  background: transparent !important;
+  border-color: var(--sid-border) !important;
+}
+

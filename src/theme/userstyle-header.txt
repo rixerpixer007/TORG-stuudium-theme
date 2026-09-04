@@ -1,0 +1,12 @@
+/* ==UserStyle==
+@name           Stuudium — Intentional Dark
+@namespace      https://github.com/rixerpixer007/TORG-stuudium-theme
+@version        2.8.0
+@description    A systematic graphite-and-mint dark theme for TORG Stuudium, Tera and Suhtlus.
+@author         rixerpixer007
+@homepageURL    https://github.com/rixerpixer007/TORG-stuudium-theme
+@supportURL     https://github.com/rixerpixer007/TORG-stuudium-theme/issues
+@updateURL      https://raw.githubusercontent.com/rixerpixer007/TORG-stuudium-theme/main/Stuudium-Intentional-Dark.user.css
+@license        MIT
+@preprocessor   default
+==/UserStyle== */

@@ -1,0 +1,56 @@
+/* Class page */
+.page_groups_view :where(.page_head, .divider) {
+  border-color: var(--sid-border) !important;
+}
+
+.page_groups_view .page_title .light {
+  color: var(--sid-text-3) !important;
+}
+
+.page_groups_view :where(
+  .new_column,
+  .group_teachers_cards,
+  .group_teacher,
+  .user_message_link_container,
+  .group_view_links,
+  .users-table
+) {
+  color: var(--sid-text-2) !important;
+  background: transparent !important;
+  border-color: var(--sid-border) !important;
+}
+
+.page_groups_view .group_teacher .avatar.outline {
+  border-color: var(--sid-border-strong) !important;
+}
+
+.page_groups_view .group_view_links a::before {
+  color: var(--sid-text-3) !important;
+}
+
+.page_groups_view .users-table :where(th, td) {
+  color: var(--sid-text-2) !important;
+  background: transparent !important;
+  border-color: var(--sid-border) !important;
+}
+
+.page_groups_view .users-table tbody tr.student > td:first-child {
+  color: var(--sid-text-3) !important;
+}
+
+.page_groups_view .users-table .u-name > i {
+  color: var(--sid-text-2) !important;
+}
+
+.page_groups_view .users-table tr.parent .u-name > em {
+  color: var(--sid-text-3) !important;
+}
+
+.page_groups_view :where(.group_teacher, .group_view_links, .users-table) a {
+  color: var(--sid-accent) !important;
+}
+
+.page_groups_view :where(.group_teacher, .group_view_links, .users-table) a:is(:hover, :focus-visible) {
+  color: var(--sid-accent-strong) !important;
+}
+

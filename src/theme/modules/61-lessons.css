@@ -1,0 +1,117 @@
+/* Lesson information */
+.page_subjects_student .subjectplan-student-view-journal-planlist {
+  color: var(--sid-text-2) !important;
+  background: var(--sid-surface-2) !important;
+  border-color: var(--sid-border) !important;
+  box-shadow: none !important;
+}
+
+.page_subjects_student .subjectplan-student-view-journal-planlist > a {
+  color: var(--sid-accent) !important;
+  background: transparent !important;
+  border-color: var(--sid-border-strong) !important;
+  box-shadow: none !important;
+}
+
+.page_subjects_student .new_message {
+  color: var(--sid-text-2) !important;
+  background: var(--sid-accent-soft) !important;
+  border: 1px solid var(--sid-accent-border) !important;
+  border-radius: var(--sid-radius-sm) !important;
+  box-shadow: none !important;
+}
+
+.page_subjects_student .student_subject_grades {
+  color: var(--sid-text-2) !important;
+  background: transparent !important;
+}
+
+.page_subjects_student .student_subject_grades :where(th, td) {
+  border-color: var(--sid-border) !important;
+}
+
+.page_subjects_student .page_body_subhead {
+  border-color: var(--sid-border) !important;
+}
+
+.page_subjects_student .student_subject_grades tr:hover {
+  background: var(--sid-surface-3) !important;
+}
+
+.page_subjects_student .student_subject_grades tr.table-sizer:hover {
+  background: transparent !important;
+}
+
+.page_subjects_student .student_subject_grades tr.summary .grade_is_summary {
+  display: inline-grid !important;
+  place-items: center !important;
+}
+
+.page_subjects_student .student_subject_grades tr.summary .grade_is_summary > .grade_active {
+  margin-block: 0 !important;
+}
+
+.page_subjects_student .student_subject_grades tr:has(> #student_subject_grades_mode_toggle) {
+  background: transparent !important;
+}
+
+.page_subjects_student #student_subject_grades_mode_toggle .st-genericactive,
+.page_subjects_student #student_subject_grades_mode_toggle .st-genericactive > span {
+  color: var(--sid-text-2) !important;
+}
+
+.page_subjects_student #student_subject_grades_mode_toggle input[type="checkbox"] {
+  accent-color: var(--sid-accent) !important;
+}
+
+.page_subjects_student #student_subject_grades_mode_toggle input[type="checkbox"] ~ em {
+  border-color: var(--sid-border-strong) !important;
+}
+
+.page_subjects_student #student_subject_grades_mode_toggle input[type="checkbox"]:checked ~ em {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5 6.5 12 13 4.5' fill='none' stroke='%2365d6b1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") !important;
+}
+
+.page_subjects_student .student_subject_grades :where(.new_grades, .grade) {
+  color: var(--sid-text-2) !important;
+}
+
+.page_subjects_student .student_subject_grades :where(.grade_A, .grade_B, .grade_C, .grade_AR) {
+  color: var(--sid-text-2) !important;
+}
+
+.page_subjects_student .student_subject_grades .grade_notes {
+  color: var(--sid-text) !important;
+}
+
+.page_subjects_student .student_subject_grades :where(.grade_params, .disclaimer, .teacher) {
+  color: var(--sid-text-3) !important;
+}
+
+.page_subjects_student .student_subject_grades :where(.grade_param_has_comment, .icon-comment, .icon-comment-empty) {
+  color: var(--sid-accent) !important;
+}
+
+.page_subjects_student .student_subject_grades .time {
+  color: var(--sid-accent-strong) !important;
+}
+
+.page_subjects_student .lesson_grade_history .current > th:first-child {
+  color: var(--sid-accent) !important;
+}
+
+.page_subjects_student .lesson_grade_history {
+  color: var(--sid-text-2) !important;
+  background: var(--sid-surface-2) !important;
+  border-color: var(--sid-border-strong) !important;
+  box-shadow: none !important;
+}
+
+.page_subjects_student .lesson_grade_history .current {
+  background: var(--sid-accent-soft) !important;
+}
+
+.page_subjects_student .lesson_grade_history :where(th, td) {
+  border-color: var(--sid-border) !important;
+}
+

@@ -1,0 +1,53 @@
+/* Notices */
+:where(.section-infomessage, .st-message, .message-help, .inline-help-message, .help-message, .new_message.info) {
+  box-sizing: border-box;
+  padding: 6px 8px !important;
+  color: var(--sid-text-2) !important;
+  background: var(--sid-accent-soft) !important;
+  border: 1px solid var(--sid-accent-border) !important;
+  border-radius: var(--sid-radius-sm) !important;
+}
+
+:is(.page_avaldused_index, .page_users_summary) .new_message:not(.error, .warning) {
+  position: relative;
+  padding-left: 30px !important;
+  color: var(--sid-text-2) !important;
+  background: var(--sid-accent-soft) !important;
+  border: 1px solid var(--sid-accent-border) !important;
+  border-radius: var(--sid-radius-sm) !important;
+  box-shadow: none !important;
+}
+
+:is(.page_avaldused_index, .page_users_summary) .new_message:not(.error, .warning)::before {
+  position: absolute;
+  top: 50%;
+  left: 8px;
+  display: grid;
+  width: 14px;
+  height: 14px;
+  color: var(--sid-accent);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1;
+  content: "i";
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  place-items: center;
+  transform: translateY(-50%);
+}
+
+:where(.important, .warning, .message-warning) {
+  color: var(--sid-text-2) !important;
+  background: var(--sid-warning-soft) !important;
+  border-color: var(--sid-warning-border) !important;
+}
+
+:where(.new_message.error, .message-error, .error-message) {
+  padding: 10px 12px !important;
+  color: var(--sid-text-2) !important;
+  background: var(--sid-danger-soft) !important;
+  border: 1px solid var(--sid-danger-border) !important;
+  border-radius: var(--sid-radius-sm) !important;
+}
+

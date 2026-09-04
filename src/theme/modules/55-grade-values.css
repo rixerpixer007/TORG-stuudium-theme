@@ -1,0 +1,76 @@
+/* Grade value paints shared by the compact and expanded subject renderers. */
+:is(
+  .page_dashboard_subjects .dashboard-subjects-journal,
+  .page_grades_student .student_lessons_grades
+) :where(.grade_A, .grade_B, .grade_C, .grade_AR),
+.page_dashboard_subjects
+  .dashboard-subjects-journal
+  .grade-current:not(:has(.grade-current-verbose-standalone)) {
+  color: var(--sid-text-2) !important;
+}
+
+:is(
+  .page_dashboard_subjects .dashboard-subjects-journal,
+  .page_grades_student .student_lessons_grades
+) :where(.grade_3, .grade_4, .grade_5),
+.page_dashboard_subjects
+  .dashboard-subjects-journal
+  .d-s-is-final
+  .grade-current:not(:has(.grade-current-verbose-standalone)) {
+  color: var(--sid-text) !important;
+}
+
+:is(
+  .page_dashboard_subjects .dashboard-subjects-journal,
+  .page_grades_student .student_lessons_grades
+) :where(.grade_param_has_comment, .icon-comment, .icon-comment-empty) {
+  color: var(--sid-accent) !important;
+}
+
+:is(
+  .page_subjects_student .student_subject_grades,
+  .page_dashboard_subjects .dashboard-subjects-journal,
+  .page_grades_student .student_lessons_grades
+) .grade_param_has_comment :is(.icon-comment, .icon-comment-empty)::before {
+  display: inline-block !important;
+  width: 1em !important;
+  height: auto !important;
+  color: var(--sid-accent) !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  -webkit-mask: none !important;
+  mask: none !important;
+  filter: none !important;
+  font-family: "fontello" !important;
+  font-size: 9px !important;
+  font-style: normal !important;
+  font-variant: normal !important;
+  font-weight: normal !important;
+  line-height: 15px !important;
+  text-align: center !important;
+  text-decoration: inherit !important;
+  text-transform: none !important;
+  vertical-align: baseline !important;
+}
+
+:is(
+  .page_subjects_student .student_subject_grades,
+  .page_dashboard_subjects .dashboard-subjects-journal,
+  .page_grades_student .student_lessons_grades
+) .grade_param_has_comment .icon-comment::before {
+  content: "\e802" !important;
+}
+
+:is(
+  .page_subjects_student .student_subject_grades,
+  .page_dashboard_subjects .dashboard-subjects-journal,
+  .page_grades_student .student_lessons_grades
+) .grade_param_has_comment .icon-comment-empty::before {
+  content: "\e804" !important;
+}
+
+.page_dashboard_subjects .d-s-grade-popover :where(.d-s-grade-comment, .d-s-grade-lesson) {
+  color: var(--sid-text-2) !important;
+  border-color: var(--sid-border) !important;
+}
+

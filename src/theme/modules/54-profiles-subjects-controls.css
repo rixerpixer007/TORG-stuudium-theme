@@ -1,0 +1,163 @@
+/* Profiles, subjects and segmented controls */
+:where(.st-segment-nav, .st-toggle-control) {
+  color: var(--sid-text-2) !important;
+  background: var(--sid-surface-2) !important;
+  border-color: var(--sid-border-strong) !important;
+}
+
+:where(.st-segment-nav a, .st-toggle-control label, .st-toggle-control label em) {
+  color: var(--sid-text-2) !important;
+  background-color: transparent !important;
+  border-color: var(--sid-border) !important;
+}
+
+:where(.st-segment-nav a:hover, .st-segment-nav a.active, .st-segment-nav .st-is-active, .st-toggle-control label:hover, .st-toggle-control label:has(input:checked)) {
+  color: var(--sid-text) !important;
+  background: var(--sid-accent-soft) !important;
+  border-color: var(--sid-accent-border) !important;
+}
+
+.page_dashboard_subjects .dashboard-subjects-journal {
+  color: var(--sid-text-2) !important;
+  background: var(--sid-surface) !important;
+  border: 1px solid var(--sid-border) !important;
+  border-radius: var(--sid-radius) !important;
+  box-shadow: none !important;
+}
+
+.page_dashboard_subjects .dashboard-subjects-journal:hover {
+  background: var(--sid-surface-3) !important;
+  border-color: var(--sid-accent-border) !important;
+}
+
+.page_dashboard_subjects :where(.dashboard-subjects-journal-content, .dashboard-subjects-journal-teachers, .dashboard-subjects-journal-content-period),
+.page_users_language_select .page_head,
+.page_users_profile :where(.page_head, .new_column, .divider, .standard, .user_card, .sso) {
+  color: var(--sid-text-2) !important;
+  background: transparent !important;
+  border-color: var(--sid-border) !important;
+}
+
+.page_dashboard_subjects
+  .dashboard-subjects-view-mode-expanded
+  .dashboard-subjects-journal
+  > h2,
+.page_dashboard_subjects
+  .dashboard-subjects-view-mode-expanded
+  .dashboard-subjects-journal
+  h3.d-s-period {
+  color: var(--sid-text) !important;
+  background: var(--sid-surface) !important;
+}
+
+.page_dashboard_subjects
+  .dashboard-subjects-view-mode-expanded
+  .dashboard-subjects-journal:hover
+  > h2,
+.page_dashboard_subjects
+  .dashboard-subjects-view-mode-expanded
+  .dashboard-subjects-journal:hover
+  h3.d-s-period {
+  background: var(--sid-surface-3) !important;
+}
+
+.page_dashboard_subjects .dashboard-subjects-journal h2 > a {
+  color: var(--sid-text) !important;
+  text-decoration-color: rgb(242 240 233 / 28%) !important;
+}
+
+.page_dashboard_subjects .dashboard-subjects-journal h2 > a:hover {
+  color: var(--sid-text) !important;
+  text-decoration-color: currentColor !important;
+}
+
+.page_dashboard_subjects .dashboard-subjects-journal h3.d-s-period > a {
+  color: var(--sid-text) !important;
+  text-decoration-color: rgb(242 240 233 / 28%) !important;
+}
+
+.page_dashboard_subjects .dashboard-subjects-journal h3.d-s-period > a > span {
+  color: var(--sid-text-2) !important;
+}
+
+.page_dashboard_subjects .dashboard-subjects-journal h3.d-s-period > a:is(:hover, :focus-visible) {
+  color: var(--sid-text) !important;
+  text-decoration-color: currentColor !important;
+}
+
+.page_dashboard_subjects .dashboard-subjects-journal .d-s-type {
+  color: var(--sid-text-2) !important;
+}
+
+.page_dashboard_subjects .dashboard-subjects-journal .d-s-type-expandable {
+  text-decoration-color: var(--sid-accent-border) !important;
+}
+
+.page_dashboard_subjects .dashboard-subjects-journal .d-s-type-expandable:hover {
+  color: var(--sid-accent-strong) !important;
+  text-decoration-color: currentColor !important;
+}
+
+.page_dashboard_subjects .dashboard-subjects-journal :where(.ng-grade, .ng-notes, .d-s-lesson, .d-s-lesson b) {
+  color: var(--sid-text-2) !important;
+  background: transparent !important;
+}
+
+.page_dashboard_subjects .dashboard-subjects-journal .grade-current-verbose-standalone {
+  color: var(--sid-text-2) !important;
+}
+
+.page_dashboard_subjects .dashboard-subjects-journal .ng-param-wrapper .grade-param-extra {
+  color: var(--sid-text-3) !important;
+}
+
+.page_dashboard_subjects .dashboard-subjects-journal .d-s-entry-summary {
+  color: var(--sid-text-2) !important;
+  background: var(--sid-surface-2) !important;
+  border-color: var(--sid-border) !important;
+}
+
+.page_dashboard_subjects .dashboard-subjects-journal .d-s-entry-summary .ng-grade-is-summary-wrapper {
+  padding: 0 !important;
+  color: var(--sid-text-2) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+}
+
+.page_dashboard_subjects .dashboard-subjects-journal .d-s-is-final {
+  color: var(--sid-text-2) !important;
+  background: var(--sid-surface-2) !important;
+  border: 1px solid var(--sid-border) !important;
+  border-radius: var(--sid-radius-sm) !important;
+}
+
+.page_dashboard_subjects .subjectplan-student-view-journal-planlist > a {
+  color: var(--sid-text-2) !important;
+  background: transparent !important;
+  border-color: var(--sid-border-strong) !important;
+  box-shadow: none !important;
+}
+
+.page_dashboard_subjects .subjectplan-student-view-journal-planlist > a:hover,
+.page_dashboard_subjects .subjectplan-student-view-journal-planlist > a:focus-visible {
+  color: var(--sid-accent-strong) !important;
+  background: var(--sid-accent-soft) !important;
+  border-color: var(--sid-accent-border) !important;
+}
+
+.page_dashboard_subjects .dashboard-subjects-journal-teacher [data-balloon]::after {
+  color: var(--sid-text) !important;
+  background: var(--sid-bg-overlay) !important;
+  border: 1px solid var(--sid-border-strong) !important;
+  border-radius: var(--sid-radius-sm) !important;
+  box-shadow: var(--sid-shadow) !important;
+}
+
+.page_dashboard_subjects
+  .dashboard-subjects-journal-teacher
+  [data-balloon][data-balloon-pos="down"]::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='12'%3E%3Cpath fill='%231b211e' transform='rotate(180 18 6)' d='M2.658,0 C-13.615,0 50.938,0 34.662,0 C28.662,0 23.035,12.002 18.660,12.002 C14.285,12.002 8.594,0 2.658,0 Z'/%3E%3C/svg%3E") !important;
+  border-bottom-color: var(--sid-surface-2) !important;
+}
+

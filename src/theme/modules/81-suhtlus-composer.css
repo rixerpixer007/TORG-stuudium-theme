@@ -1,0 +1,147 @@
+/* New-message composer */
+.suhtlus .my-drafts {
+  color: var(--sid-text-2) !important;
+  background: var(--sid-surface-2) !important;
+  border: 1px solid var(--sid-border) !important;
+  border-radius: var(--sid-radius-sm) !important;
+  margin-bottom: 12px !important;
+  box-shadow: none !important;
+}
+
+.suhtlus .my-drafts h3 {
+  color: var(--sid-text) !important;
+}
+
+.suhtlus .my-drafts .draft-date {
+  color: var(--sid-text-3) !important;
+}
+
+.suhtlus .post-edit {
+  color: var(--sid-text-2) !important;
+  background: var(--sid-surface) !important;
+  border: 1px solid var(--sid-border) !important;
+  border-radius: var(--sid-radius-sm) !important;
+  box-shadow: none !important;
+}
+
+.suhtlus .post-edit .post-edit-submit {
+  color: var(--sid-text-2) !important;
+  background: var(--sid-canvas-soft) !important;
+  border: 0 !important;
+  border-top: 1px solid var(--sid-border) !important;
+  border-radius: 0 0 var(--sid-radius-sm) var(--sid-radius-sm) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.suhtlus .post-edit .post-edit-event-params {
+  color: var(--sid-text-2) !important;
+  background: var(--sid-surface-2) !important;
+  border-color: var(--sid-border) !important;
+}
+
+.suhtlus .post-edit .post-edit-event-params .section-label {
+  color: var(--sid-text) !important;
+}
+
+.suhtlus .post-edit .post-edit-event-help {
+  color: var(--sid-text-3) !important;
+}
+
+.suhtlus .post-edit .post-edit-errors.has-errors {
+  box-sizing: border-box !important;
+  padding: 10px 12px !important;
+  margin: 0 10px 10px !important;
+  color: var(--sid-danger) !important;
+  background: var(--sid-danger-soft) !important;
+  border: 1px solid var(--sid-danger-border) !important;
+  border-radius: var(--sid-radius-sm) !important;
+}
+
+.suhtlus .post-edit .post-edit-contents > .full-size-field:has(> textarea) {
+  margin-top: 12px !important;
+}
+
+.suhtlus [data-suhtlus-role="post-edit-container"].is-from-calendar
+  .post-edit-contents > .full-size-field:has(> textarea) {
+  margin-top: 0 !important;
+}
+
+.suhtlus .post-edit [data-role="membership-search-no-results-hint"] {
+  display: none !important;
+}
+
+.suhtlus .post-edit .membership-search .selectize-input,
+.suhtlus .post-edit .membership-search .selectize-dropdown {
+  color: var(--sid-text-2) !important;
+  background: var(--sid-control) !important;
+  border-color: var(--sid-border) !important;
+  box-shadow: none !important;
+}
+
+.suhtlus .post-edit .membership-search .selectize-input input {
+  color: var(--sid-text) !important;
+  caret-color: var(--sid-accent) !important;
+}
+
+.suhtlus .post-edit .membership-search .selectize-input input::placeholder {
+  color: var(--sid-text-disabled) !important;
+  opacity: 1 !important;
+}
+
+.suhtlus .post-edit .membership-search .selectize-input [data-value] {
+  color: var(--sid-text-2) !important;
+  background: var(--sid-accent-soft) !important;
+  border-color: var(--sid-accent-border) !important;
+  border-radius: var(--sid-radius-xs) !important;
+  box-shadow: none !important;
+}
+
+.suhtlus .post-edit .membership-search .selectize-input [data-value] .remove {
+  color: var(--sid-accent) !important;
+  background: transparent !important;
+  border-color: var(--sid-accent-border) !important;
+}
+
+.suhtlus .post-edit .membership-search .selectize-dropdown-content [data-selectable] {
+  color: var(--sid-text-2) !important;
+  background: transparent !important;
+  border-bottom: 1px solid var(--sid-border) !important;
+}
+
+.suhtlus .post-edit .membership-search .selectize-dropdown-content [data-selectable]:last-child {
+  border-bottom: 0 !important;
+}
+
+.suhtlus .post-edit .membership-search .selectize-dropdown-content .opt-description {
+  color: var(--sid-text-3) !important;
+}
+
+.suhtlus .post-edit .membership-search .selectize-dropdown-content :where([data-selectable]:hover, .active) {
+  color: var(--sid-text) !important;
+  background: var(--sid-accent-soft) !important;
+}
+
+.suhtlus .post-edit .membership-search .selectize-dropdown-content :where([data-selectable]:hover, .active) .opt-description {
+  color: var(--sid-text-2) !important;
+}
+
+.suhtlus-nav a {
+  color: var(--sid-text-3) !important;
+  background: transparent !important;
+  border-color: transparent !important;
+}
+
+:where(.suhtlus-nav a:hover) {
+  color: var(--sid-text) !important;
+  background: var(--sid-surface) !important;
+}
+
+.suhtlus-nav a.nav-active {
+  color: var(--sid-accent-strong) !important;
+  background: var(--sid-accent-soft) !important;
+  border-color: var(--sid-accent-border) !important;
+  border-radius: var(--sid-radius-sm) var(--sid-radius-sm) 0 0 !important;
+  box-shadow: inset 0 -3px 0 var(--sid-accent) !important;
+}
+

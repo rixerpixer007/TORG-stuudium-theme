@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="manifest.open_in_tab" content="true" />
+    <title>TORG Stuudium Enhancement settings</title>
+  </head>
+  <body>
+    <main>
+      <header>
+        <p class="eyebrow">TORG Stuudium Enhancement</p>
+        <h1>Settings</h1>
+        <p>Control the local enhancement without changing your Stuudium account or school data.</p>
+      </header>
+
+      <form>
+        <label class="setting" for="enhancement-enabled">
+          <span>
+            <strong>Enable the enhancement</strong>
+            <small>Apply Intentional Dark and show the in-page settings shortcut.</small>
+          </span>
+          <input id="enhancement-enabled" name="enhancement-enabled" type="checkbox" />
+        </label>
+      </form>
+
+      <p id="status" class="status" role="status" aria-live="polite">Loading preference…</p>
+      <p class="privacy-note">
+        Stored locally: this enable/disable preference only. The extension does not store grades,
+        attendance, messages, authentication data, or other student information.
+      </p>
+    </main>
+
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

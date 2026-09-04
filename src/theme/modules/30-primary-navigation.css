@@ -1,0 +1,70 @@
+/* Primary navigation and menus */
+.st-stuudium-navigation-2021 {
+  position: relative !important;
+  z-index: var(--sid-z-nav) !important;
+  overflow: visible !important;
+  background: rgb(15 19 17 / 94%) !important;
+  border-bottom: 1px solid var(--sid-border) !important;
+  box-shadow: none !important;
+  backdrop-filter: blur(18px) saturate(135%);
+}
+
+:where(#stuudium-navigation-container, #stuudium-navigation-container-inner) {
+  position: relative !important;
+  z-index: var(--sid-z-nav) !important;
+  overflow: visible !important;
+  background: var(--sid-canvas) !important;
+}
+
+.st-stuudium-navigation-2021-contents {
+  max-width: 1180px;
+  margin-inline: auto;
+}
+
+:where(.st-nav-item, .st-nav-item-label, .st-nav-item-graphic) {
+  color: var(--sid-text-2) !important;
+  border-color: var(--sid-border) !important;
+}
+
+.st-nav-block-main {
+  gap: 4px !important;
+}
+
+:where(.st-nav-item:hover, .st-nav-item.sn-active, .st-nav-item[aria-expanded="true"]) {
+  color: var(--sid-text) !important;
+  background: var(--sid-accent-soft) !important;
+  border-color: var(--sid-accent-border) !important;
+}
+
+.st-nav-item-expandable:hover > .st-nav-item {
+  color: var(--sid-text) !important;
+  background: var(--sid-accent-soft) !important;
+  border-color: var(--sid-accent-border) !important;
+}
+
+.st-nav-item.sn-active {
+  box-shadow: inset 0 -2px 0 var(--sid-accent) !important;
+}
+
+:where(.st-nav-item-expandable-content, .st-nav-item-menu-contents, [data-dropdown-content], .dropdown, .dropdown-menu, .ui-menu, .select2-drop) {
+  z-index: var(--sid-z-menu) !important;
+  color: var(--sid-text-2) !important;
+  background: var(--sid-surface-2) !important;
+  border: 1px solid var(--sid-border) !important;
+  border-radius: var(--sid-radius) !important;
+  box-shadow: var(--sid-shadow) !important;
+}
+
+:where(.st-nav-item-expandable-content, .st-nav-item-menu-contents) {
+  overflow: hidden !important;
+}
+
+:where(.st-nav-menu-contents-item, .st-nav-item-expandable-content a, .ui-menu-item) {
+  background: transparent !important;
+}
+
+:where(.st-nav-menu-contents-item:hover, .st-nav-item-expandable-content a:hover, .ui-menu-item:hover) {
+  color: var(--sid-text) !important;
+  background: var(--sid-surface-3) !important;
+}
+

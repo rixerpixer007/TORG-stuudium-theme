@@ -1,0 +1,48 @@
+/*
+ * Design tokens
+ * Stuudium has reusable component/state classes but no native colour tokens,
+ * so this userstyle supplies one palette and maps those classes onto it.
+ */
+:root {
+  color-scheme: dark;
+  --sid-canvas: #0f1311;
+  --sid-canvas-soft: #121713;
+  --sid-canvas-highlight: #101512;
+  --sid-surface: #171c19;
+  --sid-surface-2: #1b211e;
+  --sid-surface-3: #202824;
+  --sid-surface-interactive: #191f1b;
+  --sid-bg-overlay: var(--sid-surface-2);
+  --sid-control: #111613;
+  --sid-border: #2a332e;
+  --sid-border-strong: #3a4740;
+  --sid-text: #f2f0e9;
+  --sid-text-2: #c1c0b8;
+  --sid-text-3: #959b95;
+  --sid-text-disabled: #5d655f;
+  --sid-accent: #65d6b1;
+  --sid-accent-strong: #7ce8c3;
+  --sid-accent-ink: #0b110e;
+  --sid-accent-soft: rgb(101 214 177 / 12%);
+  --sid-accent-border: rgb(101 214 177 / 34%);
+  --sid-danger: #ff9696;
+  --sid-danger-soft: rgb(255 150 150 / 11%);
+  --sid-danger-border: rgb(255 150 150 / 42%);
+  --sid-warning: #efc873;
+  --sid-warning-soft: rgb(239 200 115 / 11%);
+  --sid-warning-border: rgb(239 200 115 / 42%);
+  --sid-radius-xs: 4px;
+  --sid-radius-sm: 7px;
+  --sid-radius: 11px;
+  --sid-radius-lg: 14px;
+  --sid-radius-pill: 999px;
+  --sid-shadow: 0 16px 42px rgb(0 0 0 / 24%);
+  --sid-focus: 0 0 0 3px rgb(101 214 177 / 20%);
+  --sid-icon-filter-light: invert(88%) sepia(8%) saturate(228%) hue-rotate(88deg) brightness(90%) contrast(91%);
+  --sid-icon-filter-dark: brightness(0) saturate(100%);
+  --sid-spinner-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='9' fill='none' stroke='%232a332e' stroke-width='3'/%3E%3Cpath d='M12 3a9 9 0 0 1 9 9' fill='none' stroke='%2365d6b1' stroke-width='3' stroke-linecap='round'%3E%3CanimateTransform attributeName='transform' type='rotate' from='0 12 12' to='360 12 12' dur='.75s' repeatCount='indefinite'/%3E%3C/path%3E%3C/svg%3E");
+  --sid-z-tabs: 500;
+  --sid-z-nav: 10000;
+  --sid-z-menu: 10020;
+}
+

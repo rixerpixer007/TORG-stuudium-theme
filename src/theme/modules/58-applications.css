@@ -1,0 +1,57 @@
+/* Applications */
+:is(.page_avaldused_index, .page_avaldused_edit) .page_head {
+  border-bottom-color: var(--sid-border) !important;
+}
+
+.page_avaldused_edit .avaldus-status-banner-draft > span {
+  color: var(--sid-warning) !important;
+  background: var(--sid-surface-2) !important;
+}
+
+.page_avaldused_edit .avaldused-edit-application-section.hide_from_print {
+  border-top-color: var(--sid-border) !important;
+}
+
+.page_avaldused_index .avaldused-create-new-templates-list-template > .bl-inner {
+  color: var(--sid-text-2) !important;
+  background: var(--sid-surface-2) !important;
+  border-radius: var(--sid-radius-sm) !important;
+  box-shadow: inset 0 0 0 1px var(--sid-border) !important;
+}
+
+.page_avaldused_index .avaldused-create-new-templates-list-template > .bl-inner:is(:hover, :focus-visible) {
+  color: var(--sid-accent-strong) !important;
+  background: var(--sid-surface-3) !important;
+  box-shadow: inset 0 0 0 1px var(--sid-accent-border) !important;
+}
+
+.page_avaldused_index .avaldus-application-index-filters .st-toggle-control {
+  color: var(--sid-text-2) !important;
+  background: var(--sid-surface-2) !important;
+  border-color: var(--sid-border-strong) !important;
+}
+
+.page_avaldused_index .avaldus-application-index-filters .st-toggle-control label > span {
+  color: var(--sid-text-2) !important;
+}
+
+.page_avaldused_index .avaldus-application-index-filters .st-toggle-control label:has(input:checked) > span {
+  color: var(--sid-text) !important;
+}
+
+.page_avaldused_index .avaldus-application-index-filters .st-toggle-control label > em {
+  background-image: none !important;
+}
+
+.page_avaldused_index .avaldus-application-index-filters .st-toggle-control input:checked ~ em::after {
+  position: absolute;
+  top: 5px;
+  left: 9px;
+  width: 4px;
+  height: 8px;
+  content: "";
+  border: solid var(--sid-accent);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+

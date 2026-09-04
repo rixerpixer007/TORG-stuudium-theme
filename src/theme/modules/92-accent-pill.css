@@ -1,0 +1,10 @@
+/* Shared accent-pill shell; text, spacing, and semantic variants stay local. */
+.page_grades_student .help_toggle,
+.suhtlus :where(.bl-p),
+.page_registration_collection .st-badge.st-badge-green,
+.page_registration_collection .reg_count abbr {
+  background: var(--sid-accent-soft) !important;
+  border: 1px solid var(--sid-accent-border) !important;
+  border-radius: var(--sid-radius-pill) !important;
+}
+

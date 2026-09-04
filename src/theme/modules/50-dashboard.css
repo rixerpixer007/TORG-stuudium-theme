@@ -1,0 +1,25 @@
+/* Dashboard, diary and dynamically loaded older entries */
+body.page_dashboard_recent :is(
+  .section.todos,
+  .section.student_absences_excuses
+) > .section-infomessage {
+  display: none !important;
+}
+
+#dashboard_recent .student_absences_excuses [data-role="student-absences-excuser"].is_loading {
+  background-color: transparent !important;
+  background-image: var(--sid-spinner-image) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: 24px 24px !important;
+  filter: none !important;
+}
+
+:where(.daily-summaries-navigate, .daily-summary, .scheduled > *, .scheduled-item, .lesson, .event, .todo_container) {
+  border-color: var(--sid-border) !important;
+}
+
+:where(.daily-summary, .scheduled-item, .lesson, .event):hover {
+  background: var(--sid-surface-3) !important;
+}
+

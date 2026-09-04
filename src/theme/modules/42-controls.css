@@ -1,0 +1,100 @@
+/* Controls: intentionally limited to Stuudium controls and text-like fields */
+:where(
+  .new_button,
+  .button,
+  a.button-submit,
+  a.button-disabled,
+  :is(#content, .page_body, .courses_index, .suhtlus) button,
+  input[type="button"],
+  input[type="submit"]
+) {
+  color: var(--sid-text) !important;
+  background: var(--sid-surface-2) !important;
+  border: 1px solid var(--sid-border-strong) !important;
+  border-radius: var(--sid-radius-sm) !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  transition: color 140ms ease, background-color 140ms ease, border-color 140ms ease, transform 140ms ease;
+}
+
+:where(
+  .new_button,
+  .button,
+  a.button-submit,
+  :is(#content, .page_body, .courses_index, .suhtlus) button,
+  input[type="button"],
+  input[type="submit"]
+):not(:disabled):not([aria-disabled="true"]):not(.disabled):hover {
+  color: var(--sid-accent-ink) !important;
+  background: var(--sid-accent) !important;
+  border-color: var(--sid-accent) !important;
+  transform: translateY(-1px);
+}
+
+:where(.new_button, .button):where(.pill, .round, [data-shape="pill"]) {
+  border-radius: var(--sid-radius-pill) !important;
+}
+
+:where(
+  .new_button,
+  .button,
+  :is(#content, .page_body, .courses_index, .suhtlus) button,
+  input[type="button"],
+  input[type="submit"]
+):is(:disabled, [aria-disabled="true"], .disabled),
+a.button-disabled {
+  color: var(--sid-text-disabled) !important;
+  background: var(--sid-canvas-soft) !important;
+  border-color: var(--sid-border) !important;
+  transform: none !important;
+  cursor: not-allowed !important;
+}
+
+:where(.button-primary, .new_button.blue, a.button-submit, :is(#content, .page_body, .courses_index, .suhtlus) button.primary, input[type="submit"].primary) {
+  color: var(--sid-accent-ink) !important;
+  background: var(--sid-accent) !important;
+  border-color: var(--sid-accent) !important;
+  font-weight: 700;
+}
+
+:where(.new_button, .button, :is(#content, .page_body, .courses_index, .suhtlus) button, input, textarea, select, [contenteditable="true"], .st-nav-item, .tab, a):focus-visible {
+  outline: 2px solid var(--sid-accent) !important;
+  outline-offset: 2px;
+  box-shadow: var(--sid-focus) !important;
+}
+
+:where(
+  input:not([type]),
+  input[type="text"],
+  input[type="search"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  input[type="date"],
+  input[type="time"],
+  textarea,
+  select,
+  .standard-styled-input,
+  .select2-container .select2-choice,
+  .selectize-input,
+  [contenteditable="true"]
+) {
+  color: var(--sid-text) !important;
+  caret-color: var(--sid-accent);
+  background-color: var(--sid-control) !important;
+  border: 1px solid var(--sid-border) !important;
+  border-radius: var(--sid-radius-sm) !important;
+  box-shadow: none !important;
+}
+
+:where(input, textarea)::placeholder {
+  color: var(--sid-text-disabled) !important;
+  opacity: 1;
+}
+
+:where(input, textarea, select, [contenteditable="true"]):disabled {
+  color: var(--sid-text-disabled) !important;
+  background-color: var(--sid-canvas-soft) !important;
+  cursor: not-allowed;
+}
+

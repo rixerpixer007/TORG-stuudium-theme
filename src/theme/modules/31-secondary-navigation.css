@@ -1,0 +1,69 @@
+/* Secondary tabs and the large "Veel" menu */
+.page_tabs {
+  position: relative !important;
+  z-index: var(--sid-z-tabs) !important;
+  background: rgb(15 19 17 / 90%) !important;
+  border-bottom: 1px solid var(--sid-border) !important;
+  box-shadow: none !important;
+}
+
+.page_tabs .tab {
+  color: var(--sid-text-3) !important;
+  background: transparent !important;
+  border-color: transparent !important;
+}
+
+.page_tabs .tab:hover {
+  color: var(--sid-accent-strong) !important;
+  background: transparent !important;
+  border-color: transparent !important;
+  text-decoration: none !important;
+}
+
+.page_tabs .tab.active {
+  color: var(--sid-accent) !important;
+  background: var(--sid-canvas) !important;
+  border-color: var(--sid-border) var(--sid-border) var(--sid-canvas) !important;
+}
+
+.page_tabs_dropdown_v2 {
+  z-index: calc(var(--sid-z-tabs) + 20) !important;
+  padding: 14px;
+  color: var(--sid-text-2) !important;
+  background: var(--sid-surface-2) !important;
+  border: 1px solid var(--sid-border-strong) !important;
+  border-radius: var(--sid-radius-lg) !important;
+  box-shadow: var(--sid-shadow) !important;
+}
+
+.page_tabs_dropdown_v2 .page_tabs_dropdown_segment {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 10px;
+  margin: 0 0 12px;
+  padding: 0 0 12px;
+  border-color: var(--sid-border) !important;
+}
+
+.page_tabs_dropdown_v2 .page_tabs_dropdown_segment:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.page_tabs_dropdown_v2 a {
+  min-height: 44px;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  color: var(--sid-text-2) !important;
+  background: var(--sid-surface) !important;
+  border: 1px solid var(--sid-border) !important;
+  border-radius: var(--sid-radius-sm) !important;
+  text-decoration: none !important;
+}
+
+:where(.page_tabs_dropdown_v2 a:hover, .page_tabs_dropdown_v2 a:focus-visible) {
+  color: var(--sid-text) !important;
+  background: var(--sid-accent-soft) !important;
+  border-color: var(--sid-accent-border) !important;
+}
+

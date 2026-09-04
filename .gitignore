@@ -1,0 +1,6 @@
+.DS_Store
+.output/
+.wxt/
+node_modules/
+src/generated/
+web-ext-artifacts/
