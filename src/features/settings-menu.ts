@@ -36,10 +36,26 @@ function createButton(document: Document, openSettings: () => Promise<boolean>):
   const graphic = document.createElement("span");
   graphic.className = "st-nav-item-graphic";
 
-  const icon = document.createElement("span");
-  icon.className = "sid-extension-settings-menu-icon";
+  const iconWrapper = document.createElement("span");
+  iconWrapper.className = "sn-navicon-new";
+
+  const icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  icon.setAttribute("class", "sid-extension-settings-menu-icon");
+  icon.setAttribute("width", "32");
+  icon.setAttribute("height", "32");
+  icon.setAttribute("viewBox", "0 0 24 24");
   icon.setAttribute("aria-hidden", "true");
-  graphic.append(icon);
+  icon.setAttribute("focusable", "false");
+
+  const iconPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  iconPath.setAttribute(
+    "d",
+    "M19.14 12.94a7.6 7.6 0 0 0 .05-.94 7.6 7.6 0 0 0-.05-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.61-.22l-2.39.96a7.4 7.4 0 0 0-1.63-.95L14.38 2.8a.5.5 0 0 0-.5-.42h-3.84a.5.5 0 0 0-.5.42l-.36 2.51c-.59.24-1.13.56-1.64.95L5.15 5.3a.5.5 0 0 0-.61.22L2.62 8.84a.5.5 0 0 0 .12.64l2.03 1.58a7.6 7.6 0 0 0-.05.94c0 .32.02.63.05.94l-2.03 1.58a.5.5 0 0 0-.12.64l1.92 3.32a.5.5 0 0 0 .61.22l2.39-.96c.5.39 1.05.71 1.64.95l.36 2.51a.5.5 0 0 0 .5.42h3.84a.5.5 0 0 0 .5-.42l.36-2.51a7.4 7.4 0 0 0 1.63-.95l2.39.96a.5.5 0 0 0 .61-.22l1.92-3.32a.5.5 0 0 0-.12-.64l-2.03-1.58ZM12 15.5A3.5 3.5 0 1 1 12 8a3.5 3.5 0 0 1 0 7.5Z",
+  );
+  iconPath.setAttribute("fill", "currentColor");
+  icon.append(iconPath);
+  iconWrapper.append(icon);
+  graphic.append(iconWrapper);
 
   const label = document.createElement("span");
   label.className = "st-nav-item-label";
@@ -73,23 +89,17 @@ export function createSettingsMenuFeature({
     if (menu === null) return;
 
     const existing = document.getElementById(BUTTON_ID);
-    if (existing !== null) return;
-
-    const button = createButton(document, () => openSettings());
-    const abiLink = [...menu.children].find(
-      (child) =>
-        child instanceof HTMLAnchorElement &&
-        new URL(child.href, document.location.href).pathname.startsWith("/abi"),
-    );
+    const button =
+      existing instanceof HTMLButtonElement
+        ? existing
+        : createButton(document, () => openSettings());
     const applicationsLink = [...menu.children].find(
       (child) => child instanceof HTMLAnchorElement && child.getAttribute("href") === "/avaldused",
     );
 
-    if (abiLink instanceof HTMLElement) {
-      abiLink.insertAdjacentElement("afterend", button);
-    } else if (applicationsLink instanceof HTMLElement) {
-      applicationsLink.insertAdjacentElement("beforebegin", button);
-    } else {
+    if (applicationsLink instanceof HTMLElement && applicationsLink.nextElementSibling !== button) {
+      applicationsLink.insertAdjacentElement("afterend", button);
+    } else if (!(applicationsLink instanceof HTMLElement) && menu.lastElementChild !== button) {
       menu.append(button);
     }
   };
