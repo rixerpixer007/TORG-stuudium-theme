@@ -7,6 +7,19 @@ export interface SettingsMenuDependencies {
   openSettings: () => Promise<boolean>;
 }
 
+function linkTargetsPath(link: HTMLAnchorElement, pathname: string): boolean {
+  return link.origin === link.ownerDocument.location.origin && link.pathname === pathname;
+}
+
+function isEstonianDocument(document: Document): boolean {
+  if (document.body.classList.contains("lang_et")) return true;
+  if (document.documentElement.dataset.suhtlusLanguage === "et") return true;
+
+  return [
+    ...document.querySelectorAll<HTMLAnchorElement>('a[href*="/users/language_select"]'),
+  ].some((link) => link.textContent.trim() === "In English");
+}
+
 function findMainMenu(document: Document): HTMLElement | null {
   const panels = document.querySelectorAll<HTMLElement>(
     ".st-nav-item-expandable > .st-nav-item-expandable-content",
@@ -19,7 +32,7 @@ function findMainMenu(document: Document): HTMLElement | null {
       );
       return (
         directLinks.some((link) => link.dataset.name === "groups") &&
-        directLinks.some((link) => link.getAttribute("href") === "/q")
+        directLinks.some((link) => linkTargetsPath(link, "/q"))
       );
     }) ?? null
   );
@@ -59,7 +72,7 @@ function createButton(document: Document, openSettings: () => Promise<boolean>):
 
   const label = document.createElement("span");
   label.className = "st-nav-item-label";
-  const estonian = document.body.classList.contains("lang_et");
+  const estonian = isEstonianDocument(document);
   label.textContent = estonian ? "Teema seaded" : "Theme settings";
 
   button.append(graphic, label);
@@ -94,7 +107,7 @@ export function createSettingsMenuFeature({
         ? existing
         : createButton(document, () => openSettings());
     const applicationsLink = [...menu.children].find(
-      (child) => child instanceof HTMLAnchorElement && child.getAttribute("href") === "/avaldused",
+      (child) => child instanceof HTMLAnchorElement && linkTargetsPath(child, "/avaldused"),
     );
 
     if (applicationsLink instanceof HTMLElement && applicationsLink.nextElementSibling !== button) {

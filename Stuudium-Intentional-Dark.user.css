@@ -868,7 +868,7 @@
     .button,
     a.button-submit,
     a.button-disabled,
-    :is(#content, .page_body, .courses_index, .suhtlus) button,
+    :is(#content, .page_body, .courses_index, .suhtlus) button:not(.sid-extension-settings-menu-item),
     input[type="button"],
     input[type="submit"]
   ) {
@@ -885,7 +885,7 @@
     .new_button,
     .button,
     a.button-submit,
-    :is(#content, .page_body, .courses_index, .suhtlus) button,
+    :is(#content, .page_body, .courses_index, .suhtlus) button:not(.sid-extension-settings-menu-item),
     input[type="button"],
     input[type="submit"]
   ):not(:disabled):not([aria-disabled="true"]):not(.disabled):hover {
@@ -902,7 +902,7 @@
   :where(
     .new_button,
     .button,
-    :is(#content, .page_body, .courses_index, .suhtlus) button,
+    :is(#content, .page_body, .courses_index, .suhtlus) button:not(.sid-extension-settings-menu-item),
     input[type="button"],
     input[type="submit"]
   ):is(:disabled, [aria-disabled="true"], .disabled),
@@ -921,7 +921,18 @@
     font-weight: 700;
   }
 
-  :where(.new_button, .button, :is(#content, .page_body, .courses_index, .suhtlus) button, input, textarea, select, [contenteditable="true"], .st-nav-item, .tab, a):focus-visible {
+  :where(
+    .new_button,
+    .button,
+    :is(#content, .page_body, .courses_index, .suhtlus) button:not(.sid-extension-settings-menu-item),
+    input,
+    textarea,
+    select,
+    [contenteditable="true"],
+    .st-nav-item,
+    .tab,
+    a
+  ):focus-visible {
     outline: 2px solid var(--sid-accent) !important;
     outline-offset: 2px;
     box-shadow: var(--sid-focus) !important;
@@ -961,7 +972,6 @@
     background-color: var(--sid-canvas-soft) !important;
     cursor: not-allowed;
   }
-
   /* Small icons: text glyphs inherit colour; monochrome sprite spans are filtered as isolated icons. */
   :where([class^="icon-"], [class*=" icon-"]) {
     color: inherit !important;

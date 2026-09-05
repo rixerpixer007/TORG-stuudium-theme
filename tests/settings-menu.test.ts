@@ -57,6 +57,29 @@ describe("settings menu feature", () => {
     feature.cleanup();
   });
 
+  it("mounts in application menus that use absolute navigation links", () => {
+    document.body.classList.remove("lang_et");
+    document.documentElement.dataset.suhtlusLanguage = "et";
+    document.querySelectorAll<HTMLAnchorElement>("a[href]").forEach((link) => {
+      link.href = new URL(link.getAttribute("href") ?? "", document.baseURI).href;
+    });
+    const feature = createSettingsMenuFeature({
+      document,
+      openSettings: vi.fn(() => Promise.resolve(true)),
+    });
+
+    feature.activate(context);
+
+    const button = document.getElementById(BUTTON_ID);
+    expect(button).toBeInstanceOf(window.HTMLButtonElement);
+    expect(button?.textContent).toBe("Teema seaded");
+    expect(button?.previousElementSibling?.getAttribute("href")).toBe(
+      "https://torg.ope.ee/avaldused",
+    );
+
+    feature.cleanup();
+  });
+
   it("remains idempotent and restores its position after navigation", () => {
     const feature = createSettingsMenuFeature({
       document,
