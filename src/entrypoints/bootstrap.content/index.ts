@@ -27,7 +27,7 @@ export default defineContentScript({
     extensionGlobal.__sidEnhancementCleanup?.();
 
     const settingsStore = createWebExtensionSettingsStore();
-    const runtime = new EnhancementRuntime([
+    const settingsMenuRuntime = new EnhancementRuntime([
       createSettingsMenuFeature({
         document,
         openSettings: openExtensionSettings,
@@ -42,30 +42,29 @@ export default defineContentScript({
       if (cleanedUp || currentSettings === undefined) return;
 
       const route = detectStuudiumRoute(currentUrl);
-      if (currentSettings.enhancementEnabled && route.supported) {
-        document.documentElement.setAttribute(ACTIVATION_ATTRIBUTE, "enabled");
-        runtime.activate({ route });
+      if (route.supported) {
+        settingsMenuRuntime.activate({ route });
+        if (currentSettings.enhancementEnabled) {
+          document.documentElement.setAttribute(ACTIVATION_ATTRIBUTE, "enabled");
+        } else {
+          document.documentElement.removeAttribute(ACTIVATION_ATTRIBUTE);
+        }
       } else {
-        runtime.cleanup();
+        settingsMenuRuntime.cleanup();
         document.documentElement.removeAttribute(ACTIVATION_ATTRIBUTE);
       }
     };
 
     const updateRoute = (nextUrl: string | URL = window.location.href): void => {
       currentUrl = nextUrl.toString();
-      const route = detectStuudiumRoute(currentUrl);
-      if (currentSettings?.enhancementEnabled === true && route.supported) {
-        runtime.navigate({ route });
-      } else {
-        apply();
-      }
+      apply();
     };
 
     const cleanup = (): void => {
       if (cleanedUp) return;
       cleanedUp = true;
       unsubscribeSettings();
-      runtime.cleanup();
+      settingsMenuRuntime.cleanup();
       document.documentElement.removeAttribute(ACTIVATION_ATTRIBUTE);
       window.removeEventListener("pagehide", handlePageHide);
       if (extensionGlobal.__sidEnhancementCleanup === cleanup) {
@@ -104,7 +103,7 @@ export default defineContentScript({
         apply();
       } catch (error) {
         console.error("Unable to read extension settings", error);
-        runtime.cleanup();
+        settingsMenuRuntime.cleanup();
         document.documentElement.removeAttribute(ACTIVATION_ATTRIBUTE);
       }
     };

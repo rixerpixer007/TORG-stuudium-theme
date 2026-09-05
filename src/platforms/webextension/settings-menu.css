@@ -1,18 +1,21 @@
-:where(html[data-sid-enhancement="enabled"]) .sid-extension-settings-menu-item {
+.sid-extension-settings-menu-item {
   display: flex !important;
   box-sizing: border-box;
   width: 100%;
   min-width: 100%;
   margin: 0;
   padding: 0;
-  color: var(--sid-text-2) !important;
-  background: transparent !important;
+  background: transparent;
   border: 0;
   border-radius: 0;
   font: inherit;
   text-align: start;
   cursor: pointer;
   appearance: none;
+}
+
+:where(html[data-sid-enhancement="enabled"]) .sid-extension-settings-menu-item {
+  color: var(--sid-text-2) !important;
 }
 
 :where(html[data-sid-enhancement="enabled"])

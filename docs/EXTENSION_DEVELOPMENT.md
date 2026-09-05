@@ -213,9 +213,9 @@ Restore the userstyle after the comparison.
 
 ## 9. Open the settings
 
-The Phase 1 settings page has one control: **Enable the enhancement**. It proves
+The Phase 1 settings page has one control: **Enable the dark theme**. It proves
 that a preference can be read, written, persisted, and consumed; it does not
-switch themes.
+offer multiple theme palettes.
 
 Open it in any of these ways:
 
@@ -228,8 +228,8 @@ Open it in any of these ways:
 Turn the switch off and return to the Stuudium tab. The root activation marker
 is removed, which immediately deactivates both the critical and complete theme
 without attempting to undo hundreds of CSS properties individually. The
-in-page settings shortcut is also removed. Re-enable it from the toolbar or the
-browser's extension details page.
+in-page settings shortcut remains in Stuudium's native appearance so the dark
+theme can be re-enabled directly from the site.
 
 Only this object is stored in `chrome.storage.local`:
 
@@ -292,8 +292,9 @@ tools or save them in the repository.
    URL whose extension ID matches the unpacked extension card.
 5. Inspect computed styles on `<html>` or `<body>`. The graphite canvas token is
    `#0f1311`; verify that the winning rule comes from the extension build.
-6. Open the Stuudium hamburger menu and confirm the themed settings button is in
-   the former visible `Abi` position, before **Avaldused**.
+6. Open the Stuudium hamburger menu and confirm the settings button is directly
+   after **Avaldused**. With the theme enabled it uses the theme treatment; with
+   the theme disabled it uses Stuudium's native appearance.
 7. Exercise hover, keyboard focus, menu close/reopen, and client-side navigation.
 8. Check one component unrelated to the change as a negative control.
 9. Repeat with the setting off, after an extension reload, after disabling and
@@ -479,10 +480,10 @@ refresh before comparing them.
 
 ### The in-page settings button is missing
 
-Confirm that the master setting is enabled, refresh the authenticated TORG
-page, and open the main top navigation hamburger menu. The shortcut is not
-injected on unsupported origins or when the enhancement is disabled. The
-toolbar icon and **Extension options** remain available for re-enabling it.
+Refresh the authenticated TORG page and open the main top navigation hamburger
+menu. The shortcut remains available when the dark theme is disabled, but it is
+not injected on unsupported origins. The toolbar icon and **Extension options**
+remain available as a fallback.
 
 ### Settings do not persist
 

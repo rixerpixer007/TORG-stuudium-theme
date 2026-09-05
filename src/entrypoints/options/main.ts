@@ -24,7 +24,7 @@ async function initialize(): Promise<void> {
     const settings = await settingsStore.get();
     enabledControl.checked = settings.enhancementEnabled;
     enabledControl.disabled = false;
-    setStatus(settings.enhancementEnabled ? "Enhancement enabled." : "Enhancement disabled.");
+    setStatus(settings.enhancementEnabled ? "Dark theme enabled." : "Dark theme disabled.");
   } catch (error) {
     console.error("Unable to read extension settings", error);
     setStatus("Could not read the saved preference.", "error");
@@ -38,7 +38,7 @@ async function savePreference(): Promise<void> {
 
   try {
     await settingsStore.set({ enhancementEnabled: enabledControl.checked });
-    setStatus(enabledControl.checked ? "Enhancement enabled." : "Enhancement disabled.");
+    setStatus(enabledControl.checked ? "Dark theme enabled." : "Dark theme disabled.");
   } catch (error) {
     console.error("Unable to save extension settings", error);
     enabledControl.checked = !enabledControl.checked;
