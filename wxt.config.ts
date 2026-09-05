@@ -5,6 +5,12 @@ import { STUUDIUM_MATCHES } from "./src/shared/sites";
 export default defineConfig({
   srcDir: "src",
   manifestVersion: 3,
+  dev: {
+    server: {
+      port: 3000,
+      strictPort: true,
+    },
+  },
   manifest: {
     name: "TORG Stuudium Enhancement",
     description:

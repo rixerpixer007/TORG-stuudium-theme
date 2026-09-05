@@ -4,31 +4,135 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="manifest.open_in_tab" content="true" />
+    <style>
+      html,
+      body {
+        color-scheme: dark;
+        background: #0f1311;
+      }
+
+      body {
+        margin: 0;
+      }
+    </style>
+    <link rel="stylesheet" href="../../theme/modules/01-tokens.css" />
+    <link rel="stylesheet" href="./style.css" />
     <title>TORG Stuudium Enhancement settings</title>
   </head>
   <body>
-    <main>
-      <header>
-        <p class="eyebrow">TORG Stuudium Enhancement</p>
-        <h1>Settings</h1>
-        <p>Control the local enhancement without changing your Stuudium account or school data.</p>
-      </header>
+    <header class="app-header">
+      <div class="app-header__content">
+        <div class="app-identity">
+          <img class="app-logo" src="./logo-placeholder.svg" alt="" width="40" height="40" />
+          <span class="app-name">TORG Stuudium Enhancement</span>
+        </div>
 
-      <form>
-        <label class="setting" for="enhancement-enabled">
-          <span>
-            <strong>Enable the dark theme</strong>
-            <small>Apply Intentional Dark. The in-page settings shortcut remains available.</small>
-          </span>
-          <input id="enhancement-enabled" name="enhancement-enabled" type="checkbox" />
-        </label>
-      </form>
+        <nav class="app-navigation" aria-label="Settings section">
+          <span class="app-navigation__current" aria-current="page">Theme settings</span>
+        </nav>
+      </div>
+    </header>
 
-      <p id="status" class="status" role="status" aria-live="polite">Loading preference…</p>
-      <p class="privacy-note">
-        Stored locally: this enable/disable preference only. The extension does not store grades,
-        attendance, messages, authentication data, or other student information.
-      </p>
+    <main class="settings-page">
+      <nav class="settings-categories" aria-label="Settings categories">
+        <button
+          class="settings-category is-active"
+          type="button"
+          data-category="all"
+          aria-pressed="true"
+        >
+          All settings
+        </button>
+        <button
+          class="settings-category"
+          type="button"
+          data-category="appearance"
+          aria-pressed="false"
+        >
+          Appearance
+        </button>
+        <button
+          class="settings-category"
+          type="button"
+          data-category="privacy"
+          aria-pressed="false"
+        >
+          Privacy
+        </button>
+      </nav>
+
+      <article class="settings-sheet">
+        <div class="settings-search">
+          <label class="visually-hidden" for="settings-search">Search settings</label>
+          <input
+            id="settings-search"
+            type="search"
+            placeholder="Search settings…"
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="settings-list">
+          <section
+            class="settings-section"
+            aria-labelledby="appearance-heading"
+            data-settings-section="appearance"
+            data-search-terms="appearance intentional dark theme stuudium enabled disabled"
+          >
+            <h2 id="appearance-heading">Appearance</h2>
+
+            <div class="settings-card-list">
+              <div
+                class="setting-row"
+                data-setting-item
+                data-search-terms="intentional dark theme stuudium enabled disabled"
+              >
+                <div class="setting-copy">
+                  <label for="enhancement-enabled">Intentional Dark</label>
+                  <p id="enhancement-enabled-description">
+                    Use the dark Stuudium theme on supported TORG pages.
+                  </p>
+                </div>
+
+                <label class="setting-checkbox" for="enhancement-enabled">
+                  <input
+                    id="enhancement-enabled"
+                    name="enhancement-enabled"
+                    type="checkbox"
+                    aria-describedby="enhancement-enabled-description"
+                  />
+                  <span class="setting-checkbox__box" aria-hidden="true"></span>
+                </label>
+              </div>
+            </div>
+
+            <p
+              id="status"
+              class="visually-hidden"
+              data-state="loading"
+              role="status"
+              aria-live="polite"
+            >
+              Loading setting…
+            </p>
+          </section>
+
+          <section
+            class="settings-section privacy"
+            aria-labelledby="privacy-heading"
+            data-settings-section="privacy"
+            data-search-terms="privacy locally stored data grades attendance messages sign-in details"
+          >
+            <h2 id="privacy-heading">Privacy</h2>
+            <p>
+              Only this on/off preference is stored locally. The extension does not store grades,
+              attendance, messages, sign-in details, or other student information.
+            </p>
+          </section>
+
+          <p class="settings-empty" hidden>No settings match your search.</p>
+        </div>
+      </article>
     </main>
 
     <script type="module" src="./main.ts"></script>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="Temporary extension logo">
+  <rect x="1" y="1" width="46" height="46" rx="4" fill="#171c19" stroke="#3a4740" stroke-width="2" />
+  <path d="M13 15h22v18H13z" fill="#202824" stroke="#65d6b1" stroke-width="2" />
+  <path d="m16 18 8 7 8-7" fill="none" stroke="#65d6b1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+  <circle cx="35" cy="14" r="4" fill="#65d6b1" />
+</svg>
