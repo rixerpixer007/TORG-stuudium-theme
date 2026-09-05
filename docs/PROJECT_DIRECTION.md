@@ -101,13 +101,14 @@ The Phase 2 implementation:
 4. Apply the preference early enough to avoid a white startup flash.
 5. Avoid duplicating component rules for each palette.
 
-It initially offers Graphite Mint and Graphite Blue. They intentionally share
-the complete graphite neutral palette and differ only in accent tokens. The
-catalog records a theme's light/dark color-scheme family so a future light
-theme can replace every required surface and text token without changing the
-selection UI or stored preference shape. Selection is manual and remembered;
-a future system-following mode can be added alongside the current `manual`
-mode without changing existing saved choices.
+It initially offers Graphite Mint and Graphite Blue. Mint preserves the original
+green-tinted graphite palette, while Blue supplies its own cool slate canvas,
+surfaces, controls, borders, text colors, and blue accent. Component rules use
+the same semantic tokens in both themes. The catalog records a theme's
+light/dark color-scheme family so a future light theme can replace every
+required token without changing the selection UI or stored preference shape.
+Selection is manual and remembered; a future system-following mode can be added
+alongside the current `manual` mode without changing existing saved choices.
 
 ## CSS loading decision
 

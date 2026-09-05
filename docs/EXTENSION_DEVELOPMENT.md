@@ -230,9 +230,10 @@ Restore the userstyle after the comparison.
 ## 9. Open the settings
 
 The settings page has a master **Enable the dark theme** switch and visual cards
-for **Graphite Mint** and **Graphite Blue**. Selecting a card changes the accent
-palette immediately; both choices keep the same graphite surfaces. The card
-grid wraps automatically as future themes are added.
+for **Graphite Mint** and **Graphite Blue**. Selecting a card changes the complete
+color palette immediately. Mint keeps the original green-tinted graphite;
+Blue uses cool slate surfaces and text with its blue accent. The card grid wraps
+automatically as future themes are added.
 
 Open it in any of these ways:
 
@@ -312,9 +313,9 @@ tools or save them in the repository.
    `data-sid-theme="graphite-mint"` or `data-sid-theme="graphite-blue"`.
 4. In **Sources**, confirm that the loaded CSS and JavaScript have an extension
    URL whose extension ID matches the unpacked extension card.
-5. Inspect computed styles on `<html>` or `<body>`. The graphite canvas token is
-   `#0f1311` in both themes. The main accent token is `#65d6b1` for Mint and
-   `#75a7ff` for Blue; verify that the winning rule comes from the extension
+5. Inspect computed styles on `<html>` or `<body>`. Mint uses canvas token
+   `#0f1311` and accent token `#65d6b1`; Blue uses canvas token `#0c1118` and
+   accent token `#75a7ff`. Verify that the winning rule comes from the extension
    build.
 6. Open the Stuudium hamburger menu and confirm the settings button is directly
    after **Avaldused**. With the theme enabled it uses the theme treatment; with
@@ -360,13 +361,13 @@ matching manifest entries. Do not broaden the manifest to `*.ope.ee` just in
 case; each origin should be verified and added deliberately.
 
 To add a future theme, add one catalog entry in `src/shared/themes.ts`, its token
-overrides in an owning theme module, a tiny synchronous early-activation
-entrypoint, and its filename mapping in
+overrides in `src/theme/modules/02-palettes.css`, a tiny synchronous
+early-activation entrypoint, and its filename mapping in
 `src/platforms/webextension/early-activation.ts`. The settings grid is generated
-from the catalog. A dark accent variant can inherit the graphite neutral tokens;
-a light theme must declare `colorScheme: "light"` and override all necessary
-surface, text, border, shadow, and accent tokens. Do not assume that changing
-only the accent is sufficient for a light palette.
+from the catalog. A close dark variant may deliberately inherit matching tokens,
+but each theme should explicitly replace every semantic color that would retain
+an unwanted tint. A light theme must declare `colorScheme: "light"` and override
+all necessary surface, text, border, shadow, and accent tokens.
 
 ## 13. Regenerate and check the compatibility userstyle
 

@@ -2,7 +2,7 @@
 .page_tabs {
   position: relative !important;
   z-index: var(--sid-z-tabs) !important;
-  background: rgb(15 19 17 / 90%) !important;
+  background: var(--sid-subnavigation-background) !important;
   border-bottom: 1px solid var(--sid-border) !important;
   box-shadow: none !important;
 }
@@ -66,4 +66,3 @@
   background: var(--sid-accent-soft) !important;
   border-color: var(--sid-accent-border) !important;
 }
-

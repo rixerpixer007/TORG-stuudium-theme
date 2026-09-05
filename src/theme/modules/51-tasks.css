@@ -27,7 +27,7 @@
 
 .section.todos .todo_container.is_marked .todo_content {
   text-decoration-line: line-through !important;
-  text-decoration-color: rgb(193 192 184 / 55%) !important;
+  text-decoration-color: var(--sid-text-decoration-muted) !important;
   text-decoration-thickness: 1px !important;
 }
 

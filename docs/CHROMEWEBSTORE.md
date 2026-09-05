@@ -19,7 +19,7 @@ Adds selectable Intentional Dark themes and local settings to TORG Stuudium.
 
 **Detailed description**
 
-TORG Stuudium Enhancement gives the genuine TORG Stuudium website a consistent graphite dark appearance with a Mint or Blue accent.
+TORG Stuudium Enhancement gives the genuine TORG Stuudium website a consistent dark appearance with selectable graphite-mint and cool-slate-blue palettes.
 
 FEATURES
 • Applies the Intentional Dark appearance across supported TORG Stuudium pages.
@@ -31,7 +31,7 @@ HOW TO USE
 
 1. Install the extension and open TORG Stuudium.
 2. Use Stuudium normally; the dark appearance is enabled by default.
-3. Open the extension from the toolbar or select “Teema seaded” in Stuudium’s main menu to choose an accent or change the master setting.
+3. Open the extension from the toolbar or select “Teema seaded” in Stuudium’s main menu to choose a palette or change the master setting.
 
 PRIVACY
 The extension stores only its local enabled/disabled and selected-theme preferences. It does not collect or transmit analytics, browsing history, grades, attendance, messages, credentials, cookies, page contents, or other student information.

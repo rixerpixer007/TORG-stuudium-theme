@@ -16,7 +16,7 @@
   gap: 5px;
   padding: 5px 8px !important;
   color: var(--sid-text-2) !important;
-  background: rgb(23 28 25 / 88%) !important;
+  background: var(--sid-panel-translucent) !important;
   border: 1px solid var(--sid-border) !important;
   border-radius: 0 0 var(--sid-radius-sm) 0 !important;
   box-shadow: 0 8px 24px rgb(0 0 0 / 20%) !important;
@@ -35,8 +35,7 @@
 
 #login-page-container #main {
   color: var(--sid-text-2) !important;
-  background:
-    linear-gradient(180deg, rgb(32 40 36 / 98%), rgb(23 28 25 / 98%)) !important;
+  background: var(--sid-panel-gradient) !important;
   border: 1px solid var(--sid-border-strong) !important;
   border-radius: var(--sid-radius-lg) !important;
   box-shadow: 0 24px 80px rgb(0 0 0 / 48%) !important;
@@ -405,7 +404,7 @@
 
 #main .login-captcha-container {
   color: var(--sid-text-2) !important;
-  background: rgb(23 28 25 / 96%) !important;
+  background: var(--sid-panel-translucent-strong) !important;
   border-color: var(--sid-border-strong) !important;
 }
 

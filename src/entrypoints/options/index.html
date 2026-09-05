@@ -1,27 +1,36 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-sid-settings-state="loading" data-sid-theme-cache-key="sid-settings-theme">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="dark" />
     <meta name="manifest.open_in_tab" content="true" />
     <style>
-      html,
-      body {
-        color-scheme: dark;
-        background: #0f1311;
+      @keyframes sid-settings-failsafe-reveal {
+        to {
+          visibility: visible;
+        }
       }
 
-      body {
+      html[data-sid-settings-state="loading"],
+      html[data-sid-settings-state="loading"] body {
+        color-scheme: dark;
+        background: var(--sid-canvas, #0f1311);
+      }
+
+      html[data-sid-settings-state="loading"] body {
         margin: 0;
+        visibility: hidden;
+        animation: sid-settings-failsafe-reveal 0s 3s forwards;
       }
     </style>
+    <script src="/options-startup.js"></script>
     <link rel="stylesheet" href="../../theme/modules/01-tokens.css" />
-    <link rel="stylesheet" href="../../theme/modules/02-accent-themes.css" />
+    <link rel="stylesheet" href="../../theme/modules/02-palettes.css" />
     <link rel="stylesheet" href="./style.css" />
     <title>TORG Stuudium Enhancement settings</title>
   </head>
-  <body>
+  <body aria-busy="true">
     <header class="app-header">
       <div class="app-header__content">
         <div class="app-identity">
@@ -84,7 +93,7 @@
             class="settings-section"
             aria-labelledby="appearance-heading"
             data-settings-section="appearance"
-            data-search-terms="appearance graphite mint blue accent theme stuudium enabled disabled"
+            data-search-terms="appearance graphite mint blue palette color theme stuudium enabled disabled"
           >
             <h2 id="appearance-heading">Appearance</h2>
 
@@ -116,12 +125,12 @@
             <fieldset
               class="theme-picker"
               data-setting-item
-              data-search-terms="theme color accent graphite mint blue"
+              data-search-terms="theme color palette graphite mint blue"
               aria-describedby="theme-picker-description"
             >
-              <legend>Theme accent</legend>
+              <legend>Theme</legend>
               <p id="theme-picker-description">
-                Choose the accent color used with the graphite surfaces. Your selection is applied
+                Choose the complete color palette used on Stuudium. Your selection is applied
                 immediately.
               </p>
               <div id="theme-options" class="theme-options"></div>

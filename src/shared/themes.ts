@@ -34,13 +34,13 @@ export const THEMES = [
     id: "graphite-blue",
     name: "Graphite Blue",
     shortName: "Blue",
-    description: "The same graphite surfaces with a calm blue accent.",
+    description: "A cool graphite palette with a calm blue accent.",
     colorScheme: "dark",
     preview: {
-      canvas: "#0f1311",
-      surface: "#202824",
+      canvas: "#0c1118",
+      surface: "#202b3a",
       accent: "#75a7ff",
-      text: "#f2f0e9",
+      text: "#eef2f8",
     },
   },
 ] as const satisfies readonly ThemeDefinition[];

@@ -15,6 +15,7 @@ describe("theme catalog", () => {
     expect(new Set(THEMES.map((theme) => theme.id)).size).toBe(THEMES.length);
     expect(DEFAULT_THEME_ID).toBe("graphite-mint");
     expect(getTheme(DEFAULT_THEME_ID).preview.accent).toBe("#65d6b1");
+    expect(getTheme("graphite-blue").preview.canvas).toBe("#0c1118");
   });
 
   it("recognizes only catalogued themes", () => {

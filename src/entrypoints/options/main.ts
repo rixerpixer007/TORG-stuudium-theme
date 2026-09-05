@@ -39,6 +39,8 @@ const searchControl = searchInput;
 const noResults = emptyState;
 const themeOptionsContainer = themeOptions;
 const colorSchemeMetadata = colorSchemeMeta;
+const SETTINGS_STATE_ATTRIBUTE = "data-sid-settings-state";
+const themeCacheKey = document.documentElement.dataset.sidThemeCacheKey;
 let activeCategory = "all";
 let currentSettings: ExtensionSettings = {
   enhancementEnabled: DEFAULT_SETTINGS.enhancementEnabled,
@@ -81,6 +83,23 @@ function applySettingsTheme(themeId: ThemeId): void {
   applyTheme(document.documentElement, themeId);
   colorSchemeMetadata.content = theme.colorScheme;
   document.documentElement.style.colorScheme = theme.colorScheme;
+}
+
+function cacheSettingsTheme(themeId: ThemeId): void {
+  if (themeCacheKey === undefined) return;
+
+  try {
+    window.localStorage.setItem(themeCacheKey, themeId);
+  } catch (error) {
+    console.warn("Unable to update the settings-page theme cache", error);
+  }
+}
+
+function revealSettingsPage(): void {
+  // Settle the saved control and palette styles while transitions are disabled.
+  void document.body.offsetHeight;
+  document.documentElement.setAttribute(SETTINGS_STATE_ATTRIBUTE, "ready");
+  document.body.setAttribute("aria-busy", "false");
 }
 
 function setThemeControls(themeId: ThemeId): void {
@@ -158,15 +177,21 @@ async function initialize(): Promise<void> {
     enabledControl.checked = settings.enhancementEnabled;
     setThemeControls(settings.theme.themeId);
     applySettingsTheme(settings.theme.themeId);
+    cacheSettingsTheme(settings.theme.themeId);
     setSettingsControlsDisabled(false);
     setStatus(settings.enhancementEnabled ? "Intentional Dark is on." : "Intentional Dark is off.");
   } catch (error) {
     console.error("Unable to read extension settings", error);
+    enabledControl.checked = currentSettings.enhancementEnabled;
+    setThemeControls(currentSettings.theme.themeId);
+    applySettingsTheme(currentSettings.theme.themeId);
+    cacheSettingsTheme(currentSettings.theme.themeId);
     setStatus("Could not read the saved preference.", "error");
+  } finally {
+    revealSettingsPage();
   }
 }
 
-setSettingsControlsDisabled(true);
 async function savePreference(): Promise<void> {
   const previousEnabled = currentSettings.enhancementEnabled;
   setSettingsControlsDisabled(true);
@@ -204,6 +229,7 @@ async function saveThemePreference(themeId: ThemeId): Promise<void> {
 
   try {
     await settingsStore.set(currentSettings);
+    cacheSettingsTheme(themeId);
     setStatus(`${getTheme(themeId).name} is selected.`);
   } catch (error) {
     console.error("Unable to save theme preference", error);
@@ -276,4 +302,5 @@ categoryControls.forEach((control) => {
 searchControl.addEventListener("input", filterSettings);
 
 renderThemeOptions();
+setSettingsControlsDisabled(true);
 void initialize();

@@ -15,7 +15,7 @@ Do not commit, publish, submit to a store, change live Stuudium data, or begin a
 
 Phase 1 is implemented as a WXT 0.21 Chromium Manifest V3 extension written in TypeScript and built with npm. It delivers the existing dark theme, adds an early critical dark surface, and uses a small idempotent content bootstrap.
 
-Phase 2 adds manual, remembered switching between Graphite Mint and Graphite Blue. These dark themes share the graphite neutral palette and change only accent tokens. The theme contract already distinguishes dark and light families so future light themes can replace the full token set, but automatic system-following is not implemented. The Stylus compatibility output deliberately remains Graphite Mint only.
+Phase 2 adds manual, remembered switching between Graphite Mint and Graphite Blue. Each dark theme owns a complete semantic color palette; Graphite Blue uses cool slate neutrals instead of inheriting Mint's green-tinted graphite. The theme contract already distinguishes dark and light families so future light themes can replace the full token set, but automatic system-following is not implemented. The Stylus compatibility output deliberately remains Graphite Mint only.
 
 Phase 3 release hardening and store publication have not started. Bug fixes and maintenance must preserve that boundary.
 
@@ -28,7 +28,7 @@ The project enhances the genuine Stuudium interface. It must never become a prox
 - `Stuudium-Intentional-Dark.user.css` is a generated, supported Stylus compatibility output. Never edit it directly.
 - `src/generated/theme.css` is the generated, activation-gated extension stylesheet. Never edit it directly; it is intentionally ignored by Git.
 - `src/theme/critical.css` is the small early dark surface. Keep it minimal and never use it to replace Stuudium's structural CSS.
-- `src/theme/modules/01-tokens.css` contains the default Graphite Mint tokens; `02-accent-themes.css` contains attribute-gated accent overrides.
+- `src/theme/modules/01-tokens.css` contains the default Graphite Mint tokens; `02-palettes.css` contains attribute-gated complete palette overrides.
 
 Run `npm run build:theme` after changing canonical theme modules, unless `npm run dev` is already watching them. Run `npm run check:theme` to prove both generated CSS outputs are current and deterministic.
 

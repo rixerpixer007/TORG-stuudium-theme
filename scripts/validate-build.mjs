@@ -62,6 +62,22 @@ assert(Array.isArray(bootstrap.css) && bootstrap.css.length > 0, "Theme CSS is m
 assert(Array.isArray(bootstrap.js) && bootstrap.js.length === 1, "Bootstrap JS is missing");
 assert(manifest.web_accessible_resources === undefined, "No web-accessible resources are expected");
 
+const optionsHtml = fs.readFileSync(path.join(BUILD_DIRECTORY, "options.html"), "utf8");
+assert(
+  optionsHtml.includes('data-sid-settings-state="loading"') &&
+    optionsHtml.includes('aria-busy="true"') &&
+    optionsHtml.includes('data-sid-theme-cache-key="sid-settings-theme"') &&
+    optionsHtml.includes('src="/options-startup.js"'),
+  "Options page startup gate is missing",
+);
+assert(files.includes("options-startup.js"), "Options page startup script is missing");
+
+const optionsStartup = fs.readFileSync(path.join(BUILD_DIRECTORY, "options-startup.js"), "utf8");
+assert(
+  optionsStartup.includes("localStorage.getItem") && optionsStartup.includes("data-sid-theme"),
+  "Options page startup script does not restore the cached palette",
+);
+
 for (const file of files) {
   assert(!file.endsWith(".map"), `Source map must not be packaged: ${file}`);
   assert(!file.startsWith("src/"), `Source file must not be packaged: ${file}`);
@@ -80,12 +96,23 @@ assert(
 assert(bundledCss.includes("--sid-canvas:#0f1311"), "Full graphite theme is missing");
 assert(
   bundledCss.includes("data-sid-theme=graphite-blue]") &&
-    bundledCss.includes("--sid-accent:#75a7ff"),
+    bundledCss.includes("--sid-accent:#75a7ff") &&
+    bundledCss.includes("--sid-canvas:#0c1118"),
   "Graphite Blue theme is missing",
 );
 assert(
   bundledCss.includes("sid-extension-settings-menu-item"),
   "In-page settings menu styling is missing",
+);
+
+const bundledJavaScript = files
+  .filter((file) => file.endsWith(".js"))
+  .map((file) => fs.readFileSync(path.join(BUILD_DIRECTORY, file), "utf8"))
+  .join("\n");
+assert(
+  bundledJavaScript.includes("data-sid-settings-state") &&
+    /setAttribute\([^,]+,[`'"]ready[`'"]\)/.test(bundledJavaScript),
+  "Options page does not release its startup gate",
 );
 
 for (const activationScript of ["activation-graphite-mint.js", "activation-graphite-blue.js"]) {
