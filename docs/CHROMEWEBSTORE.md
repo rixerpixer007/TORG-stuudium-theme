@@ -1,8 +1,8 @@
 # Chrome Web Store listing — TORG Stuudium Enhancement
 
-> Last updated: 2026-09-04
+> Last updated: 2026-09-05
 >
-> Status: Phase 1 draft. Do not submit until every owner-required field and asset below is complete.
+> Status: Phase 2 draft. Do not submit until every owner-required field and asset below is complete.
 
 This file is the copy-and-review source for the Chrome Web Store dashboard. The complete release procedure, account requirements, and rollback guidance are in
 [`docs/EXTENSION_PUBLISHING.md`](docs/EXTENSION_PUBLISHING.md).
@@ -15,35 +15,36 @@ TORG Stuudium Enhancement
 
 **Short description**
 
-Applies Intentional Dark and local enhancement settings to TORG Stuudium.
+Adds selectable Intentional Dark themes and local settings to TORG Stuudium.
 
 **Detailed description**
 
-TORG Stuudium Enhancement gives the genuine TORG Stuudium website a consistent graphite-and-mint dark appearance.
+TORG Stuudium Enhancement gives the genuine TORG Stuudium website a consistent graphite dark appearance with a Mint or Blue accent.
 
 FEATURES
 • Applies the Intentional Dark appearance across supported TORG Stuudium pages.
 • Adds a matching settings shortcut to Stuudium’s main menu.
-• Provides one local switch for enabling or disabling the complete enhancement.
+• Remembers a choice of Graphite Mint or Graphite Blue.
+• Provides a local switch for enabling or disabling the complete enhancement.
 
 HOW TO USE
 
 1. Install the extension and open TORG Stuudium.
 2. Use Stuudium normally; the dark appearance is enabled by default.
-3. Open the extension from the toolbar or select “Teema seaded” in Stuudium’s main menu to change the master setting.
+3. Open the extension from the toolbar or select “Teema seaded” in Stuudium’s main menu to choose an accent or change the master setting.
 
 PRIVACY
-The extension stores only its local enabled/disabled preference. It does not collect or transmit analytics, browsing history, grades, attendance, messages, credentials, cookies, page contents, or other student information.
+The extension stores only its local enabled/disabled and selected-theme preferences. It does not collect or transmit analytics, browsing history, grades, attendance, messages, credentials, cookies, page contents, or other student information.
 
 PERMISSIONS
 • Access to torg.ope.ee lets the extension apply its appearance and settings shortcut only on the supported school website.
-• Local storage keeps the enabled/disabled preference on this device.
+• Local storage keeps the enabled/disabled and selected-theme preferences on this device.
 • Script registration lets that preference take effect at the beginning of a supported page load.
 
 SUPPORT
 [OWNER REQUIRED: add the approved public support URL or monitored contact address.]
 
-Version 0.1.0 — Initial dark-theme and local-settings foundation.
+Version 0.1.0 — Initial selectable dark themes and local settings.
 
 **Category**
 
@@ -74,7 +75,7 @@ Create separate 16×16, 32×32, 48×48, and 128×128 PNG extension icons after b
 
 | Manifest item           | Type            | Store-facing justification                                                                                                  |
 | ----------------------- | --------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `storage`               | Permission      | Saves only the user’s local master enabled/disabled preference so it persists between browser sessions.                     |
+| `storage`               | Permission      | Saves only the user’s local enabled/disabled and selected-theme preferences so they persist between browser sessions.       |
 | `scripting`             | Permission      | Registers or removes the early activation marker so the saved preference is honored from the start of supported page loads. |
 | `https://torg.ope.ee/*` | Host permission | Applies the dark appearance and local settings shortcut only to the verified TORG Stuudium website.                         |
 
@@ -84,12 +85,16 @@ No tabs, browsing-history, cookies, downloads, geolocation, identity, or broad a
 
 **Does the extension collect user data?** No.
 
-The extension stores one functional preference locally on the device:
+The extension stores one functional preference object locally on the device:
 
 ```json
 {
   "preferences": {
-    "enhancementEnabled": true
+    "enhancementEnabled": true,
+    "theme": {
+      "mode": "manual",
+      "themeId": "graphite-mint"
+    }
   }
 }
 ```
@@ -127,9 +132,9 @@ Never place store credentials, payment information, recovery codes, identity doc
 
 ## Version history
 
-| Version | Date       | Changes                                                                                          | Status |
-| ------- | ---------- | ------------------------------------------------------------------------------------------------ | ------ |
-| 0.1.0   | 2026-09-04 | Initial Manifest V3 dark-theme delivery, settings foundation, and compatibility userstyle build. | Draft  |
+| Version | Date       | Changes                                                                                         | Status |
+| ------- | ---------- | ----------------------------------------------------------------------------------------------- | ------ |
+| 0.1.0   | 2026-09-05 | Initial Manifest V3 delivery, Mint/Blue selection, local settings, and compatibility userstyle. | Draft  |
 
 ## Review notes
 
@@ -137,7 +142,7 @@ Never place store credentials, payment information, recovery codes, identity doc
 
 - Final icons, listing images, public support details, and privacy-policy URL are not yet approved or created.
 - Only `https://torg.ope.ee/*` is supported; other `ope.ee` schools are intentionally not pre-authorized.
-- Theme switching is not included in Phase 1.
+- Automatic system-following and light themes are not included in Phase 2.
 - Chromium requires an open Stuudium page to be refreshed after an unpacked extension is reloaded or re-enabled during development.
 - Chrome and Brave live checks must be complete on the exact production package before submission.
 

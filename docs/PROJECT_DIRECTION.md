@@ -1,8 +1,8 @@
 # Project direction
 
-Status: agreed direction, Phase 1 foundation implemented
+Status: agreed direction, Phase 2 theme switching implemented
 
-Last updated: 2026-09-04
+Last updated: 2026-09-05
 
 ## Purpose
 
@@ -84,7 +84,7 @@ continues to generate both the extension stylesheet and the supported
 `Stuudium-Intentional-Dark.user.css` compatibility output.
 
 Supported Stuudium sites are declared in one registry so more verified schools
-can be added deliberately later. Phase 1 grants access only to
+can be added deliberately later. The extension currently grants access only to
 `https://torg.ope.ee/*`; it does not pre-authorize every `ope.ee` school.
 
 ## First feature after the extension foundation
@@ -93,13 +93,21 @@ Theme switching requires JavaScript execution, persistent settings, and a user-f
 
 Theme switching is the first product feature built on that foundation because the current stylesheet already centralizes its palette in CSS custom properties.
 
-The initial implementation should:
+The Phase 2 implementation:
 
 1. Preserve the existing graphite-and-mint theme as the default.
 2. Select palettes by setting a stable attribute on the document root.
 3. Store only the selected preference.
 4. Apply the preference early enough to avoid a white startup flash.
 5. Avoid duplicating component rules for each palette.
+
+It initially offers Graphite Mint and Graphite Blue. They intentionally share
+the complete graphite neutral palette and differ only in accent tokens. The
+catalog records a theme's light/dark color-scheme family so a future light
+theme can replace every required surface and text token without changing the
+selection UI or stored preference shape. Selection is manual and remembered;
+a future system-following mode can be added alongside the current `manual`
+mode without changing existing saved choices.
 
 ## CSS loading decision
 
@@ -143,10 +151,11 @@ first distribution route because both browsers can install its Chromium
 extensions. Microsoft Edge Add-ons is documented as an optional additional
 channel, but Phase 1 does not create or submit an Edge listing.
 
-The Phase 1 settings surface is a themed options page with one master enable
-preference. It opens from the extension toolbar and from a button added to
-Stuudium's main overflow menu. This proves local preference read, write,
-persistence, and consumption without implementing theme switching.
+The settings surface is a themed options page with a master enable preference
+and a responsive visual theme-card grid. It opens from the extension toolbar
+and from a button added to Stuudium's main overflow menu. The grid is generated
+from the shared theme catalog and is designed to wrap cleanly with roughly ten
+themes rather than hard-coding a two-choice layout.
 
 The existing `Abi` link remains CSS-hidden in Phase 1. Replacing that visual
 hide with JavaScript DOM removal is viable, but it is intentionally deferred
@@ -180,9 +189,11 @@ Development can use free personal-device signing. Public distribution waits for 
 
 ### Phase 2: First feature
 
-- Implement theme switching.
+- Implement manual, remembered switching between Graphite Mint and Graphite
+  Blue. **Implemented.**
 - Verify persistence, initial rendering, navigation, and responsive behavior.
-- Keep the existing theme visually unchanged when selected.
+- Keep the existing theme visually unchanged when selected and retain Graphite
+  Mint as the only compatibility-userstyle palette.
 
 ### Phase 3: Desktop extension hardening and release
 
@@ -221,7 +232,9 @@ These choices remain intentionally unresolved:
 - The Android/iOS WebView framework.
 - The long-term Android updater implementation.
 - The organization and governance of the eventual Apple developer account.
-- The exact theme palettes and post-theme-switching feature roadmap.
+- The post-theme-switching feature roadmap.
+- Which future theme should first exercise full light-palette overrides and
+  whether automatic system-following belongs in that same phase.
 
 Resolve each through the smallest relevant prototype and live Stuudium verification rather than selecting technology from feature lists alone.
 

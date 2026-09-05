@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
     <meta name="manifest.open_in_tab" content="true" />
     <style>
       html,
@@ -16,6 +17,7 @@
       }
     </style>
     <link rel="stylesheet" href="../../theme/modules/01-tokens.css" />
+    <link rel="stylesheet" href="../../theme/modules/02-accent-themes.css" />
     <link rel="stylesheet" href="./style.css" />
     <title>TORG Stuudium Enhancement settings</title>
   </head>
@@ -23,7 +25,12 @@
     <header class="app-header">
       <div class="app-header__content">
         <div class="app-identity">
-          <img class="app-logo" src="./logo-placeholder.svg" alt="" width="40" height="40" />
+          <svg class="app-logo" viewBox="0 0 48 48" aria-hidden="true">
+            <rect x="1" y="1" width="46" height="46" rx="10" />
+            <path d="M13 15h22v18H13z" />
+            <path d="m16 18 8 7 8-7" />
+            <circle cx="35" cy="14" r="4" />
+          </svg>
           <span class="app-name">TORG Stuudium Enhancement</span>
         </div>
 
@@ -77,7 +84,7 @@
             class="settings-section"
             aria-labelledby="appearance-heading"
             data-settings-section="appearance"
-            data-search-terms="appearance intentional dark theme stuudium enabled disabled"
+            data-search-terms="appearance graphite mint blue accent theme stuudium enabled disabled"
           >
             <h2 id="appearance-heading">Appearance</h2>
 
@@ -85,7 +92,7 @@
               <div
                 class="setting-row"
                 data-setting-item
-                data-search-terms="intentional dark theme stuudium enabled disabled"
+                data-search-terms="intentional dark enhancement stuudium enabled disabled"
               >
                 <div class="setting-copy">
                   <label for="enhancement-enabled">Intentional Dark</label>
@@ -106,6 +113,20 @@
               </div>
             </div>
 
+            <fieldset
+              class="theme-picker"
+              data-setting-item
+              data-search-terms="theme color accent graphite mint blue"
+              aria-describedby="theme-picker-description"
+            >
+              <legend>Theme accent</legend>
+              <p id="theme-picker-description">
+                Choose the accent color used with the graphite surfaces. Your selection is applied
+                immediately.
+              </p>
+              <div id="theme-options" class="theme-options"></div>
+            </fieldset>
+
             <p
               id="status"
               class="visually-hidden"
@@ -125,8 +146,9 @@
           >
             <h2 id="privacy-heading">Privacy</h2>
             <p>
-              Only this on/off preference is stored locally. The extension does not store grades,
-              attendance, messages, sign-in details, or other student information.
+              Only enhancement preferences, including the selected theme, are stored locally. The
+              extension does not store grades, attendance, messages, sign-in details, or other
+              student information.
             </p>
           </section>
 

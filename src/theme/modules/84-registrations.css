@@ -1,6 +1,6 @@
 /* Registrations */
 :where(#registration_index, #registration_collection) {
-  background-image: radial-gradient(circle at 58% 0, rgb(25 78 60 / 22%), transparent 34rem) !important;
+  background-image: radial-gradient(circle at 58% 0, var(--sid-accent-glow), transparent 34rem) !important;
   background-repeat: no-repeat !important;
 }
 
@@ -151,4 +151,3 @@
 .page_registration_collection .option_registrations .group_name {
   color: var(--sid-text-3) !important;
 }
-

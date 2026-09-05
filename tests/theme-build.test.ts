@@ -73,4 +73,34 @@ describe("generated theme", () => {
     expect(color?.value).toBe("var(--sid-text-2)");
     expect(color?.important).toBe(true);
   });
+
+  it("includes a gated blue accent palette while retaining Mint as the fallback", () => {
+    const css = fs.readFileSync(path.join(projectRoot, "src/generated/theme.css"), "utf8");
+    const blueTheme = findRule(css, '[data-sid-theme="graphite-blue"]');
+    const mintFallback = findRule(css, ":root:where([data-sid-enhancement");
+
+    expect(css).toContain("--sid-accent: #65d6b1");
+    expect(blueTheme?.selector).toContain('data-sid-enhancement="enabled"');
+    expect(blueTheme?.selector).toContain('data-sid-theme="graphite-blue"');
+    expect(
+      blueTheme?.nodes.some(
+        (node) => node.type === "decl" && node.prop === "--sid-accent" && node.value === "#75a7ff",
+      ),
+    ).toBe(true);
+    expect(mintFallback).toBeDefined();
+  });
+
+  it("keeps Mint-specific accent values inside palette modules", () => {
+    const modulesDirectory = path.join(projectRoot, "src/theme/modules");
+    const componentCss = fs
+      .readdirSync(modulesDirectory)
+      .filter(
+        (file) =>
+          file.endsWith(".css") && !["01-tokens.css", "02-accent-themes.css"].includes(file),
+      )
+      .map((file) => fs.readFileSync(path.join(modulesDirectory, file), "utf8"))
+      .join("\n");
+
+    expect(componentCss).not.toMatch(/#65d6b1|#7ce8c3|101 214 177|25 78 60|%2365d6b1/i);
+  });
 });

@@ -1,9 +1,9 @@
 :root:where([data-sid-enhancement="enabled"]) {
-  color-scheme: dark;
-  background-color: #0f1311 !important;
+  color-scheme: var(--sid-color-scheme, dark);
+  background-color: var(--sid-canvas, #0f1311) !important;
 }
 
 :root:where([data-sid-enhancement="enabled"]) body {
-  background-color: #0f1311 !important;
-  color: #c1c0b8 !important;
+  background-color: var(--sid-canvas, #0f1311) !important;
+  color: var(--sid-text-2, #c1c0b8) !important;
 }

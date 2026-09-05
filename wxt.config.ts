@@ -13,8 +13,7 @@ export default defineConfig({
   },
   manifest: {
     name: "TORG Stuudium Enhancement",
-    description:
-      "Applies the Intentional Dark theme and a local settings foundation to TORG Stuudium.",
+    description: "Adds selectable Intentional Dark themes and local settings to TORG Stuudium.",
     minimum_chrome_version: "96",
     permissions: ["storage", "scripting"],
     host_permissions: [...STUUDIUM_MATCHES],

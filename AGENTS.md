@@ -13,9 +13,11 @@ Do not commit, publish, submit to a store, change live Stuudium data, or begin a
 
 ## Current project state and phase boundary
 
-Phase 1 is implemented as a WXT 0.21 Chromium Manifest V3 extension written in TypeScript and built with npm. It delivers the existing graphite-and-mint theme, adds an early critical dark surface, uses a small idempotent content bootstrap, and stores only an `enhancementEnabled` preference.
+Phase 1 is implemented as a WXT 0.21 Chromium Manifest V3 extension written in TypeScript and built with npm. It delivers the existing dark theme, adds an early critical dark surface, and uses a small idempotent content bootstrap.
 
-Phase 2 theme switching is not implemented. Phase 3 release hardening and store publication have not started. Bug fixes and maintenance must preserve those boundaries.
+Phase 2 adds manual, remembered switching between Graphite Mint and Graphite Blue. These dark themes share the graphite neutral palette and change only accent tokens. The theme contract already distinguishes dark and light families so future light themes can replace the full token set, but automatic system-following is not implemented. The Stylus compatibility output deliberately remains Graphite Mint only.
+
+Phase 3 release hardening and store publication have not started. Bug fixes and maintenance must preserve that boundary.
 
 The project enhances the genuine Stuudium interface. It must never become a proxy for Stuudium authentication or student data, a replacement client, a source of remote executable code, or an unrestricted page-to-extension/native bridge. Do not add analytics or telemetry by default.
 
@@ -26,15 +28,16 @@ The project enhances the genuine Stuudium interface. It must never become a prox
 - `Stuudium-Intentional-Dark.user.css` is a generated, supported Stylus compatibility output. Never edit it directly.
 - `src/generated/theme.css` is the generated, activation-gated extension stylesheet. Never edit it directly; it is intentionally ignored by Git.
 - `src/theme/critical.css` is the small early dark surface. Keep it minimal and never use it to replace Stuudium's structural CSS.
+- `src/theme/modules/01-tokens.css` contains the default Graphite Mint tokens; `02-accent-themes.css` contains attribute-gated accent overrides.
 
 Run `npm run build:theme` after changing canonical theme modules, unless `npm run dev` is already watching them. Run `npm run check:theme` to prove both generated CSS outputs are current and deterministic.
 
 ## Architecture map
 
-- `src/shared/`: platform-neutral settings, route recognition, supported-site registry, and lifecycle contracts. Do not import browser APIs here.
+- `src/shared/`: platform-neutral settings, theme catalog, route recognition, supported-site registry, and lifecycle contracts. Do not import browser APIs here.
 - `src/features/`: reusable DOM-facing feature logic with explicit activation and cleanup boundaries.
 - `src/platforms/webextension/`: small adapters around extension storage and runtime APIs.
-- `src/entrypoints/`: WXT background, early activation marker, content bootstrap, and options-page entrypoints.
+- `src/entrypoints/`: WXT background, per-theme early activation markers, content bootstrap, and options-page entrypoints.
 - `src/shared/sites.ts`: single registry for verified Stuudium origins. Add an origin here only after it is explicitly verified and approved; keep manifest access narrow.
 - `wxt.config.ts`: extension manifest/build configuration.
 - `scripts/`: deterministic theme, packaging, and validation tooling.

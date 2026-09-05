@@ -1,9 +1,9 @@
 # Extension development
 
 This guide starts from a computer that has never built a browser extension. It
-covers the Phase 1 Chromium extension for Google Chrome and Brave. The extension
-changes only pages under `https://torg.ope.ee/`, stores one local enable/disable
-preference, and does not read or store student information.
+covers the Phase 2 Chromium extension for Google Chrome and Brave. The extension
+changes only pages under `https://torg.ope.ee/`, stores an enable/disable choice
+and a selected theme, and does not read or store student information.
 
 ## What the tools do
 
@@ -15,6 +15,7 @@ preference, and does not read or store student information.
 - **WXT** turns the source entrypoints into a valid Manifest V3 extension.
 - **Vite** is the bundler used by WXT.
 - **PostCSS** parses and generates the two theme outputs.
+- **Happy DOM** gives DOM-facing unit tests a small simulated browser document.
 - **ESLint, Prettier, and Vitest** check code quality, formatting, and behavior.
 
 The extension is not uploaded anywhere by these commands. Building and loading
@@ -77,10 +78,10 @@ types. It does not change Stuudium or install an extension in a browser. Use
 Stuudium-Intentional-Dark.user.css  Generated compatibility userstyle
 src/
 |-- theme/
-|   |-- modules/                   Canonical theme CSS, in source order
+|   |-- modules/                   Canonical theme CSS and palettes, in source order
 |   |-- critical.css               Tiny earliest dark page surface
 |   `-- userstyle-header.txt        Userstyle metadata
-|-- shared/                        Browser-independent settings, routes, lifecycle
+|-- shared/                        Browser-independent settings, themes, routes, lifecycle
 |-- features/                      DOM features with activate/cleanup boundaries
 |-- platforms/webextension/        WebExtension API and page-shell adapters
 |-- entrypoints/                   Background, content script, and settings page
@@ -156,6 +157,21 @@ finished, reload the extension on the extensions page, and refresh the Stuudium
 tab. That explicit sequence also tests the same lifecycle used by a production
 build.
 
+### Preview the settings page on localhost
+
+While `npm run dev` is running, open this exact URL:
+
+```text
+http://localhost:3000/src/entrypoints/options/index.html
+```
+
+This displays the real settings HTML, CSS, and TypeScript bundle in an ordinary
+browser tab, which is convenient for responsive design and accessibility work.
+The localhost preview uses a temporary in-memory settings adapter because an
+ordinary web page cannot access extension storage. Choices work for the current
+preview tab, but reloading it resets them. Use the installed unpacked extension
+for persistence and lifecycle tests.
+
 ## 6. Load the unpacked extension in Chrome
 
 Chrome's official development workflow is documented in
@@ -213,9 +229,10 @@ Restore the userstyle after the comparison.
 
 ## 9. Open the settings
 
-The Phase 1 settings page has one control: **Enable the dark theme**. It proves
-that a preference can be read, written, persisted, and consumed; it does not
-offer multiple theme palettes.
+The settings page has a master **Enable the dark theme** switch and visual cards
+for **Graphite Mint** and **Graphite Blue**. Selecting a card changes the accent
+palette immediately; both choices keep the same graphite surfaces. The card
+grid wraps automatically as future themes are added.
 
 Open it in any of these ways:
 
@@ -231,12 +248,16 @@ without attempting to undo hundreds of CSS properties individually. The
 in-page settings shortcut remains in Stuudium's native appearance so the dark
 theme can be re-enabled directly from the site.
 
-Only this object is stored in `chrome.storage.local`:
+Only this preference object is stored in `chrome.storage.local`:
 
 ```json
 {
   "preferences": {
-    "enhancementEnabled": true
+    "enhancementEnabled": true,
+    "theme": {
+      "mode": "manual",
+      "themeId": "graphite-mint"
+    }
   }
 }
 ```
@@ -287,17 +308,21 @@ tools or save them in the repository.
    dashboard, a subject or journal page, Tera, Suhtlus, applications, and a
    narrow responsive layout that the change can affect.
 3. Inspect the page root in DevTools. When enabled, `<html>` must have
-   `data-sid-enhancement="enabled"`.
+   `data-sid-enhancement="enabled"` and either
+   `data-sid-theme="graphite-mint"` or `data-sid-theme="graphite-blue"`.
 4. In **Sources**, confirm that the loaded CSS and JavaScript have an extension
    URL whose extension ID matches the unpacked extension card.
 5. Inspect computed styles on `<html>` or `<body>`. The graphite canvas token is
-   `#0f1311`; verify that the winning rule comes from the extension build.
+   `#0f1311` in both themes. The main accent token is `#65d6b1` for Mint and
+   `#75a7ff` for Blue; verify that the winning rule comes from the extension
+   build.
 6. Open the Stuudium hamburger menu and confirm the settings button is directly
    after **Avaldused**. With the theme enabled it uses the theme treatment; with
    the theme disabled it uses Stuudium's native appearance.
 7. Exercise hover, keyboard focus, menu close/reopen, and client-side navigation.
 8. Check one component unrelated to the change as a negative control.
-9. Repeat with the setting off, after an extension reload, after disabling and
+9. Select each theme and reload the page to prove the choice persists. Repeat
+   with the enhancement off, after an extension reload, after disabling and
    re-enabling the extension, and after restarting the browser.
 10. Watch hard refreshes and new navigations for a white frame before the dark
     surface. Test with both a warm cache and DevTools **Disable cache** enabled.
@@ -334,8 +359,14 @@ When adding a new school, add a verified origin to the registry in
 matching manifest entries. Do not broaden the manifest to `*.ope.ee` just in
 case; each origin should be verified and added deliberately.
 
-Theme switching remains Phase 2. Do not add palettes or a theme selector while
-working on Phase 1 maintenance.
+To add a future theme, add one catalog entry in `src/shared/themes.ts`, its token
+overrides in an owning theme module, a tiny synchronous early-activation
+entrypoint, and its filename mapping in
+`src/platforms/webextension/early-activation.ts`. The settings grid is generated
+from the catalog. A dark accent variant can inherit the graphite neutral tokens;
+a light theme must declare `colorScheme: "light"` and override all necessary
+surface, text, border, shadow, and accent tokens. Do not assume that changing
+only the accent is sufficient for a light palette.
 
 ## 13. Regenerate and check the compatibility userstyle
 
@@ -345,7 +376,7 @@ After editing a canonical module:
 npm run build:theme
 ```
 
-This parses all 38 modules in filename order and writes:
+This parses all theme modules in filename order and writes:
 
 - `Stuudium-Intentional-Dark.user.css`, wrapped in the Stylus-compatible
   `@-moz-document` block.

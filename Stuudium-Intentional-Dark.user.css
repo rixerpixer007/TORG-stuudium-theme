@@ -28,10 +28,12 @@
   /*
    * Design tokens
    * Stuudium has reusable component/state classes but no native colour tokens,
-   * so this userstyle supplies one palette and maps those classes onto it.
+   * so this userstyle supplies semantic tokens and maps those classes onto them.
+   * Graphite Mint is the fallback palette when no explicit theme is selected.
    */
   :root {
-    color-scheme: dark;
+    --sid-color-scheme: dark;
+    color-scheme: var(--sid-color-scheme);
     --sid-canvas: #0f1311;
     --sid-canvas-soft: #121713;
     --sid-canvas-highlight: #101512;
@@ -52,6 +54,11 @@
     --sid-accent-ink: #0b110e;
     --sid-accent-soft: rgb(101 214 177 / 12%);
     --sid-accent-border: rgb(101 214 177 / 34%);
+    --sid-accent-decoration: rgb(101 214 177 / 35%);
+    --sid-accent-glow: rgb(25 78 60 / 22%);
+    --sid-accent-glow-strong: rgb(25 78 60 / 24%);
+    --sid-accent-halo: rgb(101 214 177 / 8%);
+    --sid-accent-fill-strong: rgb(101 214 177 / 28%);
     --sid-danger: #ff9696;
     --sid-danger-soft: rgb(255 150 150 / 11%);
     --sid-danger-border: rgb(255 150 150 / 42%);
@@ -68,11 +75,31 @@
     --sid-icon-filter-light: invert(88%) sepia(8%) saturate(228%) hue-rotate(88deg) brightness(90%) contrast(91%);
     --sid-icon-filter-dark: brightness(0) saturate(100%);
     --sid-spinner-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='9' fill='none' stroke='%232a332e' stroke-width='3'/%3E%3Cpath d='M12 3a9 9 0 0 1 9 9' fill='none' stroke='%2365d6b1' stroke-width='3' stroke-linecap='round'%3E%3CanimateTransform attributeName='transform' type='rotate' from='0 12 12' to='360 12 12' dur='.75s' repeatCount='indefinite'/%3E%3C/path%3E%3C/svg%3E");
+    --sid-checkmark-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5 6.5 12 13 4.5' fill='none' stroke='%2365d6b1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
     --sid-z-tabs: 500;
     --sid-z-nav: 10000;
     --sid-z-menu: 10020;
   }
-
+  /*
+   * Accent themes
+   * Phase 2 themes share the graphite neutral palette. A future light theme can
+   * override the same semantic tokens, including color-scheme and every surface.
+   */
+  :root[data-sid-theme="graphite-blue"] {
+    --sid-accent: #75a7ff;
+    --sid-accent-strong: #9cc1ff;
+    --sid-accent-ink: #07111f;
+    --sid-accent-soft: rgb(117 167 255 / 12%);
+    --sid-accent-border: rgb(117 167 255 / 36%);
+    --sid-accent-decoration: rgb(117 167 255 / 38%);
+    --sid-accent-glow: rgb(45 84 150 / 24%);
+    --sid-accent-glow-strong: rgb(45 84 150 / 28%);
+    --sid-accent-halo: rgb(117 167 255 / 10%);
+    --sid-accent-fill-strong: rgb(117 167 255 / 30%);
+    --sid-focus: 0 0 0 3px rgb(117 167 255 / 22%);
+    --sid-spinner-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='9' fill='none' stroke='%232a332e' stroke-width='3'/%3E%3Cpath d='M12 3a9 9 0 0 1 9 9' fill='none' stroke='%2375a7ff' stroke-width='3' stroke-linecap='round'%3E%3CanimateTransform attributeName='transform' type='rotate' from='0 12 12' to='360 12 12' dur='.75s' repeatCount='indefinite'/%3E%3C/path%3E%3C/svg%3E");
+    --sid-checkmark-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5 6.5 12 13 4.5' fill='none' stroke='%2375a7ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  }
   /* Page shell and type */
   html,
   body {
@@ -83,7 +110,7 @@
   body {
     min-height: 100vh;
     background-image:
-      radial-gradient(circle at 58% 4%, rgb(25 78 60 / 22%), transparent 34rem),
+      radial-gradient(circle at 58% 4%, var(--sid-accent-glow), transparent 34rem),
       linear-gradient(180deg, var(--sid-canvas-highlight) 0, var(--sid-canvas) 34rem) !important;
     font-family: "Stuudium Sans", Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
   }
@@ -113,14 +140,13 @@
   /* Intentional site-wide link fallback; named feature roles override this paint. */
   :where(a) {
     color: var(--sid-accent) !important;
-    text-decoration-color: rgb(101 214 177 / 35%) !important;
+    text-decoration-color: var(--sid-accent-decoration) !important;
   }
 
   :where(a:hover, a:focus-visible) {
     color: var(--sid-accent-strong) !important;
     text-decoration-color: currentColor !important;
   }
-
   /* Minimal mode: hide navigation into Stuudium's Abi section. */
   :where(a):is(
     [href="/abi"],
@@ -176,7 +202,7 @@
   #bg {
     min-height: 100vh;
     background:
-      radial-gradient(circle at 58% 8%, rgb(25 78 60 / 24%), transparent 34rem),
+      radial-gradient(circle at 58% 8%, var(--sid-accent-glow-strong), transparent 34rem),
       linear-gradient(180deg, var(--sid-canvas-highlight), var(--sid-canvas)) !important;
   }
 
@@ -617,7 +643,6 @@
   #main .foot {
     color: var(--sid-text-3) !important;
   }
-
   /* Primary navigation and menus */
   .st-stuudium-navigation-2021 {
     position: relative !important;
@@ -1528,9 +1553,8 @@
   .absences_popover :where(select, textarea):is(:focus, :focus-visible) {
     border-color: var(--sid-accent-border) !important;
     outline: 0 !important;
-    box-shadow: 0 0 0 2px rgb(101 214 177 / 8%) !important;
+    box-shadow: 0 0 0 2px var(--sid-accent-halo) !important;
   }
-
   /* Profiles, subjects and segmented controls */
   :where(.st-segment-nav, .st-toggle-control) {
     color: var(--sid-text-2) !important;
@@ -2216,7 +2240,7 @@
   }
 
   .page_subjects_student #student_subject_grades_mode_toggle input[type="checkbox"]:checked ~ em {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5 6.5 12 13 4.5' fill='none' stroke='%2365d6b1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") !important;
+    background-image: var(--sid-checkmark-image) !important;
   }
 
   .page_subjects_student .student_subject_grades :where(.new_grades, .grade) {
@@ -2261,7 +2285,6 @@
   .page_subjects_student .lesson_grade_history :where(th, td) {
     border-color: var(--sid-border) !important;
   }
-
   /* Grading guide */
   .page_subjectplans_plan .page_head {
     border-bottom-color: var(--sid-border) !important;
@@ -2772,7 +2795,7 @@
 
   @keyframes sid-accent-flash {
     0% {
-      background-color: rgb(101 214 177 / 28%);
+      background-color: var(--sid-accent-fill-strong);
     }
 
     50%,
@@ -2784,7 +2807,6 @@
   .suhtlus .email-in-settings .email-in-address a.colorflash {
     animation-name: sid-accent-flash !important;
   }
-
   /* Groups menu */
   .suhtlus .my-channels :where(.my-channel, .channels-manage-link, .no-channels-placeholder) {
     color: var(--sid-text-2) !important;
@@ -3253,7 +3275,7 @@
 
   .suhtlus .cal-date[data-suhtlus-action] span {
     color: var(--sid-accent) !important;
-    text-decoration-color: rgb(101 214 177 / 35%) !important;
+    text-decoration-color: var(--sid-accent-decoration) !important;
   }
 
   .suhtlus .cal-day .cal-date-add {
@@ -3289,10 +3311,9 @@
     color: var(--sid-accent-strong) !important;
     background: var(--sid-accent-soft) !important;
   }
-
   /* Registrations */
   :where(#registration_index, #registration_collection) {
-    background-image: radial-gradient(circle at 58% 0, rgb(25 78 60 / 22%), transparent 34rem) !important;
+    background-image: radial-gradient(circle at 58% 0, var(--sid-accent-glow), transparent 34rem) !important;
     background-repeat: no-repeat !important;
   }
 
@@ -3443,7 +3464,6 @@
   .page_registration_collection .option_registrations .group_name {
     color: var(--sid-text-3) !important;
   }
-
   /* Data grids and calendars: scoped to known data-heavy page/component roots. */
   :where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_users_profile, .content-container, .suhtlus) table {
     color: var(--sid-text-2) !important;

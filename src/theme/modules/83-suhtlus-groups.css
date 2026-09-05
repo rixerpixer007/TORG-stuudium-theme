@@ -466,7 +466,7 @@
 
 .suhtlus .cal-date[data-suhtlus-action] span {
   color: var(--sid-accent) !important;
-  text-decoration-color: rgb(101 214 177 / 35%) !important;
+  text-decoration-color: var(--sid-accent-decoration) !important;
 }
 
 .suhtlus .cal-day .cal-date-add {
@@ -502,4 +502,3 @@
   color: var(--sid-accent-strong) !important;
   background: var(--sid-accent-soft) !important;
 }
-

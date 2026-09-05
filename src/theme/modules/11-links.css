@@ -1,11 +1,10 @@
 /* Intentional site-wide link fallback; named feature roles override this paint. */
 :where(a) {
   color: var(--sid-accent) !important;
-  text-decoration-color: rgb(101 214 177 / 35%) !important;
+  text-decoration-color: var(--sid-accent-decoration) !important;
 }
 
 :where(a:hover, a:focus-visible) {
   color: var(--sid-accent-strong) !important;
   text-decoration-color: currentColor !important;
 }
-

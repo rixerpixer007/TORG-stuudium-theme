@@ -87,6 +87,5 @@
 .absences_popover :where(select, textarea):is(:focus, :focus-visible) {
   border-color: var(--sid-accent-border) !important;
   outline: 0 !important;
-  box-shadow: 0 0 0 2px rgb(101 214 177 / 8%) !important;
+  box-shadow: 0 0 0 2px var(--sid-accent-halo) !important;
 }
-

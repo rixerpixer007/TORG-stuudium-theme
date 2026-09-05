@@ -3,6 +3,7 @@ import "../../generated/theme.css";
 import "../../platforms/webextension/settings-menu.css";
 
 import { createSettingsMenuFeature } from "../../features/settings-menu";
+import { applyTheme, clearTheme } from "../../features/theme-selection";
 import { openExtensionSettings } from "../../platforms/webextension/open-settings";
 import { createWebExtensionSettingsStore } from "../../platforms/webextension/settings-storage";
 import { EnhancementRuntime } from "../../shared/lifecycle";
@@ -45,13 +46,16 @@ export default defineContentScript({
       if (route.supported) {
         settingsMenuRuntime.activate({ route });
         if (currentSettings.enhancementEnabled) {
+          applyTheme(document.documentElement, currentSettings.theme.themeId);
           document.documentElement.setAttribute(ACTIVATION_ATTRIBUTE, "enabled");
         } else {
           document.documentElement.removeAttribute(ACTIVATION_ATTRIBUTE);
+          clearTheme(document.documentElement);
         }
       } else {
         settingsMenuRuntime.cleanup();
         document.documentElement.removeAttribute(ACTIVATION_ATTRIBUTE);
+        clearTheme(document.documentElement);
       }
     };
 
@@ -66,6 +70,7 @@ export default defineContentScript({
       unsubscribeSettings();
       settingsMenuRuntime.cleanup();
       document.documentElement.removeAttribute(ACTIVATION_ATTRIBUTE);
+      clearTheme(document.documentElement);
       window.removeEventListener("pagehide", handlePageHide);
       if (extensionGlobal.__sidEnhancementCleanup === cleanup) {
         delete extensionGlobal.__sidEnhancementCleanup;
@@ -105,6 +110,7 @@ export default defineContentScript({
         console.error("Unable to read extension settings", error);
         settingsMenuRuntime.cleanup();
         document.documentElement.removeAttribute(ACTIVATION_ATTRIBUTE);
+        clearTheme(document.documentElement);
       }
     };
 

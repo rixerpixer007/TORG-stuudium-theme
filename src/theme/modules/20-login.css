@@ -2,7 +2,7 @@
 #bg {
   min-height: 100vh;
   background:
-    radial-gradient(circle at 58% 8%, rgb(25 78 60 / 24%), transparent 34rem),
+    radial-gradient(circle at 58% 8%, var(--sid-accent-glow-strong), transparent 34rem),
     linear-gradient(180deg, var(--sid-canvas-highlight), var(--sid-canvas)) !important;
 }
 
@@ -443,4 +443,3 @@
 #main .foot {
   color: var(--sid-text-3) !important;
 }
-

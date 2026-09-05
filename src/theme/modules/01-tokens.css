@@ -1,10 +1,12 @@
 /*
  * Design tokens
  * Stuudium has reusable component/state classes but no native colour tokens,
- * so this userstyle supplies one palette and maps those classes onto it.
+ * so this userstyle supplies semantic tokens and maps those classes onto them.
+ * Graphite Mint is the fallback palette when no explicit theme is selected.
  */
 :root {
-  color-scheme: dark;
+  --sid-color-scheme: dark;
+  color-scheme: var(--sid-color-scheme);
   --sid-canvas: #0f1311;
   --sid-canvas-soft: #121713;
   --sid-canvas-highlight: #101512;
@@ -25,6 +27,11 @@
   --sid-accent-ink: #0b110e;
   --sid-accent-soft: rgb(101 214 177 / 12%);
   --sid-accent-border: rgb(101 214 177 / 34%);
+  --sid-accent-decoration: rgb(101 214 177 / 35%);
+  --sid-accent-glow: rgb(25 78 60 / 22%);
+  --sid-accent-glow-strong: rgb(25 78 60 / 24%);
+  --sid-accent-halo: rgb(101 214 177 / 8%);
+  --sid-accent-fill-strong: rgb(101 214 177 / 28%);
   --sid-danger: #ff9696;
   --sid-danger-soft: rgb(255 150 150 / 11%);
   --sid-danger-border: rgb(255 150 150 / 42%);
@@ -41,8 +48,8 @@
   --sid-icon-filter-light: invert(88%) sepia(8%) saturate(228%) hue-rotate(88deg) brightness(90%) contrast(91%);
   --sid-icon-filter-dark: brightness(0) saturate(100%);
   --sid-spinner-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='9' fill='none' stroke='%232a332e' stroke-width='3'/%3E%3Cpath d='M12 3a9 9 0 0 1 9 9' fill='none' stroke='%2365d6b1' stroke-width='3' stroke-linecap='round'%3E%3CanimateTransform attributeName='transform' type='rotate' from='0 12 12' to='360 12 12' dur='.75s' repeatCount='indefinite'/%3E%3C/path%3E%3C/svg%3E");
+  --sid-checkmark-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5 6.5 12 13 4.5' fill='none' stroke='%2365d6b1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   --sid-z-tabs: 500;
   --sid-z-nav: 10000;
   --sid-z-menu: 10020;
 }
-

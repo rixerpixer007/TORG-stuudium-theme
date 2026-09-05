@@ -1,11 +1,12 @@
 import { browser } from "wxt/browser";
 
 import { isOpenSettingsMessage } from "../platforms/webextension/open-settings";
+import { getEarlyActivationScript } from "../platforms/webextension/early-activation";
 import { createWebExtensionSettingsStore } from "../platforms/webextension/settings-storage";
 import { STUUDIUM_MATCHES } from "../shared/sites";
+import type { ExtensionSettings } from "../shared/settings";
 
 const ACTIVATION_SCRIPT_ID = "sid-early-activation";
-const ACTIVATION_SCRIPT_FILE = "activation-marker.js";
 const OPTIONS_PAGE_FILE = "/options.html";
 const OPTIONS_PAGE_LOAD_TIMEOUT_MS = 5_000;
 let activationReconciliation = Promise.resolve();
@@ -75,12 +76,12 @@ async function openSettingsTab(openerTabId?: number, windowId?: number): Promise
   await browser.windows.update(settingsTab.windowId, { focused: true });
 }
 
-async function reconcileEarlyActivation(enabled: boolean): Promise<void> {
+async function reconcileEarlyActivation(settings: ExtensionSettings): Promise<void> {
   const registered = await browser.scripting.getRegisteredContentScripts({
     ids: [ACTIVATION_SCRIPT_ID],
   });
 
-  if (!enabled) {
+  if (!settings.enhancementEnabled) {
     if (registered.length > 0) {
       await browser.scripting.unregisterContentScripts({ ids: [ACTIVATION_SCRIPT_ID] });
     }
@@ -90,7 +91,7 @@ async function reconcileEarlyActivation(enabled: boolean): Promise<void> {
   const registration = {
     id: ACTIVATION_SCRIPT_ID,
     matches: [...STUUDIUM_MATCHES],
-    js: [ACTIVATION_SCRIPT_FILE],
+    js: [getEarlyActivationScript(settings.theme.themeId)],
     allFrames: false,
     persistAcrossSessions: true,
     runAt: "document_start" as const,
@@ -104,12 +105,12 @@ async function reconcileEarlyActivation(enabled: boolean): Promise<void> {
   }
 }
 
-function scheduleEarlyActivation(enabled: boolean): Promise<void> {
+function scheduleEarlyActivation(settings: ExtensionSettings): Promise<void> {
   const previousReconciliation = activationReconciliation;
   activationReconciliation = (async () => {
     await previousReconciliation;
     try {
-      await reconcileEarlyActivation(enabled);
+      await reconcileEarlyActivation(settings);
     } catch (error) {
       console.error("Unable to reconcile early theme activation", error);
     }
@@ -129,7 +130,7 @@ export default defineBackground(() => {
   const initialize = async (): Promise<void> => {
     const settings = await settingsStore.get();
     await settingsStore.set(settings);
-    await scheduleEarlyActivation(settings.enhancementEnabled);
+    await scheduleEarlyActivation(settings);
   };
 
   browser.runtime.onInstalled.addListener(() => {
@@ -149,7 +150,7 @@ export default defineBackground(() => {
   });
 
   settingsStore.subscribe((settings) => {
-    void scheduleEarlyActivation(settings.enhancementEnabled);
+    void scheduleEarlyActivation(settings);
   });
 
   runSafely("Unable to initialize extension settings", initialize());

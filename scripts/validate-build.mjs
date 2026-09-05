@@ -79,8 +79,17 @@ assert(
 );
 assert(bundledCss.includes("--sid-canvas:#0f1311"), "Full graphite theme is missing");
 assert(
+  bundledCss.includes("data-sid-theme=graphite-blue]") &&
+    bundledCss.includes("--sid-accent:#75a7ff"),
+  "Graphite Blue theme is missing",
+);
+assert(
   bundledCss.includes("sid-extension-settings-menu-item"),
   "In-page settings menu styling is missing",
 );
+
+for (const activationScript of ["activation-graphite-mint.js", "activation-graphite-blue.js"]) {
+  assert(files.includes(activationScript), `Early theme script is missing: ${activationScript}`);
+}
 
 console.log(`Validated Manifest V3 production build with ${files.length} packaged files.`);

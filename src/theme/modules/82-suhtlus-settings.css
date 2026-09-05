@@ -24,7 +24,7 @@
 
 @keyframes sid-accent-flash {
   0% {
-    background-color: rgb(101 214 177 / 28%);
+    background-color: var(--sid-accent-fill-strong);
   }
 
   50%,
@@ -36,4 +36,3 @@
 .suhtlus .email-in-settings .email-in-address a.colorflash {
   animation-name: sid-accent-flash !important;
 }
-

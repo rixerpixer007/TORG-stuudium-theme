@@ -1,10 +1,10 @@
 # Extension publishing
 
-This is the Phase 1 release guide for the approved distribution plan:
+This is the current release guide for the approved distribution plan:
 
 1. Publish first in the **Chrome Web Store** for Google Chrome and Brave users.
 2. Document **Microsoft Edge Add-ons** as an optional additional Chromium
-   channel; do not open or submit that listing during Phase 1.
+   channel; do not open or submit that listing before it is explicitly approved.
 
 No command in this guide publishes automatically. Store registration, identity
 or trader declarations, listing approval, payment, upload, and final submission
@@ -18,7 +18,7 @@ Store forms and policies change. Items marked **RECHECK BEFORE PUBLISH** were
 verified against official documentation on 2026-09-04 but must be checked again
 immediately before a real submission.
 
-## What is and is not release-ready in Phase 1
+## What is and is not release-ready after Phase 2
 
 The build is a valid local Manifest V3 extension and produces a validated ZIP.
 Before the first public submission, the owner must still approve branding,
@@ -31,9 +31,9 @@ The extension's single purpose is:
 > Improve the appearance and local usability of TORG Stuudium while the user
 > continues to use the genuine Stuudium site.
 
-Phase 1 applies the existing Intentional Dark theme and provides a local master
-enable setting. It does not proxy Stuudium, collect analytics, execute remote
-code, or store student data.
+Phase 2 provides Graphite Mint and Graphite Blue with a local master enable
+setting and remembered manual selection. It does not proxy Stuudium, collect
+analytics, execute remote code, or store student data.
 
 ## 1. Create and secure the Chrome Web Store account
 
@@ -79,11 +79,12 @@ before upload.
 
 - **Name:** `TORG Stuudium Enhancement`, unless the owner approves a final public
   product name. The manifest and listing must agree.
-- **Short description:** at most 132 characters. A suitable Phase 1 draft is:
-  `Applies Intentional Dark and local enhancement settings to TORG Stuudium.`
+- **Short description:** at most 132 characters. A suitable current draft is:
+  `Adds selectable Intentional Dark themes and local settings to TORG Stuudium.`
 - **Detailed description:** explain the single purpose, that it works only on
   TORG Stuudium, how to open settings, what is stored locally, and the exact
-  permissions. Do not advertise Phase 2 theme switching before it exists.
+  permissions. Do not advertise automatic system-following or light themes
+  before they exist.
 - **Primary language:** choose the language actually used by the listing. Add
   localized Estonian/English listing text only when both are maintained.
 - **Category:** choose the closest current dashboard category after reviewing
@@ -109,7 +110,7 @@ currently require:
 Prepare matching 16×16, 32×32, 48×48, and 128×128 PNG icons for browser UI and
 the manifest. Add them to a deliberate `public/icons/` source set and configure
 them in `wxt.config.ts`; then rebuild and verify that the 128×128 file is in the
-ZIP. This is not done in Phase 1 because final branding has not been approved.
+ZIP. This is not done yet because final branding has not been approved.
 
 Screenshots must show the real current extension experience without exposing a
 student's name, grades, attendance, messages, schedule, class membership,
@@ -131,7 +132,8 @@ The privacy policy should say, in plain language:
 
 - The extension runs only on `https://torg.ope.ee/*`.
 - It changes presentation locally in the browser.
-- It stores only the local `enhancementEnabled` preference.
+- It stores only the local `enhancementEnabled` and manual theme-selection
+  preferences.
 - It does not collect, transmit, sell, or share analytics, browsing history,
   grades, attendance, messages, page contents, credentials, cookies, or other
   student information.
@@ -373,9 +375,9 @@ Never publish an unreviewed permission expansion as a shortcut.
 
 ## 11. Optional Microsoft Edge Add-ons distribution
 
-This is documentation only for Phase 1. Do not create an Edge account or listing
-until the owner explicitly chooses to add that channel and the extension has
-been tested in Microsoft Edge.
+This is documentation only. Do not create an Edge account or listing until the
+owner explicitly chooses to add that channel and the extension has been tested
+in Microsoft Edge.
 
 Microsoft's current
 [Edge developer registration guide](https://learn.microsoft.com/en-us/microsoft-edge/extensions-chromium/publish/create-dev-account)
