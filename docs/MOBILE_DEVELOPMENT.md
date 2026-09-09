@@ -106,6 +106,7 @@ apps/android/
 src/mobile/entrypoints/bootstrap.ts      Shared DOM runtime for Stuudium
 src/mobile/entrypoints/settings.ts       Mobile adapter for the shared settings UI
 src/mobile/entrypoints/config.ts         Shared catalog exported for Kotlin
+src/mobile/platform.css                  Android-only touch presentation
 src/platforms/webview/                   WebView-facing TypeScript adapters
 scripts/build-mobile-assets.mjs          Deterministic mobile web-asset generator
 scripts/validate-mobile-assets.mjs       Generated-asset security checks

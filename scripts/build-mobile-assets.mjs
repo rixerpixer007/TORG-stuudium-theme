@@ -120,6 +120,10 @@ async function buildBootstrap(outputDirectory) {
     path.join(injectionDirectory, "critical.css"),
   );
   fs.copyFileSync(
+    path.join(PROJECT_ROOT, "src/mobile/platform.css"),
+    path.join(injectionDirectory, "platform.css"),
+  );
+  fs.copyFileSync(
     path.join(PROJECT_ROOT, "src/generated/theme.css"),
     path.join(injectionDirectory, "theme.css"),
   );

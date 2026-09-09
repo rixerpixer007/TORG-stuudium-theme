@@ -11,6 +11,7 @@ const REQUIRED_FILES = [
   "config.json",
   "injection/bootstrap.js",
   "injection/critical.css",
+  "injection/platform.css",
   "injection/settings-menu.css",
   "injection/theme.css",
   "settings/index.html",

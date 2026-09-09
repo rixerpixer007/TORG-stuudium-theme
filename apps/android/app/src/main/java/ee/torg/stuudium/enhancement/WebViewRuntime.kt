@@ -19,6 +19,7 @@ import org.json.JSONObject
 data class MobileAssetBundle(
     val bootstrap: String,
     val criticalCss: String,
+    val platformCss: String,
     val themeCss: String,
     val settingsMenuCss: String,
 ) {
@@ -27,6 +28,7 @@ data class MobileAssetBundle(
             MobileAssetBundle(
                 bootstrap = activity.readAsset("mobile/injection/bootstrap.js"),
                 criticalCss = activity.readAsset("mobile/injection/critical.css"),
+                platformCss = activity.readAsset("mobile/injection/platform.css"),
                 themeCss = activity.readAsset("mobile/injection/theme.css"),
                 settingsMenuCss = activity.readAsset("mobile/injection/settings-menu.css"),
             )
@@ -115,6 +117,7 @@ fun buildDocumentStartScript(
 ): String {
     val settingsJson = JSONObject.quote(settings.toJson().toString())
     val criticalCss = JSONObject.quote(assets.criticalCss)
+    val platformCss = JSONObject.quote(assets.platformCss)
     val themeCss = JSONObject.quote(assets.themeCss)
     val settingsMenuCss = JSONObject.quote(assets.settingsMenuCss)
 
@@ -141,6 +144,7 @@ fun buildDocumentStartScript(
               style.textContent = css;
             };
 
+            installStyle("sid-mobile-platform", $platformCss);
             installStyle("sid-mobile-critical", $criticalCss);
             installStyle("sid-mobile-theme", $themeCss);
             installStyle("sid-mobile-settings-menu", $settingsMenuCss);

@@ -1,6 +1,7 @@
 import type { EnhancementFeature } from "../shared/lifecycle";
 
 const BUTTON_ID = "sid-extension-settings-menu-item";
+const DISMISSED_ATTRIBUTE = "data-sid-settings-menu-dismissed";
 
 export interface SettingsMenuDependencies {
   document: Document;
@@ -36,6 +37,28 @@ function findMainMenu(document: Document): HTMLElement | null {
       );
     }) ?? null
   );
+}
+
+function findMenuOwner(element: Element): HTMLElement | null {
+  return element.closest<HTMLElement>(".st-nav-item-expandable");
+}
+
+function findMenuTrigger(menu: HTMLElement): Element | null {
+  return (
+    [...menu.children].find(
+      (child) =>
+        child.classList.contains("st-nav-item") &&
+        !child.classList.contains("sid-extension-settings-menu-item"),
+    ) ?? null
+  );
+}
+
+function dismissOwningMenu(button: HTMLButtonElement): HTMLElement | null {
+  const menu = findMenuOwner(button);
+  button.blur();
+  menu?.classList.remove("st-nav-item-expanded");
+  menu?.setAttribute(DISMISSED_ATTRIBUTE, "true");
+  return menu;
 }
 
 function createButton(document: Document, openSettings: () => Promise<boolean>): HTMLButtonElement {
@@ -77,10 +100,15 @@ function createButton(document: Document, openSettings: () => Promise<boolean>):
 
   button.append(graphic, label);
   const handleClick = async (): Promise<void> => {
+    const menu = dismissOwningMenu(button);
     try {
       const opened = await openSettings();
-      if (!opened) button.remove();
+      if (!opened) {
+        menu?.removeAttribute(DISMISSED_ATTRIBUTE);
+        button.remove();
+      }
     } catch (error) {
+      menu?.removeAttribute(DISMISSED_ATTRIBUTE);
       console.error("Unable to open enhancement settings", error);
     }
   };
@@ -96,6 +124,27 @@ export function createSettingsMenuFeature({
   openSettings,
 }: SettingsMenuDependencies): EnhancementFeature {
   let observer: MutationObserver | undefined;
+
+  const handlePointerOver = (event: Event): void => {
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+
+    document.querySelectorAll<HTMLElement>(`[${DISMISSED_ATTRIBUTE}]`).forEach((menu) => {
+      if (!menu.contains(target)) menu.removeAttribute(DISMISSED_ATTRIBUTE);
+    });
+  };
+
+  const handlePointerDown = (event: Event): void => {
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+
+    document.querySelectorAll<HTMLElement>(`[${DISMISSED_ATTRIBUTE}]`).forEach((menu) => {
+      const trigger = findMenuTrigger(menu);
+      if (!menu.contains(target) || trigger?.contains(target)) {
+        menu.removeAttribute(DISMISSED_ATTRIBUTE);
+      }
+    });
+  };
 
   const mount = (): void => {
     const menu = findMainMenu(document);
@@ -120,6 +169,11 @@ export function createSettingsMenuFeature({
   const cleanup = (): void => {
     observer?.disconnect();
     observer = undefined;
+    document.removeEventListener("pointerover", handlePointerOver, true);
+    document.removeEventListener("pointerdown", handlePointerDown, true);
+    document.querySelectorAll<HTMLElement>(`[${DISMISSED_ATTRIBUTE}]`).forEach((menu) => {
+      menu.removeAttribute(DISMISSED_ATTRIBUTE);
+    });
     document.getElementById(BUTTON_ID)?.remove();
   };
 
@@ -127,6 +181,8 @@ export function createSettingsMenuFeature({
     activate() {
       cleanup();
       mount();
+      document.addEventListener("pointerover", handlePointerOver, true);
+      document.addEventListener("pointerdown", handlePointerDown, true);
       observer = new MutationObserver(mount);
       observer.observe(document.documentElement, { childList: true, subtree: true });
     },

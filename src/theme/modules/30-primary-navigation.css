@@ -36,7 +36,8 @@
   border-color: var(--sid-accent-border) !important;
 }
 
-.st-nav-item-expandable:hover > .st-nav-item {
+.st-nav-item-expandable:hover > .st-nav-item,
+.st-nav-is-touch .st-nav-item-expandable.st-nav-item-expanded > .st-nav-item {
   color: var(--sid-text) !important;
   background: var(--sid-accent-soft) !important;
   border-color: var(--sid-accent-border) !important;

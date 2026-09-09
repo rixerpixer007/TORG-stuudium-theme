@@ -14,6 +14,28 @@
   appearance: none;
 }
 
+.st-nav-item-expandable[data-sid-settings-menu-dismissed] > .st-nav-item-expandable-content {
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.st-stuudium-navigation-2021
+  .st-nav-item-expandable[data-sid-settings-menu-dismissed]
+  > .st-nav-item {
+  color: rgba(255, 255, 255, 0.9) !important;
+  background: transparent !important;
+  border-color: #203852 !important;
+  border-radius: 1em !important;
+}
+
+:where(html[data-sid-enhancement="enabled"])
+  .st-stuudium-navigation-2021
+  .st-nav-item-expandable[data-sid-settings-menu-dismissed]
+  > .st-nav-item {
+  color: var(--sid-text-2) !important;
+  border-color: var(--sid-border) !important;
+}
+
 :where(html[data-sid-enhancement="enabled"]) .sid-extension-settings-menu-item {
   color: var(--sid-text-2) !important;
 }

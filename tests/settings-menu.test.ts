@@ -16,12 +16,14 @@ describe("settings menu feature", () => {
     document = window.document as unknown as Document;
     vi.stubGlobal("HTMLAnchorElement", window.HTMLAnchorElement);
     vi.stubGlobal("HTMLButtonElement", window.HTMLButtonElement);
+    vi.stubGlobal("Element", window.Element);
     vi.stubGlobal("HTMLElement", window.HTMLElement);
     vi.stubGlobal("MutationObserver", window.MutationObserver);
 
     document.body.classList.add("lang_et");
     document.body.innerHTML = `
       <nav class="st-nav-item-expandable">
+        <span class="st-nav-item st-nav-item-only-graphic">Menu</span>
         <div class="st-nav-item-expandable-content">
           <a class="st-nav-item" data-name="groups" href="/groups">Klassid</a>
           <a class="st-nav-item" href="/q">Küsimustikud</a>
@@ -110,12 +112,68 @@ describe("settings menu feature", () => {
     const feature = createSettingsMenuFeature({ document, openSettings });
 
     feature.activate(context);
+    const button = document.getElementById(BUTTON_ID);
+    const menu = document.querySelector(".st-nav-item-expandable");
+    menu?.classList.add("st-nav-item-expanded");
+    button?.dispatchEvent(new window.MouseEvent("click") as unknown as MouseEvent);
+
+    expect(menu?.hasAttribute("data-sid-settings-menu-dismissed")).toBe(true);
+    expect(menu?.classList.contains("st-nav-item-expanded")).toBe(false);
+
+    await window.happyDOM.waitUntilComplete();
+
+    expect(openSettings).toHaveBeenCalledOnce();
+
+    document
+      .querySelector(".st-nav-item-only-graphic")
+      ?.dispatchEvent(new window.Event("pointerover", { bubbles: true }) as unknown as Event);
+    expect(menu?.hasAttribute("data-sid-settings-menu-dismissed")).toBe(true);
+
+    document.body.dispatchEvent(
+      new window.Event("pointerover", { bubbles: true }) as unknown as Event,
+    );
+    expect(menu?.hasAttribute("data-sid-settings-menu-dismissed")).toBe(false);
+
+    feature.cleanup();
+  });
+
+  it("allows an explicitly pressed menu trigger to reopen a dismissed menu", () => {
+    const feature = createSettingsMenuFeature({
+      document,
+      openSettings: vi.fn(() => Promise.resolve(true)),
+    });
+
+    feature.activate(context);
+    const button = document.getElementById(BUTTON_ID);
+    const menu = document.querySelector(".st-nav-item-expandable");
+    button?.dispatchEvent(new window.MouseEvent("click") as unknown as MouseEvent);
+
+    document
+      .querySelector(".st-nav-item-only-graphic")
+      ?.dispatchEvent(new window.Event("pointerdown", { bubbles: true }) as unknown as Event);
+
+    expect(menu?.hasAttribute("data-sid-settings-menu-dismissed")).toBe(false);
+
+    feature.cleanup();
+  });
+
+  it("restores the menu when opening settings fails", async () => {
+    const feature = createSettingsMenuFeature({
+      document,
+      openSettings: vi.fn(() => Promise.resolve(false)),
+    });
+
+    feature.activate(context);
     document
       .getElementById(BUTTON_ID)
       ?.dispatchEvent(new window.MouseEvent("click") as unknown as MouseEvent);
     await window.happyDOM.waitUntilComplete();
 
-    expect(openSettings).toHaveBeenCalledOnce();
+    expect(
+      document
+        .querySelector(".st-nav-item-expandable")
+        ?.hasAttribute("data-sid-settings-menu-dismissed"),
+    ).toBe(false);
 
     feature.cleanup();
   });
