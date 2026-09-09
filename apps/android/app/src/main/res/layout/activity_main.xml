@@ -5,12 +5,19 @@
     android:layout_height="match_parent"
     android:background="@color/sid_canvas">
 
-    <WebView
-        android:id="@+id/stuudium_webview"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/sid_canvas"
-        android:visibility="invisible" />
+        android:background="@color/sid_canvas">
+
+        <WebView
+            android:id="@+id/stuudium_webview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/sid_canvas"
+            android:visibility="invisible" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <FrameLayout
         android:id="@+id/loading_surface"

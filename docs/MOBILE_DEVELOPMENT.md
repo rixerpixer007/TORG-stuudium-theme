@@ -29,6 +29,11 @@ point where content from the previous navigation will no longer be drawn. This
 avoids flashing the launch surface during quick Tera, Suhtlus, and other
 same-origin transitions.
 
+At the top of a Stuudium page, pulling downward uses Android's native
+swipe-to-refresh indicator and reloads the current allowed Stuudium URL. The
+gesture remains owned by the WebView while the page can still scroll upward,
+and the indicator stops when the refreshed page finishes or fails to load.
+
 ## 1. Install Android Studio on macOS
 
 Download the current stable Android Studio from the

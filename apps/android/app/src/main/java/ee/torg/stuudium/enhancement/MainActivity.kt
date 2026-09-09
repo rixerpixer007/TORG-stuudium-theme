@@ -24,6 +24,7 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.webkit.ScriptHandler
 import androidx.webkit.WebMessageCompat
 import androidx.webkit.WebViewCompat
@@ -34,6 +35,7 @@ class MainActivity : ComponentActivity() {
     private lateinit var originPolicy: SupportedOriginPolicy
     private lateinit var assets: MobileAssetBundle
     private lateinit var root: FrameLayout
+    private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var webView: WebView
     private lateinit var loadingSurface: View
     private lateinit var loadingIndicator: ProgressBar
@@ -72,6 +74,7 @@ class MainActivity : ComponentActivity() {
 
         setContentView(R.layout.activity_main)
         root = findViewById(R.id.root)
+        swipeRefresh = findViewById(R.id.swipe_refresh)
         webView = findViewById(R.id.stuudium_webview)
         loadingSurface = findViewById(R.id.loading_surface)
         loadingIndicator = findViewById(R.id.loading_indicator)
@@ -85,6 +88,7 @@ class MainActivity : ComponentActivity() {
         }
 
         configureWebView()
+        configurePullToRefresh()
         registerSettingsCommand()
         registerDocumentStartScript(initialSettings)
         preferences.registerListener(preferenceListener)
@@ -147,6 +151,10 @@ class MainActivity : ComponentActivity() {
                     if (originPolicy.isAllowed(url)) revealWebView()
                 }
 
+                override fun onPageFinished(view: WebView, url: String) {
+                    stopRefreshing()
+                }
+
                 override fun onReceivedError(
                     view: WebView,
                     request: WebResourceRequest,
@@ -192,6 +200,20 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    private fun configurePullToRefresh() {
+        swipeRefresh.setOnChildScrollUpCallback { _, _ ->
+            webView.canScrollVertically(-1)
+        }
+        swipeRefresh.setOnRefreshListener {
+            val currentUrl = webView.url
+            if (rendererGone || currentUrl == null || !originPolicy.isAllowed(currentUrl)) {
+                stopRefreshing()
+                return@setOnRefreshListener
+            }
+            webView.reload()
+        }
+    }
+
     private fun registerSettingsCommand() {
         WebViewCompat.addWebMessageListener(
             webView,
@@ -233,6 +255,9 @@ class MainActivity : ComponentActivity() {
         loadingSurface.setBackgroundColor(canvas)
         loadingIndicator.indeterminateTintList =
             ColorStateList.valueOf(Color.parseColor(config.accentFor(settings.themeId)))
+        swipeRefresh.setColorSchemeColors(Color.parseColor(config.accentFor(settings.themeId)))
+        swipeRefresh.setProgressBackgroundColorSchemeColor(canvas)
+        swipeRefresh.setBackgroundColor(canvas)
         webView.setBackgroundColor(canvas)
         errorPanel.setBackgroundColor(Color.parseColor(config.canvasFor(settings.themeId)))
         applySystemBarTheme(canvas, dark = settings.enhancementEnabled)
@@ -247,6 +272,7 @@ class MainActivity : ComponentActivity() {
 
     private fun showLoading() {
         rendererGone = false
+        stopRefreshing()
         errorPanel.visibility = View.GONE
         webView.visibility = View.INVISIBLE
         loadingSurface.visibility = View.VISIBLE
@@ -261,9 +287,14 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun showLoadError() {
+        stopRefreshing()
         loadingSurface.visibility = View.GONE
         webView.visibility = View.INVISIBLE
         errorPanel.visibility = View.VISIBLE
+    }
+
+    private fun stopRefreshing() {
+        if (::swipeRefresh.isInitialized) swipeRefresh.isRefreshing = false
     }
 
     private fun openExternal(uri: Uri) {
@@ -295,9 +326,10 @@ class MainActivity : ComponentActivity() {
         fileChooserCallback = null
         documentStartScript?.remove()
         if (::webView.isInitialized && !rendererGone) {
+            stopRefreshing()
             webView.stopLoading()
             webView.webChromeClient = null
-            root.removeView(webView)
+            swipeRefresh.removeView(webView)
             webView.destroy()
         }
         super.onDestroy()
