@@ -21,6 +21,14 @@ cookies into the app's preference storage. Cloud backup and device-to-device
 transfer are disabled for all app data so the WebView login session is not
 migrated outside the device.
 
+The full-screen native loading surface covers only the first cold page load and
+an explicit recovery retry. During ordinary navigation between Stuudium pages,
+the existing WebView remains visible while WebView prepares the next document.
+The launch cover is removed at `onPageCommitVisible`, Android's callback for the
+point where content from the previous navigation will no longer be drawn. This
+avoids flashing the launch surface during quick Tera, Suhtlus, and other
+same-origin transitions.
+
 ## 1. Install Android Studio on macOS
 
 Download the current stable Android Studio from the
@@ -88,6 +96,7 @@ apps/android/
 |   |-- SettingsActivity.kt              Bundled settings WebView shell
 |   |-- MobileConfig.kt                  Generated shared catalog reader
 |   |-- AppPreferences.kt                Preference-only native storage
+|   |-- NavigationPresentationPolicy.kt  Cold-start loading-cover boundary
 |   |-- SupportedOriginPolicy.kt         Exact HTTPS origin checks
 |   `-- WebViewRuntime.kt                Secure setup and early asset injection
 |-- app/src/main/res/                    Layout, launch surface, icon, and colors

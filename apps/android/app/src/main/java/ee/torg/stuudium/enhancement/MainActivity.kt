@@ -38,6 +38,7 @@ class MainActivity : ComponentActivity() {
     private lateinit var loadingSurface: View
     private lateinit var loadingIndicator: ProgressBar
     private lateinit var errorPanel: LinearLayout
+    private val navigationPresentation = NavigationPresentationPolicy()
     private var documentStartScript: ScriptHandler? = null
     private var fileChooserCallback: ValueCallback<Array<Uri>>? = null
     private var rendererGone = false
@@ -134,14 +135,15 @@ class MainActivity : ComponentActivity() {
                 }
 
                 override fun onPageStarted(view: WebView, url: String, favicon: Bitmap?) {
-                    if (originPolicy.isAllowed(url)) showLoading()
+                    if (
+                        originPolicy.isAllowed(url) &&
+                        navigationPresentation.shouldShowLaunchCover()
+                    ) {
+                        showLoading()
+                    }
                 }
 
                 override fun onPageCommitVisible(view: WebView, url: String) {
-                    if (originPolicy.isAllowed(url)) revealWebView()
-                }
-
-                override fun onPageFinished(view: WebView, url: String) {
                     if (originPolicy.isAllowed(url)) revealWebView()
                 }
 
@@ -252,6 +254,7 @@ class MainActivity : ComponentActivity() {
 
     private fun revealWebView() {
         if (rendererGone) return
+        navigationPresentation.recordVisibleCommit()
         errorPanel.visibility = View.GONE
         webView.visibility = View.VISIBLE
         loadingSurface.visibility = View.GONE
