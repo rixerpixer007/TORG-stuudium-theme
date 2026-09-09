@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/sid_canvas">
+
+    <WebView
+        android:id="@+id/stuudium_webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/sid_canvas"
+        android:visibility="invisible" />
+
+    <FrameLayout
+        android:id="@+id/loading_surface"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/sid_canvas"
+        android:importantForAccessibility="noHideDescendants">
+
+        <ProgressBar
+            android:id="@+id/loading_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:contentDescription="@string/loading_stuudium"
+            android:indeterminateTint="@color/sid_accent" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/error_panel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="32dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/load_error_title"
+            android:textColor="@color/sid_text"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@string/load_error_body"
+            android:textColor="@color/sid_text_secondary"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/retry_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/retry" />
+    </LinearLayout>
+</FrameLayout>

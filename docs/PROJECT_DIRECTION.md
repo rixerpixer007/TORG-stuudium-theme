@@ -1,8 +1,8 @@
 # Project direction
 
-Status: agreed direction, Phase 2 theme switching implemented
+Status: agreed direction, Phase 4 Android feasibility prototype implemented locally and awaiting physical-device verification
 
-Last updated: 2026-09-05
+Last updated: 2026-09-09
 
 ## Purpose
 
@@ -36,7 +36,7 @@ The first public product scope is desktop plus Android. iOS compatibility must b
 | Chromium desktop       | WXT-based Manifest V3 WebExtension | First public target: Chrome and Brave | Chrome Web Store first; Microsoft Edge Add-ons documented as an optional later channel |
 | Firefox desktop        | WebExtension compatibility build   | Desired follow-up                     | Browser-supported distribution                                                         |
 | Safari desktop         | Safari WebExtension port           | Desired follow-up                     | Apple-supported distribution                                                           |
-| Android                | Dedicated WebView app              | First public mobile target            | Signed APK releases from GitHub with an update checker and system installer handoff    |
+| Android                | Native Kotlin WebView app          | Focused feasibility prototype         | Validate first; signed APK releases and updates remain a later release milestone       |
 | iOS                    | Dedicated WebView app              | Deferred public target                | Apple-supported signing and distribution after funding or institutional support        |
 | Existing installations | `.user.css`                        | Retained during transition            | Current userstyle update mechanism                                                     |
 
@@ -166,7 +166,31 @@ cleanup boundaries.
 
 ### Android application
 
-GitHub Releases will provide signed APKs. All releases must retain the same application ID and signing key so Android accepts them as updates. The initial updater may simply notify users and open the release page; a later version can download the APK and hand it to Android's installer for explicit user approval.
+The Phase 4 prototype uses a small native Kotlin shell rather than a
+cross-platform UI framework. It embeds the shared web assets but keeps Android
+lifecycle, navigation, storage, and origin enforcement in Kotlin. A future iOS
+shell can implement the same boundaries in Swift without requiring the shared
+TypeScript features or CSS to know which native platform hosts them.
+
+The first prototype deliberately proves feasibility rather than distribution.
+It supports Android 8.0 and newer (`minSdk = 26`) while feature-detecting the
+required Android System WebView document-start and origin-aware messaging APIs.
+If an Android 8 device has an outdated WebView provider, the app requests an
+update and closes instead of using a large, late, or weakly isolated fallback.
+Raise the minimum to Android 10 only if representative Android 8 testing exposes
+a platform limitation whose correct workaround would be disproportionate.
+
+The existing themed settings interface is bundled as a local page inside the
+APK. The genuine Stuudium page can request only that this settings activity be
+opened; it cannot read preferences or call general native methods. The settings
+page has a separate, exact-origin bridge for reading and writing the same small
+preference contract used by the extension.
+
+If Android distribution is approved after the prototype, GitHub Releases will
+provide signed APKs. All releases must retain the same application ID and
+signing key so Android accepts them as updates. The initial updater may simply
+notify users and open the release page; a later version can download the APK and
+hand it to Android's installer for explicit user approval.
 
 Release signing keys must never be committed to the repository.
 
@@ -205,9 +229,16 @@ Development can use free personal-device signing. Public distribution waits for 
 
 ### Phase 4: Android app
 
-- Select the WebView application framework through a focused prototype.
-- Verify login, session persistence, navigation, file handling, external links, Tera, and responsive behavior.
-- Establish signed GitHub releases and the update flow.
+- Build a focused native Kotlin WebView prototype that reuses the generated
+  theme, feature runtime, settings contract, and settings UI. **Implemented
+  locally; physical-device verification pending.**
+- Verify login, session persistence, navigation, file handling, external links,
+  Tera, responsive behavior, settings persistence, theme startup, and WebView
+  console health on the Samsung S25. **Pending physical-device testing.**
+- Check Android 8 with a maintained System WebView before preserving that public
+  minimum; raise to Android 10 instead of building a disproportionate fallback.
+- Establish signed GitHub releases and the update flow only after the prototype
+  is accepted. **Deferred.**
 
 ### Phase 5: iOS preparation and release
 
@@ -223,15 +254,20 @@ Development can use free personal-device signing. Public distribution waits for 
 - Do not use a separately hosted PWA as though it could inject into Stuudium.
 - Do not make an iOS userscript a supported first-release product.
 - Do not remove Stuudium's structural CSS merely to reduce the loading flash.
-- Do not choose a cross-platform framework before a prototype verifies the actual Stuudium login and rendering path.
+- Do not introduce a cross-platform framework unless the native Kotlin and later
+  Swift shells demonstrate a concrete duplication problem that outweighs their
+  simple platform boundaries.
 - Do not remove the current userstyle before replacement targets are proven.
 
 ## Open decisions
 
 These choices remain intentionally unresolved:
 
-- The Android/iOS WebView framework.
 - The long-term Android updater implementation.
+- Whether physical Android 8 testing preserves `minSdk = 26` or demonstrates a
+  reason to raise the public minimum to Android 10.
+- The final Android application ID, release signing ownership, and distribution
+  process; the current ID and debug signing are prototype-only.
 - The organization and governance of the eventual Apple developer account.
 - The post-theme-switching feature roadmap.
 - Which future theme should first exercise full light-palette overrides and

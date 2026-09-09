@@ -10,6 +10,12 @@
     "watch:theme": "node scripts/watch-theme.mjs",
     "build:theme": "node scripts/build-theme.mjs",
     "check:theme": "node scripts/build-theme.mjs --check",
+    "build:mobile:web": "npm run build:theme && node scripts/build-mobile-assets.mjs",
+    "check:mobile:web": "npm run check:theme && node scripts/build-mobile-assets.mjs --check",
+    "validate:mobile:web": "node scripts/validate-mobile-assets.mjs",
+    "build:android:debug": "npm run build:mobile:web && node scripts/run-android-gradle.mjs :app:assembleDebug",
+    "test:android": "npm run build:mobile:web && node scripts/run-android-gradle.mjs :app:testDebugUnitTest",
+    "validate:android": "npm run build:mobile:web && npm run validate:mobile:web && node scripts/run-android-gradle.mjs :app:lintDebug :app:testDebugUnitTest :app:assembleDebug",
     "build": "node scripts/build-theme.mjs && wxt build -b chrome",
     "package": "npm run build && wxt zip -b chrome && node scripts/validate-package.mjs",
     "format": "prettier --write .",
@@ -20,7 +26,7 @@
     "test:settings-menu": "vitest run tests/settings-menu.test.ts",
     "test:watch": "vitest",
     "validate:build": "node scripts/validate-build.mjs",
-    "validate": "npm run check:theme && npm run format:check && npm run lint && npm run typecheck && npm run test && npm run build && npm run validate:build"
+    "validate": "npm run check:theme && npm run check:mobile:web && npm run validate:mobile:web && npm run format:check && npm run lint && npm run typecheck && npm run test && npm run build && npm run validate:build"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",

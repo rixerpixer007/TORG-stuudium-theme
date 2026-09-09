@@ -12,7 +12,7 @@ function linkTargetsPath(link: HTMLAnchorElement, pathname: string): boolean {
 }
 
 function isEstonianDocument(document: Document): boolean {
-  if (document.body.classList.contains("lang_et")) return true;
+  if (document.querySelector("body")?.classList.contains("lang_et")) return true;
   if (document.documentElement.dataset.suhtlusLanguage === "et") return true;
 
   return [
@@ -81,7 +81,7 @@ function createButton(document: Document, openSettings: () => Promise<boolean>):
       const opened = await openSettings();
       if (!opened) button.remove();
     } catch (error) {
-      console.error("Unable to open extension settings", error);
+      console.error("Unable to open enhancement settings", error);
     }
   };
   button.addEventListener("click", () => {

@@ -7,6 +7,8 @@ export default defineConfig(
   globalIgnores([
     ".output/**",
     ".wxt/**",
+    "apps/android/app/src/main/assets/mobile/**",
+    "apps/android/**/build/**",
     "node_modules/**",
     "src/generated/**",
     "Stuudium-Intentional-Dark.user.css",

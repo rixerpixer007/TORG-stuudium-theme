@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="sid_canvas">#0F1311</color>
+    <color name="sid_text">#F2F0E9</color>
+    <color name="sid_text_secondary">#C1C0B8</color>
+    <color name="sid_accent">#65D6B1</color>
+</resources>

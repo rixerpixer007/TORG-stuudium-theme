@@ -4,3 +4,8 @@
 node_modules/
 src/generated/
 web-ext-artifacts/
+apps/android/.gradle/
+apps/android/build/
+apps/android/app/build/
+apps/android/local.properties
+apps/android/app/src/main/assets/mobile/

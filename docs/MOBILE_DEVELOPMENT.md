@@ -1,0 +1,396 @@
+# Android prototype development
+
+This guide starts from a Mac that has never built an Android application. It
+covers the Phase 4 feasibility prototype: a native Kotlin shell around the
+genuine TORG Stuudium site. The prototype is not a published or signed public
+release.
+
+## What the prototype does
+
+The Android app contains two deliberately separate WebViews:
+
+1. The main WebView loads `https://torg.ope.ee/`. Stuudium owns the page,
+   authentication, cookies, and student information.
+2. The settings WebView loads only files bundled inside the APK under Android's
+   reserved `https://appassets.androidplatform.net/` origin.
+
+The app injects the same generated CSS and shared TypeScript feature bundle used
+by the desktop extension. It stores only the enable/disable choice and selected
+theme. It does not copy grades, attendance, messages, credentials, page HTML, or
+cookies into the app's preference storage. Cloud backup and device-to-device
+transfer are disabled for all app data so the WebView login session is not
+migrated outside the device.
+
+## 1. Install Android Studio on macOS
+
+Download the current stable Android Studio from the
+[official installation page](https://developer.android.com/studio/install). On
+an Apple Silicon Mac, select **Mac with Apple chip**.
+
+1. Open the downloaded `.dmg` file.
+2. Drag **Android Studio** into **Applications**.
+3. Launch Android Studio.
+4. Choose the standard or recommended setup in the Setup Wizard.
+5. Allow the wizard to download the Android SDK and platform tools.
+
+Android Studio includes the Java runtime used by this project. Do not install a
+separate Java package merely for this repository.
+
+Open **Tools → SDK Manager** and verify these components:
+
+- **SDK Platforms:** Android 17 / API 37.
+- **SDK Tools:** Android SDK Build-Tools, Android SDK Platform-Tools, and Android
+  SDK Command-line Tools (latest).
+- **Android Emulator:** optional. The physical Samsung S25 is the primary
+  prototype device, but an emulator is useful for Android 8 and Android 10
+  compatibility checks later.
+
+The exact latest tool revision can change. Recheck the official Android Studio
+and [Android 17 SDK setup](https://developer.android.com/about/versions/17/setup-sdk)
+pages before upgrading the project's pinned build versions.
+
+## 2. Install the repository dependencies
+
+From the repository root, run:
+
+```sh
+npm ci
+```
+
+`npm ci` installs exactly the Node packages recorded in `package-lock.json`,
+regenerates the theme outputs, and prepares the desktop extension. It does not
+install anything on the phone.
+
+Verify that the Android tools can be found:
+
+```sh
+npm run build:mobile:web
+npm run build:android:debug
+```
+
+The first command bundles the shared CSS, JavaScript, settings page, theme
+catalog, default preferences, and exact supported-origin registry for Android.
+The second command repeats that asset build, lets the Gradle Wrapper download
+the pinned Android build dependencies, and creates a debug APK.
+
+The helper script automatically finds Android Studio's bundled Java runtime and
+the normal macOS SDK location. If it cannot, complete the Android Studio Setup
+Wizard before retrying.
+
+## 3. Understand the mobile files
+
+```text
+apps/android/
+|-- app/build.gradle.kts                 Android version, SDK, and dependencies
+|-- app/src/main/AndroidManifest.xml     App components and INTERNET permission
+|-- app/src/main/java/.../
+|   |-- MainActivity.kt                  Genuine Stuudium WebView shell
+|   |-- SettingsActivity.kt              Bundled settings WebView shell
+|   |-- MobileConfig.kt                  Generated shared catalog reader
+|   |-- AppPreferences.kt                Preference-only native storage
+|   |-- SupportedOriginPolicy.kt         Exact HTTPS origin checks
+|   `-- WebViewRuntime.kt                Secure setup and early asset injection
+|-- app/src/main/res/                    Layout, launch surface, icon, and colors
+|-- gradle/wrapper/                      Pinned, reproducible Gradle launcher
+`-- gradlew                              macOS/Linux Gradle Wrapper command
+
+src/mobile/entrypoints/bootstrap.ts      Shared DOM runtime for Stuudium
+src/mobile/entrypoints/settings.ts       Mobile adapter for the shared settings UI
+src/mobile/entrypoints/config.ts         Shared catalog exported for Kotlin
+src/platforms/webview/                   WebView-facing TypeScript adapters
+scripts/build-mobile-assets.mjs          Deterministic mobile web-asset generator
+scripts/validate-mobile-assets.mjs       Generated-asset security checks
+```
+
+The generated directory
+`apps/android/app/src/main/assets/mobile/` is intentionally ignored by Git. Do
+not edit it. Regenerate it from the canonical sources.
+
+The generated configuration comes directly from `src/shared/sites.ts`,
+`src/shared/themes.ts`, and `src/shared/settings.ts`. Adding a future verified
+school or theme therefore updates Android and the extension from the same source
+instead of creating a second mobile catalog.
+
+## 4. How the security boundary works
+
+AndroidX injects the bundled script at document start only for exact origins
+from the shared registry. The app checks support for both document-start scripts
+and origin-aware web messages before it loads Stuudium. The relevant APIs are
+documented under
+[`WebViewCompat`](https://developer.android.com/reference/androidx/webkit/WebViewCompat).
+
+The remote Stuudium main frame can send exactly one recognized message:
+`open-settings`. It cannot read preferences or invoke arbitrary Android methods.
+Only the bundled settings origin can send `get-settings` and `set-settings`
+messages. Every message is checked for its origin and whether it came from the
+main frame.
+
+The implementation does not use the legacy `addJavascriptInterface` API. Android
+warns that the legacy interface is exposed to every frame and lacks reliable
+origin verification; see
+[Access native APIs with a JavaScript bridge](https://developer.android.com/develop/ui/views/layout/webapps/native-api-access-jsbridge).
+
+Top-level links outside the approved Stuudium origin open in the system browser.
+Cross-origin subframes remain separate and do not receive the theme or native
+bridge.
+
+## 5. Build and validate the bundled web assets
+
+```sh
+npm run build:mobile:web
+```
+
+This command first regenerates the compatibility userstyle and extension CSS.
+It then creates:
+
+- the document-start mobile bootstrap;
+- critical and complete theme CSS;
+- the shared settings page;
+- the theme and supported-site configuration;
+- SHA-256 hashes for every generated mobile web asset.
+
+Check that a second clean generation is byte-for-byte identical:
+
+```sh
+npm run check:mobile:web
+```
+
+Inspect the security rules and asset hashes:
+
+```sh
+npm run validate:mobile:web
+```
+
+Validation rejects source maps, TypeScript source files, development startup
+scripts, localhost references, remote settings-page scripts, wildcard origins,
+and accidental WebExtension API dependencies in the mobile bootstrap.
+
+## 6. Build the debug APK
+
+```sh
+npm run build:android:debug
+```
+
+The APK is written to:
+
+```text
+apps/android/app/build/outputs/apk/debug/app-debug.apk
+```
+
+This is signed automatically with a local debug key and is suitable only for
+development. No public release key or store credential belongs in this
+repository.
+
+To run the complete Android validation in one command:
+
+```sh
+npm run validate:android
+```
+
+It regenerates and validates the shared mobile assets, runs Android lint and
+the Kotlin unit tests, and assembles the debug APK.
+
+## 7. Open the existing project in Android Studio
+
+1. Launch Android Studio.
+2. Select **Open**.
+3. Choose the repository's `apps/android` folder, not the repository root and
+   not the `app` subfolder.
+4. Wait for **Gradle sync** and indexing to finish.
+5. If Android Studio asks whether to trust the project, verify the path and then
+   trust this local checkout.
+
+Run `npm run build:mobile:web` before pressing Android Studio's Run button after
+changing shared TypeScript or CSS. The Android build deliberately fails with a
+clear message if the generated asset manifest is absent.
+
+## 8. Prepare the Samsung S25
+
+These settings affect only development access and can be turned off afterward:
+
+1. On the phone, open **Settings → About phone → Software information**.
+2. Tap **Build number** seven times and confirm the phone PIN.
+3. Return to Settings and open **Developer options**.
+4. Enable **USB debugging**.
+5. Connect the phone to the Mac with a data-capable USB cable.
+6. Unlock the phone and approve the **Allow USB debugging?** fingerprint dialog.
+   Selecting **Always allow from this computer** is optional.
+
+Check the connection from Terminal:
+
+```sh
+~/Library/Android/sdk/platform-tools/adb devices -l
+```
+
+The phone should be listed as `device`. `unauthorized` means the confirmation
+dialog is still waiting on the phone. An empty list usually means the cable is
+charge-only or USB debugging is disabled.
+
+## 9. Install and run the prototype
+
+In Android Studio, select the Samsung device in the device menu and press the
+green **Run** button.
+
+Or install the already-built APK from Terminal:
+
+```sh
+~/Library/Android/sdk/platform-tools/adb install -r apps/android/app/build/outputs/apk/debug/app-debug.apk
+```
+
+`install -r` keeps the app's existing preferences and WebView session while
+replacing the debug APK. It does not alter the normal Chrome browser's cookies.
+
+The provisional debug application ID is
+`ee.torg.stuudium.enhancement`. It must be reviewed before the first signed
+public release, after which changing it would break normal Android updates.
+
+## 10. Inspect Android and WebView errors
+
+### Native Kotlin errors
+
+In Android Studio, open **View → Tool Windows → Logcat**, select the Samsung
+device and this app process, then reproduce the problem. Do not paste logs that
+contain student page content, credentials, cookies, or authentication URLs with
+sensitive query values.
+
+From Terminal, the equivalent filtered stream is:
+
+```sh
+~/Library/Android/sdk/platform-tools/adb logcat --pid=$(~/Library/Android/sdk/platform-tools/adb shell pidof ee.torg.stuudium.enhancement)
+```
+
+Stop it with `Control+C`.
+
+### WebView HTML, CSS, and JavaScript errors
+
+Debug builds enable WebView inspection. With the phone connected and the app
+open, visit `chrome://inspect/#devices` in desktop Chrome. Under the app's
+WebView, select **inspect**. Use the Console, Elements, Network, and Computed
+panels just as you would for a normal browser tab.
+
+Confirm that `<html>` has:
+
+- `data-sid-enhancement="enabled"` when the enhancement is on;
+- either `data-sid-theme="graphite-mint"` or
+  `data-sid-theme="graphite-blue"`;
+- style elements named `sid-mobile-critical`, `sid-mobile-theme`, and
+  `sid-mobile-settings-menu`.
+
+Production builds must not enable WebView debugging.
+
+## 11. Prototype verification checklist
+
+Use a real existing Stuudium account, but never copy its credentials into source
+code, test files, screenshots, logs, or issue descriptions.
+
+Test at minimum:
+
+1. Fresh launch while signed out and the complete login flow.
+2. Closing and reopening the app after login to check session persistence.
+3. Dashboard, a subject/journal page, Tera, Suhtlus, applications, and settings.
+4. Portrait and landscape orientation.
+5. Text entry with the on-screen keyboard visible.
+6. Android back gesture through WebView history, then app exit.
+7. A normal internal Stuudium link and a client-side navigation.
+8. A foreign top-level link, which must open outside the app.
+9. A file-upload control, including cancellation.
+10. A download link. The prototype currently hands downloads to the system
+    browser; confirm whether authenticated Stuudium downloads survive that
+    boundary before designing a native download adapter.
+11. Embedded Tera or Office content as a cross-origin negative control. It must
+    render normally without receiving the theme or native message objects.
+12. Open **Teema seaded**, select Mint and Blue, disable and re-enable the
+    enhancement, close settings, reload, and restart the app.
+13. Cold-start both themes while watching specifically for a white, Mint, Blue,
+    or black flash.
+14. Check Logcat and both WebView consoles for errors.
+
+The first physical-device run is a feasibility test, not permission to change
+attendance, grades, messages, registrations, or other live Stuudium data.
+
+## 12. Android 8 compatibility policy
+
+The project currently declares `minSdk = 26`, which means Android 8.0. AndroidX
+WebKit itself supports this baseline. The crucial document-start and
+origin-aware message capabilities depend on the separately updated Android
+System WebView provider, so the app feature-detects them at runtime.
+
+If those capabilities are missing, the app asks the user to update Android
+System WebView or Chrome and closes. It does not install a large late-injection
+fallback that would weaken origin isolation or reintroduce startup flashing.
+
+Before public distribution, test an Android 8 emulator with a maintained WebView.
+If ordinary Android 8 platform behavior still requires a disproportionate
+workaround, raise `minSdk` to Android 10 as agreed and document the exact failing
+behavior.
+
+## 13. Make a future shared feature
+
+Keep reusable policy and DOM behavior in `src/shared/` or `src/features/`.
+Those modules must not import Android, Chrome, WXT, or iOS APIs.
+
+Platform code should remain small:
+
+- TypeScript under `src/platforms/webview/` translates a narrow WebView message
+  into a shared interface.
+- Kotlin under `apps/android/` owns Android lifecycle, navigation, and storage.
+- A future Swift shell can implement the same boundaries for WKWebView while
+  reusing the generated web assets.
+
+Do not add a general bridge because a future feature might need it. Add one
+validated command only when that feature has a specific native requirement.
+
+## 14. Remove the development app cleanly
+
+Long-press the app icon on the Samsung phone and choose **Uninstall**, or run:
+
+```sh
+~/Library/Android/sdk/platform-tools/adb uninstall ee.torg.stuudium.enhancement
+```
+
+Uninstalling removes the prototype's WebView session and stored preferences. It
+does not remove or alter the normal Chrome browser's Stuudium session.
+
+After testing, disable **USB debugging** in Developer options if you do not use
+it for other development work. You can also choose **Revoke USB debugging
+authorizations** to remove the Mac's authorization.
+
+## Troubleshooting
+
+### Android Studio says an SDK is missing
+
+Open **Tools → SDK Manager**, install API 37 and the latest SDK Build-Tools, then
+select **File → Sync Project with Gradle Files**.
+
+### Terminal says Java cannot be found
+
+Use the npm commands in this guide. `scripts/run-android-gradle.mjs` locates
+Android Studio's bundled Java automatically. Running `./gradlew` directly
+requires `JAVA_HOME` to be configured separately.
+
+### The Android build says mobile assets are missing
+
+Run:
+
+```sh
+npm run build:mobile:web
+```
+
+Then build again. Generated assets are deliberately not committed.
+
+### A source change does not appear on the phone
+
+Rebuild the mobile assets and APK, then reinstall with `adb install -r`. Merely
+refreshing Stuudium cannot replace JavaScript or CSS already bundled inside the
+installed APK.
+
+### The phone is `unauthorized`
+
+Unlock it and approve the USB debugging dialog. If it never appears, revoke USB
+debugging authorizations, reconnect the cable, and approve the new fingerprint.
+
+### The app requests a WebView update
+
+Update **Android System WebView** and **Google Chrome** in Google Play, reboot the
+phone if Android requests it, and reopen the app. The prototype deliberately
+does not use the unsafe legacy bridge as a fallback.

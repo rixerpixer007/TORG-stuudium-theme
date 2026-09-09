@@ -19,6 +19,12 @@ Phase 2 adds manual, remembered switching between Graphite Mint and Graphite Blu
 
 Phase 3 release hardening and store publication have not started. Bug fixes and maintenance must preserve that boundary.
 
+Phase 4 now has a focused native Kotlin Android WebView prototype. It reuses the
+generated theme, shared content runtime, settings contract, and settings UI.
+Physical-device verification is still required before treating Android as a
+supported release target. Signed releases, an updater, and iOS implementation
+remain out of scope unless explicitly requested.
+
 The project enhances the genuine Stuudium interface. It must never become a proxy for Stuudium authentication or student data, a replacement client, a source of remote executable code, or an unrestricted page-to-extension/native bridge. Do not add analytics or telemetry by default.
 
 ## Sources of truth and generated files
@@ -38,6 +44,15 @@ Run `npm run build:theme` after changing canonical theme modules, unless `npm ru
 - `src/features/`: reusable DOM-facing feature logic with explicit activation and cleanup boundaries.
 - `src/platforms/webextension/`: small adapters around extension storage and runtime APIs.
 - `src/entrypoints/`: WXT background, per-theme early activation markers, content bootstrap, and options-page entrypoints.
+- `src/mobile/entrypoints/`: platform-neutral WebView bundle entries for
+  Stuudium, the local settings page, and generated shared configuration. Keep
+  these outside WXT's `src/entrypoints/` discovery directory.
+- `src/platforms/webview/`: narrow TypeScript adapters for an origin-checked
+  native host; do not expose a general page-to-native bridge.
+- `apps/android/`: native Kotlin WebView shell, preference storage, navigation,
+  origin policy, Android resources, tests, and Gradle Wrapper.
+- `apps/android/app/src/main/assets/mobile/`: generated, ignored mobile web
+  assets. Never edit these directly; regenerate them from shared sources.
 - `src/shared/sites.ts`: single registry for verified Stuudium origins. Add an origin here only after it is explicitly verified and approved; keep manifest access narrow.
 - `wxt.config.ts`: extension manifest/build configuration.
 - `scripts/`: deterministic theme, packaging, and validation tooling.
@@ -89,8 +104,20 @@ Never mutate attendance, TODOs, messages, grades, registrations, or other Stuudi
 - `npm run build`: create the unpacked Chromium extension at `.output/chrome-mv3/`.
 - `npm run package`: create the uploadable ZIP at `.output/torg-stuudium-enhancement-<version>-chrome.zip` and validate its contents.
 - `npm run validate`: run theme freshness, formatting, linting, type checking, tests, and unpacked-build validation.
+- `npm run build:mobile:web`: deterministically bundle the shared theme,
+  Stuudium runtime, settings UI, and supported-site configuration for Android.
+- `npm run check:mobile:web`: prove the ignored Android web assets reproduce
+  byte for byte.
+- `npm run validate:mobile:web`: verify asset hashes and reject source maps,
+  localhost code, broad origins, and accidental WebExtension dependencies.
+- `npm run build:android:debug`: regenerate assets and assemble the debug APK.
+- `npm run test:android`: regenerate assets and run the Kotlin unit tests.
+- `npm run validate:android`: validate assets, run Android lint and Kotlin tests,
+  and assemble the debug APK.
 
 Beginner setup and testing instructions live in `docs/EXTENSION_DEVELOPMENT.md`. Release preparation lives in `docs/EXTENSION_PUBLISHING.md`.
+Android Studio, physical-device setup, building, inspection, and removal are
+documented in `docs/MOBILE_DEVELOPMENT.md`.
 
 ## Development artifact identity
 
@@ -110,10 +137,23 @@ Use the smallest verification tier that proves the change, then inspect the comp
 - TypeScript or extension UI behavior: run the targeted test, `npm run typecheck`, and `npm run lint`.
 - Manifest, entrypoint, build configuration, or generated extension structure: run `npm run build` and `npm run validate:build` in addition to relevant targeted checks.
 - Broad, cross-cutting, or release-candidate work: run `npm run validate`.
+- Android shared-web changes: run `npm run check:mobile:web` and
+  `npm run validate:mobile:web` in addition to the normal TypeScript checks.
+- Android Kotlin, resources, manifest, or Gradle changes: run
+  `npm run validate:android`, inspect the APK contents and permissions, and test
+  the exact APK on a dedicated device or emulator.
 - Packaging or publication work only: run `npm run package` and inspect the packaged ZIP contents.
 
 Do not run packaging checks for an ordinary CSS or documentation edit. Do not manually count delimiters when the relevant parser, formatter, compiler, or build already validates them; count only when the format lacks a normal parser or an error indicates structural imbalance.
 
 Browser claims require a dedicated test profile or isolated session and the exact local build under test. Before detailed visual inspection, prove freshness with an unmistakable changed value, selector, or DOM marker. Test the affected route and state, one unaffected negative control, and a relevant responsive width. Check page and extension consoles. If browser automation cannot access a protected `chrome://` or `chrome-extension://` surface, ask the user to perform that narrow check and report it as `BLOCKED` until confirmed; do not bypass the restriction with another control path.
+
+Android claims require the exact debug APK under test and its bundled
+`asset-manifest.json`. Verify login and session persistence without recording
+credentials, exercise internal and external navigation, settings persistence,
+theme startup, back behavior, file boundaries, orientation, one cross-origin
+negative control, Logcat, and both WebView consoles. The Samsung S25 running
+Android 16 is the initial physical test device. Android 8 compatibility remains
+`BLOCKED` until an API 26 emulator or device is tested with a maintained WebView.
 
 When handing off, state the root cause, exact changes, commands and automated results, live routes/browsers/viewports/states tested, startup-flash result when relevant, security/permission impact, all changed files, and every blocked or unverified item. Static inspection alone does not establish live visual equivalence.

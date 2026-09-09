@@ -13,3 +13,12 @@ local Chromium extension foundation. Start with the
 [publishing guide](docs/EXTENSION_PUBLISHING.md) explains Chrome Web Store
 releases and the optional Microsoft Edge Add-ons route. Store-facing draft copy
 and readiness gaps are tracked in [CHROMEWEBSTORE.md](CHROMEWEBSTORE.md).
+
+## Android prototype development
+
+Phase 4 begins with a native Kotlin Android feasibility app that reuses the
+same generated theme, shared feature runtime, settings contract, and themed
+settings interface. Start with the
+[beginner Android development guide](docs/MOBILE_DEVELOPMENT.md). Public APK
+signing, updating, and distribution remain deferred until the real Stuudium
+login and WebView behavior have been verified on physical devices.
