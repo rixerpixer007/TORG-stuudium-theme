@@ -74,6 +74,48 @@ describe("generated theme", () => {
     expect(color?.important).toBe(true);
   });
 
+  it("leaves dashboard timeline heading box geometry to Stuudium", () => {
+    const css = fs.readFileSync(path.join(projectRoot, "src/generated/theme.css"), "utf8");
+    let headingColorRule: postcss.Rule | undefined;
+    let framedHeadingRule: postcss.Rule | undefined;
+    let dashboardHeadingRule: postcss.Rule | undefined;
+
+    postcss.parse(css).walkRules((rule) => {
+      if (!rule.selector.includes(".daily-summaries-segment-heading")) return;
+
+      if (rule.selector.includes("body.page_dashboard_recent")) dashboardHeadingRule = rule;
+      else if (rule.selector.includes("body:not(.page_dashboard_recent)")) framedHeadingRule = rule;
+      else headingColorRule = rule;
+    });
+    const colorDeclarations = Object.fromEntries(
+      headingColorRule?.nodes
+        .filter((node): node is postcss.Declaration => node.type === "decl")
+        .map((node) => [node.prop, { value: node.value, important: node.important }]) ?? [],
+    );
+    const framedDeclarations = Object.fromEntries(
+      framedHeadingRule?.nodes
+        .filter((node): node is postcss.Declaration => node.type === "decl")
+        .map((node) => [node.prop, node.value]) ?? [],
+    );
+    const dashboardDeclarations = Object.fromEntries(
+      dashboardHeadingRule?.nodes
+        .filter((node): node is postcss.Declaration => node.type === "decl")
+        .map((node) => [node.prop, { value: node.value, important: node.important }]) ?? [],
+    );
+
+    expect(colorDeclarations).toEqual({
+      color: { value: "var(--sid-text)", important: true },
+    });
+    expect(framedDeclarations).toMatchObject({
+      padding: "7px 10px",
+      background: "var(--sid-surface-2)",
+      border: "1px solid var(--sid-border)",
+    });
+    expect(dashboardDeclarations).toEqual({
+      "background-color": { value: "transparent", important: true },
+    });
+  });
+
   it("includes every gated selectable palette while retaining Mint as the fallback", () => {
     const css = fs.readFileSync(path.join(projectRoot, "src/generated/theme.css"), "utf8");
     const mintFallback = findRule(css, ":root:where([data-sid-enhancement");

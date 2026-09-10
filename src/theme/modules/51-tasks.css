@@ -84,12 +84,30 @@
   .daily-summaries-segment > h3,
   .daily-summaries-segment-block > h3
 ) {
+  color: var(--sid-text) !important;
+}
+
+body:not(.page_dashboard_recent)
+  :where(
+    .daily-summaries-segment-heading,
+    .daily-summaries-segment > h3,
+    .daily-summaries-segment-block > h3
+  ) {
   margin-inline: 0 !important;
   padding: 7px 10px !important;
-  color: var(--sid-text) !important;
   background: var(--sid-surface-2) !important;
   border: 1px solid var(--sid-border) !important;
   border-radius: var(--sid-radius-sm) !important;
+}
+
+body.page_dashboard_recent
+  .daily-summaries
+  :where(
+    .daily-summaries-segment-heading,
+    .daily-summaries-segment > h3,
+    .daily-summaries-segment-block > h3
+  ) {
+  background-color: transparent !important;
 }
 
 :where(.ng-grade-is-summary-wrapper, .ng-grade-is-important-wrapper) {

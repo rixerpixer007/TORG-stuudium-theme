@@ -7,6 +7,10 @@ import { describe, expect, it } from "vitest";
 describe("mobile platform styles", () => {
   const projectRoot = path.resolve(import.meta.dirname, "..");
   const css = fs.readFileSync(path.join(projectRoot, "src/mobile/platform.css"), "utf8");
+  const settingsEntry = fs.readFileSync(
+    path.join(projectRoot, "src/mobile/entrypoints/settings.ts"),
+    "utf8",
+  );
   const parsed = postcss.parse(css);
 
   it("disables only the inherited native tap highlight", () => {
@@ -20,5 +24,9 @@ describe("mobile platform styles", () => {
 
     expect(tapHighlight?.value).toBe("transparent");
     expect(css).not.toMatch(/outline|focus/);
+  });
+
+  it("includes the platform styles in the standalone mobile settings page", () => {
+    expect(settingsEntry).toContain('import "../platform.css";');
   });
 });

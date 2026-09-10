@@ -4,6 +4,7 @@ import {
   createWebViewSettingsStore,
   type WebViewMessagePort,
 } from "../../platforms/webview/settings-storage";
+import "../platform.css";
 
 type MobileSettingsWindow = Window & {
   sidMobileSettings?: WebViewMessagePort;

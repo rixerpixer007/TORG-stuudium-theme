@@ -85,6 +85,14 @@ if (/localhost|options-startup|chrome-extension:|<script[^>]+https?:\/\//i.test(
   throw new Error("The bundled mobile settings page contains a development or remote script URL.");
 }
 
+const settingsStyles = files
+  .filter((file) => file.startsWith("settings/assets/") && file.endsWith(".css"))
+  .map((file) => fs.readFileSync(path.join(ASSET_DIRECTORY, file), "utf8"))
+  .join("\n");
+if (!/-webkit-tap-highlight-color:\s*transparent/.test(settingsStyles)) {
+  throw new Error("The bundled mobile settings page does not disable the native tap highlight.");
+}
+
 const bootstrap = fs.readFileSync(path.join(ASSET_DIRECTORY, "injection/bootstrap.js"), "utf8");
 if (/\b(?:chrome|browser)\.(?:storage|runtime|tabs)\b/.test(bootstrap)) {
   throw new Error("The mobile bootstrap contains a WebExtension API dependency.");
