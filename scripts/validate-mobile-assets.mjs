@@ -98,7 +98,9 @@ if (manifest.schemaVersion !== 1 || !Array.isArray(manifest.files)) {
 }
 
 const expectedManifestPaths = files.filter((file) => file !== "asset-manifest.json");
-const manifestPaths = manifest.files.map((entry) => entry.path).sort();
+const manifestPaths = manifest.files
+  .map((entry) => entry.path)
+  .sort((left, right) => left.localeCompare(right, "en"));
 if (JSON.stringify(manifestPaths) !== JSON.stringify(expectedManifestPaths)) {
   throw new Error("The Android asset manifest does not list exactly the bundled asset files.");
 }

@@ -31,7 +31,7 @@ The extension's single purpose is:
 > Improve the appearance and local usability of TORG Stuudium while the user
 > continues to use the genuine Stuudium site.
 
-Phase 2 provides Graphite Mint and Graphite Blue with a local master enable
+Phase 2 provides five selectable dark palettes with a local master enable
 setting and remembered manual selection. It does not proxy Stuudium, collect
 analytics, execute remote code, or store student data.
 

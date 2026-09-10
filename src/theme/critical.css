@@ -12,3 +12,18 @@
   --sid-canvas: #0c1118;
   --sid-text-2: #c1c9d5;
 }
+
+:root:where([data-sid-enhancement="enabled"][data-sid-theme="obsidian-red"]) {
+  --sid-canvas: #0d0d0f;
+  --sid-text-2: #cec3c7;
+}
+
+:root:where([data-sid-enhancement="enabled"][data-sid-theme="velvet-mauve"]) {
+  --sid-canvas: #11111b;
+  --sid-text-2: #bac2de;
+}
+
+:root:where([data-sid-enhancement="enabled"][data-sid-theme="midnight-amber"]) {
+  --sid-canvas: #11100d;
+  --sid-text-2: #cec2aa;
+}

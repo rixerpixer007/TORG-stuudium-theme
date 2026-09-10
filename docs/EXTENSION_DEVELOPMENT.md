@@ -230,10 +230,9 @@ Restore the userstyle after the comparison.
 ## 9. Open the settings
 
 The settings page has a master **Enable the dark theme** switch and visual cards
-for **Graphite Mint** and **Graphite Blue**. Selecting a card changes the complete
-color palette immediately. Mint keeps the original green-tinted graphite;
-Blue uses cool slate surfaces and text with its blue accent. The card grid wraps
-automatically as future themes are added.
+for **Graphite Mint**, **Graphite Blue**, **Obsidian Red**, **Velvet Mauve**, and
+**Midnight Amber**. Selecting a card changes the complete color palette
+immediately. The card grid wraps automatically as themes are added.
 
 Open it in any of these ways:
 

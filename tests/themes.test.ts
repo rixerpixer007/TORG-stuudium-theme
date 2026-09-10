@@ -16,11 +16,17 @@ describe("theme catalog", () => {
     expect(DEFAULT_THEME_ID).toBe("graphite-mint");
     expect(getTheme(DEFAULT_THEME_ID).preview.accent).toBe("#65d6b1");
     expect(getTheme("graphite-blue").preview.canvas).toBe("#0c1118");
+    expect(getTheme("obsidian-red").preview.accent).toBe("#ff6b7a");
+    expect(getTheme("velvet-mauve").preview.accent).toBe("#cba6f7");
+    expect(getTheme("midnight-amber").preview.accent).toBe("#f2b84b");
   });
 
   it("recognizes only catalogued themes", () => {
     expect(isThemeId("graphite-mint")).toBe(true);
     expect(isThemeId("graphite-blue")).toBe(true);
+    expect(isThemeId("obsidian-red")).toBe(true);
+    expect(isThemeId("velvet-mauve")).toBe(true);
+    expect(isThemeId("midnight-amber")).toBe(true);
     expect(isThemeId("unknown-theme")).toBe(false);
   });
 
@@ -28,6 +34,9 @@ describe("theme catalog", () => {
     expect(THEMES.map((theme) => getEarlyActivationScript(theme.id))).toEqual([
       "activation-graphite-mint.js",
       "activation-graphite-blue.js",
+      "activation-obsidian-red.js",
+      "activation-velvet-mauve.js",
+      "activation-midnight-amber.js",
     ]);
   });
 });

@@ -15,7 +15,7 @@ Do not commit, publish, submit to a store, change live Stuudium data, or begin a
 
 Phase 1 is implemented as a WXT 0.21 Chromium Manifest V3 extension written in TypeScript and built with npm. It delivers the existing dark theme, adds an early critical dark surface, and uses a small idempotent content bootstrap.
 
-Phase 2 adds manual, remembered switching between Graphite Mint and Graphite Blue. Each dark theme owns a complete semantic color palette; Graphite Blue uses cool slate neutrals instead of inheriting Mint's green-tinted graphite. The theme contract already distinguishes dark and light families so future light themes can replace the full token set, but automatic system-following is not implemented. The Stylus compatibility output deliberately remains Graphite Mint only.
+Phase 2 adds manual, remembered switching among Graphite Mint, Graphite Blue, Obsidian Red, Velvet Mauve, and Midnight Amber. Each dark theme owns a complete semantic color palette rather than inheriting another theme's neutrals. The theme contract already distinguishes dark and light families so future light themes can replace the full token set, but automatic system-following is not implemented. The Stylus compatibility output deliberately remains Graphite Mint only.
 
 Phase 3 release hardening and store publication have not started. Bug fixes and maintenance must preserve that boundary.
 

@@ -94,12 +94,19 @@ assert(
   "Theme CSS is not gated by the extension activation attribute",
 );
 assert(bundledCss.includes("--sid-canvas:#0f1311"), "Full graphite theme is missing");
-assert(
-  bundledCss.includes("data-sid-theme=graphite-blue]") &&
-    bundledCss.includes("--sid-accent:#75a7ff") &&
-    bundledCss.includes("--sid-canvas:#0c1118"),
-  "Graphite Blue theme is missing",
-);
+for (const [themeId, canvas, accent] of [
+  ["graphite-blue", "#0c1118", "#75a7ff"],
+  ["obsidian-red", "#0d0d0f", "#ff6b7a"],
+  ["velvet-mauve", "#11111b", "#cba6f7"],
+  ["midnight-amber", "#11100d", "#f2b84b"],
+]) {
+  assert(
+    bundledCss.includes(`data-sid-theme=${themeId}]`) &&
+      bundledCss.includes(`--sid-accent:${accent}`) &&
+      bundledCss.includes(`--sid-canvas:${canvas}`),
+    `${themeId} theme is missing`,
+  );
+}
 assert(
   bundledCss.includes("sid-extension-settings-menu-item"),
   "In-page settings menu styling is missing",
@@ -115,7 +122,13 @@ assert(
   "Options page does not release its startup gate",
 );
 
-for (const activationScript of ["activation-graphite-mint.js", "activation-graphite-blue.js"]) {
+for (const activationScript of [
+  "activation-graphite-mint.js",
+  "activation-graphite-blue.js",
+  "activation-obsidian-red.js",
+  "activation-velvet-mauve.js",
+  "activation-midnight-amber.js",
+]) {
   assert(files.includes(activationScript), `Early theme script is missing: ${activationScript}`);
 }
 

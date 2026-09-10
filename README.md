@@ -7,8 +7,8 @@ An intentional dark theme and planned client-side enhancement layer for TORG Stu
 
 ## Extension development
 
-Phase 2 adds remembered Graphite Mint and Graphite Blue theme selection to the
-local Chromium extension foundation. Start with the
+Phase 2 adds remembered selection among five dark palettes to the local
+Chromium extension foundation. Start with the
 [beginner development guide](docs/EXTENSION_DEVELOPMENT.md). The separate
 [publishing guide](docs/EXTENSION_PUBLISHING.md) explains Chrome Web Store
 releases and the optional Microsoft Edge Add-ons route. Store-facing draft copy

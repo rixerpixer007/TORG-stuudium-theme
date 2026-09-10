@@ -1,6 +1,6 @@
 # Chrome Web Store listing — TORG Stuudium Enhancement
 
-> Last updated: 2026-09-05
+> Last updated: 2026-09-10
 >
 > Status: Phase 2 draft. Do not submit until every owner-required field and asset below is complete.
 
@@ -19,12 +19,12 @@ Adds selectable Intentional Dark themes and local settings to TORG Stuudium.
 
 **Detailed description**
 
-TORG Stuudium Enhancement gives the genuine TORG Stuudium website a consistent dark appearance with selectable graphite-mint and cool-slate-blue palettes.
+TORG Stuudium Enhancement gives the genuine TORG Stuudium website a consistent dark appearance with five selectable palettes spanning mint, blue, crimson, mauve, and amber.
 
 FEATURES
 • Applies the Intentional Dark appearance across supported TORG Stuudium pages.
 • Adds a matching settings shortcut to Stuudium’s main menu.
-• Remembers a choice of Graphite Mint or Graphite Blue.
+• Remembers a choice of Graphite Mint, Graphite Blue, Obsidian Red, Velvet Mauve, or Midnight Amber.
 • Provides a local switch for enabling or disabling the complete enhancement.
 
 HOW TO USE

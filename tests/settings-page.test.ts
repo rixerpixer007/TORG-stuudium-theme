@@ -52,7 +52,7 @@ describe("shared settings page", () => {
     await Promise.resolve();
 
     const themeInputs = document.querySelectorAll<HTMLInputElement>('input[name="theme"]');
-    expect(themeInputs).toHaveLength(2);
+    expect(themeInputs).toHaveLength(5);
     expect(themeInputs[1]?.checked).toBe(true);
     expect(document.documentElement.dataset.sidTheme).toBe("graphite-blue");
     expect(document.documentElement.dataset.sidSettingsState).toBe("ready");

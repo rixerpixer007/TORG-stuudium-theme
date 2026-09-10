@@ -3,6 +3,9 @@ import type { ThemeId } from "../../shared/themes";
 const EARLY_ACTIVATION_SCRIPT_BY_THEME = {
   "graphite-mint": "activation-graphite-mint.js",
   "graphite-blue": "activation-graphite-blue.js",
+  "obsidian-red": "activation-obsidian-red.js",
+  "velvet-mauve": "activation-velvet-mauve.js",
+  "midnight-amber": "activation-midnight-amber.js",
 } as const satisfies Record<ThemeId, string>;
 
 export function getEarlyActivationScript(themeId: ThemeId): string {

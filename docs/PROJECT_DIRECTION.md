@@ -101,10 +101,11 @@ The Phase 2 implementation:
 4. Apply the preference early enough to avoid a white startup flash.
 5. Avoid duplicating component rules for each palette.
 
-It initially offers Graphite Mint and Graphite Blue. Mint preserves the original
-green-tinted graphite palette, while Blue supplies its own cool slate canvas,
-surfaces, controls, borders, text colors, and blue accent. Component rules use
-the same semantic tokens in both themes. The catalog records a theme's
+It offers Graphite Mint, Graphite Blue, Obsidian Red, Velvet Mauve, and Midnight
+Amber. Mint preserves the original green-tinted graphite palette; the other
+themes provide complete cool-blue, near-black crimson, mocha-purple, and warm
+amber color systems. Component rules use the same semantic tokens in every
+theme. The catalog records a theme's
 light/dark color-scheme family so a future light theme can replace every
 required token without changing the selection UI or stored preference shape.
 Selection is manual and remembered; a future system-following mode can be added
@@ -214,8 +215,8 @@ Development can use free personal-device signing. Public distribution waits for 
 
 ### Phase 2: First feature
 
-- Implement manual, remembered switching between Graphite Mint and Graphite
-  Blue. **Implemented.**
+- Implement manual, remembered switching among the catalogued dark themes.
+  **Implemented.**
 - Verify persistence, initial rendering, navigation, and responsive behavior.
 - Keep the existing theme visually unchanged when selected and retain Graphite
   Mint as the only compatibility-userstyle palette.

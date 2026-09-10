@@ -74,29 +74,37 @@ describe("generated theme", () => {
     expect(color?.important).toBe(true);
   });
 
-  it("includes a gated complete Blue palette while retaining Mint as the fallback", () => {
+  it("includes every gated selectable palette while retaining Mint as the fallback", () => {
     const css = fs.readFileSync(path.join(projectRoot, "src/generated/theme.css"), "utf8");
-    const blueTheme = findRule(css, '[data-sid-theme="graphite-blue"]');
     const mintFallback = findRule(css, ":root:where([data-sid-enhancement");
+    const palettes = [
+      ["graphite-blue", "#0c1118", "#75a7ff", "#eef2f8"],
+      ["obsidian-red", "#0d0d0f", "#ff6b7a", "#f5f0f2"],
+      ["velvet-mauve", "#11111b", "#cba6f7", "#cdd6f4"],
+      ["midnight-amber", "#11100d", "#f2b84b", "#f3ead7"],
+    ] as const;
 
     expect(css).toContain("--sid-accent: #65d6b1");
-    expect(blueTheme?.selector).toContain('data-sid-enhancement="enabled"');
-    expect(blueTheme?.selector).toContain('data-sid-theme="graphite-blue"');
-    expect(
-      blueTheme?.nodes.some(
-        (node) => node.type === "decl" && node.prop === "--sid-accent" && node.value === "#75a7ff",
-      ),
-    ).toBe(true);
-    expect(
-      blueTheme?.nodes.some(
-        (node) => node.type === "decl" && node.prop === "--sid-canvas" && node.value === "#0c1118",
-      ),
-    ).toBe(true);
-    expect(
-      blueTheme?.nodes.some(
-        (node) => node.type === "decl" && node.prop === "--sid-text" && node.value === "#eef2f8",
-      ),
-    ).toBe(true);
+    palettes.forEach(([themeId, canvas, accent, text]) => {
+      const palette = findRule(css, `[data-sid-theme="${themeId}"]`);
+      expect(palette?.selector).toContain('data-sid-enhancement="enabled"');
+      expect(palette?.selector).toContain(`data-sid-theme="${themeId}"`);
+      expect(
+        palette?.nodes.some(
+          (node) => node.type === "decl" && node.prop === "--sid-accent" && node.value === accent,
+        ),
+      ).toBe(true);
+      expect(
+        palette?.nodes.some(
+          (node) => node.type === "decl" && node.prop === "--sid-canvas" && node.value === canvas,
+        ),
+      ).toBe(true);
+      expect(
+        palette?.nodes.some(
+          (node) => node.type === "decl" && node.prop === "--sid-text" && node.value === text,
+        ),
+      ).toBe(true);
+    });
     expect(mintFallback).toBeDefined();
   });
 

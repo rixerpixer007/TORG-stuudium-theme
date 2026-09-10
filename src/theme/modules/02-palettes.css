@@ -47,3 +47,138 @@
   --sid-spinner-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='9' fill='none' stroke='%23293647' stroke-width='3'/%3E%3Cpath d='M12 3a9 9 0 0 1 9 9' fill='none' stroke='%2375a7ff' stroke-width='3' stroke-linecap='round'%3E%3CanimateTransform attributeName='transform' type='rotate' from='0 12 12' to='360 12 12' dur='.75s' repeatCount='indefinite'/%3E%3C/path%3E%3C/svg%3E");
   --sid-checkmark-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5 6.5 12 13 4.5' fill='none' stroke='%2375a7ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
+
+:root[data-sid-theme="obsidian-red"] {
+  --sid-canvas: #0d0d0f;
+  --sid-header-background: rgb(13 13 15 / 94%);
+  --sid-subnavigation-background: rgb(13 13 15 / 90%);
+  --sid-canvas-soft: #121114;
+  --sid-canvas-highlight: #100f12;
+  --sid-surface: #18171a;
+  --sid-surface-2: #1e1c20;
+  --sid-surface-3: #282429;
+  --sid-surface-interactive: #1b191d;
+  --sid-surface-interactive-transparent: rgb(27 25 29 / 0%);
+  --sid-bg-overlay: var(--sid-surface-2);
+  --sid-panel-translucent: rgb(24 23 26 / 88%);
+  --sid-panel-translucent-strong: rgb(24 23 26 / 96%);
+  --sid-panel-gradient: linear-gradient(
+    180deg,
+    rgb(40 36 41 / 98%),
+    rgb(24 23 26 / 98%)
+  );
+  --sid-control: #111013;
+  --sid-border: #342f35;
+  --sid-border-strong: #4b434b;
+  --sid-text: #f5f0f2;
+  --sid-text-2: #cec3c7;
+  --sid-text-3: #9d9196;
+  --sid-text-disabled: #695f63;
+  --sid-text-decoration-muted: rgb(206 195 199 / 55%);
+  --sid-text-decoration-strong: rgb(245 240 242 / 28%);
+  --sid-close-icon-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='m4 4 8 8m0-8-8 8' fill='none' stroke='%23cec3c7' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E");
+  --sid-popover-arrow-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='12'%3E%3Cpath fill='%231e1c20' transform='rotate(180 18 6)' d='M2.658,0 C-13.615,0 50.938,0 34.662,0 C28.662,0 23.035,12.002 18.660,12.002 C14.285,12.002 8.594,0 2.658,0 Z'/%3E%3C/svg%3E");
+  --sid-accent: #ff6b7a;
+  --sid-accent-strong: #ff94a0;
+  --sid-accent-ink: #190609;
+  --sid-accent-soft: rgb(255 107 122 / 12%);
+  --sid-accent-border: rgb(255 107 122 / 36%);
+  --sid-accent-decoration: rgb(255 107 122 / 38%);
+  --sid-accent-glow: rgb(119 27 39 / 24%);
+  --sid-accent-glow-strong: rgb(119 27 39 / 28%);
+  --sid-accent-halo: rgb(255 107 122 / 9%);
+  --sid-accent-fill-strong: rgb(255 107 122 / 30%);
+  --sid-focus: 0 0 0 3px rgb(255 107 122 / 22%);
+  --sid-spinner-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='9' fill='none' stroke='%23342f35' stroke-width='3'/%3E%3Cpath d='M12 3a9 9 0 0 1 9 9' fill='none' stroke='%23ff6b7a' stroke-width='3' stroke-linecap='round'%3E%3CanimateTransform attributeName='transform' type='rotate' from='0 12 12' to='360 12 12' dur='.75s' repeatCount='indefinite'/%3E%3C/path%3E%3C/svg%3E");
+  --sid-checkmark-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5 6.5 12 13 4.5' fill='none' stroke='%23ff6b7a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+:root[data-sid-theme="velvet-mauve"] {
+  --sid-canvas: #11111b;
+  --sid-header-background: rgb(17 17 27 / 94%);
+  --sid-subnavigation-background: rgb(17 17 27 / 90%);
+  --sid-canvas-soft: #151522;
+  --sid-canvas-highlight: #13131f;
+  --sid-surface: #181825;
+  --sid-surface-2: #1e1e2e;
+  --sid-surface-3: #313244;
+  --sid-surface-interactive: #1b1b2a;
+  --sid-surface-interactive-transparent: rgb(27 27 42 / 0%);
+  --sid-bg-overlay: var(--sid-surface-2);
+  --sid-panel-translucent: rgb(24 24 37 / 88%);
+  --sid-panel-translucent-strong: rgb(24 24 37 / 96%);
+  --sid-panel-gradient: linear-gradient(
+    180deg,
+    rgb(49 50 68 / 98%),
+    rgb(24 24 37 / 98%)
+  );
+  --sid-control: #12121d;
+  --sid-border: #323344;
+  --sid-border-strong: #585b70;
+  --sid-text: #cdd6f4;
+  --sid-text-2: #bac2de;
+  --sid-text-3: #9399b2;
+  --sid-text-disabled: #6c7086;
+  --sid-text-decoration-muted: rgb(186 194 222 / 55%);
+  --sid-text-decoration-strong: rgb(205 214 244 / 28%);
+  --sid-close-icon-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='m4 4 8 8m0-8-8 8' fill='none' stroke='%23bac2de' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E");
+  --sid-popover-arrow-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='12'%3E%3Cpath fill='%231e1e2e' transform='rotate(180 18 6)' d='M2.658,0 C-13.615,0 50.938,0 34.662,0 C28.662,0 23.035,12.002 18.660,12.002 C14.285,12.002 8.594,0 2.658,0 Z'/%3E%3C/svg%3E");
+  --sid-accent: #cba6f7;
+  --sid-accent-strong: #dabfff;
+  --sid-accent-ink: #160d20;
+  --sid-accent-soft: rgb(203 166 247 / 13%);
+  --sid-accent-border: rgb(203 166 247 / 36%);
+  --sid-accent-decoration: rgb(203 166 247 / 38%);
+  --sid-accent-glow: rgb(103 67 145 / 25%);
+  --sid-accent-glow-strong: rgb(103 67 145 / 29%);
+  --sid-accent-halo: rgb(203 166 247 / 10%);
+  --sid-accent-fill-strong: rgb(203 166 247 / 30%);
+  --sid-focus: 0 0 0 3px rgb(203 166 247 / 22%);
+  --sid-spinner-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='9' fill='none' stroke='%2345475a' stroke-width='3'/%3E%3Cpath d='M12 3a9 9 0 0 1 9 9' fill='none' stroke='%23cba6f7' stroke-width='3' stroke-linecap='round'%3E%3CanimateTransform attributeName='transform' type='rotate' from='0 12 12' to='360 12 12' dur='.75s' repeatCount='indefinite'/%3E%3C/path%3E%3C/svg%3E");
+  --sid-checkmark-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5 6.5 12 13 4.5' fill='none' stroke='%23cba6f7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+:root[data-sid-theme="midnight-amber"] {
+  --sid-canvas: #11100d;
+  --sid-header-background: rgb(17 16 13 / 94%);
+  --sid-subnavigation-background: rgb(17 16 13 / 90%);
+  --sid-canvas-soft: #16140f;
+  --sid-canvas-highlight: #13120e;
+  --sid-surface: #1b1914;
+  --sid-surface-2: #211e18;
+  --sid-surface-3: #2b261d;
+  --sid-surface-interactive: #1e1b15;
+  --sid-surface-interactive-transparent: rgb(30 27 21 / 0%);
+  --sid-bg-overlay: var(--sid-surface-2);
+  --sid-panel-translucent: rgb(27 25 20 / 88%);
+  --sid-panel-translucent-strong: rgb(27 25 20 / 96%);
+  --sid-panel-gradient: linear-gradient(
+    180deg,
+    rgb(43 38 29 / 98%),
+    rgb(27 25 20 / 98%)
+  );
+  --sid-control: #14120e;
+  --sid-border: #393226;
+  --sid-border-strong: #514735;
+  --sid-text: #f3ead7;
+  --sid-text-2: #cec2aa;
+  --sid-text-3: #9d927c;
+  --sid-text-disabled: #6a6253;
+  --sid-text-decoration-muted: rgb(206 194 170 / 55%);
+  --sid-text-decoration-strong: rgb(243 234 215 / 28%);
+  --sid-close-icon-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='m4 4 8 8m0-8-8 8' fill='none' stroke='%23cec2aa' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E");
+  --sid-popover-arrow-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='12'%3E%3Cpath fill='%23211e18' transform='rotate(180 18 6)' d='M2.658,0 C-13.615,0 50.938,0 34.662,0 C28.662,0 23.035,12.002 18.660,12.002 C14.285,12.002 8.594,0 2.658,0 Z'/%3E%3C/svg%3E");
+  --sid-accent: #f2b84b;
+  --sid-accent-strong: #ffd078;
+  --sid-accent-ink: #181004;
+  --sid-accent-soft: rgb(242 184 75 / 12%);
+  --sid-accent-border: rgb(242 184 75 / 36%);
+  --sid-accent-decoration: rgb(242 184 75 / 38%);
+  --sid-accent-glow: rgb(126 83 16 / 24%);
+  --sid-accent-glow-strong: rgb(126 83 16 / 28%);
+  --sid-accent-halo: rgb(242 184 75 / 9%);
+  --sid-accent-fill-strong: rgb(242 184 75 / 30%);
+  --sid-focus: 0 0 0 3px rgb(242 184 75 / 22%);
+  --sid-spinner-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='9' fill='none' stroke='%23393226' stroke-width='3'/%3E%3Cpath d='M12 3a9 9 0 0 1 9 9' fill='none' stroke='%23f2b84b' stroke-width='3' stroke-linecap='round'%3E%3CanimateTransform attributeName='transform' type='rotate' from='0 12 12' to='360 12 12' dur='.75s' repeatCount='indefinite'/%3E%3C/path%3E%3C/svg%3E");
+  --sid-checkmark-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5 6.5 12 13 4.5' fill='none' stroke='%23f2b84b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
