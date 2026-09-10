@@ -1,7 +1,7 @@
 # Extension development
 
 This guide starts from a computer that has never built a browser extension. It
-covers the Phase 2 Chromium extension for Google Chrome and Brave. The extension
+covers the Phase 2 Chromium extension for Google Chrome and other Chromium-based browsers. The extension
 changes only pages under `https://torg.ope.ee/`, stores an enable/disable choice
 and a selected theme, and does not read or store student information.
 
@@ -184,7 +184,7 @@ Chrome's official development workflow is documented in
 4. Select **Load unpacked**.
 5. Choose `.output/chrome-mv3` for a production test, or
    `.output/chrome-mv3-dev` while `npm run dev` is running.
-6. Confirm that **TORG Stuudium Enhancement** appears and reports no errors.
+6. Confirm that **Sinu Stuudium** appears and reports no errors.
 
 The browser grants access only to `https://torg.ope.ee/*`. The generated
 manifest does not request tabs, browsing history, cookies, downloads, or access
@@ -201,7 +201,7 @@ described in [How can I add extensions to Brave?](https://support.brave.com/hc/e
 4. Select **Load unpacked**.
 5. Choose `.output/chrome-mv3-dev` for watch mode. Choose
    `.output/chrome-mv3` only when testing the result of `npm run build`.
-6. Confirm that **TORG Stuudium Enhancement** appears without an error badge.
+6. Confirm that **Sinu Stuudium** appears without an error badge.
 
 Published users of Brave can later install the same listing from the Chrome Web
 Store; they do not need a separate Brave package.
@@ -451,7 +451,7 @@ accident.
 
 1. Stop `npm run dev` with `Control+C`.
 2. Open `chrome://extensions` or `brave://extensions`.
-3. Find **TORG Stuudium Enhancement** and select **Remove**.
+3. Find **Sinu Stuudium** and select **Remove**.
 4. Confirm removal.
 5. Refresh open Stuudium tabs. Browser-managed extension CSS and scripts are no
    longer loaded.

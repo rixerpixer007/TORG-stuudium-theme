@@ -1,4 +1,4 @@
-package ee.torg.stuudium.enhancement
+package io.github.rixerpixer007.stuudium
 
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue

@@ -1,8 +1,8 @@
 {
-  "name": "torg-stuudium-enhancement",
+  "name": "sinu-stuudium",
   "version": "0.1.0",
   "private": true,
-  "description": "Shared theme source and Chromium extension for TORG Stuudium.",
+  "description": "Sinu Stuudiumi jagatud kujundus ning Chromiumi brauserilaiendus.",
   "type": "module",
   "scripts": {
     "postinstall": "node scripts/build-theme.mjs && wxt prepare",

@@ -1,4 +1,4 @@
-package ee.torg.stuudium.enhancement
+package io.github.rixerpixer007.stuudium
 
 /** Keeps the native launch cover limited to the period before first visible web content. */
 internal class NavigationPresentationPolicy {

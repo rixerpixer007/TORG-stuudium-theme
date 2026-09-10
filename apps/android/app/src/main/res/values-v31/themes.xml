@@ -11,6 +11,6 @@
         <item name="android:statusBarColor">@color/sid_canvas</item>
         <item name="android:navigationBarColor">@color/sid_canvas</item>
         <item name="android:windowSplashScreenBackground">@color/sid_canvas</item>
-        <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_app_mark</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_app_foreground</item>
     </style>
 </resources>

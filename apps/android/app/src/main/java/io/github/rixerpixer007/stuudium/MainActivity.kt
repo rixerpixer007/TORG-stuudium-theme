@@ -1,4 +1,4 @@
-package ee.torg.stuudium.enhancement
+package io.github.rixerpixer007.stuudium
 
 import android.content.ActivityNotFoundException
 import android.content.Intent

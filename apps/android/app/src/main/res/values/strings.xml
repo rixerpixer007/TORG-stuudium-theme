@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">TORG Stuudium Enhancement</string>
-    <string name="loading_stuudium">Loading Stuudium…</string>
-    <string name="load_error_title">Stuudium could not be loaded</string>
-    <string name="load_error_body">Check your connection, then try again.</string>
-    <string name="retry">Try again</string>
-    <string name="webview_update_title">WebView update required</string>
-    <string name="webview_update_body">This prototype needs a current Android System WebView or Google Chrome to apply the theme safely before Stuudium renders. Update it in Google Play, then reopen the app.</string>
-    <string name="close">Close</string>
+    <string name="app_name">Sinu Stuudium</string>
+    <string name="loading_stuudium">Stuudiumi laadimine…</string>
+    <string name="load_error_title">Stuudiumi laadimine ebaõnnestus</string>
+    <string name="load_error_body">Kontrolli internetiühendust ja proovi uuesti.</string>
+    <string name="retry">Proovi uuesti</string>
+    <string name="webview_update_title">WebView vajab uuendamist</string>
+    <string name="webview_update_body">Sinu Stuudium vajab ajakohast Android System WebView’d või Google Chrome’i, et kujundus enne Stuudiumi kuvamist turvaliselt rakendada. Uuenda seda Google Plays ja ava rakendus uuesti.</string>
+    <string name="close">Sulge</string>
 </resources>

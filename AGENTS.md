@@ -102,7 +102,7 @@ Never mutate attendance, TODOs, messages, grades, registrations, or other Stuudi
 - `npm run typecheck`: run TypeScript checking without emitting files.
 - `npm test`: run the Vitest suite once.
 - `npm run build`: create the unpacked Chromium extension at `.output/chrome-mv3/`.
-- `npm run package`: create the uploadable ZIP at `.output/torg-stuudium-enhancement-<version>-chrome.zip` and validate its contents.
+- `npm run package`: create the uploadable ZIP at `.output/sinu-stuudium-<version>-chrome.zip` and validate its contents.
 - `npm run validate`: run theme freshness, formatting, linting, type checking, tests, and unpacked-build validation.
 - `npm run build:mobile:web`: deterministically bundle the shared theme,
   Stuudium runtime, settings UI, and supported-site configuration for Android.

@@ -77,7 +77,7 @@ body {
 
 .app-home img,
 .app-profile-logo,
-.app-profile-logo svg {
+.app-profile-logo img {
   display: block;
   width: 40px;
   height: 40px;
@@ -94,20 +94,6 @@ body {
   flex: 0 0 auto;
   margin-inline: auto 10px;
   overflow: hidden;
-}
-
-.app-profile-logo svg {
-  color: var(--sid-accent);
-  fill: var(--sid-surface-3);
-  stroke: currentColor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 2;
-}
-
-.app-profile-logo circle {
-  fill: currentColor;
-  stroke: none;
 }
 
 .app-navigation {

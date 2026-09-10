@@ -9,7 +9,7 @@ const BUILD_DIRECTORY = path.join(OUTPUT_DIRECTORY, "chrome-mv3");
 const packageMetadata = JSON.parse(
   fs.readFileSync(path.join(PROJECT_ROOT, "package.json"), "utf8"),
 );
-const ARCHIVE_NAME = `torg-stuudium-enhancement-${packageMetadata.version}-chrome.zip`;
+const ARCHIVE_NAME = `sinu-stuudium-${packageMetadata.version}-chrome.zip`;
 const ARCHIVE_PATH = path.join(OUTPUT_DIRECTORY, ARCHIVE_NAME);
 
 function walkFiles(directory, base = directory) {

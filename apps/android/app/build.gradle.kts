@@ -3,15 +3,15 @@ plugins {
 }
 
 android {
-    namespace = "ee.torg.stuudium.enhancement"
+    namespace = "io.github.rixerpixer007.stuudium"
     compileSdk = 37
 
     defaultConfig {
-        applicationId = "ee.torg.stuudium.enhancement"
+        applicationId = "io.github.rixerpixer007.stuudium"
         minSdk = 26
         targetSdk = 37
         versionCode = 1
-        versionName = "0.1.0-prototype"
+        versionName = "0.1.0-beta"
     }
 
     buildTypes {

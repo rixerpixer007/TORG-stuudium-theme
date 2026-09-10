@@ -255,9 +255,9 @@ Or install the already-built APK from Terminal:
 `install -r` keeps the app's existing preferences and WebView session while
 replacing the debug APK. It does not alter the normal Chrome browser's cookies.
 
-The provisional debug application ID is
-`ee.torg.stuudium.enhancement`. It must be reviewed before the first signed
-public release, after which changing it would break normal Android updates.
+The approved application ID is `io.github.rixerpixer007.stuudium`. It must stay
+unchanged after the first signed public release so later versions can be
+installed as normal Android updates.
 
 ## 10. Inspect Android and WebView errors
 
@@ -271,7 +271,7 @@ sensitive query values.
 From Terminal, the equivalent filtered stream is:
 
 ```sh
-~/Library/Android/sdk/platform-tools/adb logcat --pid=$(~/Library/Android/sdk/platform-tools/adb shell pidof ee.torg.stuudium.enhancement)
+~/Library/Android/sdk/platform-tools/adb logcat --pid=$(~/Library/Android/sdk/platform-tools/adb shell pidof io.github.rixerpixer007.stuudium)
 ```
 
 Stop it with `Control+C`.
@@ -360,7 +360,7 @@ validated command only when that feature has a specific native requirement.
 Long-press the app icon on the Samsung phone and choose **Uninstall**, or run:
 
 ```sh
-~/Library/Android/sdk/platform-tools/adb uninstall ee.torg.stuudium.enhancement
+~/Library/Android/sdk/platform-tools/adb uninstall io.github.rixerpixer007.stuudium
 ```
 
 Uninstalling removes the prototype's WebView session and stored preferences. It

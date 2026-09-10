@@ -2,7 +2,8 @@
 
 This is the current release guide for the approved distribution plan:
 
-1. Publish first in the **Chrome Web Store** for Google Chrome and Brave users.
+1. Publish first in the **Chrome Web Store** for Chrome and other compatible
+   Chromium-based browsers.
 2. Document **Microsoft Edge Add-ons** as an optional additional Chromium
    channel; do not open or submit that listing before it is explicitly approved.
 
@@ -77,10 +78,9 @@ before upload.
 
 ### Text
 
-- **Name:** `TORG Stuudium Enhancement`, unless the owner approves a final public
-  product name. The manifest and listing must agree.
+- **Name:** `Sinu Stuudium`. The manifest and listing must agree.
 - **Short description:** at most 132 characters. A suitable current draft is:
-  `Adds selectable Intentional Dark themes and local settings to TORG Stuudium.`
+  `Kohanda TORG Stuudium enda moodi – läbimõeldud tume kujundus ja praktilised täiustused.`
 - **Detailed description:** explain the single purpose, that it works only on
   TORG Stuudium, how to open settings, what is stored locally, and the exact
   permissions. Do not advertise automatic system-following or light themes
@@ -229,7 +229,7 @@ git status --short
 For version 0.1.0, upload exactly:
 
 ```text
-.output/torg-stuudium-enhancement-0.1.0-chrome.zip
+.output/sinu-stuudium-0.1.0-chrome.zip
 ```
 
 For a later version, the middle number changes to match `package.json`. Never
@@ -241,7 +241,7 @@ The project validator checks the ZIP directory itself and requires it to match
 the production build exactly. For a human-readable second inspection:
 
 ```sh
-unzip -l .output/torg-stuudium-enhancement-0.1.0-chrome.zip
+unzip -l .output/sinu-stuudium-0.1.0-chrome.zip
 ```
 
 Confirm that `manifest.json` is at the ZIP root and that the archive contains

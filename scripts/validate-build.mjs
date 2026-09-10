@@ -47,6 +47,24 @@ assert(manifest.background?.service_worker !== undefined, "MV3 service worker is
 assert(Array.isArray(manifest.content_scripts), "Bootstrap content script is missing");
 assert(manifest.content_scripts.length === 1, "Expected exactly one static content script");
 
+const expectedIcons = {
+  16: "icons/icon-16.png",
+  32: "icons/icon-32.png",
+  48: "icons/icon-48.png",
+  128: "icons/icon-128.png",
+};
+assert(
+  JSON.stringify(manifest.icons) === JSON.stringify(expectedIcons),
+  "Manifest icons do not match the approved Sinu Stuudium icon set",
+);
+assert(
+  JSON.stringify(manifest.action?.default_icon) === JSON.stringify(expectedIcons),
+  "Toolbar icons do not match the approved Sinu Stuudium icon set",
+);
+for (const iconPath of Object.values(expectedIcons)) {
+  assert(files.includes(iconPath), `Packaged icon is missing: ${iconPath}`);
+}
+
 const bootstrap = manifest.content_scripts[0];
 assert(
   JSON.stringify(bootstrap.matches) === JSON.stringify([EXPECTED_MATCH]),

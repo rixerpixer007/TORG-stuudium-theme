@@ -31,14 +31,14 @@ The first public product scope is desktop plus Android. iOS compatibility must b
 
 ## Platform plan
 
-| Platform               | Delivery                           | Initial status                        | Update direction                                                                       |
-| ---------------------- | ---------------------------------- | ------------------------------------- | -------------------------------------------------------------------------------------- |
-| Chromium desktop       | WXT-based Manifest V3 WebExtension | First public target: Chrome and Brave | Chrome Web Store first; Microsoft Edge Add-ons documented as an optional later channel |
-| Firefox desktop        | WebExtension compatibility build   | Desired follow-up                     | Browser-supported distribution                                                         |
-| Safari desktop         | Safari WebExtension port           | Desired follow-up                     | Apple-supported distribution                                                           |
-| Android                | Native Kotlin WebView app          | Focused feasibility prototype         | Validate first; signed APK releases and updates remain a later release milestone       |
-| iOS                    | Dedicated WebView app              | Deferred public target                | Apple-supported signing and distribution after funding or institutional support        |
-| Existing installations | `.user.css`                        | Retained during transition            | Current userstyle update mechanism                                                     |
+| Platform               | Delivery                           | Initial status                | Update direction                                                                       |
+| ---------------------- | ---------------------------------- | ----------------------------- | -------------------------------------------------------------------------------------- |
+| Chromium desktop       | WXT-based Manifest V3 WebExtension | First public beta target      | Chrome Web Store first; Microsoft Edge Add-ons documented as an optional later channel |
+| Firefox desktop        | WebExtension compatibility build   | Desired follow-up             | Browser-supported distribution                                                         |
+| Safari desktop         | Safari WebExtension port           | Desired follow-up             | Apple-supported distribution                                                           |
+| Android                | Native Kotlin WebView app          | Focused feasibility prototype | Validate first; signed APK releases and updates remain a later release milestone       |
+| iOS                    | Dedicated WebView app              | Deferred public target        | Apple-supported signing and distribution after funding or institutional support        |
+| Existing installations | `.user.css`                        | Retained during transition    | Current userstyle update mechanism                                                     |
 
 ### iOS decision
 

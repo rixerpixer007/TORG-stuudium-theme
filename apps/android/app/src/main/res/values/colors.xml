@@ -4,4 +4,5 @@
     <color name="sid_text">#F2F0E9</color>
     <color name="sid_text_secondary">#C1C0B8</color>
     <color name="sid_accent">#65D6B1</color>
+    <color name="app_icon_background">#0F1311</color>
 </resources>

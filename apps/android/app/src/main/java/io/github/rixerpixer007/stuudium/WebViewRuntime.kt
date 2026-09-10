@@ -1,4 +1,4 @@
-package ee.torg.stuudium.enhancement
+package io.github.rixerpixer007.stuudium
 
 import android.app.Activity
 import android.app.AlertDialog

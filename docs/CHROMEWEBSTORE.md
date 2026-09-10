@@ -1,50 +1,50 @@
-# Chrome Web Store listing — TORG Stuudium Enhancement
+# Chrome Web Store'i kirje — Sinu Stuudium
 
 > Last updated: 2026-09-10
 >
 > Status: Phase 2 draft. Do not submit until every owner-required field and asset below is complete.
 
 This file is the copy-and-review source for the Chrome Web Store dashboard. The complete release procedure, account requirements, and rollback guidance are in
-[`docs/EXTENSION_PUBLISHING.md`](docs/EXTENSION_PUBLISHING.md).
+[`EXTENSION_PUBLISHING.md`](EXTENSION_PUBLISHING.md).
 
 ## Store listing
 
 **Extension name**
 
-TORG Stuudium Enhancement
+Sinu Stuudium
 
 **Short description**
 
-Adds selectable Intentional Dark themes and local settings to TORG Stuudium.
+Kohanda TORG Stuudium enda moodi – läbimõeldud tume kujundus ja praktilised täiustused.
 
 **Detailed description**
 
-TORG Stuudium Enhancement gives the genuine TORG Stuudium website a consistent dark appearance with five selectable palettes spanning mint, blue, crimson, mauve, and amber.
+Sinu Stuudium on TORGi õpilase loodud mitteametlik brauserilaiendus, mis kohandab päris TORG Stuudiumi välimust ja kasutuskogemust. Vali endale sobiv tume kujundus ning kasuta praktilisi täiustusi otse oma brauseris.
 
-FEATURES
-• Applies the Intentional Dark appearance across supported TORG Stuudium pages.
-• Adds a matching settings shortcut to Stuudium’s main menu.
-• Remembers a choice of Graphite Mint, Graphite Blue, Obsidian Red, Velvet Mauve, or Midnight Amber.
-• Provides a local switch for enabling or disabling the complete enhancement.
+OMADUSED
+• Läbimõeldud tume kujundus toetatud TORG Stuudiumi lehtedel.
+• Valik erinevate tumedate kujunduste vahel.
+• Teema seaded otse Stuudiumi peamenüüs.
+• Meelde jääv valik ja võimalus kogu täiendus välja lülitada.
 
-HOW TO USE
+KASUTAMINE
 
-1. Install the extension and open TORG Stuudium.
-2. Use Stuudium normally; the dark appearance is enabled by default.
-3. Open the extension from the toolbar or select “Teema seaded” in Stuudium’s main menu to choose a palette or change the master setting.
+1. Paigalda laiendus ja ava TORG Stuudium.
+2. Kasuta Stuudiumit tavapäraselt; tume kujundus on vaikimisi sisse lülitatud.
+3. Kujunduse valimiseks või täiustuse väljalülitamiseks ava laiendus brauseri tööriistaribalt või vali Stuudiumi peamenüüst „Teema seaded”.
 
-PRIVACY
-The extension stores only its local enabled/disabled and selected-theme preferences. It does not collect or transmit analytics, browsing history, grades, attendance, messages, credentials, cookies, page contents, or other student information.
+PRIVAATSUS
+Sinu kooliandmeid ei koguta ega saadeta arendajale. Sinu Stuudium salvestab ainult vajalikud seaded sinu seadmesse. Sisselogimist ja kooliandmeid töötleb päris Stuudium.
 
-PERMISSIONS
-• Access to torg.ope.ee lets the extension apply its appearance and settings shortcut only on the supported school website.
-• Local storage keeps the enabled/disabled and selected-theme preferences on this device.
-• Script registration lets that preference take effect at the beginning of a supported page load.
+ÕIGUSED
+• Juurdepääs aadressile torg.ope.ee võimaldab rakendada kujundust ja seadete otseteed ainult toetatud kooli veebilehel.
+• Kohalik salvestusruum hoiab sisse- ja väljalülitamise ning valitud kujunduse eelistusi selles seadmes.
+• Skripti registreerimine võimaldab salvestatud valiku rakendada toetatud lehe laadimise alguses.
 
-SUPPORT
-[OWNER REQUIRED: add the approved public support URL or monitored contact address.]
+TUGI
+https://github.com/rixerpixer007/TORG-stuudium-theme/issues
 
-Version 0.1.0 — Initial selectable dark themes and local settings.
+Versioon 0.1.0 — esimene avalik beeta.
 
 **Category**
 
@@ -52,24 +52,24 @@ Productivity — provisional; the owner must confirm the categories currently of
 
 **Single purpose**
 
-Improve the local appearance and usability of the genuine TORG Stuudium website.
+Kohandada päris TORG Stuudiumi kohalikku välimust ja kasutuskogemust.
 
 **Primary language**
 
-English — provisional. Add Estonian localization only when both listings can be maintained accurately.
+Estonian.
 
 ## Graphics and assets
 
-| Asset                  | Required dimensions  | Status                               | Planned content                                                 |
-| ---------------------- | -------------------- | ------------------------------------ | --------------------------------------------------------------- |
-| Store icon             | 128×128 PNG          | Owner approval and creation required | Final approved project mark; no Stuudium logo unless authorized |
-| Screenshot 1           | 1280×800 or 640×400  | Not created                          | Themed settings page with no student information                |
-| Screenshot 2           | 1280×800 or 640×400  | Not created                          | Sanitized or demonstration TORG dashboard                       |
-| Screenshot 3           | 1280×800 or 640×400  | Optional                             | Sanitized responsive view                                       |
-| Small promotional tile | 440×280 PNG or JPEG  | Not created                          | Approved project branding                                       |
-| Marquee image          | 1400×560 PNG or JPEG | Optional                             | Approved project branding                                       |
+| Asset                  | Required dimensions  | Status      | Planned content                                    |
+| ---------------------- | -------------------- | ----------- | -------------------------------------------------- |
+| Store icon             | 128×128 PNG          | Created     | Approved Sinu Stuudium mark; no Stuudium logo used |
+| Screenshot 1           | 1280×800 or 640×400  | Not created | Themed settings page with no student information   |
+| Screenshot 2           | 1280×800 or 640×400  | Not created | Sanitized or demonstration TORG dashboard          |
+| Screenshot 3           | 1280×800 or 640×400  | Optional    | Sanitized responsive view                          |
+| Small promotional tile | 440×280 PNG or JPEG  | Not created | Sinu Stuudium name, tagline, graphite, and mint    |
+| Marquee image          | 1400×560 PNG or JPEG | Optional    | Approved project branding                          |
 
-Create separate 16×16, 32×32, 48×48, and 128×128 PNG extension icons after branding approval. Every screenshot must avoid names, grades, attendance, messages, schedules, class membership, authentication details, and other student data.
+The extension package contains separate 16×16, 32×32, 48×48, and 128×128 PNG icons generated from the approved dark logo. Every screenshot must avoid names, grades, attendance, messages, schedules, class membership, authentication details, and other student data.
 
 ## Permissions justification
 
@@ -109,21 +109,22 @@ The code recognizes supported routes and the navigation location used for its se
 
 ## Privacy policy
 
-**Public privacy-policy URL:** [OWNER REQUIRED]
+**Public privacy-policy URL:** `https://github.com/rixerpixer007/TORG-stuudium-theme/blob/main/docs/PRIVACY.md`
 
 The published policy must match the source and dashboard answers. It must state what the local preference is, that no school or authentication data is collected or transmitted, how uninstalling removes extension-local storage, and how to contact the maintainer. Verify that the final URL is public and not behind a login before submission.
 
 ## Distribution
 
 - Initial store: Chrome Web Store.
-- Initial browsers: Google Chrome and Brave.
+- Browser family: Chrome and other compatible Chromium-based browsers.
+- Independently tested before release: Google Chrome and Brave.
 - Visibility: [OWNER REQUIRED — choose public, unlisted, or a tester-only release deliberately.]
 - Regions: [OWNER REQUIRED.]
 - Optional later channel: Microsoft Edge Add-ons, only after Edge-specific live testing.
 
 ## Developer information
 
-- Publisher name: [OWNER REQUIRED]
+- Publisher name: Sinu Stuudium — confirm against the account identity shown by the dashboard.
 - Verified contact email: [OWNER REQUIRED]
 - Support URL or email: [OWNER REQUIRED]
 - Homepage URL: [OWNER REQUIRED]
@@ -132,9 +133,9 @@ Never place store credentials, payment information, recovery codes, identity doc
 
 ## Version history
 
-| Version | Date       | Changes                                                                                         | Status |
-| ------- | ---------- | ----------------------------------------------------------------------------------------------- | ------ |
-| 0.1.0   | 2026-09-05 | Initial Manifest V3 delivery, Mint/Blue selection, local settings, and compatibility userstyle. | Draft  |
+| Version | Date       | Changes                                                                   | Status |
+| ------- | ---------- | ------------------------------------------------------------------------- | ------ |
+| 0.1.0   | 2026-09-10 | First Sinu Stuudium beta with selectable dark designs and local settings. | Draft  |
 
 ## Review notes
 
@@ -144,7 +145,7 @@ Never place store credentials, payment information, recovery codes, identity doc
 - Only `https://torg.ope.ee/*` is supported; other `ope.ee` schools are intentionally not pre-authorized.
 - Automatic system-following and light themes are not included in Phase 2.
 - Chromium requires an open Stuudium page to be refreshed after an unpacked extension is reloaded or re-enabled during development.
-- Chrome and Brave live checks must be complete on the exact production package before submission.
+- Chrome and Brave live checks must be complete on the exact production package before submission. Other Chromium-based browsers are not described as independently tested until checked.
 
 ### Rejection history
 
