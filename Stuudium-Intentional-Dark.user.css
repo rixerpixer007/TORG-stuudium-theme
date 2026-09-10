@@ -785,7 +785,6 @@
 
   .page_tabs_dropdown_v2 {
     z-index: calc(var(--sid-z-tabs) + 20) !important;
-    padding: 14px;
     color: var(--sid-text-2) !important;
     background: var(--sid-surface-2) !important;
     border: 1px solid var(--sid-border-strong) !important;
@@ -794,23 +793,10 @@
   }
 
   .page_tabs_dropdown_v2 .page_tabs_dropdown_segment {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-    gap: 10px;
-    margin: 0 0 12px;
-    padding: 0 0 12px;
     border-color: var(--sid-border) !important;
   }
 
-  .page_tabs_dropdown_v2 .page_tabs_dropdown_segment:last-child {
-    margin-bottom: 0;
-    padding-bottom: 0;
-  }
-
   .page_tabs_dropdown_v2 a {
-    min-height: 44px;
-    box-sizing: border-box;
-    padding: 10px 12px;
     color: var(--sid-text-2) !important;
     background: var(--sid-surface) !important;
     border: 1px solid var(--sid-border) !important;
@@ -1527,6 +1513,12 @@
     opacity: 0.7 !important;
   }
 
+  .absences_popover [data-role="popover-loading"].is_loading {
+    background-image: var(--sid-spinner-image) !important;
+    background-size: 11px 11px !important;
+    filter: none !important;
+  }
+
   .absences_popover .student-absences-on-date-options-add-notice {
     box-sizing: border-box !important;
     padding: 8px !important;
@@ -1592,9 +1584,9 @@
   }
 
   .absences_popover :where(select, textarea):is(:focus, :focus-visible) {
-    border-color: var(--sid-accent-border) !important;
+    border-color: var(--sid-danger-border) !important;
     outline: 0 !important;
-    box-shadow: 0 0 0 2px var(--sid-accent-halo) !important;
+    box-shadow: 0 0 0 2px var(--sid-danger-soft) !important;
   }
   /* Profiles, subjects and segmented controls */
   :where(.st-segment-nav, .st-toggle-control) {
@@ -2169,6 +2161,12 @@
     color: var(--sid-text-3) !important;
   }
 
+  :where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_subjects_student)
+    .loading-icon-inline {
+    background-image: var(--sid-spinner-image) !important;
+    filter: none !important;
+  }
+
   :where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_subjects_student) .grade_param_is_notify,
   :where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_subjects_student) .grade_param_is_absent:not(.grade_param_is_absent_excused) {
     color: var(--sid-danger) !important;
@@ -2208,7 +2206,6 @@
     background: var(--sid-warning-soft) !important;
     border-color: var(--sid-warning-border) !important;
   }
-
   /* Lesson information */
   .page_subjects_student .subjectplan-student-view-journal-planlist {
     color: var(--sid-text-2) !important;
@@ -2475,7 +2472,7 @@
     border-bottom-color: var(--sid-border-strong) !important;
   }
 
-  .courses_index_content > a.course {
+  :where(.courses_index_content, .courses_index .primary-container) > a.course {
     display: block;
     box-sizing: border-box;
     margin-bottom: 12px !important;
@@ -2488,7 +2485,7 @@
     transition: transform 140ms ease, border-color 140ms ease;
   }
 
-  .courses_index_content > a.course:hover {
+  :where(.courses_index_content, .courses_index .primary-container) > a.course:hover {
     background: var(--sid-surface-3) !important;
     border-color: var(--sid-accent-border) !important;
     transform: translateY(-2px);
@@ -2515,7 +2512,9 @@
     transform: translateY(-50%);
   }
 
-  .courses_index_content .course_connections .course-journal {
+  :where(.courses_index_content, .courses_index .primary-container)
+    .course_connections
+    .course-journal {
     background: transparent !important;
     border: 0 !important;
   }
@@ -2570,7 +2569,6 @@
     background: transparent !important;
     border-color: var(--sid-border) !important;
   }
-
   /* Shared upload preview used by TERA forms and the Suhtlus composer. */
   :is(.content-container .node_form_new, .suhtlus .post-edit)
     [data-role="st-fileupload"]
@@ -3059,6 +3057,10 @@
     pointer-events: none;
   }
 
+  .suhtlus .post-in-list-archive {
+    z-index: 1;
+  }
+
   .post-in-list.post-expanded :where(.post-actions, .post-responses-content, .post-responses-counts, .post-comments, .post-comment, .post-comment-main, .post-add-members, .post-footer-actions) {
     color: var(--sid-text-2) !important;
     background: transparent !important;
@@ -3104,6 +3106,28 @@
 
   .suhtlus .post-body.block-collapsed .block-collapsed-expander:hover > span,
   .suhtlus .post-body.block-collapsed .block-collapsed-expander:focus-visible > span {
+    color: var(--sid-accent-strong) !important;
+    background: var(--sid-surface-3) !important;
+    border-color: var(--sid-accent-border) !important;
+  }
+
+  .suhtlus .comment-body.block-collapsed .block-collapsed-expander {
+    background-image: linear-gradient(
+      to bottom,
+      transparent,
+      var(--sid-surface-2) 72%
+    ) !important;
+  }
+
+  .suhtlus .comment-body.block-collapsed .block-collapsed-expander > span {
+    color: var(--sid-accent) !important;
+    background: var(--sid-surface-2) !important;
+    border-color: var(--sid-border-strong) !important;
+    box-shadow: none !important;
+  }
+
+  .suhtlus .comment-body.block-collapsed .block-collapsed-expander:hover > span,
+  .suhtlus .comment-body.block-collapsed .block-collapsed-expander:focus-visible > span {
     color: var(--sid-accent-strong) !important;
     background: var(--sid-surface-3) !important;
     border-color: var(--sid-accent-border) !important;
@@ -3250,28 +3274,21 @@
     border-top-color: var(--sid-border) !important;
   }
 
-  .suhtlus .post-comments-heading {
-    display: flex !important;
-    align-items: center;
-    gap: 8px;
+  .suhtlus .post-comments .post-comments-heading::before {
+    border-top-color: var(--sid-border) !important;
   }
 
-  .suhtlus .post-comments-heading::before,
-  .suhtlus .post-comments-heading::after {
-    position: static !important;
-    width: auto !important;
-    height: 0 !important;
-    flex: 1 1 auto;
-    content: "" !important;
-    border: 0 !important;
-    border-top: 1px solid var(--sid-border) !important;
-  }
-
-  .suhtlus .post-comments-heading > div,
-  .suhtlus .post-comments-heading span {
+  .suhtlus .post-comments .post-comments-heading > div > span {
     color: var(--sid-text-3) !important;
     background: transparent !important;
     border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .suhtlus .post-comments .post-comments-heading > a {
+    color: var(--sid-accent) !important;
+    background: var(--sid-surface-interactive) !important;
     box-shadow: none !important;
   }
 
@@ -3484,6 +3501,12 @@
     color: var(--sid-text-2) !important;
     padding: 1px 6px !important;
     text-decoration: none !important;
+  }
+
+  .page_registration_collection .reg_count.opt_is_full abbr {
+    color: var(--sid-text-3) !important;
+    background: var(--sid-surface-2) !important;
+    border-color: var(--sid-border-strong) !important;
   }
 
   .page_registration_collection .option_registrations {
@@ -3841,16 +3864,18 @@
       width: 100%;
     }
 
-    :where(.dashboard_recent_overview .section, .daily-summaries, .main-block-style, .courses_index_content > a.course) {
+    :where(
+      .dashboard_recent_overview .section,
+      .daily-summaries,
+      .main-block-style,
+      .courses_index_content > a.course,
+      .courses_index .primary-container > a.course
+    ) {
       border-radius: 9px !important;
     }
 
     .st-stuudium-navigation-2021-contents {
       padding-inline: 6px !important;
-    }
-
-    .page_tabs_dropdown_v2 .page_tabs_dropdown_segment {
-      grid-template-columns: 1fr;
     }
 
     .page_tabs .width_wrapper {

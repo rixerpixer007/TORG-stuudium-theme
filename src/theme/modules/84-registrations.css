@@ -133,6 +133,12 @@
   text-decoration: none !important;
 }
 
+.page_registration_collection .reg_count.opt_is_full abbr {
+  color: var(--sid-text-3) !important;
+  background: var(--sid-surface-2) !important;
+  border-color: var(--sid-border-strong) !important;
+}
+
 .page_registration_collection .option_registrations {
   color: var(--sid-text-2) !important;
   background: transparent !important;

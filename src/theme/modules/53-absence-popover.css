@@ -20,6 +20,12 @@
   opacity: 0.7 !important;
 }
 
+.absences_popover [data-role="popover-loading"].is_loading {
+  background-image: var(--sid-spinner-image) !important;
+  background-size: 11px 11px !important;
+  filter: none !important;
+}
+
 .absences_popover .student-absences-on-date-options-add-notice {
   box-sizing: border-box !important;
   padding: 8px !important;
@@ -85,7 +91,7 @@
 }
 
 .absences_popover :where(select, textarea):is(:focus, :focus-visible) {
-  border-color: var(--sid-accent-border) !important;
+  border-color: var(--sid-danger-border) !important;
   outline: 0 !important;
-  box-shadow: 0 0 0 2px var(--sid-accent-halo) !important;
+  box-shadow: 0 0 0 2px var(--sid-danger-soft) !important;
 }

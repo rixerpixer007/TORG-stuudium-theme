@@ -15,6 +15,10 @@ export interface WebViewMessagePort {
   removeEventListener(type: "message", listener: (event: WebViewMessageEvent) => void): void;
 }
 
+export function closeWebViewSettings(bridge: WebViewMessagePort): void {
+  bridge.postMessage("close-settings");
+}
+
 interface BridgeResponse {
   id: string;
   ok: boolean;

@@ -79,6 +79,12 @@
   color: var(--sid-text-3) !important;
 }
 
+:where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_subjects_student)
+  .loading-icon-inline {
+  background-image: var(--sid-spinner-image) !important;
+  filter: none !important;
+}
+
 :where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_subjects_student) .grade_param_is_notify,
 :where(.page_grades_student, .page_dashboard_subjects, .page_users_summary, .page_subjects_student) .grade_param_is_absent:not(.grade_param_is_absent_excused) {
   color: var(--sid-danger) !important;
@@ -118,4 +124,3 @@
   background: var(--sid-warning-soft) !important;
   border-color: var(--sid-warning-border) !important;
 }
-

@@ -1,5 +1,6 @@
 import { mountSettingsPage } from "../../features/settings-page";
 import { createWebExtensionSettingsStore } from "../../platforms/webextension/settings-storage";
+import { returnToStuudium } from "../../platforms/webextension/open-settings";
 import {
   DEFAULT_SETTINGS,
   type ExtensionSettings,
@@ -48,6 +49,11 @@ const cleanup = mountSettingsPage({
   document,
   settingsStore,
   cacheTheme,
+  returnToStuudium: isLocalPreview
+    ? () => undefined
+    : () => {
+        void returnToStuudium();
+      },
 });
 
 window.addEventListener("pagehide", cleanup, { once: true });

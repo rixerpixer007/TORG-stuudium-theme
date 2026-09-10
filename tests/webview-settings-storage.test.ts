@@ -3,6 +3,7 @@
 import { describe, expect, it, vi } from "vitest";
 
 import {
+  closeWebViewSettings,
   createWebViewSettingsStore,
   type WebViewMessageEvent,
   type WebViewMessagePort,
@@ -44,6 +45,18 @@ class FakeWebViewBridge implements WebViewMessagePort {
 }
 
 describe("WebView settings storage adapter", () => {
+  it("requests that the native settings activity close", () => {
+    const bridge = {
+      postMessage: vi.fn(),
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+    } satisfies WebViewMessagePort;
+
+    closeWebViewSettings(bridge);
+
+    expect(bridge.postMessage).toHaveBeenCalledWith("close-settings");
+  });
+
   it("reads, writes, normalizes, and publishes preferences through the narrow bridge", async () => {
     const bridge = new FakeWebViewBridge();
     const store = createWebViewSettingsStore(bridge);

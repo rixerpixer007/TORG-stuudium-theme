@@ -33,19 +33,25 @@
   <body aria-busy="true">
     <header class="app-header">
       <div class="app-header__content">
-        <div class="app-identity">
-          <svg class="app-logo" viewBox="0 0 48 48" aria-hidden="true">
+        <button class="app-home" type="button" aria-label="Back to Stuudium">
+          <img
+            src="data:image/png;base64,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"
+            alt=""
+          />
+        </button>
+
+        <nav class="app-navigation" aria-label="Settings section">
+          <span class="app-navigation__current" aria-current="page">Theme settings</span>
+        </nav>
+
+        <div class="app-profile-logo" aria-hidden="true">
+          <svg viewBox="0 0 48 48">
             <rect x="1" y="1" width="46" height="46" rx="10" />
             <path d="M13 15h22v18H13z" />
             <path d="m16 18 8 7 8-7" />
             <circle cx="35" cy="14" r="4" />
           </svg>
-          <span class="app-name">TORG Stuudium Enhancement</span>
         </div>
-
-        <nav class="app-navigation" aria-label="Settings section">
-          <span class="app-navigation__current" aria-current="page">Theme settings</span>
-        </nav>
       </div>
     </header>
 
@@ -104,7 +110,7 @@
                 data-search-terms="intentional dark enhancement stuudium enabled disabled"
               >
                 <div class="setting-copy">
-                  <label for="enhancement-enabled">Intentional Dark</label>
+                  <label for="enhancement-enabled">Enable Custom Theme</label>
                   <p id="enhancement-enabled-description">
                     Use the dark Stuudium theme on supported TORG pages.
                   </p>

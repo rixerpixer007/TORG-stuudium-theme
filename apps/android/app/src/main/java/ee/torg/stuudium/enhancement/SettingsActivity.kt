@@ -137,6 +137,11 @@ class SettingsActivity : ComponentActivity() {
                 return@addWebMessageListener
             }
 
+            if (message.data == "close-settings") {
+                finish()
+                return@addWebMessageListener
+            }
+
             val response = handleSettingsRequest(message.data)
             replyProxy.postMessage(response.toString())
         }

@@ -235,16 +235,18 @@
     width: 100%;
   }
 
-  :where(.dashboard_recent_overview .section, .daily-summaries, .main-block-style, .courses_index_content > a.course) {
+  :where(
+    .dashboard_recent_overview .section,
+    .daily-summaries,
+    .main-block-style,
+    .courses_index_content > a.course,
+    .courses_index .primary-container > a.course
+  ) {
     border-radius: 9px !important;
   }
 
   .st-stuudium-navigation-2021-contents {
     padding-inline: 6px !important;
-  }
-
-  .page_tabs_dropdown_v2 .page_tabs_dropdown_segment {
-    grid-template-columns: 1fr;
   }
 
   .page_tabs .width_wrapper {

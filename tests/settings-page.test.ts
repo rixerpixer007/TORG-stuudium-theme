@@ -1,6 +1,6 @@
 // @vitest-environment happy-dom
 
-import { beforeEach, describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { mountSettingsPage } from "../src/features/settings-page";
 import type { ExtensionSettings, SettingsStore } from "../src/shared/settings";
@@ -29,6 +29,7 @@ describe("shared settings page", () => {
     document.documentElement.innerHTML = `
       <head><meta name="color-scheme" content="dark"></head>
       <body aria-busy="true">
+        <button class="app-home" type="button"></button>
         <button data-category="all" aria-pressed="true"></button>
         <button data-category="appearance" aria-pressed="false"></button>
         <input id="settings-search">
@@ -70,6 +71,20 @@ describe("shared settings page", () => {
     await Promise.resolve();
     expect(store.value.enhancementEnabled).toBe(false);
 
+    cleanup();
+  });
+
+  it("returns to Stuudium from the school-logo button", () => {
+    const returnToStuudium = vi.fn();
+    const cleanup = mountSettingsPage({
+      document,
+      settingsStore: createStore(),
+      returnToStuudium,
+    });
+
+    document.querySelector<HTMLButtonElement>(".app-home")?.click();
+
+    expect(returnToStuudium).toHaveBeenCalledOnce();
     cleanup();
   });
 });

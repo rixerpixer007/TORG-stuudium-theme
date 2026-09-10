@@ -1,5 +1,6 @@
 import { mountSettingsPage } from "../../features/settings-page";
 import {
+  closeWebViewSettings,
   createWebViewSettingsStore,
   type WebViewMessagePort,
 } from "../../platforms/webview/settings-storage";
@@ -17,6 +18,9 @@ if (bridge === undefined) {
 const cleanup = mountSettingsPage({
   document,
   settingsStore: createWebViewSettingsStore(bridge),
+  returnToStuudium: () => {
+    closeWebViewSettings(bridge);
+  },
 });
 
 window.addEventListener("pagehide", cleanup, { once: true });

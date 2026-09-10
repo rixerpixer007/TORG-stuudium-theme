@@ -8,9 +8,11 @@ export interface SettingsPageDependencies {
   document: Document;
   settingsStore: SettingsStore;
   cacheTheme?: (themeId: ThemeId) => void;
+  returnToStuudium?: () => void;
 }
 
 interface SettingsPageElements {
+  homeButton: HTMLButtonElement;
   enabledInput: HTMLInputElement;
   status: HTMLElement;
   searchInput: HTMLInputElement;
@@ -22,6 +24,7 @@ interface SettingsPageElements {
 }
 
 function queryElements(document: Document): SettingsPageElements {
+  const homeButton = document.querySelector<HTMLButtonElement>(".app-home");
   const enabledInput = document.querySelector<HTMLInputElement>("#enhancement-enabled");
   const status = document.querySelector<HTMLElement>("#status");
   const searchInput = document.querySelector<HTMLInputElement>("#settings-search");
@@ -36,6 +39,7 @@ function queryElements(document: Document): SettingsPageElements {
   const colorSchemeMeta = document.querySelector<HTMLMetaElement>('meta[name="color-scheme"]');
 
   if (
+    homeButton === null ||
     enabledInput === null ||
     status === null ||
     searchInput === null ||
@@ -49,6 +53,7 @@ function queryElements(document: Document): SettingsPageElements {
   }
 
   return {
+    homeButton,
     enabledInput,
     status,
     searchInput,
@@ -64,6 +69,7 @@ export function mountSettingsPage({
   document,
   settingsStore,
   cacheTheme = () => undefined,
+  returnToStuudium = () => undefined,
 }: SettingsPageDependencies): () => void {
   const elements = queryElements(document);
   let activeCategory = "all";
@@ -200,9 +206,7 @@ export function mountSettingsPage({
       applySettingsTheme(settings.theme.themeId);
       cacheTheme(settings.theme.themeId);
       setSettingsControlsDisabled(false);
-      setStatus(
-        settings.enhancementEnabled ? "Intentional Dark is on." : "Intentional Dark is off.",
-      );
+      setStatus(settings.enhancementEnabled ? "Custom theme is on." : "Custom theme is off.");
     } catch (error) {
       if (cleanedUp) return;
       console.error("Unable to read enhancement settings", error);
@@ -227,9 +231,7 @@ export function mountSettingsPage({
         enhancementEnabled: elements.enabledInput.checked,
       };
       await settingsStore.set(currentSettings);
-      setStatus(
-        elements.enabledInput.checked ? "Intentional Dark is on." : "Intentional Dark is off.",
-      );
+      setStatus(elements.enabledInput.checked ? "Custom theme is on." : "Custom theme is off.");
     } catch (error) {
       console.error("Unable to save enhancement settings", error);
       currentSettings = {
@@ -282,6 +284,9 @@ export function mountSettingsPage({
   const handleEnabledChange = (): void => {
     void saveEnabledPreference();
   };
+  const handleHomeClick = (): void => {
+    returnToStuudium();
+  };
   const handleSearchInput = (): void => {
     filterSettings();
   };
@@ -301,6 +306,7 @@ export function mountSettingsPage({
     return { control, handler };
   });
 
+  elements.homeButton.addEventListener("click", handleHomeClick);
   elements.enabledInput.addEventListener("change", handleEnabledChange);
   elements.searchInput.addEventListener("input", handleSearchInput);
   renderThemeOptions();
@@ -310,6 +316,7 @@ export function mountSettingsPage({
   return () => {
     if (cleanedUp) return;
     cleanedUp = true;
+    elements.homeButton.removeEventListener("click", handleHomeClick);
     elements.enabledInput.removeEventListener("change", handleEnabledChange);
     elements.searchInput.removeEventListener("input", handleSearchInput);
     categoryHandlers.forEach(({ control, handler }) => {

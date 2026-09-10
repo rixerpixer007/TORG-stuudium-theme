@@ -62,39 +62,52 @@ body {
   margin-inline: auto;
 }
 
-.app-identity {
-  display: flex;
-  min-width: 0;
-  align-items: center;
-  gap: 10px;
-  margin-inline-start: 10px;
-}
-
-.app-logo {
+.app-home {
+  display: block;
   width: 40px;
   height: 40px;
   flex: 0 0 auto;
+  padding: 0;
+  margin-inline-start: 10px;
+  background: transparent;
+  border: 0;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.app-home img,
+.app-profile-logo,
+.app-profile-logo svg {
+  display: block;
+  width: 40px;
+  height: 40px;
+  border-radius: 3px;
+}
+
+.app-home:focus-visible {
+  outline: 2px solid var(--sid-accent);
+  outline-offset: 3px;
+  box-shadow: var(--sid-focus);
+}
+
+.app-profile-logo {
+  flex: 0 0 auto;
+  margin-inline: auto 10px;
+  overflow: hidden;
+}
+
+.app-profile-logo svg {
   color: var(--sid-accent);
   fill: var(--sid-surface-3);
   stroke: currentColor;
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 2;
-  border-radius: var(--sid-radius-xs);
 }
 
-.app-logo circle {
+.app-profile-logo circle {
   fill: currentColor;
   stroke: none;
-}
-
-.app-name {
-  overflow: hidden;
-  color: var(--sid-text);
-  font-size: 0.95rem;
-  font-weight: 650;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .app-navigation {
@@ -259,7 +272,6 @@ h2 {
 
 .settings-card-list {
   display: grid;
-  gap: 0.75rem;
 }
 
 .theme-picker {
@@ -412,14 +424,15 @@ h2 {
   justify-content: space-between;
   gap: 1.5rem;
   min-height: 4.5rem;
-  padding: 0.85rem 1rem;
-  background: var(--sid-surface-2);
-  border: 1px solid var(--sid-border);
-  border-radius: var(--sid-radius-xs);
+  padding: 0 0 1.5rem;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--sid-border);
 }
 
 .setting-copy {
   min-width: 0;
+  flex: 1 1 auto;
 }
 
 .setting-copy label {
@@ -429,7 +442,6 @@ h2 {
 }
 
 .setting-copy p {
-  max-width: 60ch;
   margin: 0.25rem 0 0;
   color: var(--sid-text-3);
   font-size: 0.9rem;
@@ -503,7 +515,6 @@ h2 {
 }
 
 .privacy p {
-  max-width: 70ch;
   margin: 0;
   color: var(--sid-text-3);
   font-size: 0.875rem;
@@ -536,32 +547,6 @@ h2 {
   .setting-row {
     align-items: flex-start;
     gap: 1rem;
-    padding-inline: 0.85rem;
-  }
-}
-
-@media (max-width: 44rem) {
-  .app-header {
-    height: auto;
-  }
-
-  .app-header__content {
-    display: grid;
-    width: 100%;
-    height: auto;
-    grid-template-columns: minmax(0, 1fr);
-    justify-items: center;
-    gap: 0.65rem;
-    padding-block: 0.75rem;
-  }
-
-  .app-identity {
-    justify-self: start;
-  }
-
-  .app-navigation {
-    position: static;
-    transform: none;
   }
 }
 

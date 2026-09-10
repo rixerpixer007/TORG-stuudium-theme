@@ -1,9 +1,12 @@
 import { browser } from "wxt/browser";
 
-import { isOpenSettingsMessage } from "../platforms/webextension/open-settings";
+import {
+  isOpenSettingsMessage,
+  isReturnToStuudiumMessage,
+} from "../platforms/webextension/open-settings";
 import { getEarlyActivationScript } from "../platforms/webextension/early-activation";
 import { createWebExtensionSettingsStore } from "../platforms/webextension/settings-storage";
-import { STUUDIUM_MATCHES } from "../shared/sites";
+import { isSupportedStuudiumUrl, STUUDIUM_MATCHES, STUUDIUM_ORIGINS } from "../shared/sites";
 import type { ExtensionSettings } from "../shared/settings";
 
 const ACTIVATION_SCRIPT_ID = "sid-early-activation";
@@ -76,6 +79,26 @@ async function openSettingsTab(openerTabId?: number, windowId?: number): Promise
   await browser.windows.update(settingsTab.windowId, { focused: true });
 }
 
+async function returnToStuudium(settingsTab: Browser.tabs.Tab | undefined): Promise<void> {
+  if (settingsTab?.id === undefined) return;
+
+  if (settingsTab.openerTabId !== undefined) {
+    try {
+      const openerTab = await browser.tabs.get(settingsTab.openerTabId);
+      if (openerTab.id !== undefined && isSupportedStuudiumUrl(openerTab.url ?? "")) {
+        await browser.tabs.update(openerTab.id, { active: true });
+        await browser.windows.update(openerTab.windowId, { focused: true });
+        await browser.tabs.remove(settingsTab.id);
+        return;
+      }
+    } catch {
+      // Fall back to loading the supported school origin in the settings tab.
+    }
+  }
+
+  await browser.tabs.update(settingsTab.id, { url: STUUDIUM_ORIGINS[0] });
+}
+
 async function reconcileEarlyActivation(settings: ExtensionSettings): Promise<void> {
   const registered = await browser.scripting.getRegisteredContentScripts({
     ids: [ACTIVATION_SCRIPT_ID],
@@ -142,11 +165,15 @@ export default defineBackground(() => {
   });
 
   browser.runtime.onMessage.addListener((message: unknown, sender) => {
-    if (sender.id !== browser.runtime.id || !isOpenSettingsMessage(message)) return;
-    runSafely(
-      "Unable to open extension settings",
-      openSettingsTab(sender.tab?.id, sender.tab?.windowId),
-    );
+    if (sender.id !== browser.runtime.id) return;
+    if (isOpenSettingsMessage(message)) {
+      runSafely(
+        "Unable to open extension settings",
+        openSettingsTab(sender.tab?.id, sender.tab?.windowId),
+      );
+    } else if (isReturnToStuudiumMessage(message)) {
+      runSafely("Unable to return to Stuudium", returnToStuudium(sender.tab));
+    }
   });
 
   settingsStore.subscribe((settings) => {

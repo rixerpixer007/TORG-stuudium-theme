@@ -28,7 +28,6 @@
 
 .page_tabs_dropdown_v2 {
   z-index: calc(var(--sid-z-tabs) + 20) !important;
-  padding: 14px;
   color: var(--sid-text-2) !important;
   background: var(--sid-surface-2) !important;
   border: 1px solid var(--sid-border-strong) !important;
@@ -37,23 +36,10 @@
 }
 
 .page_tabs_dropdown_v2 .page_tabs_dropdown_segment {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-  gap: 10px;
-  margin: 0 0 12px;
-  padding: 0 0 12px;
   border-color: var(--sid-border) !important;
 }
 
-.page_tabs_dropdown_v2 .page_tabs_dropdown_segment:last-child {
-  margin-bottom: 0;
-  padding-bottom: 0;
-}
-
 .page_tabs_dropdown_v2 a {
-  min-height: 44px;
-  box-sizing: border-box;
-  padding: 10px 12px;
   color: var(--sid-text-2) !important;
   background: var(--sid-surface) !important;
   border: 1px solid var(--sid-border) !important;
