@@ -239,8 +239,8 @@ Development can use free personal-device signing. Public distribution waits for 
 - Check Android 8 with a maintained System WebView before preserving that public
   minimum; raise to Android 10 instead of building a disproportionate fallback.
 - Establish signed GitHub releases and the update flow only after the prototype
-  is accepted. **Native notification flow and local release signing are
-  implemented; first GitHub prerelease and end-to-end update verification are
+  is accepted. **Native notification flow, release signing, and the first
+  GitHub prerelease are implemented; end-to-end update verification is
   pending.**
 
 ### Phase 5: iOS preparation and release

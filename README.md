@@ -47,7 +47,7 @@ Täpsem selgitus on [privaatsuspoliitikas](docs/PRIVACY.md).
 
 ## Paigaldamine
 
-Avalikud beeta-allalaadimised lisatakse pärast tootmispakettide, allkirjastamise ja väljalaskekontrollide lõpetamist.
+Androidi avaliku eelväljalaske leiab [GitHub Releasesi lehelt](https://github.com/rixerpixer007/TORG-stuudium-theme/releases/tag/android-v0.1.0-beta). Laadi alla APK-fail ning kinnita selle paigaldamine Androidis. Kuna tegemist on eelväljalaskega, jätkub uuendamise ja eri Androidi versioonide kontrollimine.
 
 - Brauserilaienduse kohaliku arenduskeskkonna juhised: [EXTENSION_DEVELOPMENT.md](docs/EXTENSION_DEVELOPMENT.md)
 - Androidi ehitamise ja testimise juhised: [MOBILE_DEVELOPMENT.md](docs/MOBILE_DEVELOPMENT.md)
