@@ -14,6 +14,7 @@
     "check:mobile:web": "npm run check:theme && node scripts/build-mobile-assets.mjs --check",
     "validate:mobile:web": "node scripts/validate-mobile-assets.mjs",
     "build:android:debug": "npm run build:mobile:web && node scripts/run-android-gradle.mjs :app:assembleDebug",
+    "build:android:release": "npm run build:mobile:web && npm run validate:mobile:web && node scripts/run-android-gradle.mjs :app:assembleRelease",
     "test:android": "npm run build:mobile:web && node scripts/run-android-gradle.mjs :app:testDebugUnitTest",
     "validate:android": "npm run build:mobile:web && npm run validate:mobile:web && node scripts/run-android-gradle.mjs :app:lintDebug :app:testDebugUnitTest :app:assembleDebug",
     "build": "node scripts/build-theme.mjs && wxt build -b chrome",

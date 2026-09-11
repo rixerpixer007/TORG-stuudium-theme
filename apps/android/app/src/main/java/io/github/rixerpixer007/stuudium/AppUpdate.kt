@@ -36,7 +36,9 @@ class AppUpdatePreferences(context: Context) {
 
 object AppUpdateClient {
     private val manifestUri =
-        URI("https://rixerpixer007.github.io/TORG-stuudium-theme/updates/android.json")
+        URI(
+            "https://raw.githubusercontent.com/rixerpixer007/TORG-stuudium-theme/main/release/android.json",
+        )
 
     fun fetch(): AppUpdate? {
         val connection = manifestUri.toURL().openConnection() as HttpsURLConnection

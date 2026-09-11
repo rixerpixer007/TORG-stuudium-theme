@@ -205,6 +205,31 @@ npm run validate:android
 It regenerates and validates the shared mobile assets, runs Android lint and
 the Kotlin unit tests, and assembles the debug APK.
 
+### Build a signed release APK
+
+Keep the permanent keystore outside the repository. Supply its path, alias, and
+passwords only in the shell that performs the build:
+
+```sh
+export SINU_STUUDIUM_KEYSTORE_PATH="/absolute/path/to/sinu-stuudium-release.p12"
+export SINU_STUUDIUM_KEY_ALIAS="sinu-stuudium-release"
+export SINU_STUUDIUM_KEYSTORE_PASSWORD="..."
+export SINU_STUUDIUM_KEY_PASSWORD="..."
+npm run build:android:release
+unset SINU_STUUDIUM_KEYSTORE_PASSWORD SINU_STUUDIUM_KEY_PASSWORD
+```
+
+Do not place literal passwords in a committed script, Gradle file, shell-history
+example, issue, or build log. The release command fails before assembly when the
+required signing values are absent. Its output is:
+
+```text
+apps/android/app/build/outputs/apk/release/app-release.apk
+```
+
+The first published signing certificate is permanent for direct APK updates.
+Back up its keystore and credentials separately before publishing.
+
 ## 7. Open the existing project in Android Studio
 
 1. Launch Android Studio.
@@ -366,16 +391,21 @@ GitHub Releases page in the system browser; the app does not download or install
 packages itself and therefore does not request package-install or storage
 permissions.
 
-The metadata source is `docs/updates/android.json`, served at:
+The metadata source is the small machine-readable `release/android.json` file,
+served directly from the public repository at:
 
 ```text
-https://rixerpixer007.github.io/TORG-stuudium-theme/updates/android.json
+https://raw.githubusercontent.com/rixerpixer007/TORG-stuudium-theme/main/release/android.json
 ```
 
-Before testing this outside the unit suite, configure GitHub Pages to deploy the
-`docs/` directory from the `main` branch. Until the first signed public release,
-the checked-in file deliberately contains `"published": false`, so installed
-debug builds do not advertise a nonexistent APK.
+This does not require GitHub Pages and does not publish the development
+documentation as a website. Until the first signed public release, the
+checked-in file deliberately contains `"published": false`, so installed builds
+do not advertise a nonexistent APK.
+
+Android betas may be marked as GitHub prereleases. The updater reads this
+explicit metadata rather than GitHub's `releases/latest` endpoint, which omits
+prereleases.
 
 For a real release, publish metadata in this shape:
 
