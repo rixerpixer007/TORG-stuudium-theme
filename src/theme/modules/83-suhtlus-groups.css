@@ -195,6 +195,7 @@
 
 .suhtlus .post-in-list.post-is-favorite {
   border-color: var(--sid-warning) !important;
+  border-image: none !important;
 }
 
 .suhtlus .post-in-list.post-is-favorite::after {

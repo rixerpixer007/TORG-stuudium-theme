@@ -15,6 +15,37 @@
   background: var(--sid-border) !important;
 }
 
+.absences_popover .absences li {
+  border-color: var(--sid-border) !important;
+}
+
+.absences_popover .absences .bl-abs-label {
+  color: var(--sid-text-2) !important;
+}
+
+.absences_popover .absences .custom-checkbox-v2 + em {
+  box-sizing: border-box !important;
+  background-color: var(--sid-danger-soft) !important;
+  background-image: none !important;
+  border: 1px solid var(--sid-danger) !important;
+  border-radius: var(--sid-radius-xs) !important;
+  box-shadow: none !important;
+}
+
+.absences_popover .absences .custom-checkbox-v2:checked + em {
+  background-color: var(--sid-control) !important;
+  background-image: var(--sid-checkmark-image) !important;
+  border-color: var(--sid-accent) !important;
+}
+
+.absences_popover .absences .excused .excuse {
+  color: var(--sid-accent) !important;
+}
+
+.absences_popover .absences .excused .excuse.excuse_rejected {
+  color: var(--sid-danger) !important;
+}
+
 .absences_popover .icon.close {
   filter: var(--sid-icon-filter-light) !important;
   opacity: 0.7 !important;

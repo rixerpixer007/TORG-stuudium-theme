@@ -79,6 +79,19 @@
   border-bottom-color: var(--sid-border-strong) !important;
 }
 
+#course-home .node_children .add_to_folder {
+  background: transparent !important;
+  border-top-color: var(--sid-border) !important;
+}
+
+#course-home .node_children .add_to_folder:hover {
+  background: var(--sid-surface-3) !important;
+}
+
+#course-home .node_children .add_to_folder .is_empty_indicator {
+  color: var(--sid-text-3) !important;
+}
+
 :where(.courses_index_content, .courses_index .primary-container) > a.course {
   display: block;
   box-sizing: border-box;

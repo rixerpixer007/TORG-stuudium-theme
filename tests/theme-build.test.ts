@@ -74,6 +74,89 @@ describe("generated theme", () => {
     expect(color?.important).toBe(true);
   });
 
+  it("keeps expanded dark-theme coverage for live Stuudium component variants", () => {
+    const css = fs.readFileSync(path.join(projectRoot, "src/generated/theme.css"), "utf8");
+    const favoriteRule = findRule(css, ".post-in-list.post-is-favorite");
+    const emptyFolderRule = findRule(css, ".add_to_folder .is_empty_indicator");
+    const responseLinkRule = findRule(css, ".response_node_inner .node_time em");
+    const responseMetaRule = findRule(css, ".single_node_is_response .node-meta");
+    const unexcusedAbsenceRule = findRule(css, ".absences .custom-checkbox-v2 + em");
+    const excusedAbsenceRule = findRule(css, ".absences .custom-checkbox-v2:checked + em");
+    const rejectedExcuseRule = findRule(css, ".excuse.excuse_rejected");
+    const lessonBordersRule = findRule(css, ".student_subject_grades :where(tr, th, td)");
+
+    expect(favoriteRule?.nodes).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ prop: "border-image", value: "none", important: true }),
+      ]),
+    );
+    expect(emptyFolderRule?.nodes).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ prop: "color", value: "var(--sid-text-3)", important: true }),
+      ]),
+    );
+    expect(responseLinkRule?.nodes).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ prop: "color", value: "inherit", important: true }),
+      ]),
+    );
+    expect(responseMetaRule?.nodes).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          prop: "background",
+          value: "transparent",
+          important: true,
+        }),
+      ]),
+    );
+    expect(unexcusedAbsenceRule?.nodes).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          prop: "background-color",
+          value: "var(--sid-danger-soft)",
+          important: true,
+        }),
+        expect.objectContaining({
+          prop: "border",
+          value: "1px solid var(--sid-danger)",
+          important: true,
+        }),
+      ]),
+    );
+    expect(excusedAbsenceRule?.nodes).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          prop: "background-image",
+          value: "var(--sid-checkmark-image)",
+          important: true,
+        }),
+        expect.objectContaining({
+          prop: "border-color",
+          value: "var(--sid-accent)",
+          important: true,
+        }),
+      ]),
+    );
+    expect(rejectedExcuseRule?.nodes).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          prop: "color",
+          value: "var(--sid-danger)",
+          important: true,
+        }),
+      ]),
+    );
+    expect(lessonBordersRule?.nodes).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          prop: "border-color",
+          value: "var(--sid-border)",
+          important: true,
+        }),
+      ]),
+    );
+  });
+
   it("leaves dashboard timeline heading box geometry to Stuudium", () => {
     const css = fs.readFileSync(path.join(projectRoot, "src/generated/theme.css"), "utf8");
     let headingColorRule: postcss.Rule | undefined;

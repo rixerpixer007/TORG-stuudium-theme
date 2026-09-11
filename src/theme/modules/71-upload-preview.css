@@ -62,6 +62,10 @@
   color: var(--sid-accent-strong) !important;
 }
 
+.content-container .response_node_inner .node_time em {
+  color: inherit !important;
+}
+
 .content-container .response_node_inner :where(.node_file, .node_file_head) {
   color: var(--sid-accent) !important;
   background: transparent !important;
@@ -83,3 +87,8 @@
   box-shadow: none !important;
 }
 
+.content-container .single_node_is_response .node-meta {
+  color: var(--sid-text-2) !important;
+  background: transparent !important;
+  border-color: var(--sid-border) !important;
+}

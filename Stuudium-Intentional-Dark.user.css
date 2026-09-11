@@ -1661,6 +1661,37 @@
     background: var(--sid-border) !important;
   }
 
+  .absences_popover .absences li {
+    border-color: var(--sid-border) !important;
+  }
+
+  .absences_popover .absences .bl-abs-label {
+    color: var(--sid-text-2) !important;
+  }
+
+  .absences_popover .absences .custom-checkbox-v2 + em {
+    box-sizing: border-box !important;
+    background-color: var(--sid-danger-soft) !important;
+    background-image: none !important;
+    border: 1px solid var(--sid-danger) !important;
+    border-radius: var(--sid-radius-xs) !important;
+    box-shadow: none !important;
+  }
+
+  .absences_popover .absences .custom-checkbox-v2:checked + em {
+    background-color: var(--sid-control) !important;
+    background-image: var(--sid-checkmark-image) !important;
+    border-color: var(--sid-accent) !important;
+  }
+
+  .absences_popover .absences .excused .excuse {
+    color: var(--sid-accent) !important;
+  }
+
+  .absences_popover .absences .excused .excuse.excuse_rejected {
+    color: var(--sid-danger) !important;
+  }
+
   .absences_popover .icon.close {
     filter: var(--sid-icon-filter-light) !important;
     opacity: 0.7 !important;
@@ -2387,7 +2418,7 @@
     background: transparent !important;
   }
 
-  .page_subjects_student .student_subject_grades :where(th, td) {
+  .page_subjects_student .student_subject_grades :where(tr, th, td) {
     border-color: var(--sid-border) !important;
   }
 
@@ -2625,6 +2656,19 @@
     border-bottom-color: var(--sid-border-strong) !important;
   }
 
+  #course-home .node_children .add_to_folder {
+    background: transparent !important;
+    border-top-color: var(--sid-border) !important;
+  }
+
+  #course-home .node_children .add_to_folder:hover {
+    background: var(--sid-surface-3) !important;
+  }
+
+  #course-home .node_children .add_to_folder .is_empty_indicator {
+    color: var(--sid-text-3) !important;
+  }
+
   :where(.courses_index_content, .courses_index .primary-container) > a.course {
     display: block;
     box-sizing: border-box;
@@ -2786,6 +2830,10 @@
     color: var(--sid-accent-strong) !important;
   }
 
+  .content-container .response_node_inner .node_time em {
+    color: inherit !important;
+  }
+
   .content-container .response_node_inner :where(.node_file, .node_file_head) {
     color: var(--sid-accent) !important;
     background: transparent !important;
@@ -2807,6 +2855,11 @@
     box-shadow: none !important;
   }
 
+  .content-container .single_node_is_response .node-meta {
+    color: var(--sid-text-2) !important;
+    background: transparent !important;
+    border-color: var(--sid-border) !important;
+  }
   /* Suhtlus */
   :where(.header-wrapper, .suhtlus-nav) {
     background: transparent !important;
@@ -3195,6 +3248,7 @@
 
   .suhtlus .post-in-list.post-is-favorite {
     border-color: var(--sid-warning) !important;
+    border-image: none !important;
   }
 
   .suhtlus .post-in-list.post-is-favorite::after {
