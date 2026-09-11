@@ -8,7 +8,7 @@
     <string name="webview_update_title">WebView vajab uuendamist</string>
     <string name="webview_update_body">Sinu Stuudium vajab ajakohast Android System WebView’d või Google Chrome’i, et kujundus enne Stuudiumi kuvamist turvaliselt rakendada. Uuenda seda Google Plays ja ava rakendus uuesti.</string>
     <string name="app_update_title">Uus versioon on saadaval</string>
-    <string name="app_update_body">Sinu Stuudiumi versioon %1$s on saadaval. Uuenduse allalaadimiseks ava GitHubi väljalaske leht.</string>
+    <string name="app_update_body">Sinu Stuudiumi versioon %1$s on saadaval. Uuenduse allalaadimiseks ava GitHubi allalaadimiste leht.</string>
     <string name="view_update">Vaata uuendust</string>
     <string name="later">Hiljem</string>
     <string name="close">Sulge</string>
