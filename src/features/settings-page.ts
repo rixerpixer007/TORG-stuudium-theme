@@ -12,7 +12,7 @@ export interface SettingsPageDependencies {
 }
 
 interface SettingsPageElements {
-  homeButton: HTMLButtonElement;
+  returnControls: HTMLButtonElement[];
   enabledInput: HTMLInputElement;
   status: HTMLElement;
   searchInput: HTMLInputElement;
@@ -24,7 +24,9 @@ interface SettingsPageElements {
 }
 
 function queryElements(document: Document): SettingsPageElements {
-  const homeButton = document.querySelector<HTMLButtonElement>(".app-home");
+  const returnControls = Array.from(
+    document.querySelectorAll<HTMLButtonElement>("[data-return-to-stuudium]"),
+  );
   const enabledInput = document.querySelector<HTMLInputElement>("#enhancement-enabled");
   const status = document.querySelector<HTMLElement>("#status");
   const searchInput = document.querySelector<HTMLInputElement>("#settings-search");
@@ -39,7 +41,7 @@ function queryElements(document: Document): SettingsPageElements {
   const colorSchemeMeta = document.querySelector<HTMLMetaElement>('meta[name="color-scheme"]');
 
   if (
-    homeButton === null ||
+    returnControls.length === 0 ||
     enabledInput === null ||
     status === null ||
     searchInput === null ||
@@ -53,7 +55,7 @@ function queryElements(document: Document): SettingsPageElements {
   }
 
   return {
-    homeButton,
+    returnControls,
     enabledInput,
     status,
     searchInput,
@@ -306,7 +308,9 @@ export function mountSettingsPage({
     return { control, handler };
   });
 
-  elements.homeButton.addEventListener("click", handleHomeClick);
+  elements.returnControls.forEach((control) => {
+    control.addEventListener("click", handleHomeClick);
+  });
   elements.enabledInput.addEventListener("change", handleEnabledChange);
   elements.searchInput.addEventListener("input", handleSearchInput);
   renderThemeOptions();
@@ -316,7 +320,9 @@ export function mountSettingsPage({
   return () => {
     if (cleanedUp) return;
     cleanedUp = true;
-    elements.homeButton.removeEventListener("click", handleHomeClick);
+    elements.returnControls.forEach((control) => {
+      control.removeEventListener("click", handleHomeClick);
+    });
     elements.enabledInput.removeEventListener("change", handleEnabledChange);
     elements.searchInput.removeEventListener("input", handleSearchInput);
     categoryHandlers.forEach(({ control, handler }) => {

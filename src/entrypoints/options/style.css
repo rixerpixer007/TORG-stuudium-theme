@@ -136,6 +136,58 @@ body {
   padding-block-end: 3rem;
 }
 
+.settings-return-row {
+  padding: 14px 3px 0;
+}
+
+.settings-return {
+  display: inline-flex;
+  min-height: 30px;
+  align-items: center;
+  gap: 5px;
+  padding: 4px;
+  margin: 0;
+  color: var(--sid-text-3);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--sid-radius-sm);
+  font:
+    400 15px/19.5px "Stuudium Sans",
+    Inter,
+    system-ui,
+    -apple-system,
+    "system-ui",
+    "Segoe UI",
+    sans-serif;
+  cursor: pointer;
+}
+
+.settings-return svg {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+  fill: none;
+  stroke: var(--sid-accent-strong);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.75;
+}
+
+.settings-return:hover {
+  color: var(--sid-text);
+  background: var(--sid-surface);
+}
+
+.settings-return:focus-visible {
+  outline: 2px solid var(--sid-accent);
+  outline-offset: 2px;
+  box-shadow: var(--sid-focus);
+}
+
+.settings-return:active {
+  color: var(--sid-accent-strong);
+}
+
 .settings-categories {
   display: flex;
   height: 40px;
@@ -526,6 +578,10 @@ h2 {
 }
 
 @media (max-width: 34rem) {
+  .settings-return-row {
+    padding-inline: 10px;
+  }
+
   .settings-section {
     padding-inline: 1rem;
   }

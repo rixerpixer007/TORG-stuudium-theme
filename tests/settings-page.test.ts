@@ -29,7 +29,8 @@ describe("shared settings page", () => {
     document.documentElement.innerHTML = `
       <head><meta name="color-scheme" content="dark"></head>
       <body aria-busy="true">
-        <button class="app-home" type="button"></button>
+        <button class="app-home" type="button" data-return-to-stuudium></button>
+        <button class="settings-return" type="button" data-return-to-stuudium></button>
         <button data-category="all" aria-pressed="true"></button>
         <button data-category="appearance" aria-pressed="false"></button>
         <input id="settings-search">
@@ -74,7 +75,7 @@ describe("shared settings page", () => {
     cleanup();
   });
 
-  it("returns to Stuudium from the school-logo button", () => {
+  it("returns to Stuudium from both back controls", () => {
     const returnToStuudium = vi.fn();
     const cleanup = mountSettingsPage({
       document,
@@ -83,8 +84,9 @@ describe("shared settings page", () => {
     });
 
     document.querySelector<HTMLButtonElement>(".app-home")?.click();
+    document.querySelector<HTMLButtonElement>(".settings-return")?.click();
 
-    expect(returnToStuudium).toHaveBeenCalledOnce();
+    expect(returnToStuudium).toHaveBeenCalledTimes(2);
     cleanup();
   });
 });
