@@ -1,6 +1,7 @@
 import { mountSettingsPage } from "../../features/settings-page";
 import {
   closeWebViewSettings,
+  createWebViewAppUpdates,
   createWebViewSettingsStore,
   type WebViewMessagePort,
 } from "../../platforms/webview/settings-storage";
@@ -19,6 +20,7 @@ if (bridge === undefined) {
 const cleanup = mountSettingsPage({
   document,
   settingsStore: createWebViewSettingsStore(bridge),
+  appUpdates: createWebViewAppUpdates(bridge),
   returnToStuudium: () => {
     closeWebViewSettings(bridge);
   },

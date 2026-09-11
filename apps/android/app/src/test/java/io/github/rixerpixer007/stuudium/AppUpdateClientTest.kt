@@ -49,6 +49,22 @@ class AppUpdateClientTest {
         assertNull(validCandidate(sha256 = "not-a-checksum"))
     }
 
+    @Test
+    fun evaluatesPublishedAndUnpublishedManifestsForManualChecks() {
+        val update = requireNotNull(validCandidate(versionCode = 2L))
+        val available = AppUpdateClient.evaluateCandidate(1, true, update, 1L)
+        val installed = AppUpdateClient.evaluateCandidate(1, true, update, 2L)
+        val unpublished =
+            AppUpdateClient.evaluateCandidate(1, false, null, 1L)
+        val invalid = AppUpdateClient.evaluateCandidate(2, true, update, 1L)
+
+        assertEquals(AppUpdateCheckStatus.UPDATE_AVAILABLE, available.status)
+        assertEquals(2L, available.update?.versionCode)
+        assertEquals(AppUpdateCheckStatus.UP_TO_DATE, installed.status)
+        assertEquals(AppUpdateCheckStatus.UP_TO_DATE, unpublished.status)
+        assertEquals(AppUpdateCheckStatus.UNAVAILABLE, invalid.status)
+    }
+
     private fun validCandidate(
         schemaVersion: Int = 1,
         versionCode: Long = 2L,

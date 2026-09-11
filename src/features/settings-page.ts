@@ -1,4 +1,5 @@
 import { applyTheme } from "./theme-selection";
+import type { AppUpdates } from "../shared/app-updates";
 import { DEFAULT_SETTINGS, type ExtensionSettings, type SettingsStore } from "../shared/settings";
 import { getTheme, THEMES, type ThemeId } from "../shared/themes";
 
@@ -9,6 +10,7 @@ export interface SettingsPageDependencies {
   settingsStore: SettingsStore;
   cacheTheme?: (themeId: ThemeId) => void;
   returnToStuudium?: () => void;
+  appUpdates?: AppUpdates;
 }
 
 interface SettingsPageElements {
@@ -21,6 +23,9 @@ interface SettingsPageElements {
   emptyState: HTMLElement;
   themeOptions: HTMLElement;
   colorSchemeMeta: HTMLMetaElement;
+  appVersion: HTMLElement;
+  updateCheckButton: HTMLButtonElement;
+  updateCheckStatus: HTMLElement;
 }
 
 function queryElements(document: Document): SettingsPageElements {
@@ -39,6 +44,9 @@ function queryElements(document: Document): SettingsPageElements {
   const emptyState = document.querySelector<HTMLElement>(".settings-empty");
   const themeOptions = document.querySelector<HTMLElement>("#theme-options");
   const colorSchemeMeta = document.querySelector<HTMLMetaElement>('meta[name="color-scheme"]');
+  const appVersion = document.querySelector<HTMLElement>("#app-version");
+  const updateCheckButton = document.querySelector<HTMLButtonElement>("#check-for-updates");
+  const updateCheckStatus = document.querySelector<HTMLElement>("#update-check-status");
 
   if (
     returnControls.length === 0 ||
@@ -49,7 +57,10 @@ function queryElements(document: Document): SettingsPageElements {
     settingsSections.length === 0 ||
     emptyState === null ||
     themeOptions === null ||
-    colorSchemeMeta === null
+    colorSchemeMeta === null ||
+    appVersion === null ||
+    updateCheckButton === null ||
+    updateCheckStatus === null
   ) {
     throw new Error("Settings page controls are missing");
   }
@@ -64,6 +75,9 @@ function queryElements(document: Document): SettingsPageElements {
     emptyState,
     themeOptions,
     colorSchemeMeta,
+    appVersion,
+    updateCheckButton,
+    updateCheckStatus,
   };
 }
 
@@ -72,6 +86,7 @@ export function mountSettingsPage({
   settingsStore,
   cacheTheme = () => undefined,
   returnToStuudium = () => undefined,
+  appUpdates,
 }: SettingsPageDependencies): () => void {
   const elements = queryElements(document);
   let activeCategory = "all";
@@ -222,6 +237,47 @@ export function mountSettingsPage({
     }
   }
 
+  async function initializeAppUpdates(): Promise<void> {
+    if (appUpdates === undefined) {
+      elements.appVersion.textContent = "0.0.0";
+      elements.updateCheckButton.disabled = true;
+      return;
+    }
+
+    try {
+      const version = await appUpdates.getCurrentVersion();
+      if (!cleanedUp) elements.appVersion.textContent = version;
+    } catch (error) {
+      console.error("Unable to read the installed app version", error);
+      if (!cleanedUp) elements.appVersion.textContent = "Unknown";
+    }
+  }
+
+  async function checkForUpdates(): Promise<void> {
+    if (appUpdates === undefined) return;
+
+    elements.updateCheckButton.disabled = true;
+    elements.updateCheckStatus.textContent = "Checking for updates…";
+
+    try {
+      const result = await appUpdates.checkForUpdates();
+      if (cleanedUp) return;
+      elements.updateCheckStatus.textContent =
+        result === "update-available"
+          ? "A new version is available."
+          : result === "up-to-date"
+            ? "Sinu Stuudium is up to date."
+            : "Could not check for updates. Try again later.";
+    } catch (error) {
+      console.error("Unable to check for app updates", error);
+      if (!cleanedUp) {
+        elements.updateCheckStatus.textContent = "Could not check for updates. Try again later.";
+      }
+    } finally {
+      if (!cleanedUp) elements.updateCheckButton.disabled = false;
+    }
+  }
+
   async function saveEnabledPreference(): Promise<void> {
     const previousEnabled = currentSettings.enhancementEnabled;
     setSettingsControlsDisabled(true);
@@ -292,6 +348,9 @@ export function mountSettingsPage({
   const handleSearchInput = (): void => {
     filterSettings();
   };
+  const handleUpdateCheck = (): void => {
+    void checkForUpdates();
+  };
   const categoryHandlers = elements.categoryControls.map((control) => {
     const handler = (): void => {
       activeCategory = control.dataset.category ?? "all";
@@ -313,9 +372,11 @@ export function mountSettingsPage({
   });
   elements.enabledInput.addEventListener("change", handleEnabledChange);
   elements.searchInput.addEventListener("input", handleSearchInput);
+  elements.updateCheckButton.addEventListener("click", handleUpdateCheck);
   renderThemeOptions();
   setSettingsControlsDisabled(true);
   void initialize();
+  void initializeAppUpdates();
 
   return () => {
     if (cleanedUp) return;
@@ -325,6 +386,7 @@ export function mountSettingsPage({
     });
     elements.enabledInput.removeEventListener("change", handleEnabledChange);
     elements.searchInput.removeEventListener("input", handleSearchInput);
+    elements.updateCheckButton.removeEventListener("click", handleUpdateCheck);
     categoryHandlers.forEach(({ control, handler }) => {
       control.removeEventListener("click", handler);
     });

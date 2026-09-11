@@ -90,6 +90,14 @@
         >
           Privacy
         </button>
+        <button
+          class="settings-category"
+          type="button"
+          data-category="updates"
+          aria-pressed="false"
+        >
+          Updates
+        </button>
       </nav>
 
       <article class="settings-sheet">
@@ -174,6 +182,45 @@
               enhancement does not store grades, attendance, messages, sign-in details, or other
               student information.
             </p>
+          </section>
+
+          <section
+            class="settings-section updates"
+            aria-labelledby="updates-heading"
+            data-settings-section="updates"
+            data-search-terms="updates current installed version check android"
+          >
+            <h2 id="updates-heading">Updates</h2>
+
+            <div class="settings-card-list">
+              <div
+                class="setting-row setting-row--compact"
+                data-setting-item
+                data-search-terms="current installed version"
+              >
+                <div class="setting-copy">
+                  <span class="setting-label">Current version</span>
+                  <p id="app-version">Loading…</p>
+                </div>
+              </div>
+
+              <div
+                class="setting-row setting-row--action"
+                data-setting-item
+                data-search-terms="check updates new version android"
+              >
+                <div class="setting-copy">
+                  <span class="setting-label">Check for updates</span>
+                  <p id="update-check-status" role="status" aria-live="polite">
+                    Update checks are available in the Android app.
+                  </p>
+                </div>
+
+                <button id="check-for-updates" class="settings-button" type="button">
+                  Check now
+                </button>
+              </div>
+            </div>
           </section>
 
           <p class="settings-empty" hidden>No settings match your search.</p>

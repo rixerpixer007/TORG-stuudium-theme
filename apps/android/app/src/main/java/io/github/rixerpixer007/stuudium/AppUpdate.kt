@@ -1,6 +1,11 @@
 package io.github.rixerpixer007.stuudium
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.pm.PackageManager
+import android.os.Build
+import androidx.activity.ComponentActivity
+import androidx.core.content.pm.PackageInfoCompat
 import java.net.HttpURLConnection
 import java.net.URI
 import javax.net.ssl.HttpsURLConnection
@@ -12,6 +17,52 @@ data class AppUpdate(
     val releaseUrl: String,
     val sha256: String,
 )
+
+enum class AppUpdateCheckStatus {
+    UPDATE_AVAILABLE,
+    UP_TO_DATE,
+    UNAVAILABLE,
+}
+
+data class AppUpdateCheckResult(
+    val status: AppUpdateCheckStatus,
+    val update: AppUpdate? = null,
+)
+
+data class InstalledAppVersion(
+    val code: Long,
+    val name: String,
+)
+
+fun Context.installedAppVersion(): InstalledAppVersion {
+    val packageInfo =
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            packageManager.getPackageInfo(
+                packageName,
+                PackageManager.PackageInfoFlags.of(0L),
+            )
+        } else {
+            @Suppress("DEPRECATION")
+            packageManager.getPackageInfo(packageName, 0)
+        }
+
+    return InstalledAppVersion(
+        code = PackageInfoCompat.getLongVersionCode(packageInfo),
+        name = packageInfo.versionName ?: "Unknown",
+    )
+}
+
+fun ComponentActivity.showAppUpdateDialog(
+    update: AppUpdate,
+    openRelease: () -> Unit,
+) {
+    AlertDialog.Builder(this)
+        .setTitle(R.string.app_update_title)
+        .setMessage(getString(R.string.app_update_body, update.versionName))
+        .setNegativeButton(R.string.later, null)
+        .setPositiveButton(R.string.view_update) { _, _ -> openRelease() }
+        .show()
+}
 
 class AppUpdatePreferences(context: Context) {
     private val preferences = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
@@ -40,7 +91,14 @@ object AppUpdateClient {
             "https://raw.githubusercontent.com/rixerpixer007/TORG-stuudium-theme/main/release/android.json",
         )
 
-    fun fetch(): AppUpdate? {
+    fun check(installedVersionCode: Long): AppUpdateCheckResult {
+        val rawManifest = fetchManifest()
+            ?: return AppUpdateCheckResult(AppUpdateCheckStatus.UNAVAILABLE)
+
+        return evaluateManifest(rawManifest, installedVersionCode)
+    }
+
+    private fun fetchManifest(): String? {
         val connection = manifestUri.toURL().openConnection() as HttpsURLConnection
         connection.connectTimeout = CONNECT_TIMEOUT_MILLIS
         connection.readTimeout = READ_TIMEOUT_MILLIS
@@ -66,11 +124,47 @@ object AppUpdateClient {
                     body.toString()
                 }
 
-            parseManifest(manifest)
+            manifest
         } catch (_: Exception) {
             null
         } finally {
             connection.disconnect()
+        }
+    }
+
+    internal fun evaluateManifest(
+        rawManifest: String,
+        installedVersionCode: Long,
+    ): AppUpdateCheckResult {
+        val manifest =
+            try {
+                JSONObject(rawManifest)
+            } catch (_: Exception) {
+                return AppUpdateCheckResult(AppUpdateCheckStatus.UNAVAILABLE)
+            }
+
+        val schemaVersion = manifest.optInt("schemaVersion", -1)
+        val published = manifest.optBoolean("published", false)
+        val update = if (published) parseManifest(rawManifest) else null
+        return evaluateCandidate(schemaVersion, published, update, installedVersionCode)
+    }
+
+    internal fun evaluateCandidate(
+        schemaVersion: Int,
+        published: Boolean,
+        update: AppUpdate?,
+        installedVersionCode: Long,
+    ): AppUpdateCheckResult {
+        if (schemaVersion != SUPPORTED_SCHEMA_VERSION) {
+            return AppUpdateCheckResult(AppUpdateCheckStatus.UNAVAILABLE)
+        }
+        if (!published) return AppUpdateCheckResult(AppUpdateCheckStatus.UP_TO_DATE)
+        if (update == null) return AppUpdateCheckResult(AppUpdateCheckStatus.UNAVAILABLE)
+
+        return if (isNewer(update, installedVersionCode)) {
+            AppUpdateCheckResult(AppUpdateCheckStatus.UPDATE_AVAILABLE, update)
+        } else {
+            AppUpdateCheckResult(AppUpdateCheckStatus.UP_TO_DATE)
         }
     }
 

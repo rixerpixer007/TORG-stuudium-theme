@@ -207,21 +207,22 @@ the Kotlin unit tests, and assembles the debug APK.
 
 ### Build a signed release APK
 
-Keep the permanent keystore outside the repository. Supply its path, alias, and
-passwords only in the shell that performs the build:
+Keep the permanent keystore outside the repository. On the maintainer's macOS
+release machine, run:
 
 ```sh
-export SINU_STUUDIUM_KEYSTORE_PATH="/absolute/path/to/sinu-stuudium-release.p12"
-export SINU_STUUDIUM_KEY_ALIAS="sinu-stuudium-release"
-export SINU_STUUDIUM_KEYSTORE_PASSWORD="..."
-export SINU_STUUDIUM_KEY_PASSWORD="..."
 npm run build:android:release
-unset SINU_STUUDIUM_KEYSTORE_PASSWORD SINU_STUUDIUM_KEY_PASSWORD
 ```
 
-Do not place literal passwords in a committed script, Gradle file, shell-history
-example, issue, or build log. The release command fails before assembly when the
-required signing values are absent. Its output is:
+The helper uses the permanent keystore's expected location and alias, prompts
+for its password without displaying it, and removes the password from its
+process environment when the build exits. Set `SINU_STUUDIUM_KEYSTORE_PATH` or
+`SINU_STUUDIUM_KEY_ALIAS` first only when either value differs from the standard
+release setup.
+
+Do not place literal passwords in a committed script, Gradle file, shell
+history, issue, or build log. The underlying configured build fails before
+assembly when the required signing values are absent. Its output is:
 
 ```text
 apps/android/app/build/outputs/apk/release/app-release.apk

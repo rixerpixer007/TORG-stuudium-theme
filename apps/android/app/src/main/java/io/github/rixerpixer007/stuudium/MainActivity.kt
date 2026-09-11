@@ -1,15 +1,12 @@
 package io.github.rixerpixer007.stuudium
 
-import android.app.AlertDialog
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.SharedPreferences
-import android.content.pm.PackageManager
 import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.webkit.RenderProcessGoneDetail
@@ -27,7 +24,6 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.pm.PackageInfoCompat
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.webkit.ScriptHandler
 import androidx.webkit.WebMessageCompat
@@ -303,39 +299,18 @@ class MainActivity : ComponentActivity() {
 
         updateCheckStarted = true
         updatePreferences.recordAttempt(nowMillis)
-        val installedVersionCode = installedVersionCode()
+        val installedVersionCode = installedAppVersion().code
         updateCheckExecutor.execute {
-            val update = AppUpdateClient.fetch() ?: return@execute
-            if (!AppUpdateClient.isNewer(update, installedVersionCode)) return@execute
+            val result = AppUpdateClient.check(installedVersionCode)
+            val update = result.update ?: return@execute
             runOnUiThread {
-                if (!isFinishing && !isDestroyed) showAppUpdateDialog(update)
+                if (!isFinishing && !isDestroyed) {
+                    showAppUpdateDialog(update) {
+                        openExternal(Uri.parse(update.releaseUrl))
+                    }
+                }
             }
         }
-    }
-
-    private fun installedVersionCode(): Long {
-        val packageInfo =
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                packageManager.getPackageInfo(
-                    packageName,
-                    PackageManager.PackageInfoFlags.of(0L),
-                )
-            } else {
-                @Suppress("DEPRECATION")
-                packageManager.getPackageInfo(packageName, 0)
-            }
-        return PackageInfoCompat.getLongVersionCode(packageInfo)
-    }
-
-    private fun showAppUpdateDialog(update: AppUpdate) {
-        AlertDialog.Builder(this)
-            .setTitle(R.string.app_update_title)
-            .setMessage(getString(R.string.app_update_body, update.versionName))
-            .setNegativeButton(R.string.later, null)
-            .setPositiveButton(R.string.view_update) { _, _ ->
-                openExternal(Uri.parse(update.releaseUrl))
-            }
-            .show()
     }
 
     private fun showLoadError() {

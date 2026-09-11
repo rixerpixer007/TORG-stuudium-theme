@@ -17,6 +17,7 @@ import androidx.webkit.WebViewAssetLoader
 import androidx.webkit.WebViewClientCompat
 import androidx.webkit.WebViewCompat
 import java.io.ByteArrayInputStream
+import java.util.concurrent.Executors
 import org.json.JSONObject
 
 class SettingsActivity : ComponentActivity() {
@@ -25,6 +26,7 @@ class SettingsActivity : ComponentActivity() {
     private lateinit var root: FrameLayout
     private lateinit var webView: WebView
     private var rendererGone = false
+    private val updateCheckExecutor = Executors.newSingleThreadExecutor()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -142,8 +144,59 @@ class SettingsActivity : ComponentActivity() {
                 return@addWebMessageListener
             }
 
+            val updateRequest = parseUpdateRequest(message.data)
+            if (updateRequest != null) {
+                checkForAppUpdate(updateRequest, replyProxy)
+                return@addWebMessageListener
+            }
+
             val response = handleSettingsRequest(message.data)
             replyProxy.postMessage(response.toString())
+        }
+    }
+
+    private fun parseUpdateRequest(rawRequest: String?): String? =
+        try {
+            val request = JSONObject(rawRequest ?: "")
+            if (request.optString("type") == "check-for-updates") {
+                request.optString("id", "unknown")
+            } else {
+                null
+            }
+        } catch (_: Exception) {
+            null
+        }
+
+    private fun checkForAppUpdate(
+        requestId: String,
+        replyProxy: androidx.webkit.JavaScriptReplyProxy,
+    ) {
+        val installedVersionCode = installedAppVersion().code
+        updateCheckExecutor.execute {
+            val result = AppUpdateClient.check(installedVersionCode)
+            runOnUiThread {
+                if (isFinishing || isDestroyed) return@runOnUiThread
+
+                val status =
+                    when (result.status) {
+                        AppUpdateCheckStatus.UPDATE_AVAILABLE -> "update-available"
+                        AppUpdateCheckStatus.UP_TO_DATE -> "up-to-date"
+                        AppUpdateCheckStatus.UNAVAILABLE -> "unavailable"
+                    }
+                replyProxy.postMessage(
+                    JSONObject()
+                        .put("id", requestId)
+                        .put("ok", true)
+                        .put("updateStatus", status)
+                        .toString(),
+                )
+
+                result.update?.let { update ->
+                    showAppUpdateDialog(update) {
+                        openExternal(Uri.parse(update.releaseUrl))
+                    }
+                }
+            }
         }
     }
 
@@ -153,21 +206,27 @@ class SettingsActivity : ComponentActivity() {
             val request = JSONObject(rawRequest ?: "")
             requestId = request.optString("id", requestId)
 
-            val settings =
-                when (request.optString("type")) {
-                    "get-settings" -> preferences.get()
-                    "set-settings" -> {
-                        val normalized = AppSettings.fromJson(request.optJSONObject("settings"), config)
-                        preferences.set(normalized)
-                        normalized
-                    }
-                    else -> throw IllegalArgumentException("Unsupported settings request")
+            when (request.optString("type")) {
+                "get-settings" ->
+                    JSONObject()
+                        .put("id", requestId)
+                        .put("ok", true)
+                        .put("settings", preferences.get().toJson())
+                "set-settings" -> {
+                    val normalized = AppSettings.fromJson(request.optJSONObject("settings"), config)
+                    preferences.set(normalized)
+                    JSONObject()
+                        .put("id", requestId)
+                        .put("ok", true)
+                        .put("settings", normalized.toJson())
                 }
-
-            JSONObject()
-                .put("id", requestId)
-                .put("ok", true)
-                .put("settings", settings.toJson())
+                "get-app-info" ->
+                    JSONObject()
+                        .put("id", requestId)
+                        .put("ok", true)
+                        .put("version", installedAppVersion().name)
+                else -> throw IllegalArgumentException("Unsupported settings request")
+            }
         } catch (_: Exception) {
             JSONObject()
                 .put("id", requestId)
@@ -195,6 +254,7 @@ class SettingsActivity : ComponentActivity() {
     }
 
     override fun onDestroy() {
+        updateCheckExecutor.shutdownNow()
         if (::webView.isInitialized && !rendererGone) {
             webView.stopLoading()
             root.removeView(webView)

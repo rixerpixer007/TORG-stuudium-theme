@@ -4,6 +4,7 @@ import {
   type SettingsChangeListener,
   type SettingsStore,
 } from "../../shared/settings";
+import type { AppUpdates, UpdateCheckResult } from "../../shared/app-updates";
 
 export interface WebViewMessageEvent {
   data: unknown;
@@ -23,7 +24,72 @@ interface BridgeResponse {
   id: string;
   ok: boolean;
   settings?: unknown;
+  version?: unknown;
+  updateStatus?: unknown;
   error?: string;
+}
+
+let appRequestSequence = 0;
+
+function requestAppUpdateValue(
+  bridge: WebViewMessagePort,
+  type: "get-app-info" | "check-for-updates",
+  requestTimeoutMs: number,
+): Promise<BridgeResponse> {
+  appRequestSequence += 1;
+  const id = `app-updates-${String(appRequestSequence)}`;
+
+  return new Promise((resolve, reject) => {
+    const handleMessage = (event: WebViewMessageEvent): void => {
+      const response = parseResponse(event.data);
+      if (response?.id !== id) return;
+
+      window.clearTimeout(timeoutId);
+      bridge.removeEventListener("message", handleMessage);
+      if (response.ok) {
+        resolve(response);
+      } else {
+        reject(new Error(response.error ?? "The mobile app update request failed."));
+      }
+    };
+    const timeoutId = window.setTimeout(() => {
+      bridge.removeEventListener("message", handleMessage);
+      reject(new Error("The mobile app update request timed out."));
+    }, requestTimeoutMs);
+
+    bridge.addEventListener("message", handleMessage);
+    try {
+      bridge.postMessage(JSON.stringify({ id, type }));
+    } catch (error) {
+      window.clearTimeout(timeoutId);
+      bridge.removeEventListener("message", handleMessage);
+      reject(error instanceof Error ? error : new Error("The mobile settings bridge failed."));
+    }
+  });
+}
+
+export function createWebViewAppUpdates(
+  bridge: WebViewMessagePort,
+  requestTimeoutMs = 12_000,
+): AppUpdates {
+  return {
+    async getCurrentVersion() {
+      const response = await requestAppUpdateValue(bridge, "get-app-info", requestTimeoutMs);
+      if (typeof response.version !== "string" || response.version.length === 0) {
+        throw new Error("The installed app version is unavailable.");
+      }
+      return response.version;
+    },
+
+    async checkForUpdates() {
+      const response = await requestAppUpdateValue(bridge, "check-for-updates", requestTimeoutMs);
+      const status = response.updateStatus;
+      if (status !== "update-available" && status !== "up-to-date" && status !== "unavailable") {
+        throw new Error("The mobile app update response is invalid.");
+      }
+      return status satisfies UpdateCheckResult;
+    },
+  };
 }
 
 interface PendingRequest {

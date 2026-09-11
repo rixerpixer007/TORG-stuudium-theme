@@ -4,6 +4,7 @@ import { describe, expect, it, vi } from "vitest";
 
 import {
   closeWebViewSettings,
+  createWebViewAppUpdates,
   createWebViewSettingsStore,
   type WebViewMessageEvent,
   type WebViewMessagePort,
@@ -20,7 +21,7 @@ class FakeWebViewBridge implements WebViewMessagePort {
   postMessage(message: string): void {
     const request = JSON.parse(message) as {
       id: string;
-      type: "get-settings" | "set-settings";
+      type: "get-settings" | "set-settings" | "get-app-info" | "check-for-updates";
       settings?: ExtensionSettings;
     };
     if (request.type === "set-settings" && request.settings !== undefined) {
@@ -28,7 +29,13 @@ class FakeWebViewBridge implements WebViewMessagePort {
     }
 
     queueMicrotask(() => {
-      const response = JSON.stringify({ id: request.id, ok: true, settings: this.settings });
+      const response = JSON.stringify({
+        id: request.id,
+        ok: true,
+        settings: this.settings,
+        version: request.type === "get-app-info" ? "0.1.0-beta" : undefined,
+        updateStatus: request.type === "check-for-updates" ? "up-to-date" : undefined,
+      });
       this.listeners.forEach((listener) => {
         listener({ data: response });
       });
@@ -73,5 +80,12 @@ describe("WebView settings storage adapter", () => {
 
     expect(bridge.settings).toEqual(nextSettings);
     expect(listener).toHaveBeenCalledWith(nextSettings);
+  });
+
+  it("reads Android app information and requests a manual update check", async () => {
+    const appUpdates = createWebViewAppUpdates(new FakeWebViewBridge());
+
+    await expect(appUpdates.getCurrentVersion()).resolves.toBe("0.1.0-beta");
+    await expect(appUpdates.checkForUpdates()).resolves.toBe("up-to-date");
   });
 });

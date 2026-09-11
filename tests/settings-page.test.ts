@@ -33,6 +33,7 @@ describe("shared settings page", () => {
         <button class="settings-return" type="button" data-return-to-stuudium></button>
         <button data-category="all" aria-pressed="true"></button>
         <button data-category="appearance" aria-pressed="false"></button>
+        <button data-category="updates" aria-pressed="false"></button>
         <input id="settings-search">
         <section data-settings-section="appearance">
           <div data-setting-item data-search-terms="theme">
@@ -41,6 +42,13 @@ describe("shared settings page", () => {
           </div>
         </section>
         <section data-settings-section="privacy"></section>
+        <section data-settings-section="updates">
+          <div data-setting-item data-search-terms="version update">
+            <span id="app-version">Loading…</span>
+            <button id="check-for-updates" type="button">Check now</button>
+            <p id="update-check-status"></p>
+          </div>
+        </section>
         <p id="status"></p>
         <p class="settings-empty" hidden></p>
       </body>
@@ -87,6 +95,40 @@ describe("shared settings page", () => {
     document.querySelector<HTMLButtonElement>(".settings-return")?.click();
 
     expect(returnToStuudium).toHaveBeenCalledTimes(2);
+    cleanup();
+  });
+
+  it("uses extension placeholders without enabling update checks", async () => {
+    const cleanup = mountSettingsPage({ document, settingsStore: createStore() });
+    await Promise.resolve();
+
+    expect(document.querySelector("#app-version")?.textContent).toBe("0.0.0");
+    expect(document.querySelector<HTMLButtonElement>("#check-for-updates")?.disabled).toBe(true);
+    cleanup();
+  });
+
+  it("shows the native version and runs a manual Android update check", async () => {
+    const appUpdates = {
+      getCurrentVersion: vi.fn().mockResolvedValue("0.1.0-beta"),
+      checkForUpdates: vi.fn().mockResolvedValue("up-to-date" as const),
+    };
+    const cleanup = mountSettingsPage({
+      document,
+      settingsStore: createStore(),
+      appUpdates,
+    });
+    await Promise.resolve();
+    await Promise.resolve();
+
+    expect(document.querySelector("#app-version")?.textContent).toBe("0.1.0-beta");
+    document.querySelector<HTMLButtonElement>("#check-for-updates")?.click();
+    await Promise.resolve();
+    await Promise.resolve();
+
+    expect(appUpdates.checkForUpdates).toHaveBeenCalledOnce();
+    expect(document.querySelector("#update-check-status")?.textContent).toBe(
+      "Sinu Stuudium is up to date.",
+    );
     cleanup();
   });
 });
