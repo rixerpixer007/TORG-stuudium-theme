@@ -1,12 +1,15 @@
 package io.github.rixerpixer007.stuudium
 
+import android.app.AlertDialog
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.webkit.RenderProcessGoneDetail
@@ -24,14 +27,17 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.pm.PackageInfoCompat
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.webkit.ScriptHandler
 import androidx.webkit.WebMessageCompat
 import androidx.webkit.WebViewCompat
+import java.util.concurrent.Executors
 
 class MainActivity : ComponentActivity() {
     private lateinit var config: MobileConfig
     private lateinit var preferences: AppPreferences
+    private lateinit var updatePreferences: AppUpdatePreferences
     private lateinit var originPolicy: SupportedOriginPolicy
     private lateinit var assets: MobileAssetBundle
     private lateinit var root: FrameLayout
@@ -44,6 +50,8 @@ class MainActivity : ComponentActivity() {
     private var documentStartScript: ScriptHandler? = null
     private var fileChooserCallback: ValueCallback<Array<Uri>>? = null
     private var rendererGone = false
+    private var updateCheckStarted = false
+    private val updateCheckExecutor = Executors.newSingleThreadExecutor()
 
     private val fileChooserLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -64,6 +72,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         config = MobileConfig.load(this)
         preferences = AppPreferences(this, config)
+        updatePreferences = AppUpdatePreferences(this)
         originPolicy = SupportedOriginPolicy(config.supportedOrigins)
         assets = MobileAssetBundle.load(this)
         val initialSettings = preferences.get()
@@ -284,6 +293,49 @@ class MainActivity : ComponentActivity() {
         errorPanel.visibility = View.GONE
         webView.visibility = View.VISIBLE
         loadingSurface.visibility = View.GONE
+        maybeCheckForAppUpdate()
+    }
+
+    private fun maybeCheckForAppUpdate() {
+        if (updateCheckStarted) return
+        val nowMillis = System.currentTimeMillis()
+        if (!updatePreferences.shouldCheck(nowMillis)) return
+
+        updateCheckStarted = true
+        updatePreferences.recordAttempt(nowMillis)
+        val installedVersionCode = installedVersionCode()
+        updateCheckExecutor.execute {
+            val update = AppUpdateClient.fetch() ?: return@execute
+            if (!AppUpdateClient.isNewer(update, installedVersionCode)) return@execute
+            runOnUiThread {
+                if (!isFinishing && !isDestroyed) showAppUpdateDialog(update)
+            }
+        }
+    }
+
+    private fun installedVersionCode(): Long {
+        val packageInfo =
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                packageManager.getPackageInfo(
+                    packageName,
+                    PackageManager.PackageInfoFlags.of(0L),
+                )
+            } else {
+                @Suppress("DEPRECATION")
+                packageManager.getPackageInfo(packageName, 0)
+            }
+        return PackageInfoCompat.getLongVersionCode(packageInfo)
+    }
+
+    private fun showAppUpdateDialog(update: AppUpdate) {
+        AlertDialog.Builder(this)
+            .setTitle(R.string.app_update_title)
+            .setMessage(getString(R.string.app_update_body, update.versionName))
+            .setNegativeButton(R.string.later, null)
+            .setPositiveButton(R.string.view_update) { _, _ ->
+                openExternal(Uri.parse(update.releaseUrl))
+            }
+            .show()
     }
 
     private fun showLoadError() {
@@ -325,6 +377,7 @@ class MainActivity : ComponentActivity() {
         fileChooserCallback?.onReceiveValue(null)
         fileChooserCallback = null
         documentStartScript?.remove()
+        updateCheckExecutor.shutdownNow()
         if (::webView.isInitialized && !rendererGone) {
             stopRefreshing()
             webView.stopLoading()

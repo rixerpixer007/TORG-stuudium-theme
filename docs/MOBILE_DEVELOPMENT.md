@@ -355,7 +355,70 @@ Platform code should remain small:
 Do not add a general bridge because a future feature might need it. Add one
 validated command only when that feature has a specific native requirement.
 
-## 14. Remove the development app cleanly
+## 14. GitHub update notification
+
+The Android shell checks for a new public version after the first Stuudium page
+becomes visible. It performs this check at most once every 24 hours, never blocks
+startup, and remains silent when the device is offline or the update metadata is
+unavailable. When a higher numeric `versionCode` is published, the app shows a
+native **Later** / **View update** dialog. **View update** opens the allowlisted
+GitHub Releases page in the system browser; the app does not download or install
+packages itself and therefore does not request package-install or storage
+permissions.
+
+The metadata source is `docs/updates/android.json`, served at:
+
+```text
+https://rixerpixer007.github.io/TORG-stuudium-theme/updates/android.json
+```
+
+Before testing this outside the unit suite, configure GitHub Pages to deploy the
+`docs/` directory from the `main` branch. Until the first signed public release,
+the checked-in file deliberately contains `"published": false`, so installed
+debug builds do not advertise a nonexistent APK.
+
+For a real release, publish metadata in this shape:
+
+```json
+{
+  "schemaVersion": 1,
+  "published": true,
+  "versionCode": 2,
+  "versionName": "0.1.1-beta",
+  "releaseUrl": "https://github.com/rixerpixer007/TORG-stuudium-theme/releases/tag/android-v0.1.1-beta",
+  "sha256": "the-lowercase-64-character-sha256-of-the-signed-apk"
+}
+```
+
+Release in this order so users are never directed to an incomplete download:
+
+1. Increment `versionCode` and update the human-facing `versionName`.
+2. Build, sign, and validate the release APK with the permanent release key.
+3. Create the GitHub Release and upload the signed APK, checksum, and notes.
+4. Download the uploaded APK and confirm its application ID, version, signing
+   certificate, and SHA-256 digest.
+5. Change `published` to `true`, copy the exact values and release URL into the
+   metadata file, and deploy that small metadata change last.
+
+The update checker accepts only HTTPS release URLs under this repository's
+`/releases` path, validates the manifest schema and checksum shape, and compares
+numeric version codes rather than version-name strings. The remote file cannot
+inject scripts or change app behavior.
+
+The first release-signed APK cannot normally update an installed debug APK,
+because their signing certificates differ. Uninstall the debug build once, then
+install the first public APK. Later public APKs will update it normally as long
+as `io.github.rixerpixer007.stuudium`, the release signing identity, and the
+increasing version-code sequence remain unchanged.
+
+Test the complete browser handoff on Android 16 and the eventual minimum Android
+version. Confirm that the system presents **Update**, preserves the WebView
+session and preferences, and stops offering the update after installation. Also
+test a missing or malformed manifest, offline startup, an equal or lower version
+code, a wrong-signature APK, and browsers without unknown-app installation
+approval.
+
+## 15. Remove the development app cleanly
 
 Long-press the app icon on the Samsung phone and choose **Uninstall**, or run:
 

@@ -2,7 +2,7 @@
 
 Status: agreed direction, Phase 4 Android feasibility prototype implemented locally and awaiting physical-device verification
 
-Last updated: 2026-09-09
+Last updated: 2026-09-11
 
 ## Purpose
 
@@ -239,7 +239,8 @@ Development can use free personal-device signing. Public distribution waits for 
 - Check Android 8 with a maintained System WebView before preserving that public
   minimum; raise to Android 10 instead of building a disproportionate fallback.
 - Establish signed GitHub releases and the update flow only after the prototype
-  is accepted. **Deferred.**
+  is accepted. **Native notification flow implemented locally; release signing,
+  GitHub Pages setup, and end-to-end update verification pending.**
 
 ### Phase 5: iOS preparation and release
 
@@ -264,11 +265,13 @@ Development can use free personal-device signing. Public distribution waits for 
 
 These choices remain intentionally unresolved:
 
-- The long-term Android updater implementation.
+- Whether a later Android updater should download APKs itself; the initial
+  notification-and-browser handoff is implemented.
 - Whether physical Android 8 testing preserves `minSdk = 26` or demonstrates a
   reason to raise the public minimum to Android 10.
-- The final Android application ID, release signing ownership, and distribution
-  process; the current ID and debug signing are prototype-only.
+- Release signing ownership and the final distribution process. The approved
+  Android application ID is `io.github.rixerpixer007.stuudium`; debug signing
+  remains development-only.
 - The organization and governance of the eventual Apple developer account.
 - The post-theme-switching feature roadmap.
 - Which future theme should first exercise full light-palette overrides and
