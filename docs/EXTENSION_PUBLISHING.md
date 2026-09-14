@@ -202,9 +202,9 @@ sync:
 npm version 0.1.1 --no-git-tag-version
 ```
 
-This edits the two version fields but deliberately creates neither a Git commit
-nor a tag. Replace `0.1.1` with the approved release version. Inspect both files
-before building.
+Replace `0.1.1` with the approved release version. See
+[Project npm commands](NPM_COMMANDS.md#update-the-project-version)
+for the exact behavior, then inspect both files before building.
 
 ## 5. Create a reproducible production package
 
@@ -219,12 +219,8 @@ git diff --check
 git status --short
 ```
 
-- `npm ci` installs exactly `package-lock.json`.
-- `npm run validate` checks formatting, lint, types, tests, generated theme
-  reproducibility, the production build, manifest, permissions, and CSS gate.
-- `npm run package` rebuilds, makes a maximum-compression ZIP, and rejects any
-  unexpected or missing file in it.
-- The Git commands expose whitespace problems and unreviewed changes.
+See [Project npm commands](NPM_COMMANDS.md) for the npm commands' exact behavior.
+The Git commands expose whitespace problems and unreviewed changes.
 
 For version 0.1.0, upload exactly:
 

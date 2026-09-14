@@ -67,10 +67,9 @@ Install the exact dependency versions from the lockfile:
 npm ci
 ```
 
-`npm ci` removes and recreates only the local `node_modules` dependency folder,
-downloads the locked packages, regenerates the theme outputs, and prepares WXT
-types. It does not change Stuudium or install an extension in a browser. Use
-`npm ci`, rather than `npm install`, for a reproducible clean setup.
+Use `npm ci`, rather than `npm install`, for a reproducible clean setup. The
+complete command behavior and requirements are documented in
+[Project npm commands](NPM_COMMANDS.md).
 
 ## 3. Understand the important files
 
@@ -111,9 +110,7 @@ Create a production build:
 npm run build
 ```
 
-This first regenerates both CSS outputs, then asks WXT/Vite to compile the
-TypeScript, CSS, options page, and Manifest V3 metadata. Load this generated
-folder as an unpacked extension:
+Load the generated folder as an unpacked extension:
 
 ```text
 .output/chrome-mv3
@@ -129,13 +126,6 @@ For repeated editing, run:
 ```sh
 npm run dev
 ```
-
-This does three things:
-
-1. Generates the current CSS outputs once.
-2. Watches the canonical theme modules and regenerates both outputs when they
-   change.
-3. Runs WXT's development builder for TypeScript, extension pages, and CSS.
 
 The development folder is:
 
@@ -376,69 +366,31 @@ After editing a canonical module:
 npm run build:theme
 ```
 
-This parses all theme modules in filename order and writes:
-
-- `Stuudium-Intentional-Dark.user.css`, wrapped in the Stylus-compatible
-  `@-moz-document` block.
-- `src/generated/theme.css`, with selectors gated by the extension's root
-  activation attribute.
-
 Check that the committed compatibility output exactly matches the modules:
 
 ```sh
 npm run check:theme
 ```
 
-This command does not rewrite files. It exits with an error if either generated
-file is missing or stale. Commit the canonical module and the regenerated
-root-level `.user.css`; do not commit the ignored extension-only generated CSS.
+Commit the canonical module and the regenerated root-level `.user.css`; do not
+commit the ignored extension-only generated CSS. See
+[Project npm commands](NPM_COMMANDS.md#theme-commands) for the exact generated
+outputs and check behavior.
 
-## 14. Run every project check
+## 14. Run the project checks
 
-Run individual checks while working:
-
-```sh
-npm run format
-npm run format:check
-npm run lint
-npm run typecheck
-npm run test
-npm run test:watch
-npm run check:theme
-npm run build
-npm run validate:build
-npm run package
-```
-
-What they do:
-
-- `format` rewrites supported source and documentation to the project's
-  Prettier format.
-- `format:check` checks formatting without changing files.
-- `lint` finds unsafe, unclear, or unused JavaScript/TypeScript patterns.
-- `typecheck` checks TypeScript without emitting another build.
-- `test` runs the automated test suite once.
-- `test:watch` reruns relevant tests while files change; press `Control+C` to
-  stop it.
-- `check:theme` proves the generated userstyle and extension CSS match the
-  canonical modules.
-- `build` makes the unpacked production extension.
-- `validate:build` checks the generated manifest, permission boundary, CSS
-  gating, and file contents. Run `build` first.
-- `package` rebuilds, creates the release ZIP, and verifies that the ZIP contains
-  exactly the intended extension files.
-
-Before handing work to someone else, run the combined check:
+The complete command list, individual checks, outputs, side effects, and
+change-based validation tiers live in
+[Project npm commands](NPM_COMMANDS.md). Before handing broad extension or
+shared-code work to someone else, run:
 
 ```sh
 npm run validate
 ```
 
-It runs theme reproducibility, formatting, linting, type checking, tests,
-production build, and manifest/build validation in a fixed order. Then run:
+Then inspect repository-level issues that npm does not cover:
 
 ```sh
-npm run package
 git diff --check
 git status --short
 ```
@@ -524,6 +476,6 @@ of the unpacked extension is being tested.
 
 ### A build works but the store ZIP does not
 
-Run `npm run package`. Its final validator reads the ZIP directory directly and
-rejects missing build files, source maps, source directories, documentation,
-dependencies, or environment files.
+Run `npm run package` and inspect its validation error. See
+[Project npm commands](NPM_COMMANDS.md#npm-run-package) for the packaging and
+archive-validation boundary.

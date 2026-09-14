@@ -36,7 +36,7 @@ The project enhances the genuine Stuudium interface. It must never become a prox
 - `src/theme/critical.css` is the small early dark surface. Keep it minimal and never use it to replace Stuudium's structural CSS.
 - `src/theme/modules/01-tokens.css` contains the default Graphite Mint tokens; `02-palettes.css` contains attribute-gated complete palette overrides.
 
-Run `npm run build:theme` after changing canonical theme modules, unless `npm run dev` is already watching them. Run `npm run check:theme` to prove both generated CSS outputs are current and deterministic.
+Run `npm run build:theme` after changing canonical theme modules, unless `npm run dev` is already watching them. Run `npm run check:theme` to prove the committed compatibility userstyle is current and deterministic. See `docs/NPM_COMMANDS.md` for the exact scope of each command.
 
 ## Architecture map
 
@@ -92,28 +92,10 @@ Never mutate attendance, TODOs, messages, grades, registrations, or other Stuudi
 
 ## Commands
 
-- `npm ci`: install exactly the locked dependency graph from a fresh state.
-- `npm run dev`: regenerate theme CSS and start WXT development mode.
-- `npm run watch:theme`: rebuild only the theme outputs when canonical CSS changes.
-- `npm run build:theme`: deterministically regenerate the Stylus and extension CSS outputs.
-- `npm run check:theme`: fail if either generated theme output is stale.
-- `npm run format` / `npm run format:check`: write or verify Prettier formatting.
-- `npm run lint`: run ESLint.
-- `npm run typecheck`: run TypeScript checking without emitting files.
-- `npm test`: run the Vitest suite once.
-- `npm run build`: create the unpacked Chromium extension at `.output/chrome-mv3/`.
-- `npm run package`: create the uploadable ZIP at `.output/sinu-stuudium-<version>-chrome.zip` and validate its contents.
-- `npm run validate`: run theme freshness, formatting, linting, type checking, tests, and unpacked-build validation.
-- `npm run build:mobile:web`: deterministically bundle the shared theme,
-  Stuudium runtime, settings UI, and supported-site configuration for Android.
-- `npm run check:mobile:web`: prove the ignored Android web assets reproduce
-  byte for byte.
-- `npm run validate:mobile:web`: verify asset hashes and reject source maps,
-  localhost code, broad origins, and accidental WebExtension dependencies.
-- `npm run build:android:debug`: regenerate assets and assemble the debug APK.
-- `npm run test:android`: regenerate assets and run the Kotlin unit tests.
-- `npm run validate:android`: validate assets, run Android lint and Kotlin tests,
-  and assemble the debug APK.
+`docs/NPM_COMMANDS.md` is the canonical reference for every project-specific npm
+command, its prerequisites, outputs, side effects, and composition. Keep command
+descriptions there instead of duplicating them in this guide. The verification
+tiers below remain authoritative for choosing which commands a change requires.
 
 Beginner setup and testing instructions live in `docs/EXTENSION_DEVELOPMENT.md`. Release preparation lives in `docs/EXTENSION_PUBLISHING.md`.
 Android Studio, physical-device setup, building, inspection, and removal are

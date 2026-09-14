@@ -51,6 +51,7 @@ Androidi avaliku eelväljalaske leiab [GitHub Releasesi lehelt](https://github.c
 
 - Brauserilaienduse kohaliku arenduskeskkonna juhised: [EXTENSION_DEVELOPMENT.md](docs/EXTENSION_DEVELOPMENT.md)
 - Androidi ehitamise ja testimise juhised: [MOBILE_DEVELOPMENT.md](docs/MOBILE_DEVELOPMENT.md)
+- Projekti npm-käskude koondjuhend: [NPM_COMMANDS.md](docs/NPM_COMMANDS.md)
 - Olemasolev Styluse ühilduvusvariant: [Stuudium — Intentional Dark](Stuudium-Intentional-Dark.user.css)
 
 ## Kellele see on mõeldud?

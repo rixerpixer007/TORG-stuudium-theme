@@ -70,9 +70,8 @@ From the repository root, run:
 npm ci
 ```
 
-`npm ci` installs exactly the Node packages recorded in `package-lock.json`,
-regenerates the theme outputs, and prepares the desktop extension. It does not
-install anything on the phone.
+The requirements and exact setup behavior are documented in
+[Project npm commands](NPM_COMMANDS.md).
 
 Verify that the Android tools can be found:
 
@@ -80,11 +79,6 @@ Verify that the Android tools can be found:
 npm run build:mobile:web
 npm run build:android:debug
 ```
-
-The first command bundles the shared CSS, JavaScript, settings page, theme
-catalog, default preferences, and exact supported-origin registry for Android.
-The second command repeats that asset build, lets the Gradle Wrapper download
-the pinned Android build dependencies, and creates a debug APK.
 
 The helper script automatically finds Android Studio's bundled Java runtime and
 the normal macOS SDK location. If it cannot, complete the Android Studio Setup
@@ -151,34 +145,20 @@ bridge.
 
 ## 5. Build and validate the bundled web assets
 
+The generated mobile bundle contains the document-start bootstrap, critical
+and complete theme CSS, platform and settings-menu CSS, the shared settings
+page, theme and supported-site configuration, and SHA-256 hashes for every
+asset. Use the following sequence to rebuild it, check reproducibility, and
+validate its security boundaries:
+
 ```sh
 npm run build:mobile:web
-```
-
-This command first regenerates the compatibility userstyle and extension CSS.
-It then creates:
-
-- the document-start mobile bootstrap;
-- critical and complete theme CSS;
-- the shared settings page;
-- the theme and supported-site configuration;
-- SHA-256 hashes for every generated mobile web asset.
-
-Check that a second clean generation is byte-for-byte identical:
-
-```sh
 npm run check:mobile:web
-```
-
-Inspect the security rules and asset hashes:
-
-```sh
 npm run validate:mobile:web
 ```
 
-Validation rejects source maps, TypeScript source files, development startup
-scripts, localhost references, remote settings-page scripts, wildcard origins,
-and accidental WebExtension API dependencies in the mobile bootstrap.
+See [Project npm commands](NPM_COMMANDS.md#android-web-asset-commands) for the
+exact responsibility and side effects of each command.
 
 ## 6. Build the debug APK
 
@@ -202,8 +182,8 @@ To run the complete Android validation in one command:
 npm run validate:android
 ```
 
-It regenerates and validates the shared mobile assets, runs Android lint and
-the Kotlin unit tests, and assembles the debug APK.
+Its complete validation scope is documented in
+[Project npm commands](NPM_COMMANDS.md#npm-run-validateandroid).
 
 ### Build a signed release APK
 
@@ -214,11 +194,10 @@ release machine, run:
 npm run build:android:release
 ```
 
-The helper uses the permanent keystore's expected location and alias, prompts
-for its password without displaying it, and removes the password from its
-process environment when the build exits. Set `SINU_STUUDIUM_KEYSTORE_PATH` or
-`SINU_STUUDIUM_KEY_ALIAS` first only when either value differs from the standard
-release setup.
+The command's signing inputs and internal build sequence are documented in
+[Project npm commands](NPM_COMMANDS.md#npm-run-buildandroidrelease). Set
+`SINU_STUUDIUM_KEYSTORE_PATH` or `SINU_STUUDIUM_KEY_ALIAS` first only when either
+value differs from the standard release setup.
 
 Do not place literal passwords in a committed script, Gradle file, shell
 history, issue, or build log. The underlying configured build fails before
