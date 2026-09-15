@@ -10,6 +10,9 @@
 
 **TORGi õpilaselt TORGi õpilastele.**
 
+> [!WARNING]
+> **Tähelepanu:** Sinu Stuudium on arendusfaasis olev prototüüp. Mõned funktsioonid võivad olla piiratud või ei pruugi veel töötada.
+
 Kohanda TORG Stuudium enda moodi – läbimõeldud tume kujundus ja praktilised täiustused.
 
 Sinu Stuudium on sõltumatu ja mitteametlik projekt TORG Stuudiumile. See ei ole Stuudiumi ega TORGi ametlik toode.
