@@ -3,7 +3,6 @@
 node_modules/
 src/generated/
 src/theme/modules/
-Stuudium-Intentional-Dark.user.css
 package-lock.json
 AGENTS.md
 .agents/

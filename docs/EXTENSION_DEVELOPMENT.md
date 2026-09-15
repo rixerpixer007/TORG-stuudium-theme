@@ -74,12 +74,10 @@ complete command behavior and requirements are documented in
 ## 3. Understand the important files
 
 ```text
-Stuudium-Intentional-Dark.user.css  Generated compatibility userstyle
 src/
 |-- theme/
 |   |-- modules/                   Canonical theme CSS and palettes, in source order
 |   |-- critical.css               Tiny earliest dark page surface
-|   `-- userstyle-header.txt        Userstyle metadata
 |-- shared/                        Browser-independent settings, themes, routes, lifecycle
 |-- features/                      DOM features with activate/cleanup boundaries
 |-- platforms/webextension/        WebExtension API and page-shell adapters
@@ -94,8 +92,7 @@ package-lock.json                   Exact dependency graph for reproducible inst
 docs/                               Project, development, and publishing guides
 ```
 
-Do not hand-edit `Stuudium-Intentional-Dark.user.css` or
-`src/generated/theme.css`; both say that they are generated. Edit the owning
+Do not hand-edit `src/generated/theme.css`; it is generated. Edit the owning
 file in `src/theme/modules/` and regenerate instead.
 
 WXT generates `.output/.../manifest.json` from `wxt.config.ts` and the files in
@@ -212,11 +209,6 @@ build, use the same **Reload**, then page-refresh sequence whenever you need a
 clean lifecycle test. Reloading the extension alone cannot replace code already
 running in an open web page; the page refresh is important.
 
-If Stylus is also applying the compatibility userstyle, temporarily disable
-that style during an extension-only visual test. Otherwise two equivalent
-stylesheets are active and the test cannot prove which one produced the result.
-Restore the userstyle after the comparison.
-
 ## 9. Open the settings
 
 The settings page has a master **Enable the dark theme** switch and visual cards
@@ -293,36 +285,29 @@ necessarily appear in the Stuudium tab's console.
 Use an existing authenticated session. Do not enter credentials into project
 tools or save them in the repository.
 
-1. Disable the equivalent Stylus userstyle for an extension-only test.
-2. Visit representative routes under `https://torg.ope.ee/`, including the
+1. Visit representative routes under `https://torg.ope.ee/`, including the
    dashboard, a subject or journal page, Tera, Suhtlus, applications, and a
    narrow responsive layout that the change can affect.
-3. Inspect the page root in DevTools. When enabled, `<html>` must have
+2. Inspect the page root in DevTools. When enabled, `<html>` must have
    `data-sid-enhancement="enabled"` and either
    `data-sid-theme="graphite-mint"` or `data-sid-theme="graphite-blue"`.
-4. In **Sources**, confirm that the loaded CSS and JavaScript have an extension
+3. In **Sources**, confirm that the loaded CSS and JavaScript have an extension
    URL whose extension ID matches the unpacked extension card.
-5. Inspect computed styles on `<html>` or `<body>`. Mint uses canvas token
+4. Inspect computed styles on `<html>` or `<body>`. Mint uses canvas token
    `#0f1311` and accent token `#65d6b1`; Blue uses canvas token `#0c1118` and
    accent token `#75a7ff`. Verify that the winning rule comes from the extension
    build.
-6. Open the Stuudium hamburger menu and confirm the settings button is directly
+5. Open the Stuudium hamburger menu and confirm the settings button is directly
    after **Avaldused**. With the theme enabled it uses the theme treatment; with
    the theme disabled it uses Stuudium's native appearance.
-7. Exercise hover, keyboard focus, menu close/reopen, and client-side navigation.
-8. Check one component unrelated to the change as a negative control.
-9. Select each theme and reload the page to prove the choice persists. Repeat
+6. Exercise hover, keyboard focus, menu close/reopen, and client-side navigation.
+7. Check one component unrelated to the change as a negative control.
+8. Select each theme and reload the page to prove the choice persists. Repeat
    with the enhancement off, after an extension reload, after disabling and
    re-enabling the extension, and after restarting the browser.
-10. Watch hard refreshes and new navigations for a white frame before the dark
-    surface. Test with both a warm cache and DevTools **Disable cache** enabled.
-11. Check the page, service-worker, and settings consoles after every state.
-
-For a visual-equivalence comparison, capture the same authenticated route at
-the same viewport twice: once with only the compatibility userstyle enabled and
-once with only the unpacked extension enabled. Compare rendered layout, color,
-typography, spacing, responsive behavior, and computed winning styles. Static
-source comparison alone is not a visual-equivalence test.
+9. Watch hard refreshes and new navigations for a white frame before the dark
+   surface. Test with both a warm cache and DevTools **Disable cache** enabled.
+10. Check the page, service-worker, and settings consoles after every state.
 
 The extension must do nothing on another origin such as `https://example.com/`.
 That is the origin-level negative control for the permission boundary.
@@ -358,7 +343,7 @@ but each theme should explicitly replace every semantic color that would retain
 an unwanted tint. A light theme must declare `colorScheme: "light"` and override
 all necessary surface, text, border, shadow, and accent tokens.
 
-## 13. Regenerate and check the compatibility userstyle
+## 13. Regenerate and check the theme CSS
 
 After editing a canonical module:
 
@@ -366,14 +351,13 @@ After editing a canonical module:
 npm run build:theme
 ```
 
-Check that the committed compatibility output exactly matches the modules:
+Check that the generated stylesheet exactly matches the modules:
 
 ```sh
 npm run check:theme
 ```
 
-Commit the canonical module and the regenerated root-level `.user.css`; do not
-commit the ignored extension-only generated CSS. See
+Commit the canonical module; do not commit the ignored generated CSS. See
 [Project npm commands](NPM_COMMANDS.md#theme-commands) for the exact generated
 outputs and check behavior.
 
@@ -409,7 +393,7 @@ accident.
    longer loaded.
 
 Removing the unpacked extension also removes its local extension storage. It
-does not remove the repository or the separately installed Stylus userstyle.
+does not remove the repository.
 
 ## Troubleshooting
 
@@ -455,11 +439,6 @@ menu button when WXT detects this state, but Chromium does not inject the newly
 loaded code into an existing tab. Refresh the Stuudium page after every
 extension reload or re-enable. If the message remains after that refresh, clear
 the extension's old Errors entries and reproduce it once before debugging.
-
-### The page looks too dark or rules appear twice
-
-The Stylus userstyle and extension are probably both enabled. Disable one and
-refresh before comparing them.
 
 ### The in-page settings button is missing
 

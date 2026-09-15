@@ -7,7 +7,6 @@ import { fileURLToPath } from "node:url";
 const SCRIPT_DIRECTORY = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(SCRIPT_DIRECTORY, "..");
 const MODULE_DIRECTORY = path.join(PROJECT_ROOT, "src/theme/modules");
-const HEADER_FILE = path.join(PROJECT_ROOT, "src/theme/userstyle-header.txt");
 const BUILD_SCRIPT = path.join(SCRIPT_DIRECTORY, "build-theme.mjs");
 
 let timer;
@@ -45,7 +44,7 @@ function sourceFingerprint() {
     .filter((file) => file.endsWith(".css"))
     .map((file) => path.join(MODULE_DIRECTORY, file));
 
-  return [...files, HEADER_FILE]
+  return files
     .map((file) => {
       const stats = fs.statSync(file);
       return `${file}:${stats.mtimeMs}:${stats.size}`;
@@ -61,7 +60,7 @@ const poller = setInterval(() => {
   scheduleBuild();
 }, 500);
 
-console.log("Watching theme modules and userstyle metadata for changes…");
+console.log("Watching theme modules for changes…");
 
 function close() {
   clearInterval(poller);

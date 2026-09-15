@@ -23,7 +23,6 @@ Sinu Stuudium on sõltumatu ja mitteametlik projekt TORG Stuudiumile. See ei ole
 | -------------------------------------------- | ---------------- | ----------------------- |
 | Chrome ja teised Chromiumi-põhised brauserid | Beeta            | Chrome ja Brave         |
 | Android                                      | Beeta            | Samsung S25, Android 16 |
-| Stylus                                       | Ühilduvusvariant | Graphite Minti kujundus |
 | Firefox, Safari ja iOS                       | Praegu toetamata | —                       |
 
 Android 8 tugi ei ole veel päris seadmel ega sobiva WebView'ga emulaatoril kontrollitud. Teisi Chromiumi-põhiseid brausereid ei käsitleta eraldi kontrollituna enne nende läbimist väljalasketestis.
@@ -55,7 +54,6 @@ Androidi avaliku eelväljalaske leiab [GitHub Releasesi lehelt](https://github.c
 - Brauserilaienduse kohaliku arenduskeskkonna juhised: [EXTENSION_DEVELOPMENT.md](docs/EXTENSION_DEVELOPMENT.md)
 - Androidi ehitamise ja testimise juhised: [MOBILE_DEVELOPMENT.md](docs/MOBILE_DEVELOPMENT.md)
 - Projekti npm-käskude koondjuhend: [NPM_COMMANDS.md](docs/NPM_COMMANDS.md)
-- Olemasolev Styluse ühilduvusvariant: [Stuudium — Intentional Dark](Stuudium-Intentional-Dark.user.css)
 
 ## Kellele see on mõeldud?
 

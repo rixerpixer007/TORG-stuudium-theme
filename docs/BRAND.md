@@ -97,6 +97,5 @@ Platvormide väiksemad ikoonid genereeritakse nendest lähtevaradest. Märki ei 
 
 - **Android application ID:** `io.github.rixerpixer007.stuudium`
 - **GitHubi repositoorium:** `rixerpixer007/TORG-stuudium-theme`
-- **Styluse nimi:** `Stuudium — Intentional Dark`
 
-Androidi ID jääb kuvatavast brändinimest sõltumatuks. GitHubi repositooriumi ja Styluse nime ei muudeta esimese rebrändimise käigus, et säilitada olemasolevad lingid ja uuendusteekond.
+Androidi ID jääb kuvatavast brändinimest sõltumatuks. GitHubi repositooriumi nime ei muudeta esimese rebrändimise käigus, et säilitada olemasolevad lingid ja uuendusteekond.

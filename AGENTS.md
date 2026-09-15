@@ -15,7 +15,7 @@ Do not commit, publish, submit to a store, change live Stuudium data, or begin a
 
 Phase 1 is implemented as a WXT 0.21 Chromium Manifest V3 extension written in TypeScript and built with npm. It delivers the existing dark theme, adds an early critical dark surface, and uses a small idempotent content bootstrap.
 
-Phase 2 adds manual, remembered switching among Graphite Mint, Graphite Blue, Obsidian Red, Velvet Mauve, and Midnight Amber. Each dark theme owns a complete semantic color palette rather than inheriting another theme's neutrals. The theme contract already distinguishes dark and light families so future light themes can replace the full token set, but automatic system-following is not implemented. The Stylus compatibility output deliberately remains Graphite Mint only.
+Phase 2 adds manual, remembered switching among Graphite Mint, Graphite Blue, Obsidian Red, Velvet Mauve, and Midnight Amber. Each dark theme owns a complete semantic color palette rather than inheriting another theme's neutrals. The theme contract already distinguishes dark and light families so future light themes can replace the full token set, but automatic system-following is not implemented.
 
 Phase 3 release hardening and store publication have not started. Bug fixes and maintenance must preserve that boundary.
 
@@ -30,13 +30,11 @@ The project enhances the genuine Stuudium interface. It must never become a prox
 ## Sources of truth and generated files
 
 - `src/theme/modules/*.css` is the canonical full-theme source. Edit the owning module here.
-- `src/theme/userstyle-header.txt` is the canonical compatibility-userstyle metadata.
-- `Stuudium-Intentional-Dark.user.css` is a generated, supported Stylus compatibility output. Never edit it directly.
 - `src/generated/theme.css` is the generated, activation-gated extension stylesheet. Never edit it directly; it is intentionally ignored by Git.
 - `src/theme/critical.css` is the small early dark surface. Keep it minimal and never use it to replace Stuudium's structural CSS.
 - `src/theme/modules/01-tokens.css` contains the default Graphite Mint tokens; `02-palettes.css` contains attribute-gated complete palette overrides.
 
-Run `npm run build:theme` after changing canonical theme modules, unless `npm run dev` is already watching them. Run `npm run check:theme` to prove the committed compatibility userstyle is current and deterministic. See `docs/NPM_COMMANDS.md` for the exact scope of each command.
+Run `npm run build:theme` after changing canonical theme modules, unless `npm run dev` is already watching them. Run `npm run check:theme` to prove the generated stylesheet is current and deterministic. See `docs/NPM_COMMANDS.md` for the exact scope of each command.
 
 ## Architecture map
 
@@ -72,13 +70,12 @@ Keep shared feature logic independent of Chrome, Android, and iOS APIs. Browser 
 
 Preserve the existing visual design unless the user explicitly approves a redesign. Reuse matching `--sid-*` tokens and place changes in the owning module, ordered as base, variants, interactions, and responsive behavior.
 
-The generated extension CSS gates selectors with zero-specificity `:where(html[data-sid-enhancement="enabled"])`. Static extension CSS can lose an equal-specificity, equal-importance tie to Stuudium CSS loaded later, even when the same canonical rule wins through Stylus. Therefore:
+The generated extension CSS gates selectors with zero-specificity `:where(html[data-sid-enhancement="enabled"])`. Static extension CSS can lose an equal-specificity, equal-importance tie to Stuudium CSS loaded later. Therefore:
 
 1. Inspect the live element, real DOM contract, matched competition, and computed winner before editing.
-2. Compare extension delivery with the generated Stylus output at the same route and viewport when migration equivalence is relevant.
-3. Fix the narrow component owner with a stable semantic class, attribute, or route anchor. Do not raise specificity for the entire generated theme.
-4. Keep `:where(...)` where its zero specificity is intentional. Do not introduce `@layer`, a global reset, a broad specificity rewrite, or a zero-`!important` goal.
-5. Audit analogous rules in code for the same root cause, then verify representative live components. Do not silently fix unrelated CSS defects.
+2. Fix the narrow component owner with a stable semantic class, attribute, or route anchor. Do not raise specificity for the entire generated theme.
+3. Keep `:where(...)` where its zero specificity is intentional. Do not introduce `@layer`, a global reset, a broad specificity rewrite, or a zero-`!important` goal.
+4. Audit analogous rules in code for the same root cause, then verify representative live components. Do not silently fix unrelated CSS defects.
 
 Never mutate attendance, TODOs, messages, grades, registrations, or other Stuudium data merely to test styling without the user's approval.
 
@@ -108,7 +105,7 @@ Before diagnosing a stale browser result, confirm which unpacked folder the brow
 - `npm run dev` continuously writes `.output/chrome-mv3-dev/`.
 - `npm run build` writes `.output/chrome-mv3/` once.
 
-The two folders are different extension builds. Running `npm run dev` cannot update a browser instance loaded from `.output/chrome-mv3/`, even after reloading that extension card. Keep only the intended test instance enabled, and disable the Stylus compatibility userstyle during extension-only checks.
+The two folders are different extension builds. Running `npm run dev` cannot update a browser instance loaded from `.output/chrome-mv3/`, even after reloading that extension card. Keep only the intended test instance enabled.
 
 ## Verification and handoff
 

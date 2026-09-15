@@ -11,7 +11,6 @@ export default defineConfig(
     "apps/android/**/build/**",
     "node_modules/**",
     "src/generated/**",
-    "Stuudium-Intentional-Dark.user.css",
   ]),
   {
     files: ["**/*.{js,mjs,ts}"],

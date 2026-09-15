@@ -64,7 +64,7 @@ Reklaampiltidel kasuta Sinu Stuudiumi märki, nime, tunnuslauset, grafiiti ja m�
 ## Enne pildistamist
 
 1. Kasuta täpselt avaldamiseks mõeldud tootmis- või beetaversiooni.
-2. Lülita välja Styluse koopia ja kõik teised Sinu Stuudiumi laienduse eksemplarid.
+2. Lülita välja kõik teised Sinu Stuudiumi laienduse eksemplarid.
 3. Kontrolli, et pilt ei sisaldaks brauseri järjehoidjaid, kontopilti, e-posti aadressi ega süsteemiteavitusi.
 4. Kontrolli pärast salvestamist pilti täissuuruses, mitte ainult pisipilti.
 5. Säilita algsed võttefailid ainult siis, kui need ise ei sisalda tundlikku infot.

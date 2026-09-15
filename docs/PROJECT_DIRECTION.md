@@ -23,22 +23,20 @@ Shared enhancement core
 |
 |-- Desktop: browser extension
 |-- Android: dedicated WebView application
-|-- iOS: dedicated WebView application later
-`-- Compatibility: existing CSS userstyle
+`-- iOS: dedicated WebView application later
 ```
 
 The first public product scope is desktop plus Android. iOS compatibility must be considered from the beginning, but public iOS distribution is deferred until sustainable Apple signing is available.
 
 ## Platform plan
 
-| Platform               | Delivery                           | Initial status                | Update direction                                                                       |
-| ---------------------- | ---------------------------------- | ----------------------------- | -------------------------------------------------------------------------------------- |
-| Chromium desktop       | WXT-based Manifest V3 WebExtension | First public beta target      | Chrome Web Store first; Microsoft Edge Add-ons documented as an optional later channel |
-| Firefox desktop        | WebExtension compatibility build   | Desired follow-up             | Browser-supported distribution                                                         |
-| Safari desktop         | Safari WebExtension port           | Desired follow-up             | Apple-supported distribution                                                           |
-| Android                | Native Kotlin WebView app          | Focused feasibility prototype | Validate first; signed APK releases and updates remain a later release milestone       |
-| iOS                    | Dedicated WebView app              | Deferred public target        | Apple-supported signing and distribution after funding or institutional support        |
-| Existing installations | `.user.css`                        | Retained during transition    | Current userstyle update mechanism                                                     |
+| Platform         | Delivery                           | Initial status                | Update direction                                                                       |
+| ---------------- | ---------------------------------- | ----------------------------- | -------------------------------------------------------------------------------------- |
+| Chromium desktop | WXT-based Manifest V3 WebExtension | First public beta target      | Chrome Web Store first; Microsoft Edge Add-ons documented as an optional later channel |
+| Firefox desktop  | WebExtension compatibility build   | Desired follow-up             | Browser-supported distribution                                                         |
+| Safari desktop   | Safari WebExtension port           | Desired follow-up             | Apple-supported distribution                                                           |
+| Android          | Native Kotlin WebView app          | Focused feasibility prototype | Validate first; signed APK releases and updates remain a later release milestone       |
+| iOS              | Dedicated WebView app              | Deferred public target        | Apple-supported signing and distribution after funding or institutional support        |
 
 ### iOS decision
 
@@ -80,8 +78,8 @@ Platform adapters should provide:
 The Phase 1 implementation uses WXT, TypeScript, npm, and small platform
 adapters around WebExtension APIs. Semantic CSS modules under
 `src/theme/modules/` are the canonical theme source. A deterministic build
-continues to generate both the extension stylesheet and the supported
-`Stuudium-Intentional-Dark.user.css` compatibility output.
+generates the activation-gated stylesheet used by the extension and Android
+app.
 
 Supported Stuudium sites are declared in one registry so more verified schools
 can be added deliberately later. The extension currently grants access only to
@@ -204,7 +202,7 @@ Development can use free personal-device signing. Public distribution waits for 
 ### Phase 1: Shared source and desktop extension foundation
 
 - Establish a modular source structure without redesigning the theme.
-- Continue producing the existing CSS userstyle.
+- Generate an activation-gated stylesheet for the supported delivery targets.
 - Add platform-neutral feature and settings interfaces.
 - Create a minimal Chromium WebExtension with narrowly scoped Stuudium permissions.
 - Inject critical CSS at document start, followed by the complete existing theme.
@@ -218,8 +216,7 @@ Development can use free personal-device signing. Public distribution waits for 
 - Implement manual, remembered switching among the catalogued dark themes.
   **Implemented.**
 - Verify persistence, initial rendering, navigation, and responsive behavior.
-- Keep the existing theme visually unchanged when selected and retain Graphite
-  Mint as the only compatibility-userstyle palette.
+- Keep the existing Graphite Mint theme visually unchanged when selected.
 
 ### Phase 3: Desktop extension hardening and release
 
@@ -260,7 +257,6 @@ Development can use free personal-device signing. Public distribution waits for 
 - Do not introduce a cross-platform framework unless the native Kotlin and later
   Swift shells demonstrate a concrete duplication problem that outweighs their
   simple platform boundaries.
-- Do not remove the current userstyle before replacement targets are proven.
 
 ## Open decisions
 

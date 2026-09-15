@@ -14,7 +14,7 @@ Use both:
 1. The signed-in, rendered Stuudium site with the relevant local build or stylesheet active.
 2. The actual theme source in this repository.
 
-`src/theme/modules/*.css` is the canonical full-theme source. `Stuudium-Intentional-Dark.user.css` and `src/generated/theme.css` are generated outputs; do not hand-edit them. Always confirm which local artifact the browser is actually loading.
+`src/theme/modules/*.css` is the canonical full-theme source. `src/generated/theme.css` is generated output; do not hand-edit it. Always confirm which local artifact the browser is actually loading.
 
 ## Before editing
 

@@ -37,7 +37,7 @@ the current checkout.
 | Regenerate extension and Android brand images   | `npm run build:brand`                                     |
 | Check generated brand images for staleness      | `npm run check:brand`                                     |
 | Regenerate theme CSS outputs                    | `npm run build:theme`                                     |
-| Check the committed userstyle for staleness     | `npm run check:theme`                                     |
+| Check generated theme CSS for staleness         | `npm run check:theme`                                     |
 | Run the main project validation                 | `npm run validate`                                        |
 | Create and validate the Chrome release ZIP      | `npm run package`                                         |
 | Rebuild Android's bundled web assets            | `npm run build:mobile:web`                                |
@@ -98,26 +98,21 @@ stale image and tells you to run `npm run build:brand`.
 
 ## Theme commands
 
-The canonical source is `src/theme/modules/*.css`, plus
-`src/theme/userstyle-header.txt` for compatibility-userstyle metadata.
+The canonical source is `src/theme/modules/*.css`.
 
 ### `npm run build:theme`
 
-Parses the canonical modules in filename order and writes both theme outputs:
+Parses the canonical modules in filename order and writes
+`src/generated/theme.css`, the ignored, activation-gated stylesheet used by the
+extension and mobile asset builds.
 
-- `Stuudium-Intentional-Dark.user.css`, the committed Graphite Mint Stylus
-  compatibility userstyle;
-- `src/generated/theme.css`, the ignored, activation-gated stylesheet used by
-  the extension and mobile asset builds.
-
-Run it after changing a canonical theme module or the userstyle header unless
-`npm run dev` is already watching those files.
+Run it after changing a canonical theme module unless `npm run dev` is already
+watching those files.
 
 ### `npm run watch:theme`
 
-Watches the canonical theme modules and userstyle header, then reruns the theme
-build after a change. It watches only theme sources and stays active until
-stopped with `Control+C`.
+Watches the canonical theme modules, then reruns the theme build after a change.
+It stays active until stopped with `Control+C`.
 
 This command does not perform an initial build. Use `npm run build:theme` first
 when the outputs might be missing or stale. `npm run dev` already combines that
@@ -125,14 +120,10 @@ initial build with this watcher.
 
 ### `npm run check:theme`
 
-Rebuilds the expected theme content in memory and compares it with the committed
-`Stuudium-Intentional-Dark.user.css`. It does not write files. A failure means
-the compatibility userstyle is missing or stale and should be regenerated with
+Rebuilds the expected theme content in memory and compares it with
+`src/generated/theme.css`. It does not write files. A failure means the
+generated stylesheet is missing or stale and should be regenerated with
 `npm run build:theme`.
-
-The current check does not independently compare the ignored
-`src/generated/theme.css`; the extension and mobile build paths regenerate or
-consume that output as part of their own workflows.
 
 ## Chromium extension commands
 
@@ -219,9 +210,9 @@ preferences, or CSS that Android consumes.
 
 ### `npm run check:mobile:web`
 
-Checks the committed compatibility userstyle, generates the expected Android
-web assets in a temporary directory, and compares their filenames and bytes
-with the existing bundled assets. It does not update the bundled directory.
+Checks the generated theme CSS, generates the expected Android web assets in a
+temporary directory, and compares their filenames and bytes with the existing
+bundled assets. It does not update the bundled directory.
 
 Use `npm run build:mobile:web` if the assets are missing or stale.
 
@@ -347,7 +338,7 @@ active until stopped with `Control+C`.
 
 Runs the main extension and shared-code validation in this order:
 
-1. compatibility-userstyle freshness;
+1. generated theme CSS freshness;
 2. Android web-asset freshness and reproducibility;
 3. Android web-asset safety and structure;
 4. Prettier formatting;

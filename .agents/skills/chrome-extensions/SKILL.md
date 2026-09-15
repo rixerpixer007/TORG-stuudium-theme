@@ -19,7 +19,7 @@ Apply current Manifest V3 constraints without loading guidance for unrelated ext
 - `npm run dev` writes and watches `.output/chrome-mv3-dev/`.
 - `npm run build` writes `.output/chrome-mv3/` once.
 - Confirm which exact folder the browser loaded before debugging stale behavior. Reloading a production instance cannot pick up the development folder's changes.
-- Disable duplicate extension instances and the Stylus compatibility userstyle during extension-only verification.
+- Disable duplicate extension instances during extension-only verification.
 
 ## Core invariants
 

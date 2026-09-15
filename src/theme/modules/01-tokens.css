@@ -1,7 +1,7 @@
 /*
  * Design tokens
  * Stuudium has reusable component/state classes but no native colour tokens,
- * so this userstyle supplies semantic tokens and maps those classes onto them.
+ * so this theme supplies semantic tokens and maps those classes onto them.
  * Graphite Mint is the fallback palette when no explicit theme is selected.
  */
 :root {
