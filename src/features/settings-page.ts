@@ -144,12 +144,12 @@ export function mountSettingsPage({
       theme: { mode: "manual", themeId },
     };
     applySettingsTheme(themeId);
-    setStatus(`Applying ${getTheme(themeId).name}…`, "saving");
+    setStatus(`Kujunduse „${getTheme(themeId).name}“ rakendamine…`, "saving");
 
     try {
       await settingsStore.set(currentSettings);
       cacheTheme(themeId);
-      setStatus(`${getTheme(themeId).name} is selected.`);
+      setStatus(`Valitud on kujundus „${getTheme(themeId).name}“.`);
     } catch (error) {
       console.error("Unable to save theme preference", error);
       currentSettings = {
@@ -158,7 +158,7 @@ export function mountSettingsPage({
       };
       setThemeControls(previousThemeId);
       applySettingsTheme(previousThemeId);
-      setStatus("Could not save the theme preference.", "error");
+      setStatus("Kujunduse eelistust ei õnnestunud salvestada.", "error");
     } finally {
       setSettingsControlsDisabled(false);
     }
@@ -223,7 +223,11 @@ export function mountSettingsPage({
       applySettingsTheme(settings.theme.themeId);
       cacheTheme(settings.theme.themeId);
       setSettingsControlsDisabled(false);
-      setStatus(settings.enhancementEnabled ? "Custom theme is on." : "Custom theme is off.");
+      setStatus(
+        settings.enhancementEnabled
+          ? "Sinu Stuudiumi kujundus on sisse lülitatud."
+          : "Sinu Stuudiumi kujundus on välja lülitatud.",
+      );
     } catch (error) {
       if (cleanedUp) return;
       console.error("Unable to read enhancement settings", error);
@@ -231,7 +235,7 @@ export function mountSettingsPage({
       setThemeControls(currentSettings.theme.themeId);
       applySettingsTheme(currentSettings.theme.themeId);
       cacheTheme(currentSettings.theme.themeId);
-      setStatus("Could not read the saved preference.", "error");
+      setStatus("Salvestatud eelistust ei õnnestunud lugeda.", "error");
     } finally {
       if (!cleanedUp) revealSettingsPage();
     }
@@ -249,7 +253,7 @@ export function mountSettingsPage({
       if (!cleanedUp) elements.appVersion.textContent = version;
     } catch (error) {
       console.error("Unable to read the installed app version", error);
-      if (!cleanedUp) elements.appVersion.textContent = "Unknown";
+      if (!cleanedUp) elements.appVersion.textContent = "Teadmata";
     }
   }
 
@@ -257,21 +261,22 @@ export function mountSettingsPage({
     if (appUpdates === undefined) return;
 
     elements.updateCheckButton.disabled = true;
-    elements.updateCheckStatus.textContent = "Checking for updates…";
+    elements.updateCheckStatus.textContent = "Uuenduste kontrollimine…";
 
     try {
       const result = await appUpdates.checkForUpdates();
       if (cleanedUp) return;
       elements.updateCheckStatus.textContent =
         result === "update-available"
-          ? "A new version is available."
+          ? "Uus versioon on saadaval."
           : result === "up-to-date"
-            ? "Sinu Stuudium is up to date."
-            : "Could not check for updates. Try again later.";
+            ? "Sinu Stuudium on ajakohane."
+            : "Uuendusi ei õnnestunud kontrollida. Proovi hiljem uuesti.";
     } catch (error) {
       console.error("Unable to check for app updates", error);
       if (!cleanedUp) {
-        elements.updateCheckStatus.textContent = "Could not check for updates. Try again later.";
+        elements.updateCheckStatus.textContent =
+          "Uuendusi ei õnnestunud kontrollida. Proovi hiljem uuesti.";
       }
     } finally {
       if (!cleanedUp) elements.updateCheckButton.disabled = false;
@@ -281,7 +286,7 @@ export function mountSettingsPage({
   async function saveEnabledPreference(): Promise<void> {
     const previousEnabled = currentSettings.enhancementEnabled;
     setSettingsControlsDisabled(true);
-    setStatus("Saving…", "saving");
+    setStatus("Salvestamine…", "saving");
 
     try {
       currentSettings = {
@@ -289,7 +294,11 @@ export function mountSettingsPage({
         enhancementEnabled: elements.enabledInput.checked,
       };
       await settingsStore.set(currentSettings);
-      setStatus(elements.enabledInput.checked ? "Custom theme is on." : "Custom theme is off.");
+      setStatus(
+        elements.enabledInput.checked
+          ? "Sinu Stuudiumi kujundus on sisse lülitatud."
+          : "Sinu Stuudiumi kujundus on välja lülitatud.",
+      );
     } catch (error) {
       console.error("Unable to save enhancement settings", error);
       currentSettings = {
@@ -297,7 +306,7 @@ export function mountSettingsPage({
         enhancementEnabled: previousEnabled,
       };
       elements.enabledInput.checked = previousEnabled;
-      setStatus("Could not save the preference.", "error");
+      setStatus("Eelistust ei õnnestunud salvestada.", "error");
     } finally {
       setSettingsControlsDisabled(false);
     }

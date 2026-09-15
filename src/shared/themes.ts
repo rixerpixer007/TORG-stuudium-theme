@@ -19,9 +19,9 @@ export interface ThemeDefinition {
 export const THEMES = [
   {
     id: "graphite-mint",
-    name: "Graphite Mint",
-    shortName: "Mint",
-    description: "The original graphite theme with its mint accent.",
+    name: "Grafiit ja münt",
+    shortName: "Münt",
+    description: "Algupärane grafiiditoonides kujundus mündirohelise aktsendiga.",
     colorScheme: "dark",
     preview: {
       canvas: "#0f1311",
@@ -32,9 +32,9 @@ export const THEMES = [
   },
   {
     id: "graphite-blue",
-    name: "Graphite Blue",
-    shortName: "Blue",
-    description: "A cool graphite palette with a calm blue accent.",
+    name: "Grafiit ja sinine",
+    shortName: "Sinine",
+    description: "Jahedates grafiiditoonides kujundus rahuliku sinise aktsendiga.",
     colorScheme: "dark",
     preview: {
       canvas: "#0c1118",
@@ -45,9 +45,9 @@ export const THEMES = [
   },
   {
     id: "obsidian-red",
-    name: "Obsidian Red",
-    shortName: "Red",
-    description: "Near-black charcoal surfaces with a vivid crimson accent.",
+    name: "Obsidiaan ja punane",
+    shortName: "Punane",
+    description: "Peaaegu mustad söetoonid erksa karmiinpunase aktsendiga.",
     colorScheme: "dark",
     preview: {
       canvas: "#0d0d0f",
@@ -58,9 +58,9 @@ export const THEMES = [
   },
   {
     id: "velvet-mauve",
-    name: "Velvet Mauve",
-    shortName: "Mauve",
-    description: "A soft mocha-dark palette with a lavender-purple accent.",
+    name: "Samet ja lillakas",
+    shortName: "Lillakas",
+    description: "Pehme tume mokapalett lavendlililla aktsendiga.",
     colorScheme: "dark",
     preview: {
       canvas: "#11111b",
@@ -71,9 +71,9 @@ export const THEMES = [
   },
   {
     id: "midnight-amber",
-    name: "Midnight Amber",
-    shortName: "Amber",
-    description: "Warm ink-black neutrals lit by a rich amber accent.",
+    name: "Kesköö ja merevaik",
+    shortName: "Merevaik",
+    description: "Soojad tindimustad toonid rikkaliku merevaigukarva aktsendiga.",
     colorScheme: "dark",
     preview: {
       canvas: "#11100d",

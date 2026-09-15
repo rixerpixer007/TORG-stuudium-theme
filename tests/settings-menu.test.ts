@@ -38,7 +38,7 @@ describe("settings menu feature", () => {
     window.close();
   });
 
-  it("mounts one localized button directly after Avaldused", () => {
+  it("mounts one Estonian button directly after Avaldused", () => {
     const feature = createSettingsMenuFeature({
       document,
       openSettings: vi.fn(() => Promise.resolve(true)),
@@ -61,7 +61,6 @@ describe("settings menu feature", () => {
 
   it("mounts in application menus that use absolute navigation links", () => {
     document.body.classList.remove("lang_et");
-    document.documentElement.dataset.suhtlusLanguage = "et";
     document.querySelectorAll<HTMLAnchorElement>("a[href]").forEach((link) => {
       link.href = new URL(link.getAttribute("href") ?? "", document.baseURI).href;
     });

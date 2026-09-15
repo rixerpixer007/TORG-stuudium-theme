@@ -44,8 +44,8 @@ describe("shared settings page", () => {
         <section data-settings-section="privacy"></section>
         <section data-settings-section="updates">
           <div data-setting-item data-search-terms="version update">
-            <span id="app-version">Loading…</span>
-            <button id="check-for-updates" type="button">Check now</button>
+            <span id="app-version">Laadimine…</span>
+            <button id="check-for-updates" type="button">Kontrolli</button>
             <p id="update-check-status"></p>
           </div>
         </section>
@@ -63,6 +63,7 @@ describe("shared settings page", () => {
     const themeInputs = document.querySelectorAll<HTMLInputElement>('input[name="theme"]');
     expect(themeInputs).toHaveLength(5);
     expect(themeInputs[1]?.checked).toBe(true);
+    expect(themeInputs[1]?.getAttribute("aria-label")).toBe("Grafiit ja sinine");
     expect(document.documentElement.dataset.sidTheme).toBe("graphite-blue");
     expect(document.documentElement.dataset.sidSettingsState).toBe("ready");
 
@@ -127,7 +128,7 @@ describe("shared settings page", () => {
 
     expect(appUpdates.checkForUpdates).toHaveBeenCalledOnce();
     expect(document.querySelector("#update-check-status")?.textContent).toBe(
-      "Sinu Stuudium is up to date.",
+      "Sinu Stuudium on ajakohane.",
     );
     cleanup();
   });

@@ -12,15 +12,6 @@ function linkTargetsPath(link: HTMLAnchorElement, pathname: string): boolean {
   return link.origin === link.ownerDocument.location.origin && link.pathname === pathname;
 }
 
-function isEstonianDocument(document: Document): boolean {
-  if (document.querySelector("body")?.classList.contains("lang_et")) return true;
-  if (document.documentElement.dataset.suhtlusLanguage === "et") return true;
-
-  return [
-    ...document.querySelectorAll<HTMLAnchorElement>('a[href*="/users/language_select"]'),
-  ].some((link) => link.textContent.trim() === "In English");
-}
-
 function findMainMenu(document: Document): HTMLElement | null {
   const panels = document.querySelectorAll<HTMLElement>(
     ".st-nav-item-expandable > .st-nav-item-expandable-content",
@@ -95,8 +86,7 @@ function createButton(document: Document, openSettings: () => Promise<boolean>):
 
   const label = document.createElement("span");
   label.className = "st-nav-item-label";
-  const estonian = isEstonianDocument(document);
-  label.textContent = estonian ? "Teema seaded" : "Theme settings";
+  label.textContent = "Teema seaded";
 
   button.append(graphic, label);
   const handleClick = async (): Promise<void> => {

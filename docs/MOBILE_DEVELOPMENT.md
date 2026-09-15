@@ -224,7 +224,7 @@ Run `npm run build:mobile:web` before pressing Android Studio's Run button after
 changing shared TypeScript or CSS. The Android build deliberately fails with a
 clear message if the generated asset manifest is absent.
 
-## 8. Prepare the Samsung S25
+## 8. Prepare the phone
 
 These settings affect only development access and can be turned off afterward:
 
@@ -239,7 +239,7 @@ These settings affect only development access and can be turned off afterward:
 Check the connection from Terminal:
 
 ```sh
-~/Library/Android/sdk/platform-tools/adb devices -l
+~/Library/Android/sdk/platform-tools/adb devices
 ```
 
 The phone should be listed as `device`. `unauthorized` means the confirmation
@@ -430,7 +430,7 @@ approval.
 
 ## 15. Remove the development app cleanly
 
-Long-press the app icon on the Samsung phone and choose **Uninstall**, or run:
+Long-press the app icon on the phone and choose **Uninstall**, or run:
 
 ```sh
 ~/Library/Android/sdk/platform-tools/adb uninstall io.github.rixerpixer007.stuudium
