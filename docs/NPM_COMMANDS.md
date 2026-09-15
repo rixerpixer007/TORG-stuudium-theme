@@ -34,6 +34,8 @@ the current checkout.
 | Install the locked dependencies                 | `npm ci`                                                  |
 | Work on the Chromium extension continuously     | `npm run dev`                                             |
 | Build the unpacked production extension         | `npm run build`                                           |
+| Regenerate extension and Android brand images   | `npm run build:brand`                                     |
+| Check generated brand images for staleness      | `npm run check:brand`                                     |
 | Regenerate theme CSS outputs                    | `npm run build:theme`                                     |
 | Check the committed userstyle for staleness     | `npm run check:theme`                                     |
 | Run the main project validation                 | `npm run validate`                                        |
@@ -54,6 +56,45 @@ Runs automatically after `npm ci` and normal dependency installation. It:
 2. Runs `wxt prepare` to generate WXT types and development metadata.
 
 You normally do not run this command directly.
+
+## Brand commands
+
+The three canonical 1024 x 1024 PNG masters are:
+
+- `assets/brand/sinu-stuudium-dark.png`;
+- `assets/brand/sinu-stuudium-light.png`;
+- `assets/brand/sinu-stuudium-mark.png`.
+
+Replace the appropriate master files instead of editing smaller platform images
+directly. The transparent mark must retain an alpha channel.
+
+### `npm run build:brand`
+
+Validates the three master images, then deterministically writes:
+
+- `public/icons/icon-{16,32,48,128}.png`, resized from the dark master for the
+  extension manifest, toolbar, and shared settings header;
+- `apps/android/app/src/main/res/drawable-nodpi/ic_app_foreground.png`, made by
+  centering the transparent mark at 700 x 700 on a transparent 1024 x 1024
+  adaptive-icon foreground canvas.
+
+The light master is used directly by documentation rather than producing a
+smaller platform image, but the command still validates it as part of the
+canonical brand set. After changing a master, run this command before reviewing
+or committing the generated platform images.
+
+The extension `dev` and `build` commands and the Android mobile-web build invoke
+the brand build automatically. To refresh complete consumable artifacts, use
+`npm run build` for the unpacked extension and `npm run build:android:debug` for
+the debug APK. Running `npm run build:brand` by itself updates the tracked image
+sources but does not rebuild an existing `.output/chrome-mv3/` production
+extension.
+
+### `npm run check:brand`
+
+Generates the expected platform images in memory and compares their bytes with
+the tracked outputs without writing files. A failure identifies the missing or
+stale image and tells you to run `npm run build:brand`.
 
 ## Theme commands
 
@@ -326,6 +367,7 @@ Use the validation tier that matches the change:
 | Change                                             | Minimum project command set                                                                 |
 | -------------------------------------------------- | ------------------------------------------------------------------------------------------- |
 | Documentation only                                 | No build required; run `npm run format:check`                                               |
+| Brand master or generated platform image           | `npm run build:brand`, then `npm run check:brand`                                           |
 | Canonical theme CSS                                | `npm run build:theme`, then `npm run check:theme` and relevant tests                        |
 | TypeScript or extension behavior                   | Relevant test, `npm run typecheck`, and `npm run lint`                                      |
 | Extension manifest, entrypoint, or build structure | `npm run build`, then `npm run validate:build`                                              |

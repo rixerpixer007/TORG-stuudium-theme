@@ -63,6 +63,9 @@ assert(
 );
 for (const iconPath of Object.values(expectedIcons)) {
   assert(files.includes(iconPath), `Packaged icon is missing: ${iconPath}`);
+  const builtIcon = fs.readFileSync(path.join(BUILD_DIRECTORY, iconPath));
+  const sourceIcon = fs.readFileSync(path.join(PROJECT_ROOT, "public", iconPath));
+  assert(builtIcon.equals(sourceIcon), `Packaged icon is stale: ${iconPath}`);
 }
 
 const bootstrap = manifest.content_scripts[0];
@@ -85,7 +88,8 @@ assert(
   optionsHtml.includes('data-sid-settings-state="loading"') &&
     optionsHtml.includes('aria-busy="true"') &&
     optionsHtml.includes('data-sid-theme-cache-key="sid-settings-theme"') &&
-    optionsHtml.includes('src="/options-startup.js"'),
+    optionsHtml.includes('src="/options-startup.js"') &&
+    optionsHtml.includes('src="/icons/icon-48.png"'),
   "Options page startup gate is missing",
 );
 assert(files.includes("options-startup.js"), "Options page startup script is missing");

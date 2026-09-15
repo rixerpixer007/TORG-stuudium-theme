@@ -77,6 +77,7 @@ async function buildSettingsPage(outputDirectory) {
             return html
               .replace(/\s*<meta name="manifest\.open_in_tab" content="true" \/>/, "")
               .replace(/\s*<script src="\/options-startup\.js"><\/script>/, "")
+              .replace('src="/icons/icon-48.png"', 'src="../../../public/icons/icon-48.png"')
               .replace('src="./main.ts"', 'src="../../mobile/entrypoints/settings.ts"');
           },
         },
