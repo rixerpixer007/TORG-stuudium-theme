@@ -21,11 +21,10 @@ Sinu Stuudium on sõltumatu ja mitteametlik projekt TORG Stuudiumile. See ei ole
 
 | Platvorm                                     | Staatus          | Kontrollitud keskkond   |
 | -------------------------------------------- | ---------------- | ----------------------- |
-| Chrome ja teised Chromiumi-põhised brauserid | Beeta            | Chrome ja Brave         |
-| Android                                      | Beeta            | Samsung S25, Android 16 |
-| Firefox, Safari ja iOS                       | Praegu toetamata | —                       |
+| Chrome ja teised Chromiumi-põhised brauserid | Peagi saadaval | Chrome ja Brave         |
+| Android                                      | ✅            | Android 16 |
+| Firefox, Safari ja iOS                       | ❌ | —                       |
 
-Android 8 tugi ei ole veel päris seadmel ega sobiva WebView'ga emulaatoril kontrollitud. Teisi Chromiumi-põhiseid brausereid ei käsitleta eraldi kontrollituna enne nende läbimist väljalasketestis.
 
 ## Mida Sinu Stuudium teeb
 
@@ -49,11 +48,7 @@ Täpsem selgitus on [privaatsuspoliitikas](docs/PRIVACY.md).
 
 ## Paigaldamine
 
-Androidi avaliku eelväljalaske leiab [GitHub Releasesi lehelt](https://github.com/rixerpixer007/TORG-stuudium-theme/releases/tag/android-v0.1.0-beta). Laadi alla APK-fail ning kinnita selle paigaldamine Androidis. Kuna tegemist on eelväljalaskega, jätkub uuendamise ja eri Androidi versioonide kontrollimine.
-
-- Brauserilaienduse kohaliku arenduskeskkonna juhised: [EXTENSION_DEVELOPMENT.md](docs/EXTENSION_DEVELOPMENT.md)
-- Androidi ehitamise ja testimise juhised: [MOBILE_DEVELOPMENT.md](docs/MOBILE_DEVELOPMENT.md)
-- Projekti npm-käskude koondjuhend: [NPM_COMMANDS.md](docs/NPM_COMMANDS.md)
+Androidi avaliku eelväljalaske leiab [GitHub Releasesi lehelt](https://github.com/rixerpixer007/TORG-stuudium-theme/releases). Laadi alla APK-fail ning kinnita selle paigaldamine Androidis.
 
 ## Kellele see on mõeldud?
 
@@ -67,8 +62,9 @@ Igapäevane koolikeskkond peaks kohanduma kasutajaga, mitte vastupidi. Sinu Stuu
 
 ## Arendus ja tugi
 
-Projekti arendab GitHubis [rixerpixer007](https://github.com/rixerpixer007). Tehniline suund ja platvormide plaan on kirjeldatud failis [PROJECT_DIRECTION.md](docs/PROJECT_DIRECTION.md).
-
+Projekti arendab GitHubis [rixerpixer007](https://github.com/rixerpixer007). 
 Probleemidest ja ettepanekutest saab teada anda [GitHub Issuesi kaudu](https://github.com/rixerpixer007/TORG-stuudium-theme/issues). Ära lisa veateatele nime, hindeid, sõnumeid, küpsiseid, sisselogimisandmeid ega muud privaatset kooliinfot.
 
-Projekt on avaldatud [MIT-litsentsi](LICENSE) alusel.
+- Brauserilaienduse kohaliku arenduskeskkonna juhised: [EXTENSION_DEVELOPMENT.md](docs/EXTENSION_DEVELOPMENT.md)
+- Androidi ehitamise ja testimise juhised: [MOBILE_DEVELOPMENT.md](docs/MOBILE_DEVELOPMENT.md)
+- Projekti npm-käskude koondjuhend: [NPM_COMMANDS.md](docs/NPM_COMMANDS.md)
