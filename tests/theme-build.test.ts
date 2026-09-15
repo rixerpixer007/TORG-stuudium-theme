@@ -80,8 +80,16 @@ describe("generated theme", () => {
     const emptyFolderRule = findRule(css, ".add_to_folder .is_empty_indicator");
     const responseLinkRule = findRule(css, ".response_node_inner .node_time em");
     const responseMetaRule = findRule(css, ".single_node_is_response .node-meta");
+    const absenceDayCheckboxRule = findRule(css, ".day_heading .custom-checkbox-v2 + em");
     const unexcusedAbsenceRule = findRule(css, ".absences .custom-checkbox-v2 + em");
-    const excusedAbsenceRule = findRule(css, ".absences .custom-checkbox-v2:checked + em");
+    const excusedAbsenceRule = findRule(
+      css,
+      ":where(.day_heading, .absences) .custom-checkbox-v2:checked + em",
+    );
+    const absenceLabelHoverRule = findRule(
+      css,
+      ".bl-abs-label.bl-is-selectable:is(:hover, :focus-within)",
+    );
     const rejectedExcuseRule = findRule(css, ".excuse.excuse_rejected");
     const lessonBordersRule = findRule(css, ".student_subject_grades :where(tr, th, td)");
 
@@ -105,6 +113,20 @@ describe("generated theme", () => {
         expect.objectContaining({
           prop: "background",
           value: "transparent",
+          important: true,
+        }),
+      ]),
+    );
+    expect(absenceDayCheckboxRule?.nodes).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          prop: "background-color",
+          value: "var(--sid-control)",
+          important: true,
+        }),
+        expect.objectContaining({
+          prop: "border",
+          value: "1px solid var(--sid-border-strong)",
           important: true,
         }),
       ]),
@@ -133,6 +155,15 @@ describe("generated theme", () => {
         expect.objectContaining({
           prop: "border-color",
           value: "var(--sid-accent)",
+          important: true,
+        }),
+      ]),
+    );
+    expect(absenceLabelHoverRule?.nodes).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          prop: "background-color",
+          value: "var(--sid-surface-3)",
           important: true,
         }),
       ]),

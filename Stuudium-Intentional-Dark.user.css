@@ -1657,6 +1657,15 @@
     color: var(--sid-text) !important;
   }
 
+  .absences_popover .day_heading .custom-checkbox-v2 + em {
+    box-sizing: border-box !important;
+    background-color: var(--sid-control) !important;
+    background-image: none !important;
+    border: 1px solid var(--sid-border-strong) !important;
+    border-radius: var(--sid-radius-xs) !important;
+    box-shadow: none !important;
+  }
+
   .absences_popover .divider {
     background: var(--sid-border) !important;
   }
@@ -1678,10 +1687,22 @@
     box-shadow: none !important;
   }
 
-  .absences_popover .absences .custom-checkbox-v2:checked + em {
+  .absences_popover :where(.day_heading, .absences) .custom-checkbox-v2:checked + em {
     background-color: var(--sid-control) !important;
     background-image: var(--sid-checkmark-image) !important;
     border-color: var(--sid-accent) !important;
+  }
+
+  .absences_popover
+    :where(.day_heading, .absences)
+    .custom-checkbox-v2:focus-visible
+    + em {
+    outline: 2px solid var(--sid-accent) !important;
+    outline-offset: 2px !important;
+  }
+
+  .absences_popover .bl-abs-label.bl-is-selectable:is(:hover, :focus-within) {
+    background-color: var(--sid-surface-3) !important;
   }
 
   .absences_popover .absences .excused .excuse {
