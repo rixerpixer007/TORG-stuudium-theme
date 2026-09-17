@@ -23,3 +23,65 @@ body.page_dashboard_recent :is(
   background: var(--sid-surface-3) !important;
 }
 
+/* Inline teacher questions shown inside a lesson in the recent diary feed. */
+body.page_dashboard_recent #dashboard_recent .lesson_feedback_prompt_respond {
+  color: var(--sid-text-2) !important;
+  background: var(--sid-surface-2) !important;
+  border-color: var(--sid-border) !important;
+  box-shadow: none !important;
+}
+
+body.page_dashboard_recent
+  #dashboard_recent
+  .lesson_feedback_prompt_respond
+  .bl-title {
+  color: var(--sid-text-2) !important;
+}
+
+body.page_dashboard_recent
+  #dashboard_recent
+  .lesson_feedback_prompt_respond
+  :where(.bl-question, strong) {
+  color: var(--sid-text) !important;
+}
+
+body.page_dashboard_recent
+  #dashboard_recent
+  .lesson_feedback_prompt_respond
+  .bl-saved-message {
+  color: var(--sid-accent-strong) !important;
+  background: var(--sid-accent-soft) !important;
+  border-color: var(--sid-accent-border) !important;
+}
+
+body.page_dashboard_recent
+  #dashboard_recent
+  .lesson_feedback_prompt_respond
+  .bl-choices
+  > a[href="#"] {
+  color: var(--sid-accent-strong) !important;
+  background: transparent !important;
+  border-color: var(--sid-accent-border) !important;
+  box-shadow: none !important;
+  text-decoration: none !important;
+}
+
+body.page_dashboard_recent
+  #dashboard_recent
+  .lesson_feedback_prompt_respond
+  .bl-choices
+  > a[href="#"]:is(:hover, :focus-visible) {
+  color: var(--sid-accent-strong) !important;
+  background: var(--sid-accent-soft) !important;
+  border-color: var(--sid-accent) !important;
+}
+
+body.page_dashboard_recent
+  #dashboard_recent
+  .lesson_feedback_prompt_respond
+  .bl-choices
+  > a.bl-choice-selected {
+  color: var(--sid-accent-ink) !important;
+  background: var(--sid-accent) !important;
+  border-color: var(--sid-accent) !important;
+}
