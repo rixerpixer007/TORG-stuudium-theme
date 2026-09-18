@@ -1,70 +1,77 @@
 # Sinu Stuudium
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/brand/sinu-stuudium-dark.png">
-  <source media="(prefers-color-scheme: light)" srcset="assets/brand/sinu-stuudium-light.png">
-  <img src="assets/brand/sinu-stuudium-light.png" alt="Sinu Stuudiumi logo" width="180">
-</picture>
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/brand/sinu-stuudium-dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="assets/brand/sinu-stuudium-light.png">
+    <img src="assets/brand/sinu-stuudium-light.png" alt="Sinu Stuudiumi logo" width="180">
+  </picture>
 
-> **Stuudium sinu moodi.**
-
-**TORGi õpilaselt TORGi õpilastele.**
+  <p><strong>Stuudium sinu moodi.</strong></p>
+  <p><strong>TORGi õpilaselt TORGi õpilastele.</strong></p>
+</div>
 
 > [!WARNING]
 > **Tähelepanu:** Sinu Stuudium on arendusfaasis olev prototüüp. Mõned funktsioonid võivad olla piiratud või ei pruugi veel töötada.
 
 Kohanda TORG Stuudium enda moodi – läbimõeldud tume kujundus ja praktilised täiustused.
 
-Sinu Stuudium on sõltumatu ja mitteametlik projekt TORG Stuudiumile. See ei ole Stuudiumi ega TORGi ametlik toode.
+## Installimine
 
-## Platvormid
+Androidi rakenduse saab alla laadida [GitHub Releasesi lehelt](https://github.com/rixerpixer007/TORG-stuudium-theme/releases). Laadi alla APK-fail ning kinnita selle paigaldamine Androidis.
 
-| Platvorm                                     | Staatus          | Kontrollitud keskkond   |
-| -------------------------------------------- | ---------------- | ----------------------- |
-| Chrome ja teised Chromiumi-põhised brauserid | Peagi saadaval | Chrome ja Brave         |
-| Android                                      | ✅            | Android 16 |
-| Firefox, Safari ja iOS                       | ❌ | —                       |
+Brauserilaiendus Chrome-ile, Brave-ile ja muudele Chromium-põhistele brauseritele on varsti saadaval.
 
+## Mis on Sinu Stuudium?
 
-## Mida Sinu Stuudium teeb
+Sinu Stuudium täiendab päris TORG Stuudiumit, säilitades selle tuttava ülesehituse ja tööviisi. See lisab tumeda kujunduse, võimaluse välimust enda järgi kohandada ning praktilisi täiustusi nii arvutis kui ka Androidis.
 
-### Läbimõeldud tume kujundus
+Projekt sündis minu igapäevasest kogemusest TORGi õpilasena. Tahtsin, et tuttav Stuudium oleks isikupärasem, silmadele rahulikum ja mugavam kasutada. Projekt areneb päris kasutuses märgatud valukohtade ja vajaduste põhjal. Praegu keskendub Sinu Stuudium TORGi õpilastele ja Stuudiumi õpilasevaatele.
 
-Terviklik välimus muudab Stuudiumi silmadele rahulikumaks, säilitades samal ajal tuttava ülesehituse ja tööviisi.
+<!--
+## Ekraanipildid
 
-### Vali endale sobiv välimus
+Siia lisandub hiljem valik arvuti- ja telefonivaateid ning link eraldi galeriile,
+kus saab näha kõiki Sinu Stuudiumi kujundusi.
+-->
 
-Vali erinevate tumedate kujunduste vahel. Sinu valik jääb meelde nii brauserilaienduses kui ka Androidi rakenduses.
+## Omadused
 
-### Praktilised täiustused
+- Läbimõeldud tume kujundus
+- Erinevad kujundused
+- Seaded Stuudiumis
+- Eraldiseisev Androidi rakendus
+## Saadavus
 
-Brauserilaiendus lisab teema seaded otse Stuudiumi menüüsse. Androidi rakendus pakub sama kujundust eraldi rakenduseaknas ning loomulikku allatõmbega värskendamist.
+| Platvorm             | Saadavus        | Kontrollitud keskkond |
+| -------------------- | --------------- | --------------------- |
+| Android              | Saadaval          | Android 16            |
+| Chrome ja Brave      | Varsti saadaval | Chrome ja Brave       |
+| Firefox, Safari, iOS | Pole toetatud   | —                     |
 
-### Privaatsust austav
+## Privaatsus ja sõltumatus
 
 Sinu kooliandmeid ei koguta ega saadeta arendajale. Sinu Stuudium salvestab ainult toimimiseks vajalikud seaded sinu seadmesse. Sisselogimist ja kooliandmeid töötleb päris Stuudium.
 
+Sinu Stuudium on sõltumatu ja mitteametlik projekt TORG Stuudiumile. See ei ole Stuudiumi ega TORGi ametlik toode.
+
 Täpsem selgitus on [privaatsuspoliitikas](docs/PRIVACY.md).
 
-## Paigaldamine
+## Tagasiside ja panustamine
 
-Androidi avaliku eelväljalaske leiab [GitHub Releasesi lehelt](https://github.com/rixerpixer007/TORG-stuudium-theme/releases). Laadi alla APK-fail ning kinnita selle paigaldamine Androidis.
+Probleemidest ja ettepanekutest saab teada anda [GitHub Issuesi kaudu](https://github.com/rixerpixer007/TORG-stuudium-theme/issues).
 
-## Kellele see on mõeldud?
+Ära lisa veateatele nime, hindeid, sõnumeid, küpsiseid, sisselogimisandmeid ega muud privaatset kooliinfot.
 
-Sinu Stuudium keskendub praegu TORGi õpilastele ja õpilase Stuudiumi vaatele. Lapsevanema ja õpetaja vaateid ei ole veel eraldi testitud ega toetatuks lubatud.
+<details>
+  <summary>Arendajale</summary>
 
-## Miks see projekt sündis?
+- [Brauserilaienduse arendamine](docs/EXTENSION_DEVELOPMENT.md)
+- [Androidi rakenduse ehitamine ja testimine](docs/MOBILE_DEVELOPMENT.md)
+- [Projekti npm-käsud](docs/NPM_COMMANDS.md)
 
-Sinu Stuudium sündis minu enda igapäevasest kogemusest TORGi õpilasena. Tahtsin, et tuttav Stuudium oleks isikupärasem, silmadele rahulikum ja mugavam kasutada. Projekt areneb päris kasutuses märgatud valukohtade ja vajaduste põhjal.
+</details>
 
-Igapäevane koolikeskkond peaks kohanduma kasutajaga, mitte vastupidi. Sinu Stuudiumi visioon on Stuudium, mis tundub isiklikum, mugavam ja usaldusväärsem, säilitades samal ajal tuttava põhikogemuse ja austades kasutaja privaatsust.
+## Litsents
 
-## Arendus ja tugi
-
-Projekti arendab GitHubis [rixerpixer007](https://github.com/rixerpixer007). 
-Probleemidest ja ettepanekutest saab teada anda [GitHub Issuesi kaudu](https://github.com/rixerpixer007/TORG-stuudium-theme/issues). Ära lisa veateatele nime, hindeid, sõnumeid, küpsiseid, sisselogimisandmeid ega muud privaatset kooliinfot.
-
-- Brauserilaienduse kohaliku arenduskeskkonna juhised: [EXTENSION_DEVELOPMENT.md](docs/EXTENSION_DEVELOPMENT.md)
-- Androidi ehitamise ja testimise juhised: [MOBILE_DEVELOPMENT.md](docs/MOBILE_DEVELOPMENT.md)
-- Projekti npm-käskude koondjuhend: [NPM_COMMANDS.md](docs/NPM_COMMANDS.md)
+Sinu Stuudium on avaldatud [MIT-litsentsi](LICENSE) alusel.
