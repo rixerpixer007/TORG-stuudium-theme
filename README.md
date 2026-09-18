@@ -1,13 +1,7 @@
 # Sinu Stuudium
 
 <div align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/brand/sinu-stuudium-dark.png">
-    <source media="(prefers-color-scheme: light)" srcset="assets/brand/sinu-stuudium-light.png">
-    <img src="assets/brand/sinu-stuudium-light.png" alt="Sinu Stuudiumi logo" width="180">
-  </picture>
-
-  <p><strong>Stuudium sinu moodi.</strong></p>
+  <img src="assets/readme/github-banner.webp" alt="Sinu Stuudium – Stuudium sinu moodi." width="100%">
   <p><strong>TORGi õpilaselt TORGi õpilastele.</strong></p>
 </div>
 
@@ -18,7 +12,13 @@ Kohanda TORG Stuudium enda moodi – läbimõeldud tume kujundus ja praktilised 
 
 ## Installimine
 
-Androidi rakenduse saab alla laadida [GitHub Releasesi lehelt](https://github.com/rixerpixer007/TORG-stuudium-theme/releases). Laadi alla APK-fail ning kinnita selle paigaldamine Androidis.
+
+
+<div align="center">
+  <a href="https://github.com/rixerpixer007/TORG-stuudium-theme/releases">
+    <img src="assets/readme/download-github.png" alt="Laadi Sinu Stuudium GitHubist alla" width="258">
+  </a>
+</div>
 
 Brauserilaiendus Chrome-ile, Brave-ile ja muudele Chromium-põhistele brauseritele on varsti saadaval.
 
@@ -26,14 +26,25 @@ Brauserilaiendus Chrome-ile, Brave-ile ja muudele Chromium-põhistele brauserite
 
 Sinu Stuudium täiendab päris TORG Stuudiumit, säilitades selle tuttava ülesehituse ja tööviisi. See lisab tumeda kujunduse, võimaluse välimust enda järgi kohandada ning praktilisi täiustusi nii arvutis kui ka Androidis.
 
-Projekt sündis minu igapäevasest kogemusest TORGi õpilasena. Tahtsin, et tuttav Stuudium oleks isikupärasem, silmadele rahulikum ja mugavam kasutada. Projekt areneb päris kasutuses märgatud valukohtade ja vajaduste põhjal. Praegu keskendub Sinu Stuudium TORGi õpilastele ja Stuudiumi õpilasevaatele.
+Projekt sündis minu igapäevasest kogemusest TORGi õpilasena. Tahtsin, et tuttav Stuudium oleks isikupärasem, pimedas silmadele rahulikum ja mugavam kasutada. Projekt areneb päris kasutuses märgatud valukohtade ja vajaduste põhjal. Praegu keskendub Sinu Stuudium TORGi õpilastele ja Stuudiumi õpilasevaatele.
 
-<!--
 ## Ekraanipildid
 
-Siia lisandub hiljem valik arvuti- ja telefonivaateid ning link eraldi galeriile,
-kus saab näha kõiki Sinu Stuudiumi kujundusi.
--->
+<p align="center">
+  <picture>
+    <source media="(max-width: 600px)" srcset="assets/readme/screenshots/cross-device-home-narrow.webp">
+    <img src="assets/readme/screenshots/cross-device-home-wide.webp" alt="Sinu Stuudiumi põhivaade arvutis ja telefonis Graphite Minti kujundusega" width="100%">
+  </picture>
+</p>
+
+<p align="center">
+  <picture>
+    <source media="(max-width: 600px)" srcset="assets/readme/screenshots/cross-device-settings-narrow.webp">
+    <img src="assets/readme/screenshots/cross-device-settings-wide.webp" alt="Sinu Stuudiumi kujunduse valimine arvutis ja telefonis" width="100%">
+  </picture>
+</p>
+
+- [Vaata rohkem ekraanipilte →](SCREEN_SHOT.md)
 
 ## Omadused
 
@@ -41,11 +52,12 @@ kus saab näha kõiki Sinu Stuudiumi kujundusi.
 - Erinevad kujundused
 - Seaded Stuudiumis
 - Eraldiseisev Androidi rakendus
+
 ## Saadavus
 
 | Platvorm             | Saadavus        | Kontrollitud keskkond |
 | -------------------- | --------------- | --------------------- |
-| Android              | Saadaval          | Android 16            |
+| Android              | Saadaval        | Android 16            |
 | Chrome ja Brave      | Varsti saadaval | Chrome ja Brave       |
 | Firefox, Safari, iOS | Pole toetatud   | —                     |
 
@@ -61,7 +73,7 @@ Täpsem selgitus on [privaatsuspoliitikas](docs/PRIVACY.md).
 
 Probleemidest ja ettepanekutest saab teada anda [GitHub Issuesi kaudu](https://github.com/rixerpixer007/TORG-stuudium-theme/issues).
 
-Ära lisa veateatele nime, hindeid, sõnumeid, küpsiseid, sisselogimisandmeid ega muud privaatset kooliinfot.
+
 
 <details>
   <summary>Arendajale</summary>
