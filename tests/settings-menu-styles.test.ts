@@ -95,4 +95,35 @@ describe("settings menu styles", () => {
       ),
     ).toBe(true);
   });
+
+  it("does not paint a missed mobile menu tap as active", () => {
+    const desktopHoverRule = primaryNavigation.nodes.find(
+      (node): node is postcss.Rule =>
+        node.type === "rule" &&
+        node.selector.includes(
+          ".st-stuudium-navigation-2021:not(.st-nav-is-touch) .st-nav-item-expandable:hover > .st-nav-item",
+        ),
+    );
+    const collapsedTouchRule = primaryNavigation.nodes.find(
+      (node): node is postcss.Rule =>
+        node.type === "rule" &&
+        node.selector.includes('[data-role="st-nav-other-menu"]:not(.st-nav-item-expanded)') &&
+        node.selector.includes(":hover") &&
+        node.selector.includes("> .st-nav-item"),
+    );
+
+    expect(desktopHoverRule).toBeDefined();
+    expect(desktopHoverRule?.selector).not.toMatch(
+      /(^|,)\s*\.st-nav-item-expandable:hover > \.st-nav-item/,
+    );
+    expect(
+      collapsedTouchRule?.nodes.some(
+        (node) =>
+          node.type === "decl" &&
+          node.prop === "background" &&
+          node.value === "transparent" &&
+          node.important,
+      ),
+    ).toBe(true);
+  });
 });

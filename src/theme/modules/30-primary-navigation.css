@@ -36,11 +36,19 @@
   border-color: var(--sid-accent-border) !important;
 }
 
-.st-nav-item-expandable:hover > .st-nav-item,
+.st-stuudium-navigation-2021:not(.st-nav-is-touch) .st-nav-item-expandable:hover > .st-nav-item,
 .st-nav-is-touch .st-nav-item-expandable.st-nav-item-expanded > .st-nav-item {
   color: var(--sid-text) !important;
   background: var(--sid-accent-soft) !important;
   border-color: var(--sid-accent-border) !important;
+}
+
+.st-nav-is-touch
+  [data-role="st-nav-other-menu"]:not(.st-nav-item-expanded):hover
+  > .st-nav-item {
+  color: var(--sid-text-2) !important;
+  background: transparent !important;
+  border-color: var(--sid-border) !important;
 }
 
 .st-nav-item.sn-active {
