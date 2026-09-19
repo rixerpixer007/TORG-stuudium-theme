@@ -65,8 +65,8 @@
   background: var(--sid-canvas-soft) !important;
   border: 1px solid var(--sid-border) !important;
   border-radius: var(--sid-radius-sm) !important;
-  opacity: 0.82;
-  filter: invert(82%) grayscale(1) brightness(78%) contrast(86%) !important;
+  opacity: 1;
+  filter: none !important;
 }
 
 #main :where(.login-form-section, .account-help-section, .login-form-idauth-separate-container) {
