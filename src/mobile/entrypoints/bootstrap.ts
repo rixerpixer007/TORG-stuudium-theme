@@ -3,6 +3,7 @@ import { applyTheme, clearTheme } from "../../features/theme-selection";
 import { EnhancementRuntime } from "../../shared/lifecycle";
 import { detectStuudiumRoute } from "../../shared/routes";
 import { normalizeSettings, type ExtensionSettings } from "../../shared/settings";
+import { applyMobileDeveloperControls, clearMobileDeveloperControls } from "../developer-controls";
 
 const ACTIVATION_ATTRIBUTE = "data-sid-enhancement";
 
@@ -22,6 +23,7 @@ function startMobileBootstrap(): void {
 
   const mobileGlobal = globalThis as MobileBootstrapGlobal;
   mobileGlobal.__sidMobileCleanup?.();
+  applyMobileDeveloperControls(document.documentElement);
 
   let currentSettings: ExtensionSettings = normalizeSettings(
     mobileGlobal.__sidMobileInitialSettings,
@@ -81,6 +83,7 @@ function startMobileBootstrap(): void {
     window.removeEventListener("hashchange", handleNavigation);
     window.removeEventListener("pagehide", handlePageHide);
     settingsMenuRuntime.cleanup();
+    clearMobileDeveloperControls(document.documentElement);
     document.documentElement.removeAttribute(ACTIVATION_ATTRIBUTE);
     clearTheme(document.documentElement);
 

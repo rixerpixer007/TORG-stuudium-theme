@@ -1,3 +1,22 @@
 html {
   -webkit-tap-highlight-color: transparent;
 }
+
+/*
+ * Android WebView passkeys stay hidden until Stuudium publishes a matching
+ * Digital Asset Links association. Controlled by mobile/developer-controls.ts.
+ */
+html[data-sid-hide-passkey-login-controls]
+  #main
+  .login-form-idauth-separate-container.show_on_mobile,
+html[data-sid-hide-passkey-login-controls]
+  #main
+  :is(
+    [data-login-method="webauthn"],
+    [data-login-method="passkey-via-remote-device"],
+    [data-action="webauthn-auth"],
+    [data-action="passkey-via-remote-device"],
+    .custom-style-passkey
+  ) {
+  display: none !important;
+}

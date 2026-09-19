@@ -13,6 +13,7 @@ import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.webkit.WebSettingsCompat
 import androidx.webkit.WebViewFeature
 import org.json.JSONObject
 
@@ -41,6 +42,32 @@ fun Activity.readAsset(path: String): String =
 fun supportsRequiredWebViewFeatures(): Boolean =
     WebViewFeature.isFeatureSupported(WebViewFeature.DOCUMENT_START_SCRIPT) &&
         WebViewFeature.isFeatureSupported(WebViewFeature.WEB_MESSAGE_LISTENER)
+
+enum class WebAuthenticationStatus {
+    ENABLED,
+    FEATURE_UNAVAILABLE,
+    ENABLEMENT_REJECTED,
+}
+
+fun enableWebAuthenticationForApp(webView: WebView): WebAuthenticationStatus {
+    if (!WebViewFeature.isFeatureSupported(WebViewFeature.WEB_AUTHENTICATION)) {
+        return WebAuthenticationStatus.FEATURE_UNAVAILABLE
+    }
+
+    WebSettingsCompat.setWebAuthenticationSupport(
+        webView.settings,
+        WebSettingsCompat.WEB_AUTHENTICATION_SUPPORT_FOR_APP,
+    )
+
+    return if (
+        WebSettingsCompat.getWebAuthenticationSupport(webView.settings) ==
+            WebSettingsCompat.WEB_AUTHENTICATION_SUPPORT_FOR_APP
+    ) {
+        WebAuthenticationStatus.ENABLED
+    } else {
+        WebAuthenticationStatus.ENABLEMENT_REJECTED
+    }
+}
 
 fun Activity.showUnsupportedWebViewDialog() {
     AlertDialog.Builder(this)

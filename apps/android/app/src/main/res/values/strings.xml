@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Sinu Stuudium</string>
+    <string name="asset_statements" translatable="false">[{\"include\": \"https://torg.ope.ee/.well-known/assetlinks.json\"}]</string>
     <string name="loading_stuudium">Stuudiumi laadimine…</string>
     <string name="load_error_title">Stuudiumi laadimine ebaõnnestus</string>
     <string name="load_error_body">Kontrolli internetiühendust ja proovi uuesti.</string>

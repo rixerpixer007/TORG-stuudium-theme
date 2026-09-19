@@ -241,7 +241,10 @@ Rebuilds the mobile web assets and assembles a debug APK:
 apps/android/app/build/outputs/apk/debug/app-debug.apk
 ```
 
-The APK uses a local debug signature and is for development only.
+The APK uses a local debug signature and the application ID
+`io.github.rixerpixer007.stuudium.debug`, and appears as
+**Sinu Stuudium [DEBUG]** so it can be installed beside the release app. It is
+for development only.
 
 ### `npm run test:android`
 

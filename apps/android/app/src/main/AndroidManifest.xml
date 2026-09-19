@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TorgStuudiumEnhancement"
         android:usesCleartextTraffic="false">
+        <meta-data
+            android:name="asset_statements"
+            android:resource="@string/asset_statements" />
         <activity
             android:name=".SettingsActivity"
             android:exported="false"

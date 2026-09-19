@@ -95,7 +95,11 @@ Platvormide väiksemad ikoonid genereeritakse nendest lähtevaradest. Märki ei 
 
 ## Püsivad tehnilised identiteedid
 
-- **Android application ID:** `io.github.rixerpixer007.stuudium`
+- **Android release application ID:** `io.github.rixerpixer007.stuudium`
+- **Android debug application ID:** `io.github.rixerpixer007.stuudium.debug`
 - **GitHubi repositoorium:** `rixerpixer007/TORG-stuudium-theme`
 
-Androidi ID jääb kuvatavast brändinimest sõltumatuks. GitHubi repositooriumi nime ei muudeta esimese rebrändimise käigus, et säilitada olemasolevad lingid ja uuendusteekond.
+Androidi väljalaske ID jääb kuvatavast brändinimest sõltumatuks. Debug-versiooni
+`.debug` järelliide võimaldab testversiooni ja väljalaskeversiooni samal seadmel
+korraga kasutada. GitHubi repositooriumi nime ei muudeta esimese rebrändimise
+käigus, et säilitada olemasolevad lingid ja uuendusteekond.

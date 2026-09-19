@@ -267,8 +267,8 @@ These choices remain intentionally unresolved:
 - Whether physical Android 8 testing preserves `minSdk = 26` or demonstrates a
   reason to raise the public minimum to Android 10.
 - Release signing ownership and the final distribution process. The approved
-  Android application ID is `io.github.rixerpixer007.stuudium`; debug signing
-  remains development-only.
+  release application ID is `io.github.rixerpixer007.stuudium`; debug builds use
+  the `.debug` suffix and debug signing remains development-only.
 - The organization and governance of the eventual Apple developer account.
 - The post-theme-switching feature roadmap.
 - Which future theme should first exercise full light-palette overrides and

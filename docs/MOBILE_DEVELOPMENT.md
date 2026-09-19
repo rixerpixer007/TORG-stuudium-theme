@@ -143,6 +143,35 @@ Top-level links outside the approved Stuudium origin open in the system browser.
 Cross-origin subframes remain separate and do not receive the theme or native
 bridge.
 
+The main Stuudium WebView feature-detects Web Authentication and opts into the
+AndroidX WebKit app support level. The bundled settings WebView does not enable
+Web Authentication. Passkeys remain subject to Android Credential Manager's
+website-to-app verification: `https://torg.ope.ee/.well-known/assetlinks.json`
+must return a valid Digital Asset Links document that names the installed
+variant's application ID and exact signing-certificate SHA-256 fingerprint.
+Release builds use `io.github.rixerpixer007.stuudium`; debug builds use
+`io.github.rixerpixer007.stuudium.debug` and a local debug certificate. The app
+manifest declares the website location, but only Stuudium can publish the
+required response. Do not replace this check with a JavaScript credential
+bridge or browser-level WebAuthn mode.
+
+At the time of this check, that `assetlinks.json` URL returned HTTP 400 instead
+of a Digital Asset Links document. Android therefore cannot verify that the app
+may use passkeys for `torg.ope.ee`; an attempted login can surface this as a
+`NotReadableError`. Browser login is unaffected because a normal browser does
+not need to establish the Android app-to-website association.
+
+Until Stuudium publishes the association, the internal Android control
+`MOBILE_DEVELOPER_CONTROLS.hidePasskeyLoginControls` in
+`src/mobile/developer-controls.ts` is set to `true`. The document-start mobile
+bootstrap then marks the page and `src/mobile/platform.css` hides the WebAuthn
+and remote-device passkey login controls together with the otherwise empty
+mobile `või` divider. This is deliberately not a user setting and does not
+affect the browser extension. A developer can set the control to `false` and
+rebuild the mobile assets when testing the association; the control should only
+remain off for users after both release and debug app identities have matching
+published entries and have been verified on-device.
+
 ## 5. Build and validate the bundled web assets
 
 The generated mobile bundle contains the document-start bootstrap, critical
@@ -172,9 +201,12 @@ The APK is written to:
 apps/android/app/build/outputs/apk/debug/app-debug.apk
 ```
 
-This is signed automatically with a local debug key and is suitable only for
-development. No public release key or store credential belongs in this
-repository.
+This is signed automatically with a local debug key, uses the application ID
+`io.github.rixerpixer007.stuudium.debug`, and appears on the device as
+**Sinu Stuudium [DEBUG]**. It can therefore be installed beside the release app
+without replacing it or sharing its WebView session and preferences. It is
+suitable only for development. No public release key or store credential
+belongs in this repository.
 
 To run the complete Android validation in one command:
 
@@ -257,12 +289,13 @@ Or install the already-built APK from Terminal:
 ~/Library/Android/sdk/platform-tools/adb install -r apps/android/app/build/outputs/apk/debug/app-debug.apk
 ```
 
-`install -r` keeps the app's existing preferences and WebView session while
-replacing the debug APK. It does not alter the normal Chrome browser's cookies.
+`install -r` keeps the debug app's existing preferences and WebView session
+while replacing the debug APK. It does not alter the release app or the normal
+Chrome browser's cookies.
 
-The approved application ID is `io.github.rixerpixer007.stuudium`. It must stay
-unchanged after the first signed public release so later versions can be
-installed as normal Android updates.
+The permanent release application ID is `io.github.rixerpixer007.stuudium`.
+Debug builds append `.debug`; the release ID must stay unchanged so later
+release versions can be installed as normal Android updates.
 
 ## 10. Inspect Android and WebView errors
 
@@ -276,7 +309,7 @@ sensitive query values.
 From Terminal, the equivalent filtered stream is:
 
 ```sh
-~/Library/Android/sdk/platform-tools/adb logcat --pid=$(~/Library/Android/sdk/platform-tools/adb shell pidof io.github.rixerpixer007.stuudium)
+~/Library/Android/sdk/platform-tools/adb logcat --pid=$(~/Library/Android/sdk/platform-tools/adb shell pidof io.github.rixerpixer007.stuudium.debug)
 ```
 
 Stop it with `Control+C`.
@@ -306,24 +339,29 @@ code, test files, screenshots, logs, or issue descriptions.
 Test at minimum:
 
 1. Fresh launch while signed out and the complete login flow.
-2. Closing and reopening the app after login to check session persistence.
-3. Dashboard, a subject/journal page, Tera, Suhtlus, applications, and settings.
-4. Portrait and landscape orientation.
-5. Text entry with the on-screen keyboard visible.
-6. Android back gesture through WebView history, then app exit.
-7. A normal internal Stuudium link and a client-side navigation.
-8. A foreign top-level link, which must open outside the app.
-9. A file-upload control, including cancellation.
-10. A download link. The prototype currently hands downloads to the system
+2. On a WebView provider that supports `WEB_AUTHENTICATION`, confirm that
+   Logcat does not report `FEATURE_UNAVAILABLE` or `ENABLEMENT_REJECTED`. After
+   Stuudium publishes the matching Digital Asset Links response, authenticate
+   with an existing passkey and verify cancellation and no-matching-passkey
+   behavior.
+3. Closing and reopening the app after login to check session persistence.
+4. Dashboard, a subject/journal page, Tera, Suhtlus, applications, and settings.
+5. Portrait and landscape orientation.
+6. Text entry with the on-screen keyboard visible.
+7. Android back gesture through WebView history, then app exit.
+8. A normal internal Stuudium link and a client-side navigation.
+9. A foreign top-level link, which must open outside the app.
+10. A file-upload control, including cancellation.
+11. A download link. The prototype currently hands downloads to the system
     browser; confirm whether authenticated Stuudium downloads survive that
     boundary before designing a native download adapter.
-11. Embedded Tera or Office content as a cross-origin negative control. It must
+12. Embedded Tera or Office content as a cross-origin negative control. It must
     render normally without receiving the theme or native message objects.
-12. Open **Teema seaded**, select Mint and Blue, disable and re-enable the
+13. Open **Teema seaded**, select Mint and Blue, disable and re-enable the
     enhancement, close settings, reload, and restart the app.
-13. Cold-start both themes while watching specifically for a white, Mint, Blue,
+14. Cold-start both themes while watching specifically for a white, Mint, Blue,
     or black flash.
-14. Check Logcat and both WebView consoles for errors.
+15. Check Logcat and both WebView consoles for errors.
 
 The first physical-device run is a feasibility test, not permission to change
 attendance, grades, messages, registrations, or other live Stuudium data.
@@ -415,11 +453,10 @@ The update checker accepts only HTTPS release URLs under this repository's
 numeric version codes rather than version-name strings. The remote file cannot
 inject scripts or change app behavior.
 
-The first release-signed APK cannot normally update an installed debug APK,
-because their signing certificates differ. Uninstall the debug build once, then
-install the first public APK. Later public APKs will update it normally as long
-as `io.github.rixerpixer007.stuudium`, the release signing identity, and the
-increasing version-code sequence remain unchanged.
+Debug and release APKs have separate application IDs, so they install beside
+each other and never update one another. Release APKs update the release app
+normally as long as `io.github.rixerpixer007.stuudium`, the release signing
+identity, and the increasing version-code sequence remain unchanged.
 
 Test the complete browser handoff on Android 16 and the eventual minimum Android
 version. Confirm that the system presents **Update**, preserves the WebView
@@ -433,11 +470,12 @@ approval.
 Long-press the app icon on the phone and choose **Uninstall**, or run:
 
 ```sh
-~/Library/Android/sdk/platform-tools/adb uninstall io.github.rixerpixer007.stuudium
+~/Library/Android/sdk/platform-tools/adb uninstall io.github.rixerpixer007.stuudium.debug
 ```
 
 Uninstalling removes the prototype's WebView session and stored preferences. It
-does not remove or alter the normal Chrome browser's Stuudium session.
+does not remove or alter the release app or the normal Chrome browser's Stuudium
+session.
 
 After testing, disable **USB debugging** in Developer options if you do not use
 it for other development work. You can also choose **Revoke USB debugging

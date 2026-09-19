@@ -60,6 +60,10 @@ android {
     }
 
     buildTypes {
+        debug {
+            applicationIdSuffix = ".debug"
+        }
+
         release {
             if (releaseBuildRequested) {
                 signingConfig = signingConfigs.getByName("release")
@@ -98,6 +102,9 @@ tasks.named("preBuild").configure {
 dependencies {
     implementation("androidx.activity:activity-ktx:1.13.0")
     implementation("androidx.core:core-ktx:1.19.0")
+    implementation("androidx.credentials:credentials:1.6.0-beta02")
+    implementation("androidx.credentials:credentials-play-services-auth:1.6.0-beta02")
+    implementation("androidx.fragment:fragment:1.9.0")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0")
     implementation("androidx.webkit:webkit:1.17.0")
 

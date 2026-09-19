@@ -8,6 +8,7 @@ import android.graphics.Bitmap
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.webkit.RenderProcessGoneDetail
 import android.webkit.ValueCallback
@@ -130,6 +131,10 @@ class MainActivity : ComponentActivity() {
             allowDomStorage = true,
             allowUserSelectedContent = true,
         )
+        val webAuthenticationStatus = enableWebAuthenticationForApp(webView)
+        if (webAuthenticationStatus != WebAuthenticationStatus.ENABLED) {
+            Log.w(TAG, "Web authentication support: $webAuthenticationStatus")
+        }
         webView.webViewClient =
             object : WebViewClient() {
                 override fun shouldOverrideUrlLoading(
@@ -364,6 +369,7 @@ class MainActivity : ComponentActivity() {
     }
 
     companion object {
+        private const val TAG = "SinuStuudium"
         private const val START_URL = "https://torg.ope.ee/"
         private const val MOBILE_SHELL_BRIDGE = "sidMobileShell"
         private const val OPEN_SETTINGS_COMMAND = "open-settings"
